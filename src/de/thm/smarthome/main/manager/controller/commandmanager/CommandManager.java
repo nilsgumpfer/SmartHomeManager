@@ -1,8 +1,8 @@
 package de.thm.smarthome.main.manager.controller.commandmanager;
 
 import de.thm.smarthome.global.command.ICommand;
-import de.thm.smarthome.main.manager.controller.IDeviceManager;
-import de.thm.smarthome.main.manager.controller.DeviceManager;
+import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
+import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 
 import java.util.List;
 

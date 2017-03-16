@@ -1,4 +1,4 @@
-package de.thm.smarthome.main.manager.controller;
+package de.thm.smarthome.main.manager.controller.devicemanager;
 
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;

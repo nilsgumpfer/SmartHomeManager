@@ -2,8 +2,8 @@ package de.thm.smarthome.main.manager.controller.requestmanager;
 
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.transfer.*;
-import de.thm.smarthome.main.manager.controller.IDeviceManager;
-import de.thm.smarthome.main.manager.controller.DeviceManager;
+import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
+import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;

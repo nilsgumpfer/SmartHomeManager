@@ -1,4 +1,4 @@
-package de.thm.smarthome.main.manager.controller;
+package de.thm.smarthome.main.manager.controller.devicemanager;
 
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
