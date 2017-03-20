@@ -26,6 +26,8 @@ public class BuderusHeatingDriver {
 //Tim 23:17 Uhr
     ///BLABLABLABLA Nils
 
+    //TEST Carlo
+
     public BuderusHeatingDriver(String productSerialNumber){
 
         //TODO: Initialize and connect to heating!
