@@ -2,7 +2,7 @@ package de.thm.smarthome.main.device.heating.adapter;
 
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
+//import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
 import de.vaillant.driver.heating.VaillantHeatingDriver;
 import de.viessmann.driver.heating.ViessmannHeatingDriver;
 
@@ -54,5 +54,25 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
     @Override
     public void update(AObservable o, Object change) {
 
+    }
+
+    @Override
+    public boolean setMaxWaterLevel(double new_maxWL){
+        return driver.setMaxWaterLevel(new_maxWL);
+    }
+
+    @Override
+    public boolean setMinWaterLevel(double new_minWL){
+        return driver.setMinWaterLevel(new_minWL);
+    }
+
+    @Override
+    public boolean setMaxTemperature(double new_maxTemperature){
+        return driver.setMaxTemperature(new_maxTemperature);
+    }
+
+    @Override
+    public boolean setMinTemperature(double new_minTemperature){
+        return driver.setMinTemperature(new_minTemperature);
     }
 }

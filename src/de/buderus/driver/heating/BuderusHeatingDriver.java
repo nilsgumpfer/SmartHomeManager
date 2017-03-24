@@ -17,16 +17,6 @@ public class BuderusHeatingDriver {
     private boolean standby;
     private List<String> listOfLogs = new ArrayList<>();
 
-    /*Teeeeeeeeeeest*/
-
-    //Sven -------------------------------
-    //Tim
-
-    //Heinrich Mettmann
-//Tim 23:17 Uhr
-    ///BLABLABLABLA Nils
-
-    //TEST Carlo
 
     public BuderusHeatingDriver(String productSerialNumber){
 
@@ -65,4 +55,25 @@ public class BuderusHeatingDriver {
         //TODO: Invoke command remotely at heating!
         return currentTemperature;
     }
+
+    public boolean setMaxTemperature(double new_maxTemperature){
+        maxTemperature = new_maxTemperature;
+        return true;
+        }
+
+    public boolean setMinTemperature(double new_minTemperature){
+        minTemperature = new_minTemperature;
+        return true;
+    }
+
+    public boolean setMaxWaterLevel(double new_maxWL){
+        maxWaterLevel = new_maxWL;
+        return true;
+    }
+
+    public boolean setMinWaterLevel(double new_minWL){
+        minWaterLevel = new_minWL;
+        return true;
+    }
 }
+
