@@ -6,24 +6,29 @@ import de.thm.smarthome.main.device.shutter.model.IShutterModel;
 /**
  * Created by Nils on 27.01.2017.
  */
+
+
 public class ShutterLogicMaintenanceMode implements IShutterLogic {
     private IShutterModel model;
     private IShutter device;
+    private ShutterModel shutterModel;
+    private logicName = "MaintenanceMode";
 
     public ShutterLogicMaintenanceMode(IShutterModel model, IShutter device){}
 
     @Override
-    public int moveUp() {
-        return 0;
+    public void moveUp() {
+        shutterModel.setShutterHeight(5);
     }
 
     @Override
-    public int moveDown() {
-        return 0;
+    public void moveDown() {
+        shutterModel.setShutterHeight(0);
     }
 
     @Override
-    public String getName() {
-        return null;
+    public string getLogicName(){
+        return logicName;
     }
+
 }

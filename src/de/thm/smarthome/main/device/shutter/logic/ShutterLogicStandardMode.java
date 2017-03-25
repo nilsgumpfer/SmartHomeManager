@@ -9,21 +9,23 @@ import de.thm.smarthome.main.device.shutter.model.IShutterModel;
 public class ShutterLogicStandardMode implements IShutterLogic {
     private IShutterModel model;
     private IShutter device;
+    private ShutterModel shutterModel;
+    private logicName = "StandardMode";
 
     public ShutterLogicStandardMode(IShutterModel model, IShutter device){}
 
     @Override
-    public int moveUp() {
-        return 0;
+    public void moveUp() {
+        shutterModel.incrementShutterHeight();
     }
 
     @Override
-    public int moveDown() {
-        return 0;
+    public void moveDown() {
+        shutterModel.decrementShutterHeight();
     }
 
     @Override
-    public String getName() {
-        return null;
+    public string getLogicName(){
+        return logicName;
     }
 }

@@ -24,32 +24,63 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     private DeviceManager(){}
 
+
     public static DeviceManager getInstance() {
         return ourInstance;
     }
 
-    public SmartHeating getSmartHeating(){ return null; }
+    public SmartHeating getSmartHeating(){
+        return smartHeating;
+    }
 
-    public List<SmartShutter> getSmartShutters() {
+    public List<SmartShutter> getSmartShutters(string name) {
+        for(int i = 0; i < smartShutters.size(); i++){
+            if(name == smartShutters[i].name){
+                return smartShutters[i];
+            }
+        }
         return null;
     }
 
-    public SmartThermometer getSmartThermometer(){ return null; }
+    public SmartThermometer getSmartThermometer(){
+        return smartThermometer;
+    }
 
-    public int setSmartHeating(SmartHeating smartHeating){return 0;}
+    public int setSmartHeating(SmartHeating smartHeating){
+        return 0;
+    }
 
-    public SmartWeatherStation getSmartWeatherStation(){return null;}
+    public SmartWeatherStation getSmartWeatherStation(){
+        return smartWeatherStation;
+    }
 
-    public int setSmartWeatherStation(SmartWeatherStation smartWeatherStation){return 0;}
+    public int setSmartWeatherStation(SmartWeatherStation smartWeatherStation){
 
-    public int setSmartThermometer(SmartThermometer smartThermometer){return 0;}
+        return 0;
+    }
 
-    public SmartShutter getSmartShutter(String id){return null;}
+    public int setSmartThermometer(SmartThermometer smartThermometer){
 
-    public int addSmartShutter(SmartShutter smartShutter){return 0;}
+        return 0;
+    }
+
+    public SmartShutter getSmartShutter(String id){
+
+        return null;
+    }
+
+    public int addSmartShutter(SmartShutter smartShutter){
+        return 0;
+    }
 
     @Override
     public void update(AObservable o, Object change) {
+
         eventManager.update(o,change);
     }
+
+
+
+
+
 }
