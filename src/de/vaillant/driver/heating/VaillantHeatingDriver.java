@@ -74,4 +74,20 @@ public class VaillantHeatingDriver {
         minWaterLevel = new_minWL;
         return true;
     }
+
+    public double getMaxTemperature(){
+        return maxTemperature;
+    }
+
+    public double getMinTemperature(){
+        return minTemperature;
+    }
+
+    public double getMaxWaterLevel(){
+        return getMaxWaterLevel();
+    }
+
+    public double getMinWaterLevel(){
+        return getMinWaterLevel();
+    }
 }

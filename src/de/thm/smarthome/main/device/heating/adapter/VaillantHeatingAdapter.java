@@ -16,7 +16,7 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
 
     VaillantHeatingDriver driver;
 
-    public VaillantHeatingAdapter(String serialNumber){
+    public VaillantHeatingAdapter(String serialNumber) {
 
         driver = new VaillantHeatingDriver(serialNumber);
     }
@@ -57,22 +57,42 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
     }
 
     @Override
-    public boolean setMaxWaterLevel(double new_maxWL){
+    public boolean setMaxWaterLevel(double new_maxWL) {
         return driver.setMaxWaterLevel(new_maxWL);
     }
 
     @Override
-    public boolean setMinWaterLevel(double new_minWL){
+    public boolean setMinWaterLevel(double new_minWL) {
         return driver.setMinWaterLevel(new_minWL);
     }
 
     @Override
-    public boolean setMaxTemperature(double new_maxTemperature){
+    public boolean setMaxTemperature(double new_maxTemperature) {
         return driver.setMaxTemperature(new_maxTemperature);
     }
 
     @Override
-    public boolean setMinTemperature(double new_minTemperature){
+    public boolean setMinTemperature(double new_minTemperature) {
         return driver.setMinTemperature(new_minTemperature);
+    }
+
+    @Override
+    public double getMaxTemperature() {
+        return driver.getMaxTemperature();
+    }
+
+    @Override
+    public double getMinTemperature() {
+        return driver.getMinTemperature();
+    }
+
+    @Override
+    public double getMaxWaterLevel() {
+        return driver.getMaxWaterLevel();
+    }
+
+    @Override
+    public double getMinWaterLevel() {
+        return driver.getMinWaterLevel();
     }
 }

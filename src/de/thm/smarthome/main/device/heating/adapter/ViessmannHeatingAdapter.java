@@ -73,4 +73,24 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
     public boolean setMinTemperature(double new_minTemperature){
         return driver.setMinTemperature(new_minTemperature);
     }
+
+    @Override
+    public double getMaxTemperature(){
+        return driver.getMaxTemperature();
+    }
+
+    @Override
+    public double getMinTemperature(){
+        return driver.getMinTemperature();
+    }
+
+    @Override
+    public double getMaxWaterLevel(){
+        return driver.getMaxWaterLevel();
+    }
+
+    @Override
+    public double getMinWaterLevel(){
+        return driver.getMinWaterLevel();
+    }
 }

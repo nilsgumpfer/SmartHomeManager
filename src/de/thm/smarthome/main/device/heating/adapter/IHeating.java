@@ -17,4 +17,9 @@ public interface IHeating {
     boolean setMinTemperature(double new_minTemperature);
     boolean setMaxWaterLevel(double new_maxWL);
     boolean setMinWaterLevel(double new_minWL);
-}
+    double getMaxTemperature();
+    double getMinTemperature();
+    double getMaxWaterLevel();
+    double getMinWaterLevel();
+
+    }
