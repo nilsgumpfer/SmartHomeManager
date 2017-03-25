@@ -1,6 +1,6 @@
 package de.thm.smarthome.main.device.heating.adapter;
 
-import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
+//import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
 
 import java.util.List;
 
@@ -13,4 +13,8 @@ public interface IHeating {
     void standby();
     void wakeup();
     List<String> getLogs();
+    boolean setMaxTemperature(double new_maxTemperature);
+    boolean setMinTemperature(double new_minTemperature);
+    boolean setMaxWaterLevel(double new_maxWL);
+    boolean setMinWaterLevel(double new_minWL);
 }

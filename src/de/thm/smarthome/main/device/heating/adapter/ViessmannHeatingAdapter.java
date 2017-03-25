@@ -53,4 +53,24 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
     public void update(AObservable o, Object change) {
 
     }
+
+    @Override
+    public boolean setMaxWaterLevel(double new_maxWL){
+        return driver.setMaxWaterLevel(new_maxWL);
+    }
+
+    @Override
+    public boolean setMinWaterLevel(double new_minWL){
+        return driver.setMinWaterLevel(new_minWL);
+    }
+
+    @Override
+    public boolean setMaxTemperature(double new_maxTemperature){
+        return driver.setMaxTemperature(new_maxTemperature);
+    }
+
+    @Override
+    public boolean setMinTemperature(double new_minTemperature){
+        return driver.setMinTemperature(new_minTemperature);
+    }
 }
