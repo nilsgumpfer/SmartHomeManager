@@ -1,5 +1,8 @@
 package de.thm.smarthome.global.connection.database.user;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 /**
  * Created by Nils on 28.01.2017.
  */
@@ -9,6 +12,7 @@ public class User {
     private String username;
     private String password;
     private boolean loggedIn;
+    private String lastTimeLoggedIn;
 
     public boolean isLoggedIn() {
         return loggedIn;
@@ -49,4 +53,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getLastTimeLoggedIn(){
+        return lastTimeLoggedIn;
+    }
+
+    public void setLastTimeLoggedIn(String date){
+        //Date currentTimestamp = new Date(Calendar.getInstance().getTime().getTime());
+        this.lastTimeLoggedIn = date;
+    }
+
 }

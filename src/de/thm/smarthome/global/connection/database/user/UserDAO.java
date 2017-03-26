@@ -1,9 +1,6 @@
 package de.thm.smarthome.global.connection.database.user;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +28,7 @@ public class UserDAO {
         String firstname;
         String lastname;
         String password;
+        String lastTimeLoggedIn;
         boolean loggedIn;
 
         User currentUser = new User();
@@ -38,6 +36,7 @@ public class UserDAO {
         currentUser.setFirstname("0");
         currentUser.setLastname("0");
         currentUser.setPassword("0");
+        currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
 
         try{
@@ -47,12 +46,14 @@ public class UserDAO {
                         firstname = rs.getString(3);
                         lastname = rs.getString(4);
                         password = rs.getString(5);
-                        loggedIn = rs.getBoolean(6);
+                        lastTimeLoggedIn = rs.getString(6);
+                        loggedIn = rs.getBoolean(7);
 
                     currentUser.setUsername(usrname);
                     currentUser.setFirstname(firstname);
                     currentUser.setLastname(lastname);
                     currentUser.setPassword(password);
+                    currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                     currentUser.setLoggedIn(loggedIn);
 
                     return currentUser;
@@ -71,6 +72,7 @@ public class UserDAO {
         String first_name;
         String last_name;
         String password;
+        String lastTimeLoggedIn;
         boolean loggedIn;
 
         User currentUser = new User();
@@ -78,21 +80,24 @@ public class UserDAO {
         currentUser.setFirstname("0");
         currentUser.setLastname("0");
         currentUser.setPassword("0");
+        currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
 
         try{
             ResultSet rs = UserEinlesen("%", firstname+"%", lastname+"%");
             while (rs.next()){
                 usrname = rs.getString(2);
-                firstname = rs.getString(3);
-                lastname = rs.getString(4);
+                first_name = rs.getString(3);
+                last_name = rs.getString(4);
                 password = rs.getString(5);
-                loggedIn = rs.getBoolean(6);
+                lastTimeLoggedIn = rs.getString(6);
+                loggedIn = rs.getBoolean(7);
 
                 currentUser.setUsername(usrname);
-                currentUser.setFirstname(firstname);
-                currentUser.setLastname(lastname);
+                currentUser.setFirstname(first_name);
+                currentUser.setLastname(last_name);
                 currentUser.setPassword(password);
+                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
 
                 return currentUser;
@@ -137,6 +142,7 @@ public class UserDAO {
         String firstname;
         String lastname;
         String password;
+        String lastTimeLoggedIn;
         boolean loggedIn;
 
         User currentUser = new User();
@@ -144,6 +150,7 @@ public class UserDAO {
         currentUser.setFirstname("0");
         currentUser.setLastname("0");
         currentUser.setPassword("0");
+        currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
 
         try{
@@ -153,12 +160,14 @@ public class UserDAO {
                 firstname = rs.getString(3);
                 lastname = rs.getString(4);
                 password = rs.getString(5);
-                loggedIn = rs.getBoolean(6);
+                lastTimeLoggedIn = rs.getString(6);
+                loggedIn = rs.getBoolean(7);
 
                 currentUser.setUsername(usrname);
                 currentUser.setFirstname(firstname);
                 currentUser.setLastname(lastname);
                 currentUser.setPassword(password);
+                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
 
                 userlist.add(currentUser);
@@ -181,6 +190,7 @@ public class UserDAO {
         String firstname;
         String lastname;
         String password;
+        String lastTimeLoggedIn;
         boolean loggedIn;
 
         User currentUser = new User();
@@ -188,6 +198,7 @@ public class UserDAO {
         currentUser.setFirstname("0");
         currentUser.setLastname("0");
         currentUser.setPassword("0");
+        currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
 
         ResultSet res;
@@ -200,12 +211,14 @@ public class UserDAO {
                 firstname = res.getString(3);
                 lastname = res.getString(4);
                 password = res.getString(5);
-                loggedIn = res.getBoolean(6);
+                lastTimeLoggedIn = res.getString(6);
+                loggedIn = res.getBoolean(7);
 
                 currentUser.setUsername(usrname);
                 currentUser.setFirstname(firstname);
                 currentUser.setLastname(lastname);
                 currentUser.setPassword(password);
+                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
 
                 userlist.add(currentUser);
@@ -228,6 +241,7 @@ public class UserDAO {
         String firstname;
         String lastname;
         String password;
+        String lastTimeLoggedIn;
         boolean loggedIn;
 
         User currentUser = new User();
@@ -235,6 +249,7 @@ public class UserDAO {
         currentUser.setFirstname("0");
         currentUser.setLastname("0");
         currentUser.setPassword("0");
+        currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
 
         ResultSet res;
@@ -247,12 +262,14 @@ public class UserDAO {
                 firstname = res.getString(3);
                 lastname = res.getString(4);
                 password = res.getString(5);
-                loggedIn = res.getBoolean(6);
+                lastTimeLoggedIn = res.getString(6);
+                loggedIn = res.getBoolean(7);
 
                 currentUser.setUsername(usrname);
                 currentUser.setFirstname(firstname);
                 currentUser.setLastname(lastname);
                 currentUser.setPassword(password);
+                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
 
                 userlist.add(currentUser);
