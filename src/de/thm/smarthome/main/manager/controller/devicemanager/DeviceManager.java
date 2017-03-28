@@ -33,9 +33,9 @@ public class DeviceManager implements IDeviceManager, IObserver{
         return smartHeating;
     }
 
-    public List<SmartShutter> getSmartShutters(string name) {
+    public List<SmartShutter> getSmartShutter(string name) {
         for(int i = 0; i < smartShutters.size(); i++){
-            if(name == smartShutters[i].name){
+            if(name == smartShutters[i].getName()){
                 return smartShutters[i];
             }
         }
@@ -54,12 +54,12 @@ public class DeviceManager implements IDeviceManager, IObserver{
         return smartWeatherStation;
     }
 
-    public int setSmartWeatherStation(SmartWeatherStation smartWeatherStation){
+    public void setSmartWeatherStation(SmartWeatherStation smartWeatherStation){
 
         return 0;
     }
 
-    public int setSmartThermometer(SmartThermometer smartThermometer){
+    public void setSmartThermometer(SmartThermometer smartThermometer){
 
         return 0;
     }
@@ -69,7 +69,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
         return null;
     }
 
-    public int addSmartShutter(SmartShutter smartShutter){
+    public void addSmartShutter(SmartShutter smartShutter){
         return 0;
     }
 

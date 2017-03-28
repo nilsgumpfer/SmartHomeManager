@@ -14,10 +14,10 @@ public interface IDeviceManager {
     SmartHeating getSmartHeating();
     List<SmartShutter> getSmartShutters();
     SmartThermometer getSmartThermometer();
-    int setSmartHeating(SmartHeating smartHeating);
+    void setSmartHeating(SmartHeating smartHeating);
     SmartWeatherStation getSmartWeatherStation();
-    int setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
-    int setSmartThermometer(SmartThermometer smartThermometer);
+    void setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
+    void setSmartThermometer(SmartThermometer smartThermometer);
     SmartShutter getSmartShutter(String id);
-    int addSmartShutter(SmartShutter smartShutter);
+    void addSmartShutter(SmartShutter smartShutter);
 }

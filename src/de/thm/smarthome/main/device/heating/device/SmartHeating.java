@@ -12,7 +12,8 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver {
     private IHeatingLogic logic;
 
-    public SmartHeating(IHeatingLogic logic) {
+    public SmartHeating(IHeatingLogic logic)
+    {
         this.logic = logic;
     }
 

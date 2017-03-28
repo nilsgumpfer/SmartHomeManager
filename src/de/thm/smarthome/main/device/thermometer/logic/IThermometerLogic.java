@@ -5,4 +5,5 @@ package de.thm.smarthome.main.device.thermometer.logic;
  */
 public interface IThermometerLogic {
     double getTemperature();
+    void setTemperatureUnit();
 }

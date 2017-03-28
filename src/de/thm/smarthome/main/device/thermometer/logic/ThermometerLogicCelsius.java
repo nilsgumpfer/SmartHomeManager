@@ -9,6 +9,8 @@ import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 public class ThermometerLogicCelsius implements IThermometerLogic {
     private IThermometerModel model;
     private IThermometer device;
+    private Thermometer thermometer;
+    private logicName = "Celsius";
 
     public ThermometerLogicCelsius(IThermometerModel model, IThermometer device) {
         this.model = model;
@@ -16,6 +18,12 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
 
     @Override
     public double getTemperature() {
-        return 0;
+        return thermometer.getTemperature();
+    }
+
+    @Override
+    public void setTemperatureUnit(){
+        (!thermometer.isCelsius) ? thermometer.setTemperature((thermometer.getTemperature()-32)/1.8) :
+        //Fehlermeldung: "Thermometer misst bereits in Celsius!"
     }
 }
