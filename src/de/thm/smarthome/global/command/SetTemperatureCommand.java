@@ -10,7 +10,6 @@ public class SetTemperatureCommand implements ICommand {
     private ITemperatureRelevantDevice device;
     private double value;
     private double old_value;
-    private HeatingMemento memento;
 
     private SetTemperatureCommand(){}
 

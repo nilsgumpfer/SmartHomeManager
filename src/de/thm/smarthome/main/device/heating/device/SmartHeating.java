@@ -12,24 +12,26 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver {
     private IHeatingLogic logic;
 
-    public SmartHeating(IHeatingLogic logic)
-    {
+    public SmartHeating(IHeatingLogic logic) {
         this.logic = logic;
     }
 
     @Override
     public int setTemperature(double temperature) {
-        return 0;
+
+        return logic.setTemperature(temperature);
     }
 
     @Override
     public double getTemperature() {
-        return 0;
+
+        return logic.getTemperature();
     }
 
     @Override
-    public String getName() {
-        return null;
+    public string getName() {
+
+        return logic.getName();
     }
 
     @Override
