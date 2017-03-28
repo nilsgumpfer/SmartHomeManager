@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.weatherstation.device;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.weatherstation.logic.IWeatherStationLogic;
 
 /**
@@ -11,28 +12,37 @@ import de.thm.smarthome.main.device.weatherstation.logic.IWeatherStationLogic;
 public class SmartWeatherStation extends AObservable implements ISmartDevice, IObserver{
     private IWeatherStationLogic logic;
 
+    public SmartWeatherStation(IWeatherStationLogic logic) {
+
+        this.logic = logic;
+    }
+
     public double getWindVelocity() {
-        return 0;
+
+        return IWeatherStationLogic.getWindVelocity();
     }
 
     public double getRainfallAmount() {
-        return 0;
+
+        return IWeatherStationLogic.getRainfallAmount();
     }
 
     public double getAirHumidity() {
-        return 0;
+
+        return IWeatherStationLogic.getAirHumidity();
     }
 
     public double getAirPressure() {
-        return 0;
+
+        return IWeatherStationLogic.getAirPressure();
     }
 
     public double getTemperature() {
-        return 0;
+        return IWeatherStationLogic.getTemperature();
     }
 
     @Override
-    public String getName() {
+    public string getName() {
         return null;
     }
 

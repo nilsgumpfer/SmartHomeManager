@@ -4,7 +4,6 @@ import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.main.device.heating.logic.HeatingLogicDayMode;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 
 /**
@@ -31,7 +30,7 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
     }
 
     @Override
-    public String getName() {
+    public string getName() {
 
         return logic.getName();
     }
