@@ -11,12 +11,12 @@ import de.thm.smarthome.main.device.shutter.logic.IShutterLogic;
  */
 public class SmartShutter extends AObservable implements ISmartDevice, IObserver{
 
-    private IShutterLogic logic;
+        private IShutterLogic logic;
 
     public SmartShutter(IShutterLogic logic) {
 
-        this.logic = logic;
-    }
+            this.logic = logic;
+        }
 
     public void moveUp() {
         logic.moveUp();
