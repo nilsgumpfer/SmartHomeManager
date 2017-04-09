@@ -9,9 +9,9 @@ import java.rmi.Remote;
  */
 public interface ShutterServerInterface extends Remote {
     public void moveUp(ShutterClientInterface c);
-    public void moveDown(ShutterClientInterface c));
+    public void moveDown(ShutterClientInterface c);
     public boolean isUp(ShutterClientInterface c);
     public boolean isDown(ShutterClientInterface c);
-    public string getName(ShutterClientInterface c);
+    public String getName(ShutterClientInterface c);
     public void update(AObservable o, Object change, ShutterClientInterface c);
 }

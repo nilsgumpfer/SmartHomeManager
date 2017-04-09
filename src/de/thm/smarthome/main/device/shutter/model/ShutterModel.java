@@ -38,15 +38,14 @@ public class ShutterModel implements IShutterModel{
 
 
     @Override
-    public void decrementShutterHeight(){
-        if(shutterHeight >0){
+    public void decrementShutterHeight() {
+        if (shutterHeight > 0) {
             shutterHeight--;
-        }
-        else{
+        } else {
             //Fehlermeldung: "Rollläden sind bereits komplett heruntergefahren"
         }
 
-        if(shutterHeight == 0){
+        if (shutterHeight == 0) {
             isDown = true;
         }
     }
@@ -67,13 +66,12 @@ public class ShutterModel implements IShutterModel{
             isDown = true;
         }
 
-    };
-
+    }
 
     @Override
     public int getShutterHeight(){
         return shutterHeight;
-    };
+    }
 
     @Override
     public boolean isUp() {

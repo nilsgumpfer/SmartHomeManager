@@ -35,14 +35,13 @@ public class DeviceManager implements IDeviceManager, IObserver{
     }
 
     @Override
-    public void setSmartHeating(SmartHeating smartHeating) {
-        this.smartHeating = smartHeating;
+    public List<SmartShutter> getSmartShutters() {
+        return null;
     }
 
-    @Override
     public SmartShutter getSmartShutter(String name) {
-        for(int i = 0; i < smartShutters.size(); i++) {
-            if (name == smartShutters.get(i).getName()) {
+        for(int i = 0; i < smartShutters.size(); i++){
+            if(name == smartShutters.get(i).getName()){ //TODO: Von Nils: Strings müssen mit .equals() verglichen werden, da mit == die Objekte an sich verglichen werden und nicht deren Inhalt
                 return smartShutters.get(i);
             }
         }

@@ -23,12 +23,13 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
         thermometerMmodel.setTemperature(temperature);
     }
 
+    @Override
     public String getName() {
         return null;
     }
 
     public double getTemperature(){
-        return thermometerMmodel.getTemperature() ;
+        return logic.getTemperature() ;
     }
 
     public void setTemperature(double temperature){

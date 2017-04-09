@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Nils on 04.02.2017.
  */
 public interface IServiceFacade {
-    String getServerrInfo();
+    String getServerInfo();
 
     CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating);
     CommandResponseObject deleteHeating(UserTransferObject authentication);
@@ -24,20 +24,20 @@ public interface IServiceFacade {
     CommandResponseObject moveShuttersDown(UserTransferObject authentication);
     String getShutterPosition(UserTransferObject authentication);
     ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter);
-    List<ShutterTransferObject> getAllShutterData(UserTransferObject authentication);
+    ShutterTransferObject[] getAllShutterData(UserTransferObject authentication);
 
     CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user);
     CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user);
     CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject user);
-    CommandResponseObject login(UserTransferObject authentication, UserTransferObject login);
-    CommandResponseObject logout(UserTransferObject authentication, UserTransferObject logout);
+    CommandResponseObject login(UserTransferObject authentication, UserTransferObject user);
+    CommandResponseObject logout(UserTransferObject authentication, UserTransferObject user);
     UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject user);
-    List<UserTransferObject> getAllUserData(UserTransferObject authentication);
+    UserTransferObject[] getAllUserData(UserTransferObject authentication);
 
     CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation);
     CommandResponseObject deleteWeatherStation(UserTransferObject authentication);
     double getAirHumidity(UserTransferObject authentication);
-    double getAitPressure(UserTransferObject authentication);
+    double getAirPressure(UserTransferObject authentication);
     double getWindVelocity(UserTransferObject authentication);
     double getOutdoorTemperature(UserTransferObject authentication);
     double getRainfallAmount(UserTransferObject authentication);
@@ -48,7 +48,7 @@ public interface IServiceFacade {
     double getIndoorTemperature(UserTransferObject authentication);
     ThermometerTransferObject getThermometerData(UserTransferObject authentication);
 
-    String[] showLogs(UserTransferObject authentication, int limit);
+    String[] readLogs(UserTransferObject authentication, int limit);
 
     CommandResponseObject undoLastCommand();
 }

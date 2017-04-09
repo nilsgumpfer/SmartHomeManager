@@ -20,194 +20,190 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @WebMethod
     public String getServerInfo() {
-        return null;
-    }
-
-    @WebMethod
-    public String getServerrInfo() {
-        return null;
+        return requestManager.getServerInfo();
     }
 
     @WebMethod
     public CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
-        return null;
+        return requestManager.createHeating(authentication,heating);
     }
 
     @WebMethod
     public CommandResponseObject deleteHeating(UserTransferObject authentication) {
-        return null;
+        return requestManager.deleteHeating(authentication);
     }
 
     @WebMethod
     public CommandResponseObject switchHeatingOn(UserTransferObject authentication) {
-        return null;
+        return  requestManager.switchHeatingOn(authentication);
     }
 
     @WebMethod
     public CommandResponseObject switchHeatingOff(UserTransferObject authentication) {
-        return null;
+        return requestManager.switchHeatingOff(authentication);
     }
 
     @WebMethod
     public CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature) {
-        return null;
+        return requestManager.setHeatingTemperature(authentication,temperature);
     }
 
     @WebMethod
     public double getHeatingTemperature(UserTransferObject authentication) {
-        return 0;
+        return requestManager.getHeatingTemperature(authentication);
     }
 
     @WebMethod
     public HeatingTransferObject getHeatingData(UserTransferObject authentication) {
-        return null;
+        return requestManager.getHeatingData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return null;
+        return requestManager.createShutter(authentication, shutter);
     }
 
     @WebMethod
     public CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return null;
+        return requestManager.deleteShutter(authentication, shutter);
     }
 
     @WebMethod
     public CommandResponseObject moveShuttersUp(UserTransferObject authentication) {
-        return null;
+        return requestManager.moveShuttersUp(authentication);
     }
 
     @WebMethod
     public CommandResponseObject moveShuttersDown(UserTransferObject authentication) {
-        return null;
+        return requestManager.moveShuttersDown(authentication);
     }
 
     @WebMethod
     public String getShutterPosition(UserTransferObject authentication) {
-        return null;
+        return requestManager.getShutterPosition(authentication);
     }
 
     @WebMethod
     public ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return null;
+        return requestManager.getShutterData(authentication, shutter);
     }
 
     @WebMethod
-    public List<ShutterTransferObject> getAllShutterData(UserTransferObject authentication) {
-        return null;
+    public ShutterTransferObject[] getAllShutterData(UserTransferObject authentication) {
+        return requestManager.getAllShutterData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+        return requestManager.createUser(authentication, user);
     }
 
     @WebMethod
     public CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+        return requestManager.deleteUser(authentication,user);
     }
 
     @WebMethod
     public CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+        return requestManager.alterUser(authentication,user);
     }
 
     @WebMethod
-    public CommandResponseObject login(UserTransferObject authentication, UserTransferObject login) {
-        return null;
+    public CommandResponseObject login(UserTransferObject authentication, UserTransferObject user) {
+        return requestManager.login(authentication,user);
     }
 
     @WebMethod
-    public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject logout) {
-        return null;
+    public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject user) {
+        return requestManager.logout(authentication, user);
     }
 
     @WebMethod
     public UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+        return requestManager.getUserData(authentication, user);
     }
 
     @WebMethod
-    public List<UserTransferObject> getAllUserData(UserTransferObject authentication) {
-        return null;
+    public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
+        return requestManager.getAllUserData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation) {
-        return null;
+        return createWeatherStation(authentication, weatherStation);
     }
 
     @WebMethod
     public CommandResponseObject deleteWeatherStation(UserTransferObject authentication) {
-        return null;
+        return requestManager.deleteWeatherStation(authentication);
     }
 
     @WebMethod
     public double getAirHumidity(UserTransferObject authentication) {
-        return 0;
+        return requestManager.getAirHumidity(authentication);
     }
 
     @WebMethod
-    public double getAitPressure(UserTransferObject authentication) {
-        return 0;
+    public double getAirPressure(UserTransferObject authentication) {
+        return requestManager.getAirPressure(authentication);
     }
 
     @WebMethod
     public double getWindVelocity(UserTransferObject authentication) {
-        return 0;
+        return requestManager.getWindVelocity(authentication);
     }
 
     @WebMethod
     public double getOutdoorTemperature(UserTransferObject authentication) {
-        return 0;
+        return requestManager.getOutdoorTemperature(authentication);
     }
 
     @WebMethod
     public double getRainfallAmount(UserTransferObject authentication) {
-        return 0;
+        return requestManager.getRainfallAmount(authentication);
     }
 
     @WebMethod
     public WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication) {
-        return null;
+        return requestManager.getWeatherStationData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometer) {
-        return null;
+        return requestManager.createThermometer(authentication,thermometer);
     }
 
     @WebMethod
     public CommandResponseObject deleteThermometer(UserTransferObject authentication) {
-        return null;
+        return requestManager.deleteThermometer(authentication);
     }
 
     @WebMethod
     public double getIndoorTemperature(UserTransferObject authentication) {
-        return 0;
+        return requestManager.getIndoorTemperature(authentication);
     }
 
     @WebMethod
     public ThermometerTransferObject getThermometerData(UserTransferObject authentication) {
-        return null;
+        return requestManager.getThermometerData(authentication);
     }
 
     @WebMethod
-    public String[] showLogs(UserTransferObject authentication, int limit) {
-        return new String[0];
+    public String[] readLogs(UserTransferObject authentication, int limit) {
+        return requestManager.readLogs(authentication, limit);
     }
 
-    @Override
+    @WebMethod
     public CommandResponseObject undoLastCommand() {
-        return null;
+        return requestManager.undoLastCommand();
     }
 
-    /*@WebMethod(operationName="body-mass-index")
+    //Web-Service-Test-Szenario (Nils)
+    @WebMethod(operationName="body-mass-index")
     @WebResult(name = "your-bmi")
     public double bmi( @WebParam(name="height") double height,
                        @WebParam(name="weight") double weight )
     {
         return weight / ((height * height) / 10000);
-    }*/
+    }
 }

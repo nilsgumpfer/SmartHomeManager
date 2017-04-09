@@ -12,7 +12,7 @@ import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 public class ShutterLogicMaintenanceMode implements IShutterLogic {
     private IShutterModel model;
     private IShutter device;
-    private ShutterModel shutterModel;
+    private ShutterModel shutterModel; //TODO: Von Nils: Warum gibt es ein Model-Interface, obwohl hier das konkrete Model verwendet wird??
     private String logicName = "MaintenanceMode";
 
     public ShutterLogicMaintenanceMode(IShutterModel model, IShutter device){}

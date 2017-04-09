@@ -20,7 +20,7 @@ public interface WeatherStationServerInterface extends Remote {
 
     public double getTemperature(WeatherStationClientInterface c);
 
-    public string getName(WeatherStationClientInterface c);
+    public String getName(WeatherStationClientInterface c);
 
     public void update(AObservable o, Object change, WeatherStationClientInterface c);
 }

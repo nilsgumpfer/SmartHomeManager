@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.thermometer.logic;
 
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
+import de.thm.smarthome.main.device.thermometer.device.Thermometer;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 import de.thm.smarthome.main.device.thermometer.model.ThermometerModel;
 
@@ -10,7 +11,7 @@ import de.thm.smarthome.main.device.thermometer.model.ThermometerModel;
 public class ThermometerLogicFahrenheit implements IThermometerLogic{
     private IThermometerModel model;
     private IThermometer device;
-    private ThermometerModel thermometer;
+    private Thermometer thermometer; //TODO: gleiche Frage wie in Klasse selbst: warum gibt´s die hier quasi zwei mal?
     private String logicName = "Fahrenheit";
 
     public ThermometerLogicFahrenheit(IThermometerModel model, IThermometer device) {
@@ -18,16 +19,13 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
     }
 
     public double getTemperature() {
-        return thermometer.getTemperature();
+        //return thermometer.getTemperature(); (Nils war´s)
+        return device.getTemperature();
     }
 
-    @Override
+
     public void setTemperatureUnit(){
-        if(thermometer.isCelsius()){
-            thermometer.setTemperature((thermometer.getTemperature()*1.8) +32);
-            thermometer.toggleTemperatureUnit();
-        }
-        //Fehlermeldung: "Thermometer misst bereits in Fahrenheit!"
+        //if(thermometer) //TODO: kein java-Script :)
     }
 }
 

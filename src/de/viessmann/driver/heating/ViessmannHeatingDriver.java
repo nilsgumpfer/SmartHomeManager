@@ -94,11 +94,11 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
     }
 
     public double getMaxWaterLevel(){
-        return getMaxWaterLevel();
+        return getMaxWaterLevel();  //TODO: Endlosschleife
     }
 
     public double getMinWaterLevel(){
-        return getMinWaterLevel();
+        return getMinWaterLevel();  //TODO: Endlosschleife
     }
 
     public void startClient(String heizungsIP, String heizungsname){

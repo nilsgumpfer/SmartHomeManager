@@ -29,36 +29,37 @@ public class SmartWeatherStation extends AObservable implements ISmartDevice, IO
         return weatherStationModel.getWindVelocity();
     }
 
-    public void setWindVelocity(double windVelocity){
-        weatherStationModel.setWindVelocity(windVelocity);
+        //return IWeatherStationLogic.getWindVelocity();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getRainfallAmount() {
         return weatherStationModel.getRainfallAmount();
     }
 
-    public void setRainfallAmount(double rainfallAmount){
-        weatherStationModel.setRainfallAmount(rainfallAmount);
+        //return IWeatherStationLogic.getRainfallAmount();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getAirHumidity() {
         return weatherStationModel.getAirHumidity();
     }
 
-    public void setAirHumidity(double airHumidity){
-        weatherStationModel.setAirHumidity(airHumidity);
+        //return IWeatherStationLogic.getAirHumidity();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getAirPressure() {
         return weatherStationModel.getAirPressure();
     }
 
-    public void setAirPressure(double airPressure){
-        weatherStationModel.setAirPressure(airPressure);
+        //return IWeatherStationLogic.getAirPressure();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getTemperature() {
-        return weatherStationModel.getTemperature();
+        //return IWeatherStationLogic.getTemperature();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public void setTemperature(double temperature){
