@@ -3,8 +3,8 @@ package de.thm.smarthome.main.device.shutter.device;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.shutter.logic.IShutterLogic;
+import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -12,11 +12,11 @@ import de.thm.smarthome.main.device.shutter.logic.IShutterLogic;
 public class SmartShutter extends AObservable implements ISmartDevice, IObserver{
 
     private IShutterLogic logic;
-
-    public SmartShutter(IShutterLogic logic) {
-
+    private SmartShutter(IShutterLogic logic) {
         this.logic = logic;
     }
+    private ShutterModel shutterModel = new ShutterModel();
+
 
     public void moveUp() {
         logic.moveUp();
@@ -26,17 +26,15 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
         logic.moveDown();
     }
 
-    public boolean isUp() {
-        return false;
+    public boolean isUp(){
+        return shutterModel.isUp();
     }
-
-    public boolean isDown() {
-        return false;
+    public boolean isDown(){
+        return shutterModel.isDown();
     }
 
     @Override
-    public string getName() {
-
+    public String getName() {
         return logic.getLogicName();
     }
 

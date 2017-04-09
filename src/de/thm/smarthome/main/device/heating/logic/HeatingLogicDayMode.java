@@ -9,21 +9,24 @@ import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 public class HeatingLogicDayMode implements IHeatingLogic {
     private IHeatingModel model;
     private IHeating device;
+    private String heatingModeName = "DayMode";
 
-    public HeatingLogicDayMode(IHeatingModel model, IHeating device){}
-
-    @Override
-    public int setTemperature(double temperature) {
-        return 0;
+    public HeatingLogicDayMode(IHeatingModel model, IHeating device){
+        model.setTemperature(20);
     }
 
     @Override
-    public static double getTemperature() {
-        return 0;
+    public void setTemperature(double temperature) {
+        model.setTemperature(temperature);
+    }
+
+    @Override
+    public double getTemperature() {
+        return model.getTemperature();
     }
 
     @Override
     public String getName() {
-        return null;
+        return heatingModeName;
     }
 }

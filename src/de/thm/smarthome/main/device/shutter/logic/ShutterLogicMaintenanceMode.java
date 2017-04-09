@@ -2,6 +2,7 @@ package de.thm.smarthome.main.device.shutter.logic;
 
 import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 import de.thm.smarthome.main.device.shutter.model.IShutterModel;
+import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -12,7 +13,7 @@ public class ShutterLogicMaintenanceMode implements IShutterLogic {
     private IShutterModel model;
     private IShutter device;
     private ShutterModel shutterModel;
-    private logicName = "MaintenanceMode";
+    private String logicName = "MaintenanceMode";
 
     public ShutterLogicMaintenanceMode(IShutterModel model, IShutter device){}
 
@@ -27,7 +28,7 @@ public class ShutterLogicMaintenanceMode implements IShutterLogic {
     }
 
     @Override
-    public string getLogicName(){
+    public String getLogicName(){
         return logicName;
     }
 

@@ -4,7 +4,10 @@ package de.thm.smarthome.main.device.thermometer.model;
  * Created by Nils on 01.02.2017.
  */
 public interface IThermometerModel {
-    void setTemperature();
-    int getTemperature();
-    void toggleTemperatureUnit()
+    void setName(String name);
+    String getName();
+    void setTemperature(double temperature);
+    void toggleTemperatureUnit();
+    double getTemperature();
+    boolean isCelsius();
 }

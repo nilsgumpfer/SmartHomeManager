@@ -6,18 +6,18 @@ import de.thm.smarthome.global.observer.AObservable;
  * Created by Nils on 27.01.2017.
  */
 public class ShutterModel implements IShutterModel{
-    string name = "";
+    String name = "";
     boolean isUp = true;
     boolean isDown = false;
     int shutterHeight = 0;
 
     @Override
-    public string getName(){
+    public String getName(){
         return name;
     }
 
     @Override
-    public void setName(string name){
+    public void setName(String name){
        this.name = name;
     }
 
@@ -54,7 +54,7 @@ public class ShutterModel implements IShutterModel{
     @Override
     public void setShutterHeight(int value){
         if(value > -1 && value <6){
-            shutterHeight = value
+            shutterHeight = value;
         }
         else{
             //Fehlermeldung: "Bitte eine Rolllädenhöhe zwischen 0 und 5 eingeben!"
@@ -74,5 +74,23 @@ public class ShutterModel implements IShutterModel{
     public int getShutterHeight(){
         return shutterHeight;
     };
+
+    @Override
+    public boolean isUp() {
+        if(shutterHeight == 5){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isDown() {
+        if(shutterHeight == 0){
+            return true;
+        } else{
+            return false;
+        }
+    }
 
 }

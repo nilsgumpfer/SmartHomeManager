@@ -6,5 +6,5 @@ package de.thm.smarthome.main.device.shutter.logic;
 public interface IShutterLogic {
     void moveUp();
     void moveDown();
-    string getLogicName();
+    String getLogicName();
 }
