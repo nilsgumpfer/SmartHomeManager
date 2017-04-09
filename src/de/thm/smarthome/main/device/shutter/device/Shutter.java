@@ -44,7 +44,7 @@ public class Shutter extends AObservable implements ISmartDevice, IObserver, Shu
     }
 
     @Override
-    public string getName(ShutterClientInterface c) {
+    public String getName(ShutterClientInterface c) {
 
         return logic.getLogicName();
     }
@@ -68,5 +68,15 @@ public class Shutter extends AObservable implements ISmartDevice, IObserver, Shu
         catch (MalformedURLException e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+
     }
 }

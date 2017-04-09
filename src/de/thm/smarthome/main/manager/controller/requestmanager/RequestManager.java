@@ -34,7 +34,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public String getServerrInfo() {
+    public String getServerInfo() {
         return null;
     }
 
@@ -159,7 +159,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public double getAitPressure(UserTransferObject authentication) {
+    public double getAirPressure(UserTransferObject authentication) {
         return 0;
     }
 
@@ -204,7 +204,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public String[] showLogs(UserTransferObject authentication, int limit) {
+    public String[] readLogs(UserTransferObject authentication, int limit) {
         return new String[0];
     }
 }

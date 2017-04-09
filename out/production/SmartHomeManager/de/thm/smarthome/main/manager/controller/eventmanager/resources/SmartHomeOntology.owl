@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.thm.de/sag/ontologies/smarthome#"
+     xml:base="http://www.thm.de/sag/ontologies/smarthome"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.thm.de/sag/ontologies/smarthome"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#hasPosition -->
+
+    <owl:ObjectProperty rdf:about="http://www.thm.de/sag/ontologies/smarthome#hasPosition">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Shutter"/>
+        <rdfs:range rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Position"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#hasStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.thm.de/sag/ontologies/smarthome#hasStatus">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#SmartDevice"/>
+        <rdfs:range rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Status"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#hasAirPressure -->
+
+    <owl:DatatypeProperty rdf:about="http://www.thm.de/sag/ontologies/smarthome#hasAirPressure">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Weatherstation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#hasRainfallAmount -->
+
+    <owl:DatatypeProperty rdf:about="http://www.thm.de/sag/ontologies/smarthome#hasRainfallAmount">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Weatherstation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#hasTemperature -->
+
+    <owl:DatatypeProperty rdf:about="http://www.thm.de/sag/ontologies/smarthome#hasTemperature">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Heating"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Thermometer"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Weatherstation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#hasWindVelocity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.thm.de/sag/ontologies/smarthome#hasWindVelocity">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Weatherstation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Down -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Down">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Position"/>
+        <owl:disjointWith rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Up"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Heating -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Heating">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#SmartDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Maintenance -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Maintenance">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Status"/>
+        <owl:disjointWith rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Normal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Normal -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Normal">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Status"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Position -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Position">
+        <owl:disjointWith rdf:resource="http://www.thm.de/sag/ontologies/smarthome#SmartDevice"/>
+        <owl:disjointWith rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Status"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Shutter -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Shutter">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#SmartDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#SmartDevice -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#SmartDevice">
+        <owl:disjointWith rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Status"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Status -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Status"/>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Thermometer -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Thermometer">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#SmartDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Up -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Up">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#Position"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/sag/ontologies/smarthome#Weatherstation -->
+
+    <owl:Class rdf:about="http://www.thm.de/sag/ontologies/smarthome#Weatherstation">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/sag/ontologies/smarthome#SmartDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.thm.de/sag/ontologies/smarthome#Heating"/>
+            <rdf:Description rdf:about="http://www.thm.de/sag/ontologies/smarthome#Shutter"/>
+            <rdf:Description rdf:about="http://www.thm.de/sag/ontologies/smarthome#Thermometer"/>
+            <rdf:Description rdf:about="http://www.thm.de/sag/ontologies/smarthome#Weatherstation"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+

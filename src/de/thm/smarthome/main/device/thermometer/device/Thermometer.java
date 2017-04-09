@@ -17,6 +17,8 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  * Created by Tim on 07.04.2017.
  */
+
+//TODO: Von Nils: warum gibt es hier eine zusätzliche Thermometer-Klasse, obwohl es doch schon das SmartThermometer gibt??
 public class Thermometer extends AObservable implements ISmartDevice, IObserver, ThermometerServerInterface {
     private IThermometerLogic logic;
 
@@ -25,13 +27,13 @@ public class Thermometer extends AObservable implements ISmartDevice, IObserver,
         this.logic = logic;
     }
 
-    @Override
-    public string getName(ThermometerClientInterface c) {
+    public String getName(ThermometerClientInterface c) {
         return null;
     }
 
     public double getTemperature(ThermometerClientInterface c){
-        return IThermometerLogic.getTemperature() ;
+        //return IThermometerLogic.getTemperature() ; //TODO: Von Nils: das klappt so nicht :)
+        return logic.getTemperature() ;
     }
 
     @Override
@@ -53,5 +55,15 @@ public class Thermometer extends AObservable implements ISmartDevice, IObserver,
         catch (MalformedURLException e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+
     }
 }

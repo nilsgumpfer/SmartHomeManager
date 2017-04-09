@@ -18,12 +18,12 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
     }
 
     @Override
-    public string getName() {
+    public String getName() {
         return null;
     }
 
     public double getTemperature(){
-        return IThermometerLogic.getTemperature() ;
+        return logic.getTemperature() ;
     }
 
     @Override

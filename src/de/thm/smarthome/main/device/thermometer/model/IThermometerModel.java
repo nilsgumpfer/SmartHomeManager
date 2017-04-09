@@ -5,6 +5,6 @@ package de.thm.smarthome.main.device.thermometer.model;
  */
 public interface IThermometerModel {
     void setTemperature();
-    int getTemperature();
-    void toggleTemperatureUnit()
+    double getTemperature();
+    void toggleTemperatureUnit();
 }

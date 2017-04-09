@@ -23,7 +23,7 @@ public class MySQLConnection {
     public void CreateConnection() throws SQLException {
         try {
             //Load driver
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+           // DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //TODO: Nils war´s, bitte wieder einkommentieren!
             //Connect to database
             String str = "jdbc:mysql://" + server + ":" + serverport + "/" + db;
             conn = DriverManager.getConnection(str, username, password);

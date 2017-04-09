@@ -18,7 +18,7 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     }
 
     @Override
-    public static double getTemperature() {
+    public double getTemperature() {
         return 0;
     }
 

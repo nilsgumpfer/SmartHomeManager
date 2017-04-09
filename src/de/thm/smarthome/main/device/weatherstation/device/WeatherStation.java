@@ -27,30 +27,35 @@ public class WeatherStation extends AObservable implements ISmartDevice, IObserv
 
     public double getWindVelocity(WeatherStationClientInterface c) {
 
-        return IWeatherStationLogic.getWindVelocity();
+        //return IWeatherStationLogic.getWindVelocity();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getRainfallAmount(WeatherStationClientInterface c) {
 
-        return IWeatherStationLogic.getRainfallAmount();
+        //return IWeatherStationLogic.getRainfallAmount();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getAirHumidity(WeatherStationClientInterface c) {
 
-        return IWeatherStationLogic.getAirHumidity();
+        //return IWeatherStationLogic.getAirHumidity();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getAirPressure(WeatherStationClientInterface c) {
 
-        return IWeatherStationLogic.getAirPressure();
+        //return IWeatherStationLogic.getAirPressure();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getTemperature(WeatherStationClientInterface c) {
-        return IWeatherStationLogic.getTemperature();
+        //return IWeatherStationLogic.getTemperature();
+        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     @Override
-    public string getName(WeatherStationClientInterface c) {
+    public String getName(WeatherStationClientInterface c) {
         return null;
     }
 
@@ -60,7 +65,7 @@ public class WeatherStation extends AObservable implements ISmartDevice, IObserv
     }
 
     public void startServer(String wetterstationname) throws RemoteException {
-        WeatherStationServerInterface stub = (WeatherStationServerInterface) UnicastRemoteObject.exportObject(this,0);
+        WeatherStationServerInterface stub = (WeatherStationServerInterface) UnicastRemoteObject.exportObject(this, 0);
         LocateRegistry.createRegistry(51000);
         try {
             /*Aktiviert und definiert das Logging des Servers*/
@@ -69,8 +74,18 @@ public class WeatherStation extends AObservable implements ISmartDevice, IObserv
             Naming.rebind("//127.0.0.1/" + wetterstationname, this);
             System.out.println("Server ist gestartet!");
 
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+
+    }
 }

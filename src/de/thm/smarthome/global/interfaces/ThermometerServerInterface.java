@@ -10,7 +10,7 @@ import java.rmi.Remote;
  */
 public interface ThermometerServerInterface extends Remote {
 
-    public string getName(ThermometerClientInterface c);
+    public String getName(ThermometerClientInterface c);
     public double getTemperature(ThermometerClientInterface c);
     public void update(AObservable o, Object change, ThermometerClientInterface c);
 }

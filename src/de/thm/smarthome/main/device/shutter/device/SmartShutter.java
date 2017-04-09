@@ -35,7 +35,7 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
     }
 
     @Override
-    public string getName() {
+    public String getName() {
 
         return logic.getLogicName();
     }

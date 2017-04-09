@@ -29,7 +29,7 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
     }
 
     @Override
-    public string getName() {
+    public String getName() {
 
         return logic.getName();
     }

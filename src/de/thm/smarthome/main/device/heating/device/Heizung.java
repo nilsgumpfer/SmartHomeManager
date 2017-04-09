@@ -59,7 +59,28 @@ public class Heizung extends AObservable implements ITemperatureRelevantDevice, 
             System.out.println("Server ist gestartet!");
 
         }
-        catch (MalformedURLException e){
+        catch (MalformedURLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+
+    }
+
+    @Override
+    public int setTemperature(double temperature) {
+        return 0;
+    }
+
+    @Override
+    public double getTemperature() {
+        return 0;
     }
 }
