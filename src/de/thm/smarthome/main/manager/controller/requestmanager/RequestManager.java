@@ -104,7 +104,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public List<ShutterTransferObject> getAllShutterData(UserTransferObject authentication) {
+    public ShutterTransferObject[] getAllShutterData(UserTransferObject authentication) {
         return null;
     }
 
@@ -139,7 +139,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public List<UserTransferObject> getAllUserData(UserTransferObject authentication) {
+    public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
         return null;
     }
 

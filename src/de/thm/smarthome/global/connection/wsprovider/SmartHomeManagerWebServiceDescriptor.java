@@ -89,7 +89,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @WebMethod
-    public List<ShutterTransferObject> getAllShutterData(UserTransferObject authentication) {
+    public ShutterTransferObject[] getAllShutterData(UserTransferObject authentication) {
         return requestManager.getAllShutterData(authentication);
     }
 
@@ -124,7 +124,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @WebMethod
-    public List<UserTransferObject> getAllUserData(UserTransferObject authentication) {
+    public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
         return requestManager.getAllUserData(authentication);
     }
 
@@ -193,17 +193,17 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.readLogs(authentication, limit);
     }
 
-    @Override
+    @WebMethod
     public CommandResponseObject undoLastCommand() {
         return requestManager.undoLastCommand();
     }
 
-    /* Web-Service-Test-Szenario (Nils)
+    //Web-Service-Test-Szenario (Nils)
     @WebMethod(operationName="body-mass-index")
     @WebResult(name = "your-bmi")
     public double bmi( @WebParam(name="height") double height,
                        @WebParam(name="weight") double weight )
     {
         return weight / ((height * height) / 10000);
-    }*/
+    }
 }

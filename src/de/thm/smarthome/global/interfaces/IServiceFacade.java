@@ -24,7 +24,7 @@ public interface IServiceFacade {
     CommandResponseObject moveShuttersDown(UserTransferObject authentication);
     String getShutterPosition(UserTransferObject authentication);
     ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter);
-    List<ShutterTransferObject> getAllShutterData(UserTransferObject authentication);
+    ShutterTransferObject[] getAllShutterData(UserTransferObject authentication);
 
     CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user);
     CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user);
@@ -32,7 +32,7 @@ public interface IServiceFacade {
     CommandResponseObject login(UserTransferObject authentication, UserTransferObject user);
     CommandResponseObject logout(UserTransferObject authentication, UserTransferObject user);
     UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject user);
-    List<UserTransferObject> getAllUserData(UserTransferObject authentication);
+    UserTransferObject[] getAllUserData(UserTransferObject authentication);
 
     CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation);
     CommandResponseObject deleteWeatherStation(UserTransferObject authentication);
