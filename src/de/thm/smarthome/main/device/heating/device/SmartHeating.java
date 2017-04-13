@@ -16,25 +16,18 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
         this.logic = logic;
     }
 
-    @Override
-    public int setTemperature(double temperature) {
-
-        return logic.setTemperature(temperature);
+    public void setTemperature(double temperature) {
+        logic.setTemperature(temperature);
     }
 
-    @Override
     public double getTemperature() {
-
         return logic.getTemperature();
     }
 
-    @Override
     public String getName() {
-
         return logic.getName();
     }
 
-    @Override
     public void update(AObservable o, Object change) {
 
     }

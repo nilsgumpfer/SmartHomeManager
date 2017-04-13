@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.thermometer.logic;
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
 import de.thm.smarthome.main.device.thermometer.device.Thermometer;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
+import de.thm.smarthome.main.device.thermometer.model.ThermometerModel;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -17,7 +18,6 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
         this.model = model;
     }
 
-    @Override
     public double getTemperature() {
         //return thermometer.getTemperature(); (Nils war´s)
         return device.getTemperature();

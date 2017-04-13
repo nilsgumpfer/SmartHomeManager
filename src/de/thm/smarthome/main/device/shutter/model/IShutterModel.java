@@ -10,4 +10,6 @@ public interface IShutterModel {
     void decrementShutterHeight();
     void setShutterHeight(int value);
     int getShutterHeight();
+    boolean isUp();
+    boolean isDown();
 }

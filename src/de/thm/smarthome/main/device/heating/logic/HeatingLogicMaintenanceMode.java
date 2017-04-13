@@ -9,21 +9,24 @@ import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 public class HeatingLogicMaintenanceMode implements IHeatingLogic {
     private IHeatingModel model;
     private IHeating device;
+    private String heatingModeName = "MaintenanceMode";
 
-    public HeatingLogicMaintenanceMode(IHeatingModel model,IHeating device){}
+    public HeatingLogicMaintenanceMode(IHeatingModel model,IHeating device){
+        model.setTemperature(0);
+    }
 
     @Override
-    public int setTemperature(double temperature) {
-        return 0;
+    public void setTemperature(double temperature) {
+        //Ausgabe: "Temperatur kann im Wartungsmodus nicht verändert werden!"
     }
 
     @Override
     public double getTemperature() {
-        return 0;
+        return model.getTemperature();
     }
 
     @Override
     public String getName() {
-        return null;
+        return heatingModeName;
     }
 }

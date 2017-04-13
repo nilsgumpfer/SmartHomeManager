@@ -9,21 +9,24 @@ import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 public class HeatingLogicNightMode implements IHeatingLogic {
     private IHeatingModel model;
     private IHeating device;
+    private String heatingModeName = "NightMode";
 
-    public HeatingLogicNightMode(IHeatingModel model, IHeating device){}
+    public HeatingLogicNightMode(IHeatingModel model, IHeating device){
+        model.setTemperature(17);
+    }
 
     @Override
-    public int setTemperature(double temperature) {
-        return 0;
+    public void setTemperature(double temperature) {
+        model.setTemperature(temperature);
     }
 
     @Override
     public double getTemperature() {
-        return 0;
+        return model.getTemperature();
     }
 
     @Override
     public String getName() {
-        return null;
+        return heatingModeName;
     }
 }

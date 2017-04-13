@@ -12,12 +12,16 @@ import java.util.List;
  */
 public interface IDeviceManager {
     SmartHeating getSmartHeating();
-    List<SmartShutter> getSmartShutters();
-    SmartThermometer getSmartThermometer();
-    int setSmartHeating(SmartHeating smartHeating);
-    SmartWeatherStation getSmartWeatherStation();
-    int setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
-    int setSmartThermometer(SmartThermometer smartThermometer);
+    void setSmartHeating(SmartHeating smartHeating);
+
     SmartShutter getSmartShutter(String id);
-    int addSmartShutter(SmartShutter smartShutter);
+    void addSmartShutter(SmartShutter smartShutter);
+    void removeSmartShutter(SmartShutter smartShutter);
+
+    SmartThermometer getSmartThermometer();
+    void setSmartThermometer(SmartThermometer smartThermometer);
+
+    SmartWeatherStation getSmartWeatherStation();
+    void setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
+
 }

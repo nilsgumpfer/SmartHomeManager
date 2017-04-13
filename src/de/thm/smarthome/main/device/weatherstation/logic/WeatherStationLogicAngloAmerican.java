@@ -13,30 +13,33 @@ public class WeatherStationLogicAngloAmerican implements IWeatherStationLogic{
     public WeatherStationLogicAngloAmerican(IWeatherStationModel model, IWeatherStation device) {
         this.model = model;
         this.device = device;
+        if(model.isMetric()){
+            model.toggleMeasuringUnit();
+        }
     }
 
     @Override
-    public double getWindVelocity() {
-        return 0;
+    public void setWindVelocity(double windVelocity) {
+
     }
 
     @Override
-    public double getRainfallAmount() {
-        return 0;
+    public void setRainfallAmount(double rainfallAmount) {
+
     }
 
     @Override
-    public double getAirHumidity() {
-        return 0;
+    public void setAirHumidity(double airHumidity) {
+
     }
 
     @Override
-    public double getAirPressure() {
-        return 0;
+    public void setAirPressure(double airPressure) {
+
     }
 
     @Override
-    public double getTemperature() {
-        return 0;
+    public void setTemperature(double temperature) {
+
     }
 }

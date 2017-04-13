@@ -73,4 +73,22 @@ public class ShutterModel implements IShutterModel{
         return shutterHeight;
     }
 
+    @Override
+    public boolean isUp() {
+        if(shutterHeight == 5){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isDown() {
+        if(shutterHeight == 0){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
 }

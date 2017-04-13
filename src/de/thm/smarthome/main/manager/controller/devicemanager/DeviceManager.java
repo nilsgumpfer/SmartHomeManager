@@ -29,8 +29,9 @@ public class DeviceManager implements IDeviceManager, IObserver{
         return ourInstance;
     }
 
-    public SmartHeating getSmartHeating(){
-        return smartHeating;
+    @Override
+    public SmartHeating getSmartHeating() {
+        return null;
     }
 
     @Override
@@ -47,30 +48,35 @@ public class DeviceManager implements IDeviceManager, IObserver{
         return null;
     }
 
-    public SmartThermometer getSmartThermometer(){
+
+    @Override
+    public void addSmartShutter(SmartShutter smartShutter) {
+        smartShutters.add(smartShutter);
+    }
+
+    @Override
+    public void removeSmartShutter(SmartShutter smartShutter) {
+        smartShutters.remove(smartShutter);
+    }
+
+    @Override
+    public SmartThermometer getSmartThermometer() {
         return smartThermometer;
     }
 
-    public int setSmartHeating(SmartHeating smartHeating){
-        return 0;
+    @Override
+    public void setSmartThermometer(SmartThermometer smartThermometer) {
+        this.smartThermometer = smartThermometer;
     }
 
-    public SmartWeatherStation getSmartWeatherStation(){
+    @Override
+    public SmartWeatherStation getSmartWeatherStation() {
         return smartWeatherStation;
     }
 
-    public int setSmartWeatherStation(SmartWeatherStation smartWeatherStation){
-
-        return 0;
-    }
-
-    public int setSmartThermometer(SmartThermometer smartThermometer){
-
-        return 0;
-    }
-
-    public int addSmartShutter(SmartShutter smartShutter){
-        return 0;
+    @Override
+    public void setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
+        this.smartWeatherStation = smartWeatherStation;
     }
 
     @Override
@@ -78,9 +84,5 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
         eventManager.update(o,change);
     }
-
-
-
-
 
 }

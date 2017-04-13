@@ -15,6 +15,7 @@ public class ShutterLogicStandardMode implements IShutterLogic {
 
     public ShutterLogicStandardMode(IShutterModel model, IShutter device){}
 
+
     @Override
     public void moveUp() {
         shutterModel.incrementShutterHeight();
