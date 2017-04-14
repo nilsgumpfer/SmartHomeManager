@@ -4,6 +4,7 @@ import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.shutter.logic.IShutterLogic;
+import de.thm.smarthome.main.device.shutter.model.IShutterModel;
 import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 
 /**
@@ -15,7 +16,7 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
     private SmartShutter(IShutterLogic logic) {
         this.logic = logic;
     }
-    private ShutterModel shutterModel = new ShutterModel();
+    private IShutterModel shutterModel = new ShutterModel();
 
 
     public void moveUp() {
@@ -35,7 +36,6 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
 
     @Override
     public String getName() {
-
         return logic.getLogicName();
     }
 

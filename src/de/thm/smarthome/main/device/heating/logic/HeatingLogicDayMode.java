@@ -3,30 +3,51 @@ package de.thm.smarthome.main.device.heating.logic;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 
+import java.util.logging.Logger;
+
 /**
  * Created by Nils on 27.01.2017.
  */
 public class HeatingLogicDayMode implements IHeatingLogic {
     private IHeatingModel model;
     private IHeating device;
-    private String heatingModeName = "DayMode";
 
     public HeatingLogicDayMode(IHeatingModel model, IHeating device){
+        model.setHeatingName("DayMode");
         model.setTemperature(20);
     }
 
     @Override
+    public String getHeatingName() {
+        return model.getHeatingName();
+    }
+
+    @Override
+    public void setHeatingName(String heatingName) {
+        model.setHeatingName(heatingName);
+    }
+
+    @Override
+    public String getHeatingModeName() {
+        return model.getHeatingModeName();
+    }
+
+    @Override
+    public void setHeatingModeName(String heatingModeName) {
+        model.setHeatingModeName(heatingModeName);
+    }
+
+    @Override
     public void setTemperature(double temperature) {
-        model.setTemperature(temperature);
+        if(temperature < 0){
+            //ToDo: //Ausgabe: "Die Temperatur darf nicht unter 0 Grad eingestellt werden!"
+        } else {
+            model.setTemperature(temperature);
+        }
     }
 
     @Override
     public double getTemperature() {
         return model.getTemperature();
-    }
-
-    @Override
-    public String getName() {
-        return heatingModeName;
     }
 }

@@ -35,7 +35,7 @@ public class Thermometer extends AObservable implements ISmartDevice, IObserver,
 
     public double getTemperature(ThermometerClientInterface c){
         //return IThermometerLogic.getTemperature() ; //TODO: Von Nils: das klappt so nicht :)
-        return logic.getTemperature() ;
+        return logic.getTemperature();
     }
 
     @Override

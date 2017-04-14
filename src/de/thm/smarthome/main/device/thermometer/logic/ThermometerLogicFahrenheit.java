@@ -11,7 +11,6 @@ import de.thm.smarthome.main.device.thermometer.model.ThermometerModel;
 public class ThermometerLogicFahrenheit implements IThermometerLogic{
     private IThermometerModel model;
     private IThermometer device;
-    private Thermometer thermometer; //TODO: gleiche Frage wie in Klasse selbst: warum gibt´s die hier quasi zwei mal?
     private String logicName = "Fahrenheit";
 
     public ThermometerLogicFahrenheit(IThermometerModel model, IThermometer device) {

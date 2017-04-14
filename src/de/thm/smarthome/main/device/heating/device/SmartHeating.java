@@ -25,7 +25,7 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
     }
 
     public String getName() {
-        return logic.getName();
+        return logic.getHeatingName();
     }
 
     public void update(AObservable o, Object change) {

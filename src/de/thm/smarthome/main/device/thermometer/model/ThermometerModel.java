@@ -17,12 +17,6 @@ public class ThermometerModel implements IThermometerModel{
     public void setTemperature(double temperature){
         this.temperature = temperature;
     }
-
-    @Override
-    public void setTemperature() {
-
-    }
-
     public double getTemperature(){
         return temperature;
     }
@@ -30,7 +24,11 @@ public class ThermometerModel implements IThermometerModel{
         return isCelsius();
     };
     public void toggleTemperatureUnit(){
-        //(isCelsius) ? isCelsius=false : isCelsius=true; //TODO: Von Nils: @Carlo: Bitte nochmal verständlich/übersichtlich machen
+        if(isCelsius==true){
+            isCelsius=false;
+        } else {
+            isCelsius=true;
+        }
     }
 
 }

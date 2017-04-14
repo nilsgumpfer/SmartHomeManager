@@ -5,6 +5,8 @@ import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.weatherstation.logic.IWeatherStationLogic;
+import de.thm.smarthome.main.device.weatherstation.logic.WeatherStationLogicAngloAmerican;
+import de.thm.smarthome.main.device.weatherstation.logic.WeatherStationLogicMetric;
 import de.thm.smarthome.main.device.weatherstation.model.WeatherStationModel;
 
 /**
@@ -16,12 +18,24 @@ public class SmartWeatherStation extends AObservable implements ISmartDevice, IO
 
     public SmartWeatherStation(IWeatherStationLogic logic) {
         this.logic = logic;
-        if(weatherStationModel.isMetric()==false){
-            weatherStationModel.setAirHumidity(weatherStationModel.getAirHumidity()*2.54);
-            weatherStationModel.setAirPressure(weatherStationModel.getAirPressure()*2.54);
-            weatherStationModel.setRainfallAmount(weatherStationModel.getRainfallAmount()*2.54);
-            weatherStationModel.setWindVelocity(weatherStationModel.getWindVelocity()*2.54);
-            //weatherStationModel.setTemperature(weatherStationModel.getTemperature()*2.54);
+//        if(!(logic.getClass().equals(this.logic.getClass())) && weatherStationModel.isMetric()==false){
+//
+//        }
+        if(weatherStationModel.isMetric()==false) {
+            //weatherStationModel.setAirHumidity(weatherStationModel.getAirHumidity()*2.54);
+            weatherStationModel.setAirPressure(weatherStationModel.getAirPressure() * 14.503773773);
+            weatherStationModel.setRainfallAmount(weatherStationModel.getRainfallAmount() * 1.75289575289575);
+            weatherStationModel.setWindVelocity(weatherStationModel.getWindVelocity() * 1.60934);
+            weatherStationModel.setTemperature((weatherStationModel.getTemperature() - 32) / 1.8);
+
+            //Einheit ändern
+            weatherStationModel.toggleMeasuringUnit();
+        } else {
+            //weatherStationModel.setAirHumidity(weatherStationModel.getAirHumidity()*2.54);
+            weatherStationModel.setAirPressure(weatherStationModel.getAirPressure() / 14.503773773);
+            weatherStationModel.setRainfallAmount(weatherStationModel.getRainfallAmount() / 1.75289575289575);
+            weatherStationModel.setWindVelocity(weatherStationModel.getWindVelocity() / 1.60934);
+            weatherStationModel.setTemperature((weatherStationModel.getTemperature() * 1.8) + 32);
         }
     }
 
@@ -29,37 +43,20 @@ public class SmartWeatherStation extends AObservable implements ISmartDevice, IO
         return weatherStationModel.getWindVelocity();
     }
 
-        //return IWeatherStationLogic.getWindVelocity();
-        return 0; //TODO: Von Nils: das geht so nicht! :)
-    }
-
     public double getRainfallAmount() {
         return weatherStationModel.getRainfallAmount();
-    }
-
-        //return IWeatherStationLogic.getRainfallAmount();
-        return 0; //TODO: Von Nils: das geht so nicht! :)
     }
 
     public double getAirHumidity() {
         return weatherStationModel.getAirHumidity();
     }
 
-        //return IWeatherStationLogic.getAirHumidity();
-        return 0; //TODO: Von Nils: das geht so nicht! :)
-    }
-
     public double getAirPressure() {
         return weatherStationModel.getAirPressure();
     }
 
-        //return IWeatherStationLogic.getAirPressure();
-        return 0; //TODO: Von Nils: das geht so nicht! :)
-    }
-
     public double getTemperature() {
-        //return IWeatherStationLogic.getTemperature();
-        return 0; //TODO: Von Nils: das geht so nicht! :)
+        return weatherStationModel.getTemperature();
     }
 
     public void setTemperature(double temperature){

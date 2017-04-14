@@ -9,8 +9,7 @@ public class WeatherStationModel implements IWeatherStationModel{
     private double airHumidity = 2;
     private double airPressure = 4;
     private double temperature = 13;
-    private boolean isMetric = false;
-
+    private boolean isMetric = true;
 
     @Override
     public double getWindVelocity() {
