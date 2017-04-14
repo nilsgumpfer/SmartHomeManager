@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.manager.controller.requestmanager;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
@@ -8,8 +9,6 @@ import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManager;
-
-import java.util.List;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -21,6 +20,7 @@ public class RequestManager implements IServiceFacade {
     private IDeviceManager smartHomeController = DeviceManager.getInstance();
     private ICommandManager commandManager = CommandManager.getInstance();
     private IUserManager userManager = UserManager.getInstance();
+    private IDeviceManager deviceManager = DeviceManager.getInstance();
 
     private RequestManager() {}
 
@@ -30,42 +30,65 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject undoLastCommand() {
-        return null;
+        return new CommandResponseObject(commandManager.undoLastCommand());
     }
 
     @Override
     public String getServerInfo() {
-        return null;
+        //TODO: provide some information about current state, connected devices, ip, and so on as simple text-message
+        String version = "0.1";
+        String ip = "127.0.0.1";
+        String wsurl = "http://" + ip + ":8080/services";
+
+        return "SmartHomeManager Version " + version + "\nServer-IP: " + ip +"\nWebService-URL: " + wsurl + "\netc. ...";
     }
 
     @Override
     public CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
-        return null;
+        if(userManager.isLoggedIn(authentication))
+            return new CommandResponseObject(deviceManager.createSmartHeating(heating));
+        else
+            return new CommandResponseObject(ResponseCode.LoggedOut);
     }
 
     @Override
     public CommandResponseObject deleteHeating(UserTransferObject authentication) {
-        return null;
+        if(userManager.isLoggedIn(authentication))
+            return new CommandResponseObject(deviceManager.deleteSmartHeating());
+        else
+            return new CommandResponseObject(ResponseCode.LoggedOut);
     }
 
     @Override
     public CommandResponseObject switchHeatingOn(UserTransferObject authentication) {
-        return null;
+        if(userManager.isLoggedIn(authentication))
+            return new CommandResponseObject(deviceManager.getSmartHeating().switchOn());
+        else
+            return new CommandResponseObject(ResponseCode.LoggedOut);
     }
 
     @Override
     public CommandResponseObject switchHeatingOff(UserTransferObject authentication) {
-        return null;
+        if(userManager.isLoggedIn(authentication))
+            return new CommandResponseObject(deviceManager.getSmartHeating().switchOff());
+        else
+            return new CommandResponseObject(ResponseCode.LoggedOut);
     }
 
     @Override
     public CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature) {
-        return null;
+        if(userManager.isLoggedIn(authentication))
+            return new CommandResponseObject(deviceManager.getSmartHeating().setTemperature(temperature));
+        else
+            return new CommandResponseObject(ResponseCode.LoggedOut);
     }
 
     @Override
-    public double getHeatingTemperature(UserTransferObject authentication) {
-        return 0;
+    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) {
+        if(userManager.isLoggedIn(authentication))
+            return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature());
+        else
+            return new HeatingTransferObject(ResponseCode.LoggedOut);
     }
 
     @Override
@@ -154,28 +177,28 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public double getAirHumidity(UserTransferObject authentication) {
-        return 0;
+    public WeatherStationTransferObject getAirHumidity(UserTransferObject authentication) {
+        return null;
     }
 
     @Override
-    public double getAirPressure(UserTransferObject authentication) {
-        return 0;
+    public WeatherStationTransferObject getAirPressure(UserTransferObject authentication) {
+        return null;
     }
 
     @Override
-    public double getWindVelocity(UserTransferObject authentication) {
-        return 0;
+    public WeatherStationTransferObject getWindVelocity(UserTransferObject authentication) {
+        return null;
     }
 
     @Override
-    public double getOutdoorTemperature(UserTransferObject authentication) {
-        return 0;
+    public WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication) {
+        return null;
     }
 
     @Override
-    public double getRainfallAmount(UserTransferObject authentication) {
-        return 0;
+    public WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication) {
+        return null;
     }
 
     @Override
@@ -194,8 +217,8 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public double getIndoorTemperature(UserTransferObject authentication) {
-        return 0;
+    public ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication) {
+        return null;
     }
 
     @Override

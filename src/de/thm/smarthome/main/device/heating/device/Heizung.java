@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.device;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.HeizungClientInterface;
 import de.thm.smarthome.global.interfaces.HeizungServerInterface;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
@@ -40,7 +41,7 @@ public class Heizung extends AObservable implements ITemperatureRelevantDevice, 
     @Override
     public String getName(HeizungClientInterface c) throws RemoteException {
 
-        return logic.getName();
+        return logic.getHeatingName();
     }
 
     @Override
@@ -75,8 +76,8 @@ public class Heizung extends AObservable implements ITemperatureRelevantDevice, 
     }
 
     @Override
-    public int setTemperature(double temperature) {
-        return 0;
+    public ResponseCode setTemperature(double temperature) {
+        return ResponseCode.TemperatureAdjustmentSuccessful;
     }
 
     @Override

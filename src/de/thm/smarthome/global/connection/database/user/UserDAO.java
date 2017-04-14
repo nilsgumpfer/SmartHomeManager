@@ -1,5 +1,7 @@
 package de.thm.smarthome.global.connection.database.user;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,28 +110,42 @@ public class UserDAO {
         return currentUser;
     }
 
-    public int logUserIn(User user) throws SQLException {
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
+    public ResponseCode logUserIn(User user){
+        try {
+            MySQLConnection mysqlconn = new MySQLConnection();
+            mysqlconn.CreateConnection();
 
-        String currentUsername = user.getUsername();
+            String currentUsername = user.getUsername();
 
-        ResultSet res;
-        Statement stm = mysqlconn.getConn().createStatement();
-        res=stm.executeQuery("Update users SET loggedIn = true WHERE username ="+currentUsername);
-        return 0;
+            ResultSet res;
+            Statement stm = mysqlconn.getConn().createStatement();
+            res = stm.executeQuery("Update users SET loggedIn = true WHERE username =" + currentUsername);
+
+            //TODO: check affected rows, etc. --> then return corresponding ResponseObject
+            return ResponseCode.LoginSuccessful;
+        }
+        catch(Exception e) {
+            return ResponseCode.LoginFailed;
+        }
     }
 
-    public int logUserOut(User user) throws SQLException {
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
+    public ResponseCode logUserOut(User user){
+        try {
+            MySQLConnection mysqlconn = new MySQLConnection();
+            mysqlconn.CreateConnection();
 
-        String currentUsername = user.getUsername();
+            String currentUsername = user.getUsername();
 
-        ResultSet res;
-        Statement stm = mysqlconn.getConn().createStatement();
-        res=stm.executeQuery("Update users SET loggedIn = false WHERE username ="+currentUsername);
-        return 0;
+            ResultSet res;
+            Statement stm = mysqlconn.getConn().createStatement();
+            res = stm.executeQuery("Update users SET loggedIn = false WHERE username =" + currentUsername);
+
+            //TODO: check affected rows, etc. --> then return corresponding ResponseObject
+            return ResponseCode.LogoutSuccessful;
+        }
+        catch(Exception e) {
+            return ResponseCode.LoginFailed;
+        }
     }
 
     public List<User> getAllUsers() throws SQLException {
@@ -282,23 +298,29 @@ public class UserDAO {
         return userlist;
     }
 
-    public Boolean isUserloggedIn(User user) throws SQLException {
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
+    public ResponseCode isUserloggedIn(User user) {
+        try {
+            MySQLConnection mysqlconn = new MySQLConnection();
+            mysqlconn.CreateConnection();
 
-        String currentUsername = user.getUsername();
-        Boolean currentUserStatus = null;
+            String currentUsername = user.getUsername();
+            Boolean currentUserStatus = null;
 
-        ResultSet res;
-        Statement stm = mysqlconn.getConn().createStatement();
-        res=stm.executeQuery("SELECT loggedIn from users WHERE username ="+currentUsername);
-        try{
-            while (res.next()){
+            ResultSet res;
+            Statement stm = mysqlconn.getConn().createStatement();
+            res = stm.executeQuery("SELECT loggedIn from users WHERE username =" + currentUsername);
+
+            while (res.next())
                 currentUserStatus = res.getBoolean(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            if(currentUserStatus)
+                return ResponseCode.LoggedIn;
+            else
+                return ResponseCode.NotLoggedIn;
         }
-        return currentUserStatus;
+        catch(Exception e){
+            return ResponseCode.DBError;
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.device;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.observer.AObservable;
@@ -19,8 +20,10 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
         heatingModel.setHeatingName(heatingName);
     }
 
-    public void setTemperature(double temperature) {
+    public ResponseCode setTemperature(double temperature) {
         logic.setTemperature(temperature);
+        //TODO: generate Response-Code
+        return ResponseCode.TemperatureAdjustmentSuccessful;
     }
 
     public double getTemperature() {
@@ -33,5 +36,15 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
 
     public void update(AObservable o, Object change) {
 
+    }
+
+    public ResponseCode switchOn(){
+        //TODO: Make this realistic
+        return ResponseCode.SwitchedOn;
+    }
+
+    public ResponseCode switchOff(){
+        //TODO: Make this realistic
+        return ResponseCode.AlreadySwitchedOff;
     }
 }

@@ -8,6 +8,6 @@ public interface IHeatingLogic {
     void setHeatingName(String heatingName);
     String getHeatingModeName();
     void setHeatingModeName(String heatingModeName);
-    void setTemperature(double temperature);
+    int setTemperature(double temperature);
     double getTemperature();
 }

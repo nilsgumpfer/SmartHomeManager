@@ -2,6 +2,8 @@ package de.thm.smarthome.main.manager.controller.usermanager;
 
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.connection.database.user.UserDAO;
+import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.transfer.UserTransferObject;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -23,21 +25,53 @@ public class UserManager implements IUserManager{
         return ourInstance;
     }
 
-    public int Login(User user) throws SQLException{
-        userdao.logUserIn(user);
-        return 0;
+    public ResponseCode Login(User user){
+        return userdao.logUserIn(user);
     }
 
-    public int Logout(User user)throws SQLException{
-        userdao.logUserOut(user);
-        return 0;
+    public ResponseCode Logout(User user){
+        return userdao.logUserOut(user);
     }
 
-    public boolean isLoggedIn(User user)throws SQLException{
-            return userdao.isUserloggedIn(user);
+    @Override
+    public ResponseCode checkLogin(User user) {
+        return userdao.isUserloggedIn(user);
     }
 
-    public boolean isLoggedOut(User user)throws SQLException{
-        return !(isLoggedIn(user));
+    @Override
+    public ResponseCode Login(UserTransferObject userTransferObject) {
+        return Login(userTransferObject.getUser());
+    }
+
+    @Override
+    public ResponseCode Logout(UserTransferObject userTransferObject) {
+        return Logout(userTransferObject.getUser());
+    }
+
+    public boolean isLoggedIn(User user){
+        switch(userdao.isUserloggedIn(user)){
+            case LoggedIn:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean isLoggedOut(User user){
+        return !isLoggedIn(user);
+    }
+
+    @Override
+    public boolean isLoggedIn(UserTransferObject userTransferObject) {
+        return isLoggedIn(userTransferObject.getUser());
+    }
+
+    @Override
+    public boolean isLoggedOut(UserTransferObject userTransferObject) {
+        return isLoggedOut(userTransferObject.getUser());
+    }
+
+    public ResponseCode checkLogin(UserTransferObject userTransferObject){
+        return checkLogin(userTransferObject.getUser());
     }
 }

@@ -15,7 +15,6 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     private IServiceFacade requestManager = RequestManager.getInstance();
 
     public SmartHomeManagerWebServiceDescriptor(){
-        this.requestManager = RequestManager.getInstance();
     }
 
     @WebMethod
@@ -49,7 +48,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @WebMethod
-    public double getHeatingTemperature(UserTransferObject authentication) {
+    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) {
         return requestManager.getHeatingTemperature(authentication);
     }
 
@@ -138,29 +137,29 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.deleteWeatherStation(authentication);
     }
 
-    @WebMethod
-    public double getAirHumidity(UserTransferObject authentication) {
-        return requestManager.getAirHumidity(authentication);
+    @Override
+    public WeatherStationTransferObject getAirHumidity(UserTransferObject authentication) {
+        return null;
     }
 
-    @WebMethod
-    public double getAirPressure(UserTransferObject authentication) {
-        return requestManager.getAirPressure(authentication);
+    @Override
+    public WeatherStationTransferObject getAirPressure(UserTransferObject authentication) {
+        return null;
     }
 
-    @WebMethod
-    public double getWindVelocity(UserTransferObject authentication) {
-        return requestManager.getWindVelocity(authentication);
+    @Override
+    public WeatherStationTransferObject getWindVelocity(UserTransferObject authentication) {
+        return null;
     }
 
-    @WebMethod
-    public double getOutdoorTemperature(UserTransferObject authentication) {
-        return requestManager.getOutdoorTemperature(authentication);
+    @Override
+    public WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication) {
+        return null;
     }
 
-    @WebMethod
-    public double getRainfallAmount(UserTransferObject authentication) {
-        return requestManager.getRainfallAmount(authentication);
+    @Override
+    public WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication) {
+        return null;
     }
 
     @WebMethod
@@ -178,9 +177,9 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.deleteThermometer(authentication);
     }
 
-    @WebMethod
-    public double getIndoorTemperature(UserTransferObject authentication) {
-        return requestManager.getIndoorTemperature(authentication);
+    @Override
+    public ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication) {
+        return null;
     }
 
     @WebMethod
@@ -198,6 +197,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.undoLastCommand();
     }
 
+    /*
     //Web-Service-Test-Szenario (Nils)
     @WebMethod(operationName="body-mass-index")
     @WebResult(name = "your-bmi")
@@ -205,5 +205,5 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
                        @WebParam(name="weight") double weight )
     {
         return weight / ((height * height) / 10000);
-    }
+    }*/
 }

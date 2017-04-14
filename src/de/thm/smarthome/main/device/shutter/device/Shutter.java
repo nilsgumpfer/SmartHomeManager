@@ -46,7 +46,8 @@ public class Shutter extends AObservable implements ISmartDevice, IObserver, Shu
     @Override
     public String getName(ShutterClientInterface c) {
 
-        return logic.getLogicName();
+        //return logic.getLogicName();
+        return "";
     }
 
     @Override
