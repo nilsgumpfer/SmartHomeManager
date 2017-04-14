@@ -11,6 +11,7 @@ public class SmartHomeManagerMainClass {
 
         SmartHomeManagerWebServiceProvider wsProvider = new SmartHomeManagerWebServiceProvider();
         wsProvider.startProviding();
+        System.out.println("WebServices are up an running..");
 
         while(true){
             Thread.sleep(1000);
