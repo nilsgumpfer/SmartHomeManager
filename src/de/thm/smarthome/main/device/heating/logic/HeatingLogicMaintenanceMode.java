@@ -45,6 +45,7 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
     public int setTemperature(double temperature) {
         //ToDo: Ausgabe: "Temperatur kann im Wartungsmodus nicht verändert werden!"
         SmartHomeLogger.log("Temperatur kann im Wartungsmodus nicht verändert werden!");
+        return 1;
     }
 
 }
