@@ -12,7 +12,7 @@ public class HeatingLogicNightMode implements IHeatingLogic {
 
     public HeatingLogicNightMode(IHeatingModel model, IHeating device){
         model.setHeatingModeName("NightMode");
-        model.setTemperature(18);
+        //model.setTemperature(18);
     }
 
     @Override

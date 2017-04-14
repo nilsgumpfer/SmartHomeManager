@@ -18,6 +18,7 @@ public class SmartWeatherStation extends AObservable implements ISmartDevice, IO
 
     public SmartWeatherStation(IWeatherStationLogic logic) {
         this.logic = logic;
+        this.logic.setValues();
 //        if(!(logic.getClass().equals(this.logic.getClass())) && weatherStationModel.isMetric()==false){
 //
 //        }

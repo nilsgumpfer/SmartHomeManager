@@ -17,14 +17,23 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
         this.model = model;
     }
 
-    public double getTemperature() {
-        //return thermometer.getTemperature(); (Nils war´s)
-        return device.getTemperature();
+    @Override
+    public String getLogicName() {
+        return logicName;
     }
 
+    public double getTemperature() {
+        return model.getTemperature();
+    }
 
-    public void setTemperatureUnit(){
-        //if(thermometer) //TODO: kein java-Script :)
+    @Override
+    public void setTemperature() {
+        if(model.isCelsius()==false){
+            model.setTemperature((model.getTemperature()-32)/1.8);
+            model.toggleTemperatureUnit();
+        } else {
+            //TODO: //Fehlermeldung: "Thermometer misst bereits in Fahrenheit!"
+        }
     }
 }
 

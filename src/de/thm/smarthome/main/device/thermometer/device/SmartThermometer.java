@@ -14,13 +14,12 @@ import de.thm.smarthome.main.device.thermometer.model.ThermometerModel;
  */
 public class SmartThermometer extends AObservable implements ISmartDevice, IObserver {
     private IThermometerLogic logic;
-    private ThermometerModel thermometerMmodel = new ThermometerModel();
-    private String thermometerBezeichnung = "";
+    private ThermometerModel model = new ThermometerModel();
 
-    public SmartThermometer(IThermometerLogic logic, String thermometerBezeichnung, double temperature) {
+    public SmartThermometer(IThermometerLogic logic, String thermometerBezeichnung) {
         this.logic = logic;
-        this.thermometerBezeichnung = thermometerBezeichnung;
-        thermometerMmodel.setTemperature(temperature);
+        model.setName(thermometerBezeichnung);
+        this.logic.setTemperature();
     }
 
     @Override
@@ -30,10 +29,6 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
 
     public double getTemperature(){
         return logic.getTemperature() ;
-    }
-
-    public void setTemperature(double temperature){
-        thermometerMmodel.setTemperature(temperature);
     }
 
     @Override

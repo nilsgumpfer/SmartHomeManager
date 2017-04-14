@@ -19,27 +19,16 @@ public class WeatherStationLogicMetric implements IWeatherStationLogic {
     }
 
     @Override
-    public void setWindVelocity(double windVelocity) {
-
-    }
-
-    @Override
-    public void setRainfallAmount(double rainfallAmount) {
-
-    }
-
-    @Override
-    public void setAirHumidity(double airHumidity) {
-
-    }
-
-    @Override
-    public void setAirPressure(double airPressure) {
-
-    }
-
-    @Override
-    public void setTemperature(double temperature) {
-
+    public void setValues() {
+        if(model.isMetric()==false){
+            model.setAirHumidity(model.getAirHumidity());
+            model.setAirPressure(model.getAirPressure() / 14.503773773);
+            model.setRainfallAmount(model.getRainfallAmount() / 1.75289575289575);
+            model.setTemperature((model.getTemperature() - 32) / 1.8);
+            model.setWindVelocity(model.getWindVelocity() * 1.60934);
+            model.toggleMeasuringUnit();
+        } else {
+            //TODO: //Fehlermeldung: "Die Wetterstation verwendet bereits Anglo-Amerikanische Einheiten!"
+        }
     }
 }

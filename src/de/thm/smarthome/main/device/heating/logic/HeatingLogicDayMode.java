@@ -14,7 +14,7 @@ public class HeatingLogicDayMode implements IHeatingLogic {
 
     public HeatingLogicDayMode(IHeatingModel model, IHeating device){
         model.setHeatingName("DayMode");
-        model.setTemperature(20);
+        //model.setTemperature(20);
     }
 
     @Override

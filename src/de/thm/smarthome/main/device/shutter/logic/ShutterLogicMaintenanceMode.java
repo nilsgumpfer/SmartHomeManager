@@ -13,9 +13,15 @@ public class ShutterLogicMaintenanceMode implements IShutterLogic {
     private IShutterModel model;
     private IShutter device;
     private ShutterModel shutterModel; //TODO: Von Nils: Warum gibt es ein Model-Interface, obwohl hier das konkrete Model verwendet wird??
-    private String logicName = "MaintenanceMode";
 
-    public ShutterLogicMaintenanceMode(IShutterModel model, IShutter device){}
+    public ShutterLogicMaintenanceMode(IShutterModel model, IShutter device){
+        setLogicName("MaintenanceMode");
+    }
+
+    @Override
+    public void setLogicName(String logicName){
+        model.setLogicName(logicName);
+    }
 
     @Override
     public void moveUp() {
@@ -25,11 +31,6 @@ public class ShutterLogicMaintenanceMode implements IShutterLogic {
     @Override
     public void moveDown() {
         shutterModel.setShutterHeight(0);
-    }
-
-    @Override
-    public String getLogicName(){
-        return logicName;
     }
 
 }

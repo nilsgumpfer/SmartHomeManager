@@ -11,10 +11,15 @@ public class ShutterLogicStandardMode implements IShutterLogic {
     private IShutterModel model;
     private IShutter device;
     private ShutterModel shutterModel;
-    private String logicName = "StandardMode";
 
-    public ShutterLogicStandardMode(IShutterModel model, IShutter device){}
+    public ShutterLogicStandardMode(IShutterModel model, IShutter device){
+        setLogicName("StandardMode");
+    }
 
+    @Override
+    public void setLogicName(String logicName){
+        model.setLogicName(logicName);
+    }
 
     @Override
     public void moveUp() {
@@ -26,8 +31,9 @@ public class ShutterLogicStandardMode implements IShutterLogic {
         shutterModel.decrementShutterHeight();
     }
 
-    @Override
-    public String getLogicName(){
-        return logicName;
+    public void setShutterHeight(int height) {
+        shutterModel.setShutterHeight(height);
     }
+
+
 }

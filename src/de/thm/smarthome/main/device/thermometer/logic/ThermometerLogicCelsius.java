@@ -17,18 +17,22 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
         this.model = model;
     }
 
+    @Override
+    public String getLogicName() {
+        return logicName;
+    }
+
     public double getTemperature() {
-        //return thermometer.getTemperature(); (Nils war´s)
         return model.getTemperature();
     }
 
-
     @Override
-    public void setTemperatureUnit(){
-       // (!thermometer.isCelsius) ? thermometer.setTemperature((thermometer.getTemperature()-32)/1.8) : //TODO: Von Nils: Testweise auskommentiert um Programm lauffähig zu machen @Carlo: bitte noch wie besprochen "vereinfachen"
+    public void setTemperature() {
         if(model.isCelsius()==false){
-            model.setTemperature((model.getTemperature()-32)/1.8);
+            model.setTemperature((model.getTemperature()*1.8)+32);
+            model.toggleTemperatureUnit();
+        } else {
+            //TODO: //Fehlermeldung: "Thermometer misst bereits in Celsius!"
         }
-        //Fehlermeldung: "Thermometer misst bereits in Celsius!"
     }
 }

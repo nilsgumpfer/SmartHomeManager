@@ -6,21 +6,31 @@ import de.thm.smarthome.global.observer.AObservable;
  * Created by Nils on 27.01.2017.
  */
 public class ShutterModel implements IShutterModel{
-    String name = "";
+    private String shuttername = "";
+    private String logicName = "";
     boolean isUp = true;
     boolean isDown = false;
     int shutterHeight = 0;
 
     @Override
-    public String getName(){
-        return name;
+    public String getShutterName(){
+        return shuttername;
     }
 
     @Override
-    public void setName(String name){
-       this.name = name;
+    public void setShutterName(String shuttername){
+       this.shuttername = shuttername;
     }
 
+    @Override
+    public String getLogicName(){
+        return logicName;
+    }
+
+    @Override
+    public void setLogicName(String logicName){
+        this.logicName = logicName;
+    }
 
     @Override
     public void incrementShutterHeight(){
@@ -28,7 +38,7 @@ public class ShutterModel implements IShutterModel{
             shutterHeight++;
         }
         else{
-            //Fehlermeldung: "Rollläden sind bereits komplett hochgefahren"
+            //TODO: Fehlermeldung: "Rollläden sind bereits komplett hochgefahren"
         }
 
         if(shutterHeight == 5){
@@ -36,13 +46,12 @@ public class ShutterModel implements IShutterModel{
         }
     }
 
-
     @Override
     public void decrementShutterHeight() {
         if (shutterHeight > 0) {
             shutterHeight--;
         } else {
-            //Fehlermeldung: "Rollläden sind bereits komplett heruntergefahren"
+            //TODO: Fehlermeldung: "Rollläden sind bereits komplett heruntergefahren"
         }
 
         if (shutterHeight == 0) {
@@ -56,16 +65,14 @@ public class ShutterModel implements IShutterModel{
             shutterHeight = value;
         }
         else{
-            //Fehlermeldung: "Bitte eine Rolllädenhöhe zwischen 0 und 5 eingeben!"
+            //TODO: Fehlermeldung: "Bitte eine Rolllädenhöhe zwischen 0 und 5 eingeben!"
         }
-
         if(shutterHeight == 5){
             isUp = true;
         }
         if(shutterHeight == 0){
             isDown = true;
         }
-
     }
 
     @Override
