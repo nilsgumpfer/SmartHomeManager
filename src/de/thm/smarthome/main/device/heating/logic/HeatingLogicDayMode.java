@@ -38,12 +38,14 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     }
 
     @Override
-    public void setTemperature(double temperature) {
+    public int setTemperature(double temperature) {
         if(temperature < 0){
             //ToDo: //Ausgabe: "Die Temperatur darf nicht unter 0 Grad eingestellt werden!"
         } else {
             model.setTemperature(temperature);
         }
+
+        return 1;
     }
 
     @Override

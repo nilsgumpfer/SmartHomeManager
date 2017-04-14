@@ -36,7 +36,7 @@ public class HeatingLogicNightMode implements IHeatingLogic {
     }
 
     @Override
-    public void setTemperature(double temperature) {
+    public int setTemperature(double temperature) {
         if(temperature > 18){
             //ToDo: //Ausgabe: "Die Temperatur darf 18 Grad im Nachtmodus nicht überschreiten!"
         } else if(temperature < 0){
@@ -44,6 +44,8 @@ public class HeatingLogicNightMode implements IHeatingLogic {
         } else {
             model.setTemperature(temperature);
         }
+
+        return 1;
     }
 
     @Override

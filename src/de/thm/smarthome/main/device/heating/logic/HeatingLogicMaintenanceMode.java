@@ -41,8 +41,9 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
     }
 
     @Override
-    public void setTemperature(double temperature) {
+    public int setTemperature(double temperature) {
         //ToDo: Ausgabe: "Temperatur kann im Wartungsmodus nicht verändert werden!"
+        return 1;
     }
 
 }

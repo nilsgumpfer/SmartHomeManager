@@ -15,7 +15,6 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     private IServiceFacade requestManager = RequestManager.getInstance();
 
     public SmartHomeManagerWebServiceDescriptor(){
-        this.requestManager = RequestManager.getInstance();
     }
 
     @WebMethod
@@ -198,6 +197,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.undoLastCommand();
     }
 
+    /*
     //Web-Service-Test-Szenario (Nils)
     @WebMethod(operationName="body-mass-index")
     @WebResult(name = "your-bmi")
@@ -205,5 +205,5 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
                        @WebParam(name="weight") double weight )
     {
         return weight / ((height * height) / 10000);
-    }
+    }*/
 }

@@ -19,8 +19,8 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
         heatingModel.setHeatingName(heatingName);
     }
 
-    public void setTemperature(double temperature) {
-        logic.setTemperature(temperature);
+    public int setTemperature(double temperature) {
+        return logic.setTemperature(temperature);
     }
 
     public double getTemperature() {

@@ -14,18 +14,15 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
  */
 public class HeatingFactory {
 
-    public SmartHeating Buderus = null;
-    public SmartHeating Vaillant = null;
-    public SmartHeating Viessmann = null;
-
     public SmartHeating createHeating(HeatingManufacturers variant, String serialnumber){
+
         switch (variant){
             case BUDERUS:
-              return Buderus = new SmartHeating(new HeatingLogicDayMode(new HeatingModel(), new BuderusHeatingAdapter(serialnumber)));
+              return new SmartHeating(new HeatingLogicDayMode(new HeatingModel(), new BuderusHeatingAdapter(serialnumber)), "");
             case VAILLANT:
-                return Vaillant = new SmartHeating(new HeatingLogicDayMode(new HeatingModel(), new VaillantHeatingAdapter(serialnumber)));
+                return new SmartHeating(new HeatingLogicDayMode(new HeatingModel(), new VaillantHeatingAdapter(serialnumber)),"");
             case VIESSMANN:
-                return Viessmann = new SmartHeating(new HeatingLogicDayMode(new HeatingModel(), new ViessmannHeatingAdapter(serialnumber)));
+                return new SmartHeating(new HeatingLogicDayMode(new HeatingModel(), new ViessmannHeatingAdapter(serialnumber)),"");
             default:
                 return null;
         }

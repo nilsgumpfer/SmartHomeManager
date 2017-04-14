@@ -40,7 +40,7 @@ public class Heizung extends AObservable implements ITemperatureRelevantDevice, 
     @Override
     public String getName(HeizungClientInterface c) throws RemoteException {
 
-        return logic.getName();
+        return logic.getHeatingName();
     }
 
     @Override
