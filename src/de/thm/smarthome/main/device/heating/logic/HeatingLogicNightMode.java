@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.logic;
 
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 
@@ -39,8 +40,10 @@ public class HeatingLogicNightMode implements IHeatingLogic {
     public void setTemperature(double temperature) {
         if(temperature > 18){
             //ToDo: //Ausgabe: "Die Temperatur darf 18 Grad im Nachtmodus nicht überschreiten!"
+            SmartHomeLogger.log("Die Temperatur darf 18 Grad im Nachtmodus nicht überschreiten!");
         } else if(temperature < 0){
             //ToDo: //Ausgabe: "Die Temperatur darf nicht unter 0 Grad eingestellt werden!"
+            SmartHomeLogger.log("Die Temperatur darf nicht unter 0 Grad eingestellt werden!");
         } else {
             model.setTemperature(temperature);
         }

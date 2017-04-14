@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.shutter.model;
 
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 
 /**
@@ -39,6 +40,7 @@ public class ShutterModel implements IShutterModel{
         }
         else{
             //TODO: Fehlermeldung: "Rollläden sind bereits komplett hochgefahren"
+            SmartHomeLogger.log("Rollläden sind bereits komplett hochgefahren");
         }
 
         if(shutterHeight == 5){
@@ -52,6 +54,7 @@ public class ShutterModel implements IShutterModel{
             shutterHeight--;
         } else {
             //TODO: Fehlermeldung: "Rollläden sind bereits komplett heruntergefahren"
+            SmartHomeLogger.log("Rollläden sind bereits komplett heruntergefahren");
         }
 
         if (shutterHeight == 0) {
@@ -66,6 +69,7 @@ public class ShutterModel implements IShutterModel{
         }
         else{
             //TODO: Fehlermeldung: "Bitte eine Rolllädenhöhe zwischen 0 und 5 eingeben!"
+            SmartHomeLogger.log("Bitte eine Rolllädenhöhe zwischen 0 und 5 eingeben!");
         }
         if(shutterHeight == 5){
             isUp = true;

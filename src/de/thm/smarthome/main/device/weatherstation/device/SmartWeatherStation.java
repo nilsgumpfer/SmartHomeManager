@@ -19,25 +19,6 @@ public class SmartWeatherStation extends AObservable implements ISmartDevice, IO
     public SmartWeatherStation(IWeatherStationLogic logic) {
         this.logic = logic;
         this.logic.setValues();
-//        if(!(logic.getClass().equals(this.logic.getClass())) && weatherStationModel.isMetric()==false){
-//
-//        }
-        if(weatherStationModel.isMetric()==false) {
-            //weatherStationModel.setAirHumidity(weatherStationModel.getAirHumidity()*2.54);
-            weatherStationModel.setAirPressure(weatherStationModel.getAirPressure() * 14.503773773);
-            weatherStationModel.setRainfallAmount(weatherStationModel.getRainfallAmount() * 1.75289575289575);
-            weatherStationModel.setWindVelocity(weatherStationModel.getWindVelocity() * 1.60934);
-            weatherStationModel.setTemperature((weatherStationModel.getTemperature() - 32) / 1.8);
-
-            //Einheit ändern
-            weatherStationModel.toggleMeasuringUnit();
-        } else {
-            //weatherStationModel.setAirHumidity(weatherStationModel.getAirHumidity()*2.54);
-            weatherStationModel.setAirPressure(weatherStationModel.getAirPressure() / 14.503773773);
-            weatherStationModel.setRainfallAmount(weatherStationModel.getRainfallAmount() / 1.75289575289575);
-            weatherStationModel.setWindVelocity(weatherStationModel.getWindVelocity() / 1.60934);
-            weatherStationModel.setTemperature((weatherStationModel.getTemperature() * 1.8) + 32);
-        }
     }
 
     public double getWindVelocity() {

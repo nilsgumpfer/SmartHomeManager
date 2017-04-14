@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.thermometer.logic;
 
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
 import de.thm.smarthome.main.device.thermometer.device.Thermometer;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
@@ -33,6 +34,7 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
             model.toggleTemperatureUnit();
         } else {
             //TODO: //Fehlermeldung: "Thermometer misst bereits in Fahrenheit!"
+            SmartHomeLogger.log("Thermometer misst bereits in Fahrenheit!");
         }
     }
 }
