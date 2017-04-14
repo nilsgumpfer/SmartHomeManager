@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.weatherstation.logic;
 
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.weatherstation.adapter.IWeatherStation;
 import de.thm.smarthome.main.device.weatherstation.model.IWeatherStationModel;
 
@@ -28,7 +29,8 @@ public class WeatherStationLogicMetric implements IWeatherStationLogic {
             model.setWindVelocity(model.getWindVelocity() * 1.60934);
             model.toggleMeasuringUnit();
         } else {
-            //TODO: //Fehlermeldung: "Die Wetterstation verwendet bereits Anglo-Amerikanische Einheiten!"
+            //TODO: //Fehlermeldung: "Die Wetterstation misst bereits in metrischen Einheiten!"
+            SmartHomeLogger.log("Die Wetterstation misst bereits in metrischen Einheiten!");
         }
     }
 }

@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.logic;
 
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 
@@ -41,6 +42,7 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     public int setTemperature(double temperature) {
         if(temperature < 0){
             //ToDo: //Ausgabe: "Die Temperatur darf nicht unter 0 Grad eingestellt werden!"
+            SmartHomeLogger.log("Die Temperatur darf nicht unter 0 Grad eingestellt werden!");
         } else {
             model.setTemperature(temperature);
         }
