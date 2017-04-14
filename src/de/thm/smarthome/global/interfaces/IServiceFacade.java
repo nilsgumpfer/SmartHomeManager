@@ -15,7 +15,7 @@ public interface IServiceFacade {
     CommandResponseObject switchHeatingOn(UserTransferObject authentication);
     CommandResponseObject switchHeatingOff(UserTransferObject authentication);
     CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature);
-    double getHeatingTemperature(UserTransferObject authentication);
+    HeatingTransferObject getHeatingTemperature(UserTransferObject authentication);
     HeatingTransferObject getHeatingData(UserTransferObject authentication);
 
     CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter);
@@ -36,16 +36,16 @@ public interface IServiceFacade {
 
     CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation);
     CommandResponseObject deleteWeatherStation(UserTransferObject authentication);
-    double getAirHumidity(UserTransferObject authentication);
-    double getAirPressure(UserTransferObject authentication);
-    double getWindVelocity(UserTransferObject authentication);
-    double getOutdoorTemperature(UserTransferObject authentication);
-    double getRainfallAmount(UserTransferObject authentication);
+    WeatherStationTransferObject getAirHumidity(UserTransferObject authentication);
+    WeatherStationTransferObject getAirPressure(UserTransferObject authentication);
+    WeatherStationTransferObject getWindVelocity(UserTransferObject authentication);
+    WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication);
+    WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication);
     WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication);
 
     CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometer);
     CommandResponseObject deleteThermometer(UserTransferObject authentication);
-    double getIndoorTemperature(UserTransferObject authentication);
+    ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication);
     ThermometerTransferObject getThermometerData(UserTransferObject authentication);
 
     String[] readLogs(UserTransferObject authentication, int limit);

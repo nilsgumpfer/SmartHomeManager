@@ -1,5 +1,6 @@
 package de.thm.smarthome.global.command;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 
 import java.util.List;
@@ -17,12 +18,12 @@ public class MoveUpCommand implements ICommand {
     }
 
     @Override
-    public int execute() {
-        return 0;
+    public ResponseCode execute() {
+        return null;
     }
 
     @Override
-    public int undo() {
-        return 0;
+    public ResponseCode undo() {
+        return null;
     }
 }

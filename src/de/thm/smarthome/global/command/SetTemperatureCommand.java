@@ -1,5 +1,6 @@
 package de.thm.smarthome.global.command;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 
 /**
@@ -19,12 +20,12 @@ public class SetTemperatureCommand implements ICommand {
     }
 
     @Override
-    public int execute() {
+    public ResponseCode execute() {
         return device.setTemperature(value);
     }
 
     @Override
-    public int undo() {
+    public ResponseCode undo() {
         return device.setTemperature(old_value);
     }
 }

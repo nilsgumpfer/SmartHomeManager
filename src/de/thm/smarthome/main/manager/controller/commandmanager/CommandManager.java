@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.manager.controller.commandmanager;
 
 import de.thm.smarthome.global.command.ICommand;
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 
@@ -22,26 +23,26 @@ public class CommandManager implements ICommandManager{
     }
 
     @Override
-    public int undoLastCommand(){
+    public ResponseCode undoLastCommand(){
         ICommand command = invokedCommands.get(invokedCommands.size()-1);
         command.undo();
         invokedCommands.remove(command);
-        return 0;
+        return ResponseCode.UndoSuccessful;
     }
 
     @Override
-    public int addTemperatureCommand(double temperature) {
-        return 0;
+    public ResponseCode addTemperatureCommand(double temperature) {
+        return ResponseCode.CommandInvokedSuccessfully;
     }
 
     @Override
-    public int addMoveUpCommand() {
-        return 0;
+    public ResponseCode addMoveUpCommand() {
+        return ResponseCode.CommandInvokedSuccessfully;
     }
 
     @Override
-    public int addMoveDownCommand() {
-        return 0;
+    public ResponseCode addMoveDownCommand() {
+        return ResponseCode.CommandInvokedSuccessfully;
     }
 
 }
