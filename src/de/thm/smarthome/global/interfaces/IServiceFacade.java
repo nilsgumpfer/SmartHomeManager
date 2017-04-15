@@ -20,6 +20,8 @@ public interface IServiceFacade {
     CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter);
     CommandResponseObject moveAllShuttersUp(UserTransferObject authentication);
     CommandResponseObject moveAllShuttersDown(UserTransferObject authentication);
+    CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
+    CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
     ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
 
     ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);

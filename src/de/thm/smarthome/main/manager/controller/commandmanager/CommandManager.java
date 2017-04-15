@@ -2,6 +2,11 @@ package de.thm.smarthome.main.manager.controller.commandmanager;
 
 import de.thm.smarthome.global.command.ICommand;
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.interfaces.IOnAndOffTurnableDevice;
+import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
+import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
+import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 
@@ -31,8 +36,13 @@ public class CommandManager implements ICommandManager{
     }
 
     @Override
-    public ResponseCode addTemperatureCommand(double temperature) {
-        return ResponseCode.CommandInvokedSuccessfully;
+    public ResponseCode addSetTemperatureCommand(HeatingTransferObject heatingTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode addSetTemperatureCommand(ITemperatureRelevantDevice temperatureRelevantDevice, double temperature) {
+        return null;
     }
 
     @Override
@@ -42,6 +52,46 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addMoveDownCommand() {
+        return ResponseCode.CommandInvokedSuccessfully;
+    }
+
+    @Override
+    public ResponseCode addMoveUpCommand(ShutterTransferObject shutterTransferObject) {
+        return ResponseCode.CommandInvokedSuccessfully;
+    }
+
+    @Override
+    public ResponseCode addMoveDownCommand(ShutterTransferObject shutterTransferObject) {
+        return ResponseCode.CommandInvokedSuccessfully;
+    }
+
+    @Override
+    public ResponseCode addMoveUpCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode addMoveDownCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode addPowerOnCommand(HeatingTransferObject heatingTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode addPowerOffCommand(HeatingTransferObject heatingTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode addPowerOnCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice) {
+        return ResponseCode.CommandInvokedSuccessfully;
+    }
+
+    @Override
+    public ResponseCode addPowerOffCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice) {
         return ResponseCode.CommandInvokedSuccessfully;
     }
 

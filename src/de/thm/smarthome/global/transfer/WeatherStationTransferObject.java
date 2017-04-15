@@ -7,5 +7,6 @@ import de.thm.smarthome.global.enumeration.ResponseCode;
  */
 public class WeatherStationTransferObject {
     public WeatherStationTransferObject(ResponseCode responseCode) {
+
     }
 }

@@ -10,5 +10,6 @@ public class ThermometerTransferObject {
     }
 
     public ThermometerTransferObject(double temperature) {
+
     }
 }
