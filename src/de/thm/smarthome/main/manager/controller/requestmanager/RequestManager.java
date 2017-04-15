@@ -96,7 +96,7 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.getSmartHeating().switchOff());
+                return new CommandResponseObject(commandManager.addPowerOnCommand(deviceManager.getSmartHeating()));
             default:
                 return new CommandResponseObject(responseCode);
         }
@@ -185,7 +185,7 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addMoveUpCommand());
+                return new CommandResponseObject(commandManager.addMoveDownCommand());
             default:
                 return new CommandResponseObject(responseCode);
         }
