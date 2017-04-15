@@ -51,5 +51,5 @@ public interface IServiceFacade {
 
     String[] readLogs(UserTransferObject authentication, int limit);
 
-    CommandResponseObject undoLastCommand();
+    CommandResponseObject undoLastCommand(UserTransferObject authentication);
 }

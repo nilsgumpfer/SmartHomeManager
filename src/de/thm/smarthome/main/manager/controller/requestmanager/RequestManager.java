@@ -36,7 +36,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject undoLastCommand() {
+    public CommandResponseObject undoLastCommand(UserTransferObject authentication) {
         return new CommandResponseObject(commandManager.undoLastCommand());
     }
 
