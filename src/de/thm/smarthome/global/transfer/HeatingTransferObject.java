@@ -14,6 +14,8 @@ public class HeatingTransferObject {
     private double temperature;
     private DeviceManufacturer manufacturer;
 
+    private HeatingTransferObject(){}
+
     public HeatingTransferObject(ResponseCode responseCode){
         this.responseCode   = responseCode;
         message             = MessageRepository.getMessage(responseCode);
@@ -66,5 +68,10 @@ public class HeatingTransferObject {
 
     public DeviceManufacturer getManufacturer() {
         return manufacturer;
+    }
+
+    @Override
+    public String toString(){
+        return "heatingName: " + heatingName + " temp: " + temperature + " manuf: " + manufacturer + " resp: " + responseCode + " : " + message;
     }
 }

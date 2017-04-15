@@ -102,7 +102,7 @@ public class CommandManager implements ICommandManager{
             ICommand command = new CollectiveMoveDownCommand(TypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed)
+            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyMovedUp)
                 invokedCommands.add(command);
 
             return responseCode;

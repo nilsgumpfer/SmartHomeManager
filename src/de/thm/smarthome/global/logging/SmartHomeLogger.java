@@ -17,7 +17,7 @@ public class SmartHomeLogger {
     }
 
     public static void log(String message){
-        String timestamp = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss:fff] : ").format(new Date());
+        String timestamp = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss:SSS] : ").format(new Date());
         SmartHomeLogger.getInstance().listOfLogs.add(timestamp + message);
     }
 

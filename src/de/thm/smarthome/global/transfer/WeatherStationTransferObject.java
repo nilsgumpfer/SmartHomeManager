@@ -21,6 +21,8 @@ public class WeatherStationTransferObject {
     private double airHumidity;
     private UnitOfMeasurement airHumidityUnit;
 
+    private WeatherStationTransferObject(){}
+
     public WeatherStationTransferObject(ResponseCode responseCode) {
         this.responseCode = responseCode;
         message = MessageRepository.getMessage(responseCode);
@@ -104,5 +106,10 @@ public class WeatherStationTransferObject {
 
     public void setAirHumidity(double airHumidity) {
         this.airHumidity = airHumidity;
+    }
+
+    @Override
+    public String toString(){
+        return "weatherstation: " + " windv: " + windVelocity + " windv_u: " + windVelocityUnit + " airpr: " + airPressure + " airpr_u: " + airPressureUnit+ " temp: " + outdoorTemperature + " temp_u: " + outdoorTemperatureUnit + " rainf: " + rainfallAmount + " rainf_u: " + rainfallAmountUnit + " airhum: " + airHumidity + " airhum_u: " + airHumidityUnit + " resp: " + responseCode + " : " + message;
     }
 }

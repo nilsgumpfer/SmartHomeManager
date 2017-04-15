@@ -456,7 +456,7 @@ public class RequestManager implements IServiceFacade {
         }
     }
 
-    private ThermometerTransferObject getThermometerData() {
+    public ThermometerTransferObject getThermometerData() {
         return deviceManager.getSmartThermometer().getThermometerData();
     }
 

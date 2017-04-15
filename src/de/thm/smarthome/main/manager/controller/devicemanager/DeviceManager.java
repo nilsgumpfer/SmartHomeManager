@@ -14,6 +14,7 @@ import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 import de.thm.smarthome.main.manager.controller.eventmanager.EventManager;
 import de.thm.smarthome.main.manager.controller.eventmanager.IEventManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -136,7 +137,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     @Override
     public List<SmartShutter> getSmartShutters() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

@@ -13,6 +13,8 @@ public class ShutterTransferObject {
     private int position;
     private String shutterID;
 
+    private ShutterTransferObject(){}
+
     public ShutterTransferObject(ResponseCode responseCode) {
         this.responseCode   = responseCode;
         message             = MessageRepository.getMessage(responseCode);
@@ -57,5 +59,10 @@ public class ShutterTransferObject {
 
     public void setShutterID(String shutterID) {
         this.shutterID = shutterID;
+    }
+
+    @Override
+    public String toString(){
+        return "shutterID: " + shutterID + " pos: " + position + " resp:" + responseCode + " : " + message;
     }
 }

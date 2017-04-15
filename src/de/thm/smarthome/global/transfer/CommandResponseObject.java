@@ -10,8 +10,31 @@ public class CommandResponseObject {
     private ResponseCode responseCode;
     private String message;
 
+    private CommandResponseObject(){}
+
     public CommandResponseObject(ResponseCode responseCode){
         this.responseCode   = responseCode;
         message             = MessageRepository.getMessage(responseCode);
+    }
+
+    public ResponseCode getResponseCode() {
+        return responseCode;
+    }
+
+    public void setResponseCode(ResponseCode responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString(){
+        return "resp: " + responseCode + " : " + message;
     }
 }

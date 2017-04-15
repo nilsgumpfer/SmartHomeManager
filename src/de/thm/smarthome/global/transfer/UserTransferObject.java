@@ -1,6 +1,5 @@
 package de.thm.smarthome.global.transfer;
 
-import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.enumeration.UserGroup;
 import de.thm.smarthome.global.helper.MessageRepository;
@@ -17,6 +16,8 @@ public class UserTransferObject {
     private String lastname;
     private String eMail;
     private UserGroup userGroup;
+
+    private UserTransferObject(){}
 
     public UserTransferObject(ResponseCode responseCode) {
         this.responseCode = responseCode;
@@ -99,5 +100,10 @@ public class UserTransferObject {
 
     public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
+    }
+
+    @Override
+    public String toString(){
+        return "user: " + username + " name: " + lastname + " firstn: " + firstname + " pw: " + password + " email: " + eMail + " ugrp: " + userGroup + " resp: " + responseCode + " : " + message;
     }
 }
