@@ -2,6 +2,7 @@ package de.thm.smarthome.main.device.shutter.device;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
+import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ShutterTransferObject;
@@ -11,7 +12,7 @@ import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class SmartShutter extends AObservable implements ISmartDevice, IObserver{
+public class SmartShutter extends AObservable implements ISmartDevice, IObserver, IUpAndDownMovableDevice{
     private IShutterLogic logic;
     private String logicName = "";
     private ShutterModel shutterModel = new ShutterModel();
@@ -25,15 +26,19 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
         logic.moveUp();
         return null;
     }
+    @Override
     public void moveDown() {
         logic.moveDown();
     }
+    @Override
     public boolean isUp(){
         return shutterModel.isUp();
     }
+    @Override
     public boolean isDown(){
         return shutterModel.isDown();
     }
+
     public String getLogicName() {
         return shutterModel.getLogicName();
     }

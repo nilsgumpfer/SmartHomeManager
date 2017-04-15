@@ -84,7 +84,7 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.getSmartHeating().switchOn());
+                return new CommandResponseObject(commandManager.addPowerOnCommand(deviceManager.getSmartHeating()));
             default:
                 return new CommandResponseObject(responseCode);
         }
@@ -108,7 +108,7 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.getSmartHeating().setTemperature(temperature));
+                return new CommandResponseObject(commandManager.addSetTemperatureCommand(deviceManager.getSmartHeating(), temperature));
             default:
                 return new CommandResponseObject(responseCode);
         }
@@ -173,13 +173,7 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                for (SmartShutter smartShutter : deviceManager.getSmartShutters()) {
-                    responseCode = smartShutter.moveUp();
-
-                    if(responseCode == ResponseCode.MoveUpFailed)
-                        return new CommandResponseObject(responseCode);
-                }
-                return new CommandResponseObject(responseCode);
+                return new CommandResponseObject(commandManager.addMoveUpCommand());
             default:
                 return new CommandResponseObject(responseCode);
         }
@@ -191,13 +185,31 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                for (SmartShutter smartShutter : deviceManager.getSmartShutters()) {
-                    responseCode = smartShutter.moveUp();
-
-                    if(responseCode == ResponseCode.MoveDownFailed)
-                        return new CommandResponseObject(responseCode);
-                }
+                return new CommandResponseObject(commandManager.addMoveUpCommand());
+            default:
                 return new CommandResponseObject(responseCode);
+        }
+    }
+
+    @Override
+    public CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(commandManager.addMoveUpCommand(shutterTransferObject));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
+    }
+
+    @Override
+    public CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(commandManager.addMoveDownCommand(shutterTransferObject));
             default:
                 return new CommandResponseObject(responseCode);
         }

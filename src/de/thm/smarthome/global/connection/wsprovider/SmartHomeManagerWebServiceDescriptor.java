@@ -89,6 +89,18 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.moveAllShuttersDown(authentication);
     }
 
+    @Override
+    public CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        SmartHomeLogger.log("WSD" + "moveShutterUp(" + authentication + "," + shutterTransferObject + ")");
+        return requestManager.moveShutterUp(authentication, shutterTransferObject);
+    }
+
+    @Override
+    public CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        SmartHomeLogger.log("WSD" + "moveShutterDown(" + authentication + "," + shutterTransferObject + ")");
+        return requestManager.moveShutterDown(authentication, shutterTransferObject);
+    }
+
     @WebMethod
     public ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
         SmartHomeLogger.log("WSD" + "getShutterPosition(" + authentication + "," + shutterTransferObject + ")");
