@@ -2,8 +2,6 @@ package de.thm.smarthome.global.interfaces;
 
 import de.thm.smarthome.global.transfer.*;
 
-import java.util.List;
-
 /**
  * Created by Nils on 04.02.2017.
  */
@@ -20,16 +18,19 @@ public interface IServiceFacade {
 
     CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter);
     CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter);
-    CommandResponseObject moveShuttersUp(UserTransferObject authentication);
-    CommandResponseObject moveShuttersDown(UserTransferObject authentication);
-    String getShutterPosition(UserTransferObject authentication);
+    CommandResponseObject moveAllShuttersUp(UserTransferObject authentication);
+    CommandResponseObject moveAllShuttersDown(UserTransferObject authentication);
+    ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
+
+    ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
+
     ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter);
     ShutterTransferObject[] getAllShutterData(UserTransferObject authentication);
 
     CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user);
     CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user);
     CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject user);
-    CommandResponseObject login(UserTransferObject authentication, UserTransferObject user);
+    CommandResponseObject login(UserTransferObject user);
     CommandResponseObject logout(UserTransferObject authentication, UserTransferObject user);
     UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject user);
     UserTransferObject[] getAllUserData(UserTransferObject authentication);

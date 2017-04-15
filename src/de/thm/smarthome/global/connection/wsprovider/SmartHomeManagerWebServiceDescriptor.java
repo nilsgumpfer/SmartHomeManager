@@ -6,7 +6,6 @@ import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 
 import javax.jws.*;
 import javax.jws.soap.SOAPBinding;
-import java.util.List;
 
 @WebService(name="SmartHomeManagerWebServices")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
@@ -68,18 +67,23 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @WebMethod
-    public CommandResponseObject moveShuttersUp(UserTransferObject authentication) {
-        return requestManager.moveShuttersUp(authentication);
+    public CommandResponseObject moveAllShuttersUp(UserTransferObject authentication) {
+        return requestManager.moveAllShuttersUp(authentication);
     }
 
     @WebMethod
-    public CommandResponseObject moveShuttersDown(UserTransferObject authentication) {
-        return requestManager.moveShuttersDown(authentication);
+    public CommandResponseObject moveAllShuttersDown(UserTransferObject authentication) {
+        return requestManager.moveAllShuttersDown(authentication);
     }
 
     @WebMethod
-    public String getShutterPosition(UserTransferObject authentication) {
-        return requestManager.getShutterPosition(authentication);
+    public ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        return requestManager.getShutterPosition(authentication,shutterTransferObject);
+    }
+
+    @WebMethod
+    public ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        return null;
     }
 
     @WebMethod
@@ -108,8 +112,9 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @WebMethod
-    public CommandResponseObject login(UserTransferObject authentication, UserTransferObject user) {
-        return requestManager.login(authentication,user);
+    public CommandResponseObject login(UserTransferObject user) {
+
+        return requestManager.login(user);
     }
 
     @WebMethod
@@ -129,7 +134,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @WebMethod
     public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation) {
-        return createWeatherStation(authentication, weatherStation);
+        return requestManager.createWeatherStation(authentication, weatherStation);
     }
 
     @WebMethod
@@ -137,27 +142,27 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.deleteWeatherStation(authentication);
     }
 
-    @Override
+    @WebMethod
     public WeatherStationTransferObject getAirHumidity(UserTransferObject authentication) {
         return null;
     }
 
-    @Override
+    @WebMethod
     public WeatherStationTransferObject getAirPressure(UserTransferObject authentication) {
         return null;
     }
 
-    @Override
+    @WebMethod
     public WeatherStationTransferObject getWindVelocity(UserTransferObject authentication) {
         return null;
     }
 
-    @Override
+    @WebMethod
     public WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication) {
         return null;
     }
 
-    @Override
+    @WebMethod
     public WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication) {
         return null;
     }
@@ -177,7 +182,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.deleteThermometer(authentication);
     }
 
-    @Override
+    @WebMethod
     public ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication) {
         return null;
     }

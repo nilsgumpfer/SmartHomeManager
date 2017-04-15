@@ -1,15 +1,20 @@
 package de.thm.smarthome.main.manager.controller.requestmanager;
 
+import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
+import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -162,73 +167,190 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject moveShuttersUp(UserTransferObject authentication) {
-        return null;
+    public CommandResponseObject moveAllShuttersUp(UserTransferObject authentication) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                for (SmartShutter smartShutter : deviceManager.getSmartShutters()) {
+                    responseCode = smartShutter.moveUp();
+
+                    if(responseCode == ResponseCode.MoveUpFailed)
+                        return new CommandResponseObject(responseCode);
+                }
+                return new CommandResponseObject(responseCode);
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
-    public CommandResponseObject moveShuttersDown(UserTransferObject authentication) {
-        return null;
+    public CommandResponseObject moveAllShuttersDown(UserTransferObject authentication) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                for (SmartShutter smartShutter : deviceManager.getSmartShutters()) {
+                    responseCode = smartShutter.moveUp();
+
+                    if(responseCode == ResponseCode.MoveDownFailed)
+                        return new CommandResponseObject(responseCode);
+                }
+                return new CommandResponseObject(responseCode);
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
-    public String getShutterPosition(UserTransferObject authentication) {
-        return null;
+    public ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new ShutterTransferObject(deviceManager.getSmartShutter(shutterTransferObject).getPosition());
+            default:
+                return new ShutterTransferObject(responseCode);
+        }
     }
 
     @Override
-    public ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return null;
+    public ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new ShutterTransferObject(deviceManager.getSmartShutter(shutterTransferObject).setPosition(shutterTransferObject));
+            default:
+                return new ShutterTransferObject(responseCode);
+        }
+    }
+
+    @Override
+    public ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return deviceManager.getSmartShutter(shutterTransferObject).getShutterData();
+            default:
+                return new ShutterTransferObject(responseCode);
+        }
     }
 
     @Override
     public ShutterTransferObject[] getAllShutterData(UserTransferObject authentication) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+        List<ShutterTransferObject> shutterTransferObjects = new ArrayList<>();
+
+        if(responseCode == ResponseCode.LoggedIn)
+            for (SmartShutter smartShutter : deviceManager.getSmartShutters()) {
+                shutterTransferObjects.add(smartShutter.getShutterData());
+            }
+
+        return (ShutterTransferObject[]) shutterTransferObjects.toArray();
     }
 
     @Override
-    public CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+    public CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return userManager.createUser(userTransferObject);
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
-    public CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+    public CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return userManager.deleteUser(userTransferObject);
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
-    public CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+    public CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return userManager.alterUser(userTransferObject);
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
-    public CommandResponseObject login(UserTransferObject authentication, UserTransferObject login) {
-        return null;
+    public CommandResponseObject login(UserTransferObject userTransferObject) {
+        return new CommandResponseObject(userManager.login(userTransferObject));
     }
 
     @Override
-    public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject logout) {
-        return null;
+    public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject userTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(userManager.logout(userTransferObject));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
-    public UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject user) {
-        return null;
+    public UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject userTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return userManager.getUserData(userTransferObject);
+            default:
+                return new UserTransferObject(responseCode);
+        }
     }
 
     @Override
     public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+        List<UserTransferObject> userTransferObjects = new ArrayList<>();
+
+        if(responseCode == ResponseCode.LoggedIn)
+            for (User user : userManager.getAllUsers()) {
+                userTransferObjects.add(new UserTransferObject(user));
+            }
+
+        return (UserTransferObject[]) userTransferObjects.toArray();
     }
 
     @Override
-    public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation) {
-        return null;
+    public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStationTransferObject) {
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.createSmartWeatherStation(weatherStationTransferObject));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject deleteWeatherStation(UserTransferObject authentication) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.deleteSmartWeatherStation());
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
@@ -262,7 +384,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometer) {
+    public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometerTransferObject) {
         return null;
     }
 

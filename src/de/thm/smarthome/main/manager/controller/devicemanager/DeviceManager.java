@@ -136,4 +136,14 @@ public class DeviceManager implements IDeviceManager, IObserver{
     public ResponseCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
         return null;
     }
+
+    @Override
+    public List<SmartShutter> getSmartShutters() {
+        return null;
+    }
+
+    @Override
+    public ResponseCode deleteSmartWeatherStation() {
+        return null;
+    }
 }

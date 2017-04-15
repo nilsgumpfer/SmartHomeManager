@@ -14,6 +14,6 @@ public enum ResponseCode {
     HeatingCouldNotBeCreated,
     ShutetrCouldNotBeCreated,
     ThermometerCouldNotBeCreated,
-    LoggedIn, DBError, LoggedOut, UndoSuccessful, CommandInvokedSuccessfully, CommandInvocationFailed, SwitchedOn, SwitchedOff, AlreadySwitchedOn, AlreadySwitchedOff, TemperatureAdjustmentSuccessful, TemperatureAdjustmentFailed, WeatherStationCouldNotBeCreated
+    LoggedIn, DBError, LoggedOut, UndoSuccessful, CommandInvokedSuccessfully, CommandInvocationFailed, SwitchedOn, SwitchedOff, AlreadySwitchedOn, AlreadySwitchedOff, TemperatureAdjustmentSuccessful, TemperatureAdjustmentFailed, MovedUpSuccessfully, MoveUpFailed, MoveDownFailed, MovedDownSuccessfully, WeatherStationCouldNotBeCreated
 
 }

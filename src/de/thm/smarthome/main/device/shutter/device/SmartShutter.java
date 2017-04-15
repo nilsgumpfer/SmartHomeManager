@@ -1,10 +1,11 @@
 package de.thm.smarthome.main.device.shutter.device;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.main.device.shutter.logic.IShutterLogic;
-import de.thm.smarthome.main.device.shutter.model.IShutterModel;
 import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 
 /**
@@ -20,8 +21,9 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
         shutterModel.setShutterName(shutterName);
     }
 
-    public void moveUp() {
+    public ResponseCode moveUp() {
         logic.moveUp();
+        return null;
     }
     public void moveDown() {
         logic.moveDown();
@@ -45,5 +47,15 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
 
     }
 
+    public int getPosition() {
+        return 0;
+    }
 
+    public ResponseCode setPosition(ShutterTransferObject shutterTransferObject) {
+        return null;
+    }
+
+    public ShutterTransferObject getShutterData() {
+        return null;
+    }
 }

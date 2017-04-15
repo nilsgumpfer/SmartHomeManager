@@ -11,6 +11,8 @@ import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
 import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 
+import java.util.List;
+
 /**
  * Created by Nils on 05.02.2017.
  */
@@ -37,4 +39,8 @@ public interface IDeviceManager {
     SmartWeatherStation getSmartWeatherStation();
     ResponseCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
     ResponseCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject);
+
+    List<SmartShutter> getSmartShutters();
+
+    ResponseCode deleteSmartWeatherStation();
 }

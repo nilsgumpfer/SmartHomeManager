@@ -3,9 +3,9 @@ package de.thm.smarthome.main.manager.controller.usermanager;
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.connection.database.user.UserDAO;
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.transfer.CommandResponseObject;
 import de.thm.smarthome.global.transfer.UserTransferObject;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -25,11 +25,11 @@ public class UserManager implements IUserManager{
         return ourInstance;
     }
 
-    public ResponseCode Login(User user){
+    public ResponseCode login(User user){
         return userdao.logUserIn(user);
     }
 
-    public ResponseCode Logout(User user){
+    public ResponseCode logout(User user){
         return userdao.logUserOut(user);
     }
 
@@ -39,13 +39,13 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public ResponseCode Login(UserTransferObject userTransferObject) {
-        return Login(userTransferObject.getUser());
+    public ResponseCode login(UserTransferObject userTransferObject) {
+        return login(userTransferObject.getUser());
     }
 
     @Override
-    public ResponseCode Logout(UserTransferObject userTransferObject) {
-        return Logout(userTransferObject.getUser());
+    public ResponseCode logout(UserTransferObject userTransferObject) {
+        return logout(userTransferObject.getUser());
     }
 
     public boolean isLoggedIn(User user){
@@ -69,6 +69,31 @@ public class UserManager implements IUserManager{
     @Override
     public boolean isLoggedOut(UserTransferObject userTransferObject) {
         return isLoggedOut(userTransferObject.getUser());
+    }
+
+    @Override
+    public CommandResponseObject createUser(UserTransferObject userTransferObject) {
+        return null;
+    }
+
+    @Override
+    public UserTransferObject getUserData(UserTransferObject userTransferObject) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public CommandResponseObject deleteUser(UserTransferObject userTransferObject) {
+        return null;
+    }
+
+    @Override
+    public CommandResponseObject alterUser(UserTransferObject userTransferObject) {
+        return null;
     }
 
     public ResponseCode checkLogin(UserTransferObject userTransferObject){
