@@ -5,7 +5,6 @@ package de.thm.smarthome.main.device.heating.logic;
  */
 public interface IHeatingLogic {
     String getHeatingName();
-    void setHeatingName(String heatingName);
     String getHeatingModeName();
     void setHeatingModeName(String heatingModeName);
     int setTemperature(double temperature);

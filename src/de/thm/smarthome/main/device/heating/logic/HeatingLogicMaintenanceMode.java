@@ -12,18 +12,13 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
     private IHeating device;
 
     public HeatingLogicMaintenanceMode(IHeatingModel model,IHeating device){
-        model.setHeatingName("MaintenanceMode");
+        model.setHeatingModeName("MaintenanceMode");
         model.setTemperature(0);
     }
 
     @Override
     public String getHeatingName() {
         return model.getHeatingName();
-    }
-
-    @Override
-    public void setHeatingName(String heatingName) {
-        model.setHeatingName(heatingName);
     }
 
     @Override

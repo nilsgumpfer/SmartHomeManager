@@ -16,9 +16,8 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
     private IThermometerLogic logic;
     private ThermometerModel model = new ThermometerModel();
 
-    public SmartThermometer(IThermometerLogic logic, String thermometerBezeichnung) {
+    public SmartThermometer(IThermometerLogic logic) {
         this.logic = logic;
-        model.setName(thermometerBezeichnung);
         this.logic.setTemperature();
     }
 

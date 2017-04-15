@@ -15,9 +15,8 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
     private String logicName = "";
     private ShutterModel shutterModel = new ShutterModel();
 
-    private SmartShutter(IShutterLogic logic, String shutterName) {
+    private SmartShutter(IShutterLogic logic) {
         this.logic = logic;
-        shutterModel.setShutterName(shutterName);
     }
 
     public void moveUp() {

@@ -15,9 +15,8 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
     private IHeatingLogic logic;
     private HeatingModel heatingModel = new HeatingModel();
 
-    public SmartHeating(IHeatingLogic logic, String heatingName) {
+    public SmartHeating(IHeatingLogic logic) {
         this.logic = logic;
-        heatingModel.setHeatingName(heatingName);
     }
 
     public ResponseCode setTemperature(double temperature) {
