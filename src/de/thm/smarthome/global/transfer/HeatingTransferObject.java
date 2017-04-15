@@ -1,6 +1,6 @@
 package de.thm.smarthome.global.transfer;
 
-import de.thm.smarthome.global.enumeration.HeatingManufacturers;
+import de.thm.smarthome.global.enumeration.DeviceManufacturer;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.helper.MessageRepository;
 
@@ -12,11 +12,11 @@ public class HeatingTransferObject {
     private String message;
     private String heatingName;
     private double temperature;
-    private HeatingManufacturers manufacturer;
+    private DeviceManufacturer manufacturer;
 
     public HeatingTransferObject(ResponseCode responseCode){
-        this.responseCode = responseCode;
-        message = MessageRepository.getMessage(responseCode);
+        this.responseCode   = responseCode;
+        message             = MessageRepository.getMessage(responseCode);
     }
 
     public HeatingTransferObject(double temperature){
@@ -24,11 +24,11 @@ public class HeatingTransferObject {
     }
 
     public HeatingTransferObject(String heatingName, double temperature) {
-        this.heatingName = heatingName;
-        this.temperature = temperature;
+        this.heatingName    = heatingName;
+        this.temperature    = temperature;
     }
 
-    public HeatingTransferObject(HeatingManufacturers manufacturer) {
+    public HeatingTransferObject(DeviceManufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 
@@ -64,7 +64,7 @@ public class HeatingTransferObject {
         this.temperature = temperature;
     }
 
-    public HeatingManufacturers getManufacturer() {
+    public DeviceManufacturer getManufacturer() {
         return manufacturer;
     }
 }

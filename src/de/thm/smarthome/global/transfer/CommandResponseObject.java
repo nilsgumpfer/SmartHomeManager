@@ -11,7 +11,7 @@ public class CommandResponseObject {
     private String message;
 
     public CommandResponseObject(ResponseCode responseCode){
-        this.responseCode = responseCode;
-        message = MessageRepository.getMessage(responseCode);
+        this.responseCode   = responseCode;
+        message             = MessageRepository.getMessage(responseCode);
     }
 }

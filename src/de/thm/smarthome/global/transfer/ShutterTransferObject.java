@@ -11,17 +11,20 @@ public class ShutterTransferObject {
     private ResponseCode responseCode;
     private String message;
     private int position;
+    private String shutterID;
 
     public ShutterTransferObject(ResponseCode responseCode) {
-        this.responseCode = responseCode;
-        message = MessageRepository.getMessage(responseCode);
-    }
-
-    public ShutterTransferObject(SmartShutter smartShutter) {
+        this.responseCode   = responseCode;
+        message             = MessageRepository.getMessage(responseCode);
     }
 
     public ShutterTransferObject(int position) {
         this.position = position;
+    }
+
+    public ShutterTransferObject(int position, String shutterID) {
+        this.position   = position;
+        this.shutterID  = shutterID;
     }
 
     public ResponseCode getResponseCode() {
@@ -38,5 +41,21 @@ public class ShutterTransferObject {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public String getShutterID() {
+        return shutterID;
+    }
+
+    public void setShutterID(String shutterID) {
+        this.shutterID = shutterID;
     }
 }

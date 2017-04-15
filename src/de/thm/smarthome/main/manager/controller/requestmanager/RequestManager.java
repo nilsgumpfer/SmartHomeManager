@@ -333,15 +333,14 @@ public class RequestManager implements IServiceFacade {
     @Override
     public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
         ResponseCode responseCode = checkLogin(authentication);
-        List<UserTransferObject> userTransferObjects = new ArrayList<>();
-        UserTransferObject [] array = {};
+        UserTransferObject[] array = {};
 
-        if(responseCode == ResponseCode.LoggedIn)
-            for (User user : userManager.getAllUsers()) {
-                userTransferObjects.add(new UserTransferObject(user));
-            }
-
-        return userTransferObjects.toArray(array);
+        switch(responseCode){
+            case LoggedIn:
+                return userManager.getAllUserData();
+            default:
+                return array;
+        }
     }
 
     @Override

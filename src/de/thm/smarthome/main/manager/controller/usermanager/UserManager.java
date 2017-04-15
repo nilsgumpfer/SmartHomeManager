@@ -25,31 +25,34 @@ public class UserManager implements IUserManager{
         return ourInstance;
     }
 
-    public ResponseCode login(User user){
-        return userdao.logUserIn(user);
-    }
-
-    public ResponseCode logout(User user){
-        return userdao.logUserOut(user);
+    @Override
+    public ResponseCode login(String username){
+        return userdao.logUserIn(username);
     }
 
     @Override
-    public ResponseCode checkLogin(User user) {
-        return userdao.isUserloggedIn(user);
+    public ResponseCode logout(String username){
+        return userdao.logUserOut(username);
+    }
+
+    @Override
+    public ResponseCode checkLogin(String username) {
+        return userdao.isUserloggedIn(username);
     }
 
     @Override
     public ResponseCode login(UserTransferObject userTransferObject) {
-        return login(userTransferObject.getUser());
+        return login(userTransferObject.getUsername());
     }
 
     @Override
     public ResponseCode logout(UserTransferObject userTransferObject) {
-        return logout(userTransferObject.getUser());
+        return logout(userTransferObject.getUsername());
     }
 
-    public boolean isLoggedIn(User user){
-        switch(userdao.isUserloggedIn(user)){
+    @Override
+    public boolean isLoggedIn(String username){
+        switch(userdao.isUserloggedIn(username)){
             case LoggedIn:
                 return true;
             default:
@@ -57,18 +60,19 @@ public class UserManager implements IUserManager{
         }
     }
 
-    public boolean isLoggedOut(User user){
-        return !isLoggedIn(user);
+    @Override
+    public boolean isLoggedOut(String username){
+        return !isLoggedIn(username);
     }
 
     @Override
     public boolean isLoggedIn(UserTransferObject userTransferObject) {
-        return isLoggedIn(userTransferObject.getUser());
+        return isLoggedIn(userTransferObject.getUsername());
     }
 
     @Override
     public boolean isLoggedOut(UserTransferObject userTransferObject) {
-        return isLoggedOut(userTransferObject.getUser());
+        return isLoggedOut(userTransferObject.getUsername());
     }
 
     @Override
@@ -87,6 +91,11 @@ public class UserManager implements IUserManager{
     }
 
     @Override
+    public UserTransferObject[] getAllUserData() {
+        return new UserTransferObject[0];
+    }
+
+    @Override
     public CommandResponseObject deleteUser(UserTransferObject userTransferObject) {
         return null;
     }
@@ -97,6 +106,6 @@ public class UserManager implements IUserManager{
     }
 
     public ResponseCode checkLogin(UserTransferObject userTransferObject){
-        return checkLogin(userTransferObject.getUser());
+        return checkLogin(userTransferObject.getUsername());
     }
 }

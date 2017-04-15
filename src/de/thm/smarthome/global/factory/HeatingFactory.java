@@ -1,7 +1,6 @@
 package de.thm.smarthome.global.factory;
 
-import de.buderus.driver.heating.BuderusHeatingDriver;
-import de.thm.smarthome.global.enumeration.HeatingManufacturers;
+import de.thm.smarthome.global.enumeration.DeviceManufacturer;
 import de.thm.smarthome.main.device.heating.adapter.BuderusHeatingAdapter;
 import de.thm.smarthome.main.device.heating.adapter.VaillantHeatingAdapter;
 import de.thm.smarthome.main.device.heating.adapter.ViessmannHeatingAdapter;
@@ -14,7 +13,7 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
  */
 public class HeatingFactory {
 
-    public SmartHeating createHeating(HeatingManufacturers variant, String serialnumber){
+    public SmartHeating createHeating(DeviceManufacturer variant, String serialnumber){
 
         switch (variant){
             case BUDERUS:

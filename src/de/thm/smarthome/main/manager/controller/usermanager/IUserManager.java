@@ -13,9 +13,9 @@ import java.util.ResourceBundle;
  * Created by Nils on 01.02.2017.
  */
 public interface IUserManager {
-    ResponseCode login(User user);
-    ResponseCode logout(User user);
-    ResponseCode checkLogin(User user);
+    ResponseCode login(String username);
+    ResponseCode logout(String username);
+    ResponseCode checkLogin(String username);
     ResponseCode login(UserTransferObject userTransferObject);
     ResponseCode logout(UserTransferObject userTransferObject);
 
@@ -24,8 +24,8 @@ public interface IUserManager {
     CommandResponseObject alterUser(UserTransferObject userTransferObject);
 
     ResponseCode checkLogin(UserTransferObject userTransferObject);
-    boolean isLoggedIn(User user);
-    boolean isLoggedOut(User user);
+    boolean isLoggedIn(String username);
+    boolean isLoggedOut(String username);
     boolean isLoggedIn(UserTransferObject userTransferObject);
     boolean isLoggedOut(UserTransferObject userTransferObject);
 
@@ -34,4 +34,6 @@ public interface IUserManager {
     UserTransferObject getUserData(UserTransferObject userTransferObject);
 
     List<User> getAllUsers();
+
+    UserTransferObject[] getAllUserData();
 }
