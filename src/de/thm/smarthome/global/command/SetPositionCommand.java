@@ -8,20 +8,24 @@ import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
  */
 public class SetPositionCommand implements ICommand {
     IPositionRelevantDevice device;
+    int position;
 
     private SetPositionCommand(){}
 
-    public SetPositionCommand(IPositionRelevantDevice device) {
-        this.device = device;
+    public SetPositionCommand(IPositionRelevantDevice device, int position) {
+        this.device     = device;
+        this.position   = position;
     }
 
     @Override
     public ResponseCode invoke() {
-        return null;
+        //TODO: save current state of device & set position
+        return ResponseCode.MoveToPositionFailed;
     }
 
     @Override
     public ResponseCode undo() {
-        return null;
+        //TODO: recover state of device & move device back
+        return ResponseCode.MoveToPositionFailed;
     }
 }

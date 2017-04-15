@@ -17,11 +17,13 @@ public class SwitchOnCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
-        return null;
+        //TODO: save current state of device & switch power
+        return ResponseCode.SwitchOnFailed;
     }
 
     @Override
     public ResponseCode undo() {
-        return null;
+        //TODO: recover state of device & switch back
+        return ResponseCode.SwitchOnFailed;
     }
 }

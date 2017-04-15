@@ -31,5 +31,5 @@ public enum ResponseCode {
     MoveDownFailed,
     MovedDownSuccessfully,
     UndoFailed,
-    WeatherStationCouldNotBeCreated
+    MoveToPositionFailed, MoveToPositionSuccessful, SwitchOnFailed, SwitchOffFailed, AlreadyMovedDown, AlreadyMovedUp, AlreadyAtThisPosition, WeatherStationCouldNotBeCreated
 }

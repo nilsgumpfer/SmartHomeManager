@@ -9,23 +9,23 @@ import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 public class SetTemperatureCommand implements ICommand {
     private ITemperatureRelevantDevice device;
     private double value;
-    private double old_value;
 
     private SetTemperatureCommand(){}
 
     public SetTemperatureCommand(ITemperatureRelevantDevice device, double value){
         this.device = device;
         this.value = value;
-        this.old_value = device.getTemperature();
     }
 
     @Override
     public ResponseCode invoke() {
-        return device.setTemperature(value);
+        //TODO: save current state of device & set temperature
+        return ResponseCode.TemperatureAdjustmentFailed;
     }
 
     @Override
     public ResponseCode undo() {
-        return device.setTemperature(old_value);
+        //TODO: recover state of device & re-set temperature
+        return ResponseCode.TemperatureAdjustmentFailed;
     }
 }

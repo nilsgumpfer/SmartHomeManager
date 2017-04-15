@@ -4,6 +4,7 @@ import de.thm.smarthome.global.command.*;
 import de.thm.smarthome.global.helper.MyTypeConverter;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
+import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
@@ -130,7 +131,7 @@ public class CommandManager implements ICommandManager{
             ICommand command = new MoveUpCommand(upAndDownMovableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed)
+            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyMovedUp)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -149,7 +150,7 @@ public class CommandManager implements ICommandManager{
             ICommand command = new MoveDownCommand(upAndDownMovableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed)
+            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyMovedDown)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -157,6 +158,25 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addMoveDownCommand: CommandInvocationFailed");
+            return ResponseCode.CommandInvocationFailed;
+        }
+    }
+
+    @Override
+    public ResponseCode addSetPositionCommand(IPositionRelevantDevice positionRelevantDevice, int position) {
+        ResponseCode responseCode;
+        try {
+            ICommand command = new SetPositionCommand(positionRelevantDevice, position);
+            responseCode = command.invoke();
+
+            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyAtThisPosition)
+                invokedCommands.add(command);
+
+            return responseCode;
+        }
+        catch(Exception e){
+            SmartHomeLogger.log(e);
+            SmartHomeLogger.log("addSetPositionCommand: CommandInvocationFailed");
             return ResponseCode.CommandInvocationFailed;
         }
     }
@@ -178,14 +198,14 @@ public class CommandManager implements ICommandManager{
             ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed)
+            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadySwitchedOn)
                 invokedCommands.add(command);
 
             return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
-            SmartHomeLogger.log("addTurnOnCommand: CommandInvocationFailed");
+            SmartHomeLogger.log("addSwitchOnCommand: CommandInvocationFailed");
             return ResponseCode.CommandInvocationFailed;
         }
     }
@@ -197,14 +217,14 @@ public class CommandManager implements ICommandManager{
             ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed)
+            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadySwitchedOff)
                 invokedCommands.add(command);
 
             return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
-            SmartHomeLogger.log("addTurnOffCommand: CommandInvocationFailed");
+            SmartHomeLogger.log("addSwitchOffCommand: CommandInvocationFailed");
             return ResponseCode.CommandInvocationFailed;
         }
     }

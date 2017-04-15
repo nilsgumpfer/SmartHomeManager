@@ -26,7 +26,7 @@ public class MoveUpCommand implements ICommand {
 
     @Override
     public ResponseCode undo() {
-        //TODO: recover state of device & move devices back
+        //TODO: recover state of device & move device back
         return ResponseCode.MoveUpFailed;
     }
 }
