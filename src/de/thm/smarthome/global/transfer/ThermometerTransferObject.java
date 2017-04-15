@@ -3,7 +3,6 @@ package de.thm.smarthome.global.transfer;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
 import de.thm.smarthome.global.helper.MessageRepository;
-import de.thm.smarthome.main.device.thermometer.device.Thermometer;
 
 /**
  * Created by Nils on 05.02.2017.

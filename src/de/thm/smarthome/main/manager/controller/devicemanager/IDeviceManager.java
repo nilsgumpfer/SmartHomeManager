@@ -6,7 +6,6 @@ import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.global.transfer.ThermometerTransferObject;
 import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
-import de.thm.smarthome.main.device.shutter.device.Shutter;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
 import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
