@@ -21,9 +21,18 @@ public class SmartHomeLogger {
         SmartHomeLogger.getInstance().listOfLogs.add(timestamp + message);
     }
 
+    public static void log(Exception e){
+        log(e.getMessage());
+    }
+
     public static String[] readLogs(int limit){
         String [] array = {};
-        return SmartHomeLogger.getInstance().listOfLogs.toArray(array);
+        List<String> logs = SmartHomeLogger.getInstance().listOfLogs;
+        int size = logs.size();
+        int end = size -1;
+        int start = end - limit;
+
+        return logs.subList(start,end).toArray(array);
     }
 
     public static SmartHomeLogger getInstance()

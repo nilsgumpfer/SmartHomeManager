@@ -146,4 +146,9 @@ public class DeviceManager implements IDeviceManager, IObserver{
     public ResponseCode deleteSmartWeatherStation() {
         return null;
     }
+
+    @Override
+    public ResponseCode deleteSmartThermometer() {
+        return null;
+    }
 }

@@ -3,6 +3,7 @@ package de.thm.smarthome.main.manager.controller.requestmanager;
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
@@ -242,13 +243,14 @@ public class RequestManager implements IServiceFacade {
     public ShutterTransferObject[] getAllShutterData(UserTransferObject authentication) {
         ResponseCode responseCode = checkLogin(authentication);
         List<ShutterTransferObject> shutterTransferObjects = new ArrayList<>();
+        ShutterTransferObject [] array = {};
 
         if(responseCode == ResponseCode.LoggedIn)
             for (SmartShutter smartShutter : deviceManager.getSmartShutters()) {
                 shutterTransferObjects.add(smartShutter.getShutterData());
             }
 
-        return (ShutterTransferObject[]) shutterTransferObjects.toArray();
+        return shutterTransferObjects.toArray(array);
     }
 
     @Override
@@ -320,13 +322,14 @@ public class RequestManager implements IServiceFacade {
     public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
         ResponseCode responseCode = checkLogin(authentication);
         List<UserTransferObject> userTransferObjects = new ArrayList<>();
+        UserTransferObject [] array = {};
 
         if(responseCode == ResponseCode.LoggedIn)
             for (User user : userManager.getAllUsers()) {
                 userTransferObjects.add(new UserTransferObject(user));
             }
 
-        return (UserTransferObject[]) userTransferObjects.toArray();
+        return userTransferObjects.toArray(array);
     }
 
     @Override
@@ -355,56 +358,92 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public WeatherStationTransferObject getAirHumidity(UserTransferObject authentication) {
-        return null;
+        return getWeatherStationData(authentication);
+    }
+
+    private WeatherStationTransferObject getWeatherStationData() {
+        return deviceManager.getSmartWeatherStation().getWeatherStationData();
     }
 
     @Override
     public WeatherStationTransferObject getAirPressure(UserTransferObject authentication) {
-        return null;
+        return getWeatherStationData(authentication);
     }
 
     @Override
     public WeatherStationTransferObject getWindVelocity(UserTransferObject authentication) {
-        return null;
+        return getWeatherStationData(authentication);
     }
 
     @Override
     public WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication) {
-        return null;
+        return getWeatherStationData(authentication);
     }
 
     @Override
     public WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication) {
-        return null;
+        return getWeatherStationData(authentication);
     }
 
     @Override
     public WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return getWeatherStationData();
+            default:
+                return new WeatherStationTransferObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometerTransferObject) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.createSmartThermometer(thermometerTransferObject));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject deleteThermometer(UserTransferObject authentication) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.deleteSmartThermometer());
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication) {
-        return null;
+        return getThermometerData(authentication);
     }
 
     @Override
     public ThermometerTransferObject getThermometerData(UserTransferObject authentication) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return getThermometerData();
+            default:
+                return new ThermometerTransferObject(responseCode);
+        }
+    }
+
+    private ThermometerTransferObject getThermometerData() {
+        return deviceManager.getSmartThermometer().getThermometerData();
     }
 
     @Override
     public String[] readLogs(UserTransferObject authentication, int limit) {
-        return new String[0];
+        return SmartHomeLogger.readLogs(limit);
     }
 }

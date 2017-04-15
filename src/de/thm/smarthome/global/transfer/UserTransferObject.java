@@ -14,6 +14,7 @@ public class UserTransferObject {
     }
 
     public UserTransferObject(User user) {
+
     }
 
 

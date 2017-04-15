@@ -43,4 +43,6 @@ public interface IDeviceManager {
     List<SmartShutter> getSmartShutters();
 
     ResponseCode deleteSmartWeatherStation();
+
+    ResponseCode deleteSmartThermometer();
 }
