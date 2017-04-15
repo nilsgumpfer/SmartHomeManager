@@ -1,4 +1,4 @@
-package de.thm.smarthome.global.converter;
+package de.thm.smarthome.global.helper;
 
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;

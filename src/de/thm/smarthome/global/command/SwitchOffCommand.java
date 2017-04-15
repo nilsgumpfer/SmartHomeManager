@@ -1,22 +1,22 @@
 package de.thm.smarthome.global.command;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.interfaces.IOnAndOffTurnableDevice;
+import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 
 /**
  * Created by Nils on 15.04.2017.
  */
-public class TurnOffCommand implements ICommand {
-    IOnAndOffTurnableDevice device;
+public class SwitchOffCommand implements ICommand {
+    IOnAndOffSwitchableDevice device;
 
-    private TurnOffCommand(){}
+    private SwitchOffCommand(){}
 
-    public TurnOffCommand(IOnAndOffTurnableDevice device) {
+    public SwitchOffCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
     }
 
     @Override
-    public ResponseCode execute() {
+    public ResponseCode invoke() {
         return null;
     }
 

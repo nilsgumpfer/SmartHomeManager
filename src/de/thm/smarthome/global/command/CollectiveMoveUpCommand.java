@@ -19,7 +19,7 @@ public class CollectiveMoveUpCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode execute() {
+    public ResponseCode invoke() {
         return null;
     }
 

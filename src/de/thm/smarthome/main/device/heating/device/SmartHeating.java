@@ -1,7 +1,7 @@
 package de.thm.smarthome.main.device.heating.device;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.interfaces.IOnAndOffTurnableDevice;
+import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.observer.AObservable;
@@ -12,7 +12,7 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver, IOnAndOffTurnableDevice {
+public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver, IOnAndOffSwitchableDevice {
     private IHeatingLogic logic;
     private HeatingModel heatingModel = new HeatingModel();
 

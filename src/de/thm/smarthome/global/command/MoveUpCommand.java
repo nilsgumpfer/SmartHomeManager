@@ -19,7 +19,7 @@ public class MoveUpCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode execute() {
+    public ResponseCode invoke() {
         return null;
     }
 

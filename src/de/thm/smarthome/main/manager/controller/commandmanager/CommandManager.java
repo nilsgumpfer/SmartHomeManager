@@ -1,9 +1,9 @@
 package de.thm.smarthome.main.manager.controller.commandmanager;
 
 import de.thm.smarthome.global.command.*;
-import de.thm.smarthome.global.converter.MyTypeConverter;
+import de.thm.smarthome.global.helper.MyTypeConverter;
 import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.interfaces.IOnAndOffTurnableDevice;
+import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
@@ -32,15 +32,20 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode undoLastCommand(){
+        ResponseCode responseCode;
         try {
             ICommand command = invokedCommands.get(invokedCommands.size() - 1);
-            command.undo();
-            invokedCommands.remove(command);
 
-            return ResponseCode.UndoSuccessful;
+            responseCode = command.undo();
+
+            if(responseCode == ResponseCode.UndoSuccessful)
+                invokedCommands.remove(command);
+
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
+            SmartHomeLogger.log("undoLastCommand: UndoFailed");
 
             return ResponseCode.UndoFailed;
         }
@@ -56,7 +61,7 @@ public class CommandManager implements ICommandManager{
         try {
             ICommand command = new SetTemperatureCommand(temperatureRelevantDevice, temperature);
 
-            command.execute();
+            command.invoke();
 
             invokedCommands.add(command);
 
@@ -65,6 +70,7 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addSetTemperatureCommand: CommandInvocationFailed");
+
             return ResponseCode.CommandInvocationFailed;
         }
     }
@@ -74,7 +80,7 @@ public class CommandManager implements ICommandManager{
         try {
             ICommand command = new CollectiveMoveUpCommand(MyTypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
 
-            command.execute();
+            command.invoke();
 
             invokedCommands.add(command);
 
@@ -92,7 +98,7 @@ public class CommandManager implements ICommandManager{
         try {
             ICommand command = new CollectiveMoveDownCommand(MyTypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
 
-            command.execute();
+            command.invoke();
 
             invokedCommands.add(command);
 
@@ -120,7 +126,7 @@ public class CommandManager implements ICommandManager{
         try {
             ICommand command = new MoveUpCommand(upAndDownMovableDevice);
 
-            command.execute();
+            command.invoke();
 
             invokedCommands.add(command);
 
@@ -138,7 +144,7 @@ public class CommandManager implements ICommandManager{
         try {
             ICommand command = new MoveDownCommand(upAndDownMovableDevice);
 
-            command.execute();
+            command.invoke();
 
             invokedCommands.add(command);
 
@@ -152,21 +158,21 @@ public class CommandManager implements ICommandManager{
     }
 
     @Override
-    public ResponseCode addTurnOnCommand(HeatingTransferObject heatingTransferObject) {
-        return addTurnOnCommand(deviceManager.getSmartHeating());
+    public ResponseCode addSwitchOnCommand(HeatingTransferObject heatingTransferObject) {
+        return addSwitchOnCommand(deviceManager.getSmartHeating());
     }
 
     @Override
-    public ResponseCode addTurnOffCommand(HeatingTransferObject heatingTransferObject) {
-        return addTurnOffCommand(deviceManager.getSmartHeating());
+    public ResponseCode addSwitchOffCommand(HeatingTransferObject heatingTransferObject) {
+        return addSwitchOffCommand(deviceManager.getSmartHeating());
     }
 
     @Override
-    public ResponseCode addTurnOnCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice) {
+    public ResponseCode addSwitchOnCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
         try {
-            ICommand command = new TurnOnCommand(onAndOffTurnableDevice);
+            ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
 
-            command.execute();
+            command.invoke();
 
             invokedCommands.add(command);
 
@@ -180,11 +186,11 @@ public class CommandManager implements ICommandManager{
     }
 
     @Override
-    public ResponseCode addTurnOffCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice) {
+    public ResponseCode addSwitchOffCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
         try {
-            ICommand command = new TurnOnCommand(onAndOffTurnableDevice);
+            ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
 
-            command.execute();
+            command.invoke();
 
             invokedCommands.add(command);
 

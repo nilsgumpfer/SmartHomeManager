@@ -19,7 +19,7 @@ public class MoveDownCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode execute() {
+    public ResponseCode invoke() {
         return null;
     }
 

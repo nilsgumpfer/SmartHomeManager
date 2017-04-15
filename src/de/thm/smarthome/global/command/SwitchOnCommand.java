@@ -1,17 +1,17 @@
 package de.thm.smarthome.global.command;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
+import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 
 /**
  * Created by Nils on 15.04.2017.
  */
-public class SetPositionCommand implements ICommand {
-    IPositionRelevantDevice device;
+public class SwitchOnCommand implements ICommand {
+    IOnAndOffSwitchableDevice device;
 
-    private SetPositionCommand(){}
+    private SwitchOnCommand(){}
 
-    public SetPositionCommand(IPositionRelevantDevice device) {
+    public SwitchOnCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
     }
 

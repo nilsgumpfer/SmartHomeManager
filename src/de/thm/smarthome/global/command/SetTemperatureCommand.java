@@ -20,7 +20,7 @@ public class SetTemperatureCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode execute() {
+    public ResponseCode invoke() {
         return device.setTemperature(value);
     }
 
