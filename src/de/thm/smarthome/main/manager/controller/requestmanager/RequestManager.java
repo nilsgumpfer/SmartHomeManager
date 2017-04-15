@@ -3,6 +3,7 @@ package de.thm.smarthome.main.manager.controller.requestmanager;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.transfer.*;
+import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
@@ -45,65 +46,119 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
-        if(userManager.isLoggedIn(authentication))
-            return new CommandResponseObject(deviceManager.createSmartHeating(heating));
-        else
-            return new CommandResponseObject(ResponseCode.LoggedOut);
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.createSmartHeating(heating));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
+    }
+
+    private ResponseCode checkLogin(UserTransferObject authentication) {
+        return userManager.checkLogin(authentication);
     }
 
     @Override
     public CommandResponseObject deleteHeating(UserTransferObject authentication) {
-        if(userManager.isLoggedIn(authentication))
-            return new CommandResponseObject(deviceManager.deleteSmartHeating());
-        else
-            return new CommandResponseObject(ResponseCode.LoggedOut);
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.deleteSmartHeating());
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject switchHeatingOn(UserTransferObject authentication) {
-        if(userManager.isLoggedIn(authentication))
-            return new CommandResponseObject(deviceManager.getSmartHeating().switchOn());
-        else
-            return new CommandResponseObject(ResponseCode.LoggedOut);
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.getSmartHeating().switchOn());
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject switchHeatingOff(UserTransferObject authentication) {
-        if(userManager.isLoggedIn(authentication))
-            return new CommandResponseObject(deviceManager.getSmartHeating().switchOff());
-        else
-            return new CommandResponseObject(ResponseCode.LoggedOut);
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.getSmartHeating().switchOff());
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature) {
-        if(userManager.isLoggedIn(authentication))
-            return new CommandResponseObject(deviceManager.getSmartHeating().setTemperature(temperature));
-        else
-            return new CommandResponseObject(ResponseCode.LoggedOut);
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.getSmartHeating().setTemperature(temperature));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) {
-        if(userManager.isLoggedIn(authentication))
-            return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature());
-        else
-            return new HeatingTransferObject(ResponseCode.LoggedOut);
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature());
+            default:
+                return new HeatingTransferObject(responseCode);
+        }
     }
 
     @Override
     public HeatingTransferObject getHeatingData(UserTransferObject authentication) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                SmartHeating smartHeating = deviceManager.getSmartHeating();
+
+                return new HeatingTransferObject(
+                        smartHeating.getName(),
+                        smartHeating.getTemperature()
+                        );
+            default:
+                return new HeatingTransferObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.createSmartShutter(shutter));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override
     public CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return null;
+        ResponseCode responseCode = checkLogin(authentication);
+
+        switch(responseCode){
+            case LoggedIn:
+                return new CommandResponseObject(deviceManager.deleteSmartShuttter(shutter));
+            default:
+                return new CommandResponseObject(responseCode);
+        }
     }
 
     @Override

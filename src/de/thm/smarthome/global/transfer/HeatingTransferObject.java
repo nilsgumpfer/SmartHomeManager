@@ -11,4 +11,7 @@ public class HeatingTransferObject {
     }
 
     public HeatingTransferObject(double temperature){}
+
+    public HeatingTransferObject(String name, double temperature) {
+    }
 }
