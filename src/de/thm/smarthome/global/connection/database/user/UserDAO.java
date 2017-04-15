@@ -110,7 +110,7 @@ public class UserDAO {
         return currentUser;
     }
 
-    public ResponseCode logUserIn(User user){
+    public ResponseCode logUserIn(User user) {
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
