@@ -9,14 +9,14 @@ import java.util.List;
 /**
  * Created by Nils on 15.04.2017.
  */
-public class MyTypeConverter {
-    private static MyTypeConverter ourInstance = new MyTypeConverter();
+public class TypeConverter {
+    private static TypeConverter ourInstance = new TypeConverter();
 
-    public static MyTypeConverter getInstance() {
+    public static TypeConverter getInstance() {
         return ourInstance;
     }
 
-    private MyTypeConverter() {
+    private TypeConverter() {
 
     }
 
