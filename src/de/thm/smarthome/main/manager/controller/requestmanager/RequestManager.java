@@ -2,6 +2,7 @@ package de.thm.smarthome.main.manager.controller.requestmanager;
 
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
@@ -13,6 +14,7 @@ import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManager;
+import de.thm.smarthome.main.manager.controller.usermanager.UserManagerMock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class RequestManager implements IServiceFacade {
 
     private IDeviceManager smartHomeController = DeviceManager.getInstance();
     private ICommandManager commandManager = CommandManager.getInstance();
-    private IUserManager userManager = UserManager.getInstance();
+    private IUserManager userManager = UserManagerMock.getInstance(); //UserManager.getInstance(); TODO: Change UserManager back to real one instead of Mock!
     private IDeviceManager deviceManager = DeviceManager.getInstance();
 
     private RequestManager() {}
@@ -41,11 +43,16 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
+    public String getMessage(ResponseCode responseCode) {
+        return MessageRepository.getMessage(responseCode);
+    }
+
+    @Override
     public String getServerInfo() {
         //TODO: provide some information about current state, connected devices, ip, and so on as simple text-message
         String version = "0.1";
         String ip = "127.0.0.1";
-        String wsurl = "http://" + ip + ":8080/services";
+        String wsurl = "http://" + ip + ":8080/SmartHomeManagerWebServices";
 
         return "SmartHomeManager Version " + version + "\nServer-IP: " + ip +"\nWebService-URL: " + wsurl + "\netc. ...";
     }

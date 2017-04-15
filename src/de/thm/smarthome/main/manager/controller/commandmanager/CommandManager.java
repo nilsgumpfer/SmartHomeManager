@@ -1,7 +1,7 @@
 package de.thm.smarthome.main.manager.controller.commandmanager;
 
 import de.thm.smarthome.global.command.*;
-import de.thm.smarthome.global.helper.MyTypeConverter;
+import de.thm.smarthome.global.helper.TypeConverter;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
@@ -80,7 +80,7 @@ public class CommandManager implements ICommandManager{
     public ResponseCode addMoveUpCommand() {
         ResponseCode responseCode;
         try {
-            ICommand command = new CollectiveMoveUpCommand(MyTypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
+            ICommand command = new CollectiveMoveUpCommand(TypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
             responseCode = command.invoke();
 
             if(responseCode != ResponseCode.CommandInvocationFailed)
@@ -99,7 +99,7 @@ public class CommandManager implements ICommandManager{
     public ResponseCode addMoveDownCommand() {
         ResponseCode responseCode;
         try {
-            ICommand command = new CollectiveMoveDownCommand(MyTypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
+            ICommand command = new CollectiveMoveDownCommand(TypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
             responseCode = command.invoke();
 
             if(responseCode != ResponseCode.CommandInvocationFailed)

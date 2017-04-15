@@ -71,6 +71,32 @@ public class MessageRepository {
                 return "Herunterfahren erfolgreich.";
             case UndoFailed:
                 return "Undo konnte nicht ausgeführt werden.";
+            case MoveToPositionFailed:
+                return "Position konnte nicht geändert werden.";
+            case MoveToPositionSuccessful:
+                return "Position erfolgreich geändert.";
+            case SwitchOnFailed:
+                return "Gerät konnte nicht eingeschaltet werden.";
+            case SwitchOffFailed:
+                return "Gerät erfolgreich eingeschaltet.";
+            case AlreadyMovedDown:
+                return "Unterste Position bereits erreicht.";
+            case AlreadyMovedUp:
+                return "Oberste Position bereits erreicht.";
+            case AlreadyAtThisPosition:
+                return "Position bereits erreicht.";
+            case UserCreatedSuccessfully:
+                return "Benutzer erfolgreich angelegt.";
+            case UserCreationFailed:
+                return "Benutzer konnte nicht angelegt werden.";
+            case UserDeletedSuccessfully:
+                return "Benutzer erfolgreich gelöscht.";
+            case UserDeletionFailed:
+                return "Benutzer konnte nicht gelöscht werden.";
+            case UserAlteredSuccessfully:
+                return "Benutzer erfolgreich geändert.";
+            case UserAlterationFailed:
+                return "Benutzer konnte nicht geändert werden.";
             case WeatherStationCouldNotBeCreated:
                 return "Wetterstation konnte nicht angelegt werden.";
             default:

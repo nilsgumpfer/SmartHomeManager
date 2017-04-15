@@ -1,5 +1,6 @@
 package de.thm.smarthome.global.interfaces;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.transfer.*;
 
 /**
@@ -54,4 +55,6 @@ public interface IServiceFacade {
     String[] readLogs(UserTransferObject authentication, int limit);
 
     CommandResponseObject undoLastCommand(UserTransferObject authentication);
+
+    String getMessage(ResponseCode responseCode);
 }

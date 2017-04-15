@@ -1,5 +1,6 @@
 package de.thm.smarthome.global.connection.wsprovider;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
@@ -249,6 +250,11 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     public CommandResponseObject undoLastCommand(UserTransferObject authentication) {
         SmartHomeLogger.log("WSD" + "undoLastCommand(" + authentication + ")");
         return requestManager.undoLastCommand(authentication);
+    }
+
+    @Override
+    public String getMessage(ResponseCode responseCode) {
+        return requestManager.getMessage(responseCode);
     }
 
     /*
