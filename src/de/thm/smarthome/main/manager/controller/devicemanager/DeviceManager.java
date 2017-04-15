@@ -14,6 +14,7 @@ import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 import de.thm.smarthome.main.manager.controller.eventmanager.EventManager;
 import de.thm.smarthome.main.manager.controller.eventmanager.IEventManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,83 +30,8 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     private DeviceManager(){}
 
-
     public static DeviceManager getInstance() {
         return ourInstance;
-    }
-
-    @Override
-    public SmartHeating getSmartHeating() {
-        return null;
-    }
-
-    @Override
-    public void setSmartHeating(SmartHeating smartHeating) {
-        this.smartHeating = smartHeating;
-    }
-
-    @Override
-    public ResponseCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
-        return null;
-    }
-
-    public SmartShutter getSmartShutter(String name) {
-        for(int i = 0; i < smartShutters.size(); i++){
-            if(name.equals(smartShutters.get(i).getName())){
-                return smartShutters.get(i);
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void addSmartShutter(SmartShutter smartShutter) {
-        smartShutters.add(smartShutter);
-    }
-
-    @Override
-    public void removeSmartShutter(SmartShutter smartShutter) {
-        smartShutters.remove(smartShutter);
-    }
-
-    @Override
-    public int createSmartShutter(ShutterTransferObject shutterTransferObject) {
-        return 0;
-    }
-
-    @Override
-    public SmartThermometer getSmartThermometer() {
-        return smartThermometer;
-    }
-
-    @Override
-    public void setSmartThermometer(SmartThermometer smartThermometer) {
-        this.smartThermometer = smartThermometer;
-    }
-
-    @Override
-    public int createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
-        return 0;
-    }
-
-    @Override
-    public SmartWeatherStation getSmartWeatherStation() {
-        return smartWeatherStation;
-    }
-
-    @Override
-    public void setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
-        this.smartWeatherStation = smartWeatherStation;
-    }
-
-    @Override
-    public int createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
-        return 0;
-    }
-
-    @Override
-    public ResponseCode deleteSmartHeating() {
-        return null;
     }
 
     @Override
@@ -114,4 +40,113 @@ public class DeviceManager implements IDeviceManager, IObserver{
         eventManager.update(o,change);
     }
 
+    @Override
+    public SmartHeating getSmartHeating() {
+        return null;
+    }
+
+    @Override
+    public ResponseCode setSmartHeating(SmartHeating smartHeating) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode setSmartHeating(HeatingTransferObject heatingTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode deleteSmartHeating() {
+        return null;
+    }
+
+    @Override
+    public SmartShutter getSmartShutter(String id) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode addSmartShutter(SmartShutter smartShutter) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode deleteSmartShuttter(SmartShutter smartShutter) {
+        return null;
+    }
+
+    @Override
+    public SmartShutter getSmartShutter(ShutterTransferObject shutterTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode addSmartShutter(ShutterTransferObject shutterTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode deleteSmartShuttter(ShutterTransferObject shutterTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode createSmartShutter(ShutterTransferObject shutterTransferObject) {
+        return null;
+    }
+
+    @Override
+    public SmartThermometer getSmartThermometer() {
+        return null;
+    }
+
+    @Override
+    public ResponseCode setSmartThermometer(SmartThermometer smartThermometer) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+        return null;
+    }
+
+    @Override
+    public SmartWeatherStation getSmartWeatherStation() {
+        return null;
+    }
+
+    @Override
+    public ResponseCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
+        return null;
+    }
+
+    @Override
+    public ResponseCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
+        return null;
+    }
+
+    @Override
+    public List<SmartShutter> getSmartShutters() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public ResponseCode deleteSmartWeatherStation() {
+        return null;
+    }
+
+    @Override
+    public ResponseCode deleteSmartThermometer() {
+        return null;
+    }
 }

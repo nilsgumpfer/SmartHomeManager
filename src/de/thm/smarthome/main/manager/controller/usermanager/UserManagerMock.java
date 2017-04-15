@@ -3,41 +3,39 @@ package de.thm.smarthome.main.manager.controller.usermanager;
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.connection.database.user.UserDAO;
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.UserGroup;
 import de.thm.smarthome.global.transfer.CommandResponseObject;
 import de.thm.smarthome.global.transfer.UserTransferObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created by Nils on 15.04.2017.
  */
-public class UserManager implements IUserManager{
-    private static UserManager ourInstance = new UserManager();
+public class UserManagerMock implements IUserManager{
+    private static UserManagerMock ourInstance = new UserManagerMock();
 
-    private List<User> loggedInUsers;
-    private List<User> allUsers;
-    UserDAO userdao = new UserDAO();
-
-    private UserManager() {
+    private UserManagerMock() {
     }
 
-    public static UserManager getInstance() {
+    public static UserManagerMock getInstance() {
         return ourInstance;
     }
 
     @Override
     public ResponseCode login(String username){
-        return userdao.logUserIn(username);
+        return ResponseCode.LoginSuccessful;
     }
 
     @Override
     public ResponseCode logout(String username){
-        return userdao.logUserOut(username);
+        return ResponseCode.LogoutSuccessful;
     }
 
     @Override
     public ResponseCode checkLogin(String username) {
-        return userdao.isUserloggedIn(username);
+        return ResponseCode.LoggedIn;
     }
 
     @Override
@@ -52,17 +50,12 @@ public class UserManager implements IUserManager{
 
     @Override
     public boolean isLoggedIn(String username){
-        switch(userdao.isUserloggedIn(username)){
-            case LoggedIn:
-                return true;
-            default:
-                return false;
-        }
+        return true;
     }
 
     @Override
     public boolean isLoggedOut(String username){
-        return !isLoggedIn(username);
+        return true;
     }
 
     @Override
@@ -77,17 +70,17 @@ public class UserManager implements IUserManager{
 
     @Override
     public CommandResponseObject createUser(UserTransferObject userTransferObject) {
-        return null;
+        return new CommandResponseObject(ResponseCode.UserCreatedSuccessfully);
     }
 
     @Override
     public UserTransferObject getUserData(UserTransferObject userTransferObject) {
-        return null;
+        return new UserTransferObject("username", "password", "firstname", "lastname", "eMail" , UserGroup.Administrator);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -97,12 +90,12 @@ public class UserManager implements IUserManager{
 
     @Override
     public CommandResponseObject deleteUser(UserTransferObject userTransferObject) {
-        return null;
+        return new CommandResponseObject(ResponseCode.UserDeletedSuccessfully);
     }
 
     @Override
     public CommandResponseObject alterUser(UserTransferObject userTransferObject) {
-        return null;
+        return new CommandResponseObject(ResponseCode.UserAlteredSuccessfully);
     }
 
     public ResponseCode checkLogin(UserTransferObject userTransferObject){

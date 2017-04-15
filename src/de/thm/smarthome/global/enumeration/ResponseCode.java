@@ -12,8 +12,24 @@ public enum ResponseCode {
     WrongUsername,
     NotLoggedIn,
     HeatingCouldNotBeCreated,
-    ShutetrCouldNotBeCreated,
+    ShutterCouldNotBeCreated,
     ThermometerCouldNotBeCreated,
-    LoggedIn, DBError, LoggedOut, UndoSuccessful, CommandInvokedSuccessfully, CommandInvocationFailed, SwitchedOn, SwitchedOff, AlreadySwitchedOn, AlreadySwitchedOff, TemperatureAdjustmentSuccessful, TemperatureAdjustmentFailed, WeatherStationCouldNotBeCreated
-
+    LoggedIn,
+    DBError,
+    LoggedOut,
+    UndoSuccessful,
+    CommandInvokedSuccessfully,
+    CommandInvocationFailed,
+    SwitchedOn,
+    SwitchedOff,
+    AlreadySwitchedOn,
+    AlreadySwitchedOff,
+    TemperatureAdjustmentSuccessful,
+    TemperatureAdjustmentFailed,
+    MovedUpSuccessfully,
+    MoveUpFailed,
+    MoveDownFailed,
+    MovedDownSuccessfully,
+    UndoFailed,
+    MoveToPositionFailed, MoveToPositionSuccessful, SwitchOnFailed, SwitchOffFailed, AlreadyMovedDown, AlreadyMovedUp, AlreadyAtThisPosition, UserCreatedSuccessfully, UserCreationFailed, UserDeletedSuccessfully, UserDeletionFailed, UserAlteredSuccessfully, UserAlterationFailed, WeatherStationCouldNotBeCreated
 }

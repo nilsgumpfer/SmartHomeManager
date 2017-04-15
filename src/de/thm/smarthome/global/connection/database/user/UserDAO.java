@@ -111,15 +111,17 @@ public class UserDAO {
     }
 
     public ResponseCode logUserIn(User user){
+        return logUserIn(user.getUsername());
+    }
+
+    public ResponseCode logUserIn(String username) {
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
 
-            String currentUsername = user.getUsername();
-
             ResultSet res;
             Statement stm = mysqlconn.getConn().createStatement();
-            res = stm.executeQuery("Update users SET loggedIn = true WHERE username =" + currentUsername);
+            res = stm.executeQuery("Update users SET loggedIn = true WHERE username =" + username);
 
             //TODO: check affected rows, etc. --> then return corresponding ResponseObject
             return ResponseCode.LoginSuccessful;
@@ -130,15 +132,17 @@ public class UserDAO {
     }
 
     public ResponseCode logUserOut(User user){
+        return logUserOut(user.getUsername());
+    }
+
+    public ResponseCode logUserOut(String username){
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
 
-            String currentUsername = user.getUsername();
-
             ResultSet res;
             Statement stm = mysqlconn.getConn().createStatement();
-            res = stm.executeQuery("Update users SET loggedIn = false WHERE username =" + currentUsername);
+            res = stm.executeQuery("Update users SET loggedIn = false WHERE username =" + username);
 
             //TODO: check affected rows, etc. --> then return corresponding ResponseObject
             return ResponseCode.LogoutSuccessful;
@@ -299,16 +303,19 @@ public class UserDAO {
     }
 
     public ResponseCode isUserloggedIn(User user) {
+        return isUserloggedIn(user.getUsername());
+    }
+
+    public ResponseCode isUserloggedIn(String username) {
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
 
-            String currentUsername = user.getUsername();
-            Boolean currentUserStatus = null;
+            Boolean currentUserStatus = false;
 
             ResultSet res;
             Statement stm = mysqlconn.getConn().createStatement();
-            res = stm.executeQuery("SELECT loggedIn from users WHERE username =" + currentUsername);
+            res = stm.executeQuery("SELECT loggedIn from users WHERE username =" + username);
 
             while (res.next())
                 currentUserStatus = res.getBoolean(1);

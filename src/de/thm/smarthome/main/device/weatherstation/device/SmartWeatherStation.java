@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.weatherstation.device;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.weatherstation.logic.IWeatherStationLogic;
 import de.thm.smarthome.main.device.weatherstation.logic.WeatherStationLogicAngloAmerican;
@@ -53,5 +54,9 @@ public class SmartWeatherStation extends AObservable implements ISmartDevice, IO
     @Override
     public void update(AObservable o, Object change) {
 
+    }
+
+    public WeatherStationTransferObject getWeatherStationData() {
+        return null;
     }
 }
