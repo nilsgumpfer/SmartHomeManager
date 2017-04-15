@@ -35,10 +35,9 @@ public class CommandManager implements ICommandManager{
         ResponseCode responseCode;
         try {
             ICommand command = invokedCommands.get(invokedCommands.size() - 1);
-
             responseCode = command.undo();
 
-            if(responseCode == ResponseCode.UndoSuccessful)
+            if(responseCode != ResponseCode.UndoFailed)
                 invokedCommands.remove(command);
 
             return responseCode;
@@ -58,14 +57,15 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addSetTemperatureCommand(ITemperatureRelevantDevice temperatureRelevantDevice, double temperature) {
+        ResponseCode responseCode;
         try {
             ICommand command = new SetTemperatureCommand(temperatureRelevantDevice, temperature);
+            responseCode = command.invoke();
 
-            command.invoke();
+            if(responseCode != ResponseCode.CommandInvocationFailed)
+                invokedCommands.add(command);
 
-            invokedCommands.add(command);
-
-            return ResponseCode.CommandInvokedSuccessfully;
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
@@ -77,14 +77,15 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addMoveUpCommand() {
+        ResponseCode responseCode;
         try {
             ICommand command = new CollectiveMoveUpCommand(MyTypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
+            responseCode = command.invoke();
 
-            command.invoke();
+            if(responseCode != ResponseCode.CommandInvocationFailed)
+                invokedCommands.add(command);
 
-            invokedCommands.add(command);
-
-            return ResponseCode.CommandInvokedSuccessfully;
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
@@ -95,14 +96,15 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addMoveDownCommand() {
+        ResponseCode responseCode;
         try {
             ICommand command = new CollectiveMoveDownCommand(MyTypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
+            responseCode = command.invoke();
 
-            command.invoke();
+            if(responseCode != ResponseCode.CommandInvocationFailed)
+                invokedCommands.add(command);
 
-            invokedCommands.add(command);
-
-            return ResponseCode.CommandInvokedSuccessfully;
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
@@ -123,14 +125,15 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addMoveUpCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
+        ResponseCode responseCode;
         try {
             ICommand command = new MoveUpCommand(upAndDownMovableDevice);
+            responseCode = command.invoke();
 
-            command.invoke();
+            if(responseCode != ResponseCode.CommandInvocationFailed)
+                invokedCommands.add(command);
 
-            invokedCommands.add(command);
-
-            return ResponseCode.CommandInvokedSuccessfully;
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
@@ -141,14 +144,15 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addMoveDownCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
+        ResponseCode responseCode;
         try {
             ICommand command = new MoveDownCommand(upAndDownMovableDevice);
+            responseCode = command.invoke();
 
-            command.invoke();
+            if(responseCode != ResponseCode.CommandInvocationFailed)
+                invokedCommands.add(command);
 
-            invokedCommands.add(command);
-
-            return ResponseCode.CommandInvokedSuccessfully;
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
@@ -169,14 +173,15 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addSwitchOnCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
+        ResponseCode responseCode;
         try {
             ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
+            responseCode = command.invoke();
 
-            command.invoke();
+            if(responseCode != ResponseCode.CommandInvocationFailed)
+                invokedCommands.add(command);
 
-            invokedCommands.add(command);
-
-            return ResponseCode.CommandInvokedSuccessfully;
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);
@@ -187,14 +192,15 @@ public class CommandManager implements ICommandManager{
 
     @Override
     public ResponseCode addSwitchOffCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
+        ResponseCode responseCode;
         try {
             ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
+            responseCode = command.invoke();
 
-            command.invoke();
+            if(responseCode != ResponseCode.CommandInvocationFailed)
+                invokedCommands.add(command);
 
-            invokedCommands.add(command);
-
-            return ResponseCode.CommandInvokedSuccessfully;
+            return responseCode;
         }
         catch(Exception e){
             SmartHomeLogger.log(e);

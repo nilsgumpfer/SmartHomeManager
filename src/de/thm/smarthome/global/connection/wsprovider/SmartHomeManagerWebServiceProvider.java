@@ -8,7 +8,7 @@ public class SmartHomeManagerWebServiceProvider
 
     public void startProviding(){
 
-        this.endpoint = Endpoint.publish( "http://localhost:8080/services", new SmartHomeManagerWebServiceDescriptor() );
+        this.endpoint = Endpoint.publish( "http://localhost:8080/SmartHomeManagerWebServices", new SmartHomeManagerWebServiceDescriptor() );
     }
 
     public void stopProviding(){
