@@ -14,4 +14,8 @@ public class HeatingTransferObject {
 
     public HeatingTransferObject(String name, double temperature) {
     }
+
+    public double getTemperature() {
+        return 0;
+    }
 }

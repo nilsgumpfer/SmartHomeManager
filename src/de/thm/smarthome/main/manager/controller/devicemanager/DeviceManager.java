@@ -29,12 +29,9 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     private DeviceManager(){}
 
-
     public static DeviceManager getInstance() {
         return ourInstance;
     }
-
-
 
     @Override
     public void update(AObservable o, Object change) {

@@ -23,8 +23,8 @@ public interface ICommandManager {
     ResponseCode addMoveUpCommand(IUpAndDownMovableDevice upAndDownMovableDevice);
     ResponseCode addMoveDownCommand(IUpAndDownMovableDevice upAndDownMovableDevice);
 
-    ResponseCode addPowerOnCommand(HeatingTransferObject heatingTransferObject);
-    ResponseCode addPowerOffCommand(HeatingTransferObject heatingTransferObject);
-    ResponseCode addPowerOnCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice);
-    ResponseCode addPowerOffCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice);
+    ResponseCode addTurnOnCommand(HeatingTransferObject heatingTransferObject);
+    ResponseCode addTurnOffCommand(HeatingTransferObject heatingTransferObject);
+    ResponseCode addTurnOnCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice);
+    ResponseCode addTurnOffCommand(IOnAndOffTurnableDevice onAndOffTurnableDevice);
 }
