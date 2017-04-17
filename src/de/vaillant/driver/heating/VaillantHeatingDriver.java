@@ -1,7 +1,7 @@
 package de.vaillant.driver.heating;
 
-import de.thm.smarthome.global.interfaces.HeizungClientInterface;
-import de.thm.smarthome.global.interfaces.HeizungServerInterface;
+import HeizungServer.interfaces.HeizungClientInterface;
+import HeizungServer.interfaces.HeizungServerInterface;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

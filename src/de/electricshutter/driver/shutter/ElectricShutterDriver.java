@@ -1,7 +1,7 @@
 package de.electricshutter.driver.shutter;
 
-import de.thm.smarthome.global.interfaces.ShutterClientInterface;
-import de.thm.smarthome.global.interfaces.ShutterServerInterface;
+import ShutterServer.interfaces.ShutterClientInterface;
+import ShutterServer.interfaces.ShutterServerInterface;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

@@ -1,7 +1,7 @@
 package de.conrad.driver.weatherstation;
 
-import de.thm.smarthome.global.interfaces.WeatherStationClientInterface;
-import de.thm.smarthome.global.interfaces.WeatherStationServerInterface;
+import WeatherStationServer.interfaces.WeatherStationClientInterface;
+import WeatherStationServer.interfaces.WeatherStationServerInterface;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

@@ -1,4 +1,4 @@
-package de.thm.smarthome.global.interfaces;
+package ThermometerServer.interfaces;
 
 import java.rmi.Remote;
 

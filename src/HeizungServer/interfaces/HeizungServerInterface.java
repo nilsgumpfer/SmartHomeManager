@@ -1,4 +1,4 @@
-package de.thm.smarthome.global.interfaces;
+package HeizungServer.interfaces;
 
 
 
@@ -14,5 +14,5 @@ public interface HeizungServerInterface extends Remote {
     public int setTemperature(double temperature, HeizungClientInterface c) throws RemoteException;
     public double getTemperature(HeizungClientInterface c) throws RemoteException;
     public String getName(HeizungClientInterface c) throws RemoteException;
-    public void update(AObservable o, Object change, HeizungClientInterface c) throws RemoteException;
+    //public void update(AObservable o, Object change, HeizungClientInterface c) throws RemoteException;
 }
