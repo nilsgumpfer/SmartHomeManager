@@ -1,7 +1,7 @@
 package de.indoorthermometer.driver.thermometer;
 
-import de.thm.smarthome.global.interfaces.ThermometerClientInterface;
-import de.thm.smarthome.global.interfaces.ThermometerServerInterface;
+import ThermometerServer.interfaces.ThermometerClientInterface;
+import ThermometerServer.interfaces.ThermometerServerInterface;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
