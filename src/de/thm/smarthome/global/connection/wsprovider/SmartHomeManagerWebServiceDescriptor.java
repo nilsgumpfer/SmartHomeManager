@@ -20,235 +20,235 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @WebMethod
     public String getServerInfo() {
-        SmartHomeLogger.log("WSD" + "getServerInfo()");
+        SmartHomeLogger.log("WSD " + "getServerInfo()");
         return requestManager.getServerInfo();
     }
 
     @WebMethod
     public CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
-        SmartHomeLogger.log("WSD" + "createHeating(" + authentication + "," + heating + ")");
+        SmartHomeLogger.log("WSD " + "createHeating(" + authentication + "," + heating + ")");
         return requestManager.createHeating(authentication,heating);
     }
 
     @WebMethod
     public CommandResponseObject deleteHeating(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "deleteHeating(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "deleteHeating(" + authentication + ")");
         return requestManager.deleteHeating(authentication);
     }
 
     @WebMethod
     public CommandResponseObject switchHeatingOn(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "switchHeatingOn(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "switchHeatingOn(" + authentication + ")");
         return  requestManager.switchHeatingOn(authentication);
     }
 
     @WebMethod
     public CommandResponseObject switchHeatingOff(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "switchHeatingOff(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "switchHeatingOff(" + authentication + ")");
         return requestManager.switchHeatingOff(authentication);
     }
 
     @WebMethod
     public CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature) {
-        SmartHomeLogger.log("WSD" + "setHeatingTemperature(" + authentication + "," + temperature + ")");
+        SmartHomeLogger.log("WSD " + "setHeatingTemperature(" + authentication + "," + temperature + ")");
         return requestManager.setHeatingTemperature(authentication,temperature);
     }
 
     @WebMethod
     public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getHeatingTemperature(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getHeatingTemperature(" + authentication + ")");
         return requestManager.getHeatingTemperature(authentication);
     }
 
     @WebMethod
     public HeatingTransferObject getHeatingData(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getHeatingData(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getHeatingData(" + authentication + ")");
         return requestManager.getHeatingData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        SmartHomeLogger.log("WSD" + "createShutter(" + authentication + "," + shutter + ")");
+        SmartHomeLogger.log("WSD " + "createShutter(" + authentication + "," + shutter + ")");
         return requestManager.createShutter(authentication, shutter);
     }
 
     @WebMethod
     public CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        SmartHomeLogger.log("WSD" + "deleteShutter(" + authentication + "," + shutter + ")");
+        SmartHomeLogger.log("WSD " + "deleteShutter(" + authentication + "," + shutter + ")");
         return requestManager.deleteShutter(authentication, shutter);
     }
 
     @WebMethod
     public CommandResponseObject moveAllShuttersUp(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "moveAllShuttersUp(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "moveAllShuttersUp(" + authentication + ")");
         return requestManager.moveAllShuttersUp(authentication);
     }
 
     @WebMethod
     public CommandResponseObject moveAllShuttersDown(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "moveAllShuttersDown(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "moveAllShuttersDown(" + authentication + ")");
         return requestManager.moveAllShuttersDown(authentication);
     }
 
     @Override
     public CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        SmartHomeLogger.log("WSD" + "moveShutterUp(" + authentication + "," + shutterTransferObject + ")");
+        SmartHomeLogger.log("WSD " + "moveShutterUp(" + authentication + "," + shutterTransferObject + ")");
         return requestManager.moveShutterUp(authentication, shutterTransferObject);
     }
 
     @Override
     public CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        SmartHomeLogger.log("WSD" + "moveShutterDown(" + authentication + "," + shutterTransferObject + ")");
+        SmartHomeLogger.log("WSD " + "moveShutterDown(" + authentication + "," + shutterTransferObject + ")");
         return requestManager.moveShutterDown(authentication, shutterTransferObject);
     }
 
     @WebMethod
     public ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        SmartHomeLogger.log("WSD" + "getShutterPosition(" + authentication + "," + shutterTransferObject + ")");
+        SmartHomeLogger.log("WSD " + "getShutterPosition(" + authentication + "," + shutterTransferObject + ")");
         return requestManager.getShutterPosition(authentication,shutterTransferObject);
     }
 
     @WebMethod
     public ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        SmartHomeLogger.log("WSD" + "setShutterPosition(" + authentication + "," + shutterTransferObject + ")");
+        SmartHomeLogger.log("WSD " + "setShutterPosition(" + authentication + "," + shutterTransferObject + ")");
         return requestManager.setShutterPosition(authentication,shutterTransferObject);
     }
 
     @WebMethod
     public ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter) {
-        SmartHomeLogger.log("WSD" + "getShutterData(" + authentication + "," + shutter + ")");
+        SmartHomeLogger.log("WSD " + "getShutterData(" + authentication + "," + shutter + ")");
         return requestManager.getShutterData(authentication, shutter);
     }
 
     @WebMethod
     public ShutterTransferObject[] getAllShutterData(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getAllShutterData(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getAllShutterData(" + authentication + ")");
         return requestManager.getAllShutterData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user) {
-        SmartHomeLogger.log("WSD" + "createUser(" + authentication + "," + user + ")");
+        SmartHomeLogger.log("WSD " + "createUser(" + authentication + "," + user + ")");
         return requestManager.createUser(authentication, user);
     }
 
     @WebMethod
     public CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user) {
-        SmartHomeLogger.log("WSD" + "deleteUser(" + authentication + "," + user + ")");
+        SmartHomeLogger.log("WSD " + "deleteUser(" + authentication + "," + user + ")");
         return requestManager.deleteUser(authentication,user);
     }
 
     @WebMethod
     public CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject user) {
-        SmartHomeLogger.log("WSD" + "alterUser(" + authentication + "," + user + ")");
+        SmartHomeLogger.log("WSD " + "alterUser(" + authentication + "," + user + ")");
         return requestManager.alterUser(authentication,user);
     }
 
     @WebMethod
     public CommandResponseObject login(UserTransferObject user) {
-        SmartHomeLogger.log("WSD" + "login(" + user + ")");
+        SmartHomeLogger.log("WSD " + "login(" + user + ")");
         return requestManager.login(user);
     }
 
     @WebMethod
     public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject user) {
-        SmartHomeLogger.log("WSD" + "logout(" + authentication + "," + user + ")");
+        SmartHomeLogger.log("WSD " + "logout(" + authentication + "," + user + ")");
         return requestManager.logout(authentication, user);
     }
 
     @WebMethod
     public UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject user) {
-        SmartHomeLogger.log("WSD" + "getUserData(" + authentication + "," + user + ")");
+        SmartHomeLogger.log("WSD " + "getUserData(" + authentication + "," + user + ")");
         return requestManager.getUserData(authentication, user);
     }
 
     @WebMethod
     public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getAllUserData(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getAllUserData(" + authentication + ")");
         return requestManager.getAllUserData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation) {
-        SmartHomeLogger.log("WSD" + "createWeatherStation(" + authentication + "," + weatherStation + ")");
+        SmartHomeLogger.log("WSD " + "createWeatherStation(" + authentication + "," + weatherStation + ")");
         return requestManager.createWeatherStation(authentication, weatherStation);
     }
 
     @WebMethod
     public CommandResponseObject deleteWeatherStation(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "deleteWeatherStation(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "deleteWeatherStation(" + authentication + ")");
         return requestManager.deleteWeatherStation(authentication);
     }
 
     @WebMethod
     public WeatherStationTransferObject getAirHumidity(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getAirHumidity(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getAirHumidity(" + authentication + ")");
         return requestManager.getAirHumidity(authentication);
     }
 
     @WebMethod
     public WeatherStationTransferObject getAirPressure(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getAirPressure(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getAirPressure(" + authentication + ")");
         return requestManager.getAirPressure(authentication);
     }
 
     @WebMethod
     public WeatherStationTransferObject getWindVelocity(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getWindVelocity(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getWindVelocity(" + authentication + ")");
         return requestManager.getWindVelocity(authentication);
     }
 
     @WebMethod
     public WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getOutdoorTemperature(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getOutdoorTemperature(" + authentication + ")");
         return requestManager.getOutdoorTemperature(authentication);
     }
 
     @WebMethod
     public WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getRainfallAmount(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getRainfallAmount(" + authentication + ")");
         return requestManager.getRainfallAmount(authentication);
     }
 
     @WebMethod
     public WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getWeatherStationData(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getWeatherStationData(" + authentication + ")");
         return requestManager.getWeatherStationData(authentication);
     }
 
     @WebMethod
     public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometer) {
-        SmartHomeLogger.log("WSD" + "createThermometer(" + authentication + "," + thermometer + ")");
+        SmartHomeLogger.log("WSD " + "createThermometer(" + authentication + "," + thermometer + ")");
         return requestManager.createThermometer(authentication,thermometer);
     }
 
     @WebMethod
     public CommandResponseObject deleteThermometer(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "deleteThermometer(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "deleteThermometer(" + authentication + ")");
         return requestManager.deleteThermometer(authentication);
     }
 
     @WebMethod
     public ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getIndoorTemperature(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getIndoorTemperature(" + authentication + ")");
         return requestManager.getIndoorTemperature(authentication);
     }
 
     @WebMethod
     public ThermometerTransferObject getThermometerData(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "getThermometerData(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "getThermometerData(" + authentication + ")");
         return requestManager.getThermometerData(authentication);
     }
 
     @WebMethod
     public String[] readLogs(UserTransferObject authentication, int limit) {
-        SmartHomeLogger.log("WSD" + "readLogs(" + authentication + "," + limit + ")");
+        SmartHomeLogger.log("WSD " + "readLogs(" + authentication + "," + " limit: " + limit + ")");
         return requestManager.readLogs(authentication, limit);
     }
 
     @WebMethod
     public CommandResponseObject undoLastCommand(UserTransferObject authentication) {
-        SmartHomeLogger.log("WSD" + "undoLastCommand(" + authentication + ")");
+        SmartHomeLogger.log("WSD " + "undoLastCommand(" + authentication + ")");
         return requestManager.undoLastCommand(authentication);
     }
 

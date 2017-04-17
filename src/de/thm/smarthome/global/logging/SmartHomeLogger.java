@@ -19,20 +19,31 @@ public class SmartHomeLogger {
     public static void log(String message){
         String timestamp = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss:SSS] : ").format(new Date());
         SmartHomeLogger.getInstance().listOfLogs.add(timestamp + message);
+        System.out.println(timestamp + message);
     }
 
     public static void log(Exception e){
-        log(e.getMessage());
+        log(e.getMessage() + " (" + e.toString() + ")");
     }
 
     public static String[] readLogs(int limit){
         String [] array = {};
-        List<String> logs = SmartHomeLogger.getInstance().listOfLogs;
-        int size = logs.size();
-        int end = size -1;
-        int start = end - limit;
+        try {
+            List<String> logs = SmartHomeLogger.getInstance().listOfLogs;
+            int size = logs.size();
+            int end = size - 1;
+            int start = end - limit;
 
-        return logs.subList(start,end).toArray(array);
+            if(logs.size() > limit)
+                array = logs.subList(start, end).toArray(array);
+            else
+                array = logs.toArray(array);
+        }
+        catch (Exception e)
+        {
+            SmartHomeLogger.log(e);
+        }
+        return array;
     }
 
     public static SmartHomeLogger getInstance()
