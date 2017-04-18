@@ -20,12 +20,18 @@ public class CollectiveMoveDownCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
+        for(IUpAndDownMovableDevice device : devices) {
+            device.moveDown();
+        }
         //TODO: save current state of devices & move all devices down
         return ResponseCode.MoveDownFailed;
     }
 
     @Override
     public ResponseCode undo() {
+        for(IUpAndDownMovableDevice device : devices) {
+            device.moveUp();
+        }
         //TODO: recover state of devices & move all devices back
         return ResponseCode.UndoFailed;
     }

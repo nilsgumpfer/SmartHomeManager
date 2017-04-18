@@ -20,12 +20,14 @@ public class MoveDownCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
+        device.moveDown();
         //TODO: save current state of device & move device down
         return ResponseCode.MoveDownFailed;
     }
 
     @Override
     public ResponseCode undo() {
+        device.moveUp();
         //TODO: recover state of device & move device back
         return ResponseCode.UndoFailed;
     }

@@ -2,6 +2,7 @@ package de.thm.smarthome.global.command;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
+import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 
 /**
  * Created by Nils on 15.04.2017.
@@ -19,6 +20,7 @@ public class SetPositionCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
+        device.setPosition(position);
         //TODO: save current state of device & set position
         return ResponseCode.MoveToPositionFailed;
     }
