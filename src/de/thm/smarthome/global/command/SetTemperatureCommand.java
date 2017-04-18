@@ -10,6 +10,7 @@ import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 public class SetTemperatureCommand implements ICommand {
     private ITemperatureRelevantDevice device;
     private double value;
+    private double oldState;
 
     private SetTemperatureCommand(){}
 
@@ -20,19 +21,18 @@ public class SetTemperatureCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
-        device.setTemperature(value);
+        oldState = device.getTemperature();
+        if(oldState != value) {
+            device.setTemperature(value);
+            return ResponseCode.TemperatureAdjustmentSuccessful;
+        }
         //TODO: save current state of device & set temperature
         return ResponseCode.TemperatureAdjustmentFailed;
     }
 
     @Override
     public ResponseCode undo() {
-        CommandManager.getInstance();
-        CommandManager.undoLastCommand();
-
-
-        device.undoLastCommand();
-        //TODO: recover state of device & re-set temperature
-        return ResponseCode.TemperatureAdjustmentFailed;
+        device.setTemperature(oldState);
+        return ResponseCode.TemperatureAdjustmentSuccessful;
     }
 }

@@ -14,6 +14,7 @@ public class SwitchOnCommand implements ICommand {
     public SwitchOnCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
     }
+    private ResponseCode oldState = null;
 
     @Override
     public ResponseCode invoke() {

@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class MoveDownCommand implements ICommand {
     IUpAndDownMovableDevice device;
+    private int oldPosition;
 
     private MoveDownCommand(){}
 
@@ -20,6 +21,7 @@ public class MoveDownCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
+        oldPosition = device.getPosition();
         device.moveDown();
         //TODO: save current state of device & move device down
         return ResponseCode.MoveDownFailed;
@@ -27,7 +29,7 @@ public class MoveDownCommand implements ICommand {
 
     @Override
     public ResponseCode undo() {
-        device.moveUp();
+        device.setPosition(oldPosition);
         //TODO: recover state of device & move device back
         return ResponseCode.UndoFailed;
     }

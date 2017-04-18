@@ -8,4 +8,5 @@ import de.thm.smarthome.global.enumeration.ResponseCode;
 public interface IOnAndOffSwitchableDevice {
     ResponseCode switchOn();
     ResponseCode switchOff();
+    ResponseCode currentState();
 }

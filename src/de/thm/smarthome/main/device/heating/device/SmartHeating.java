@@ -15,6 +15,7 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
 public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver, IOnAndOffSwitchableDevice {
     private IHeatingLogic logic;
     private HeatingModel heatingModel = new HeatingModel();
+    private ResponseCode currentState = null;
 
     public SmartHeating(IHeatingLogic logic) {
         this.logic = logic;
@@ -45,12 +46,19 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
     @Override
     public ResponseCode switchOn(){
         //TODO: Make this realistic
+        currentState = ResponseCode.SwitchedOn;
         return ResponseCode.SwitchedOn;
+
     }
 
     @Override
     public ResponseCode switchOff(){
         //TODO: Make this realistic
+        currentState = ResponseCode.SwitchedOff;
         return ResponseCode.AlreadySwitchedOff;
+    }
+@Override
+    public ResponseCode currentState(){
+        return currentState;
     }
 }

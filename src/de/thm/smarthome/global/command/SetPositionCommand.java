@@ -10,6 +10,7 @@ import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 public class SetPositionCommand implements ICommand {
     IPositionRelevantDevice device;
     int position;
+    int oldPosition = 0;
 
     private SetPositionCommand(){}
 
@@ -20,6 +21,7 @@ public class SetPositionCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
+        //device.
         device.setPosition(position);
         //TODO: save current state of device & set position
         return ResponseCode.MoveToPositionFailed;

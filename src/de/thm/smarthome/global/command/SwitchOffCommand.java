@@ -14,19 +14,28 @@ public class SwitchOffCommand implements ICommand {
     public SwitchOffCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
     }
+private ResponseCode oldState = null;
 
     @Override
     public ResponseCode invoke() {
-        device.switchOff();
+        oldState = device.currentState();
+        if(oldState == ResponseCode.SwitchedOn){
+            device.switchOff();
+            return ResponseCode.SwitchedOff;
+        }
         //TODO: save current state of device & switch power
-        return ResponseCode.SwitchOffFailed;
+        return ResponseCode.AlreadySwitchedOff;
     }
 
     @Override
     public ResponseCode undo() {
-        device.switchOn();
+        //oldState = device.currentState();
+        if(oldState == ResponseCode.SwitchedOff){
+            device.switchOn();
+            return ResponseCode.SwitchedOn;
+        }
         //TODO: recover state of device & switch back
-        return ResponseCode.SwitchOffFailed;
+        return ResponseCode.AlreadySwitchedOn;
     }
 
 

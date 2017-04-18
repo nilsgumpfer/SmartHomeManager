@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class CollectiveMoveUpCommand implements ICommand {
     List<IUpAndDownMovableDevice> devices = new ArrayList<>();
+    List<Integer> devicepositions = new ArrayList<>();
+
 
     private CollectiveMoveUpCommand(){}
 
@@ -20,19 +22,30 @@ public class CollectiveMoveUpCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
+        ResponseCode responseCode;
+
         for(IUpAndDownMovableDevice device : devices) {
-            device.moveUp();
+            devicepositions.add(device.getPosition());
+            responseCode = device.moveUp();
+
+            if(responseCode == ResponseCode.MoveUpFailed)
+                return ResponseCode.CommandInvocationFailed;
         }
-        //TODO: save current state of devices & move all devices up
-        return ResponseCode.MoveUpFailed;
+
+        return ResponseCode.CommandInvokedSuccessfully;
     }
 
     @Override
     public ResponseCode undo() {
+        int i = 0;
+        ResponseCode responseCode;
         for(IUpAndDownMovableDevice device : devices) {
-            device.moveDown();
+            responseCode = device.setPosition(devicepositions.get(i));
+            if(responseCode == ResponseCode.MoveToPositionFailed)
+                return ResponseCode.UndoFailed;
+            i++;
         }
-        //TODO: recover state of devices & move all devices back
-        return ResponseCode.UndoFailed;
+
+        return ResponseCode.UndoSuccessful;
     }
 }
