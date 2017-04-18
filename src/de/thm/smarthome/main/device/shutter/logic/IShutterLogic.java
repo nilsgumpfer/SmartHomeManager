@@ -7,4 +7,6 @@ public interface IShutterLogic {
     void moveUp();
     void moveDown();
     void setLogicName(String logicName);
+    int getPosition();
+    void setPosition(int shutterHeight);
 }

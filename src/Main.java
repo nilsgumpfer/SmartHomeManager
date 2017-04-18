@@ -12,9 +12,7 @@ public class Main extends Application {
         primaryStage.setTitle("SmartHomeManager for SmartHome CGR");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();
-
     }
-
 
     public static void main(String[] args) {
         launch(args);

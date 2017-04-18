@@ -3,14 +3,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.rmi.RemoteException;
 
 
 public class Controller {
@@ -36,23 +34,17 @@ public class Controller {
     @FXML
     private Button btnStartReset;
     @FXML
+    private Button btnChangeAmPm;
+    @FXML
     public Label lblTime;
     @FXML
     private TextField tfHour;
     @FXML
-    private TextField tfMinute;
-    @FXML
-    private TextField tfSecond;
+    private TextField tfAmPm;
 
     private int hourSet = 0;
-    private int minSet = 0;
-    private int secSet = 0;
-
     public boolean hourSetManual = false;
-    public boolean minSetManual = false;
-    public boolean secSetManual = false;
-
-    private boolean started = false;
+    public boolean changeAMPM = false;
 
     WorkerThread workerThread;
 
@@ -64,7 +56,6 @@ public class Controller {
         if(wsProvider == null){
             wsProvider = new SmartHomeManagerWebServiceProvider();
         }
-
 
         /*ps = new PrintStream(new OutputStream() {
             @Override
@@ -114,24 +105,31 @@ public class Controller {
     }
 
     public void pressBtnStartReset(ActionEvent event){
-        if(started == false) {
-            started = true;
-            workerThread = new WorkerThread(lblTime, hourSetManual, minSetManual, secSetManual, hourSet, minSet, secSet);
+        if(workerThread != null){
+            workerThread.setThreadRunning(false);
+        }
+            workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM);
             workerThread.setDaemon(true);
             workerThread.start();
-        }else
-        {
-            started = false;
-            //workerThread.
-        }
     }
 
     public void pressBtnSetTime(ActionEvent event){
         //workerThread.interrupt();
-        setTime(tfHour.getText(), tfMinute.getText(), tfSecond.getText());
+        setTime(tfHour.getText());
     }
 
-    private void setTime(String hour, String min, String sec) {
+    public void pressBtnChangeAmPm(ActionEvent event){
+        changeAMPM = true;
+        if(workerThread != null){
+            workerThread.setThreadRunning(false);
+        }
+        workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM);
+        workerThread.setDaemon(true);
+        workerThread.start();
+        changeAMPM = false;
+    }
+
+    private void setTime(String hour) {
         if(hour!=""){
             try{
                 hourSet = Integer.valueOf(hour);
@@ -141,27 +139,8 @@ public class Controller {
             }
         }
 
-        if(min!=""){
-            try{
-                minSet = Integer.valueOf(min);
-                minSetManual = true;
-            } catch (Exception e){
-                System.out.println("Bitte nur gerade Zahlen eingeben!");
-            }
-
-        }
-
-        if(sec!=""){
-            try{
-                secSet = Integer.valueOf(sec);
-                secSetManual = true;
-            } catch (Exception e){
-                System.out.println("Bitte nur gerade Zahlen eingeben!");
-            }
-        }
-
         workerThread.setThreadRunning(false);
-        workerThread = new WorkerThread(lblTime, hourSetManual, minSetManual, secSetManual, hourSet, minSet, secSet);
+        workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM);
         workerThread.setDaemon(true);
         workerThread.start();
         //workerThread.setThreadRunning(true);
@@ -169,14 +148,6 @@ public class Controller {
 
     public int getHour(){
         return hourSet;
-    }
-
-    public int getMin(){
-        return minSet;
-    }
-
-    public int getSec(){
-        return secSet;
     }
 
     private boolean isInt(javafx.scene.control.TextField input, String message){

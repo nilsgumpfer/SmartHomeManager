@@ -22,20 +22,14 @@ public class WorkerThread extends Thread{
     String day_night = "";
 
     boolean hourSetManual;
-    boolean minSetManual;
-    boolean secSetManual;
     int hourSet;
-    int minSet;
-    int secSet;
+    boolean incomingChange = false;
     boolean threadRunning = true;
 
-    public WorkerThread(Label lbl_time, boolean hourSetManual, boolean minSetManual, boolean secSetManual, int hourSet, int minSet, int secSet) {
+    public WorkerThread(Label lbl_time, boolean hourSetManual, int hourSet, boolean incomingChange) {
         this.hourSetManual = hourSetManual;
-        this.minSetManual = minSetManual;
-        this.secSetManual = secSetManual;
         this.hourSet = hourSet;
-        this.minSet = minSet;
-        this.secSet = secSet;
+        this.incomingChange = incomingChange;
         threadRunning = true;
 
         setDaemon(true);
@@ -49,18 +43,8 @@ public class WorkerThread extends Thread{
             // UI updaten
             Platform.runLater(() -> {
                 // entsprechende UI Komponente updaten
-                if(AM_PM == 1)
-                {
-                    day_night = "PM";
-                }
-                else
-                {
-                    day_night = "AM";
-                }
 
                 cal = new GregorianCalendar();
-
-
                 System.out.println("durchlauf");
 
                 if(hourSetManual==false)
@@ -70,25 +54,44 @@ public class WorkerThread extends Thread{
                     hour = hourSet;
                 }
 
-                if(minSetManual==false)
-                {
-                    min = cal.get(Calendar.MINUTE);
-                }else {
-                    min = minSet;
+                min = cal.get(Calendar.MINUTE);
+                sec = cal.get(Calendar.SECOND);
+
+                System.out.println("erstes am/pm");
+                System.out.println(AM_PM);
+
+                if(AM_PM!=0 && AM_PM !=1){
+                    AM_PM = cal.get(Calendar.AM_PM);
                 }
 
-                if(secSetManual==false)
-                {
-                    sec = cal.get(Calendar.SECOND);
-                }else {
-                    sec = secSet;
+                System.out.println("ampm");
+                System.out.println(AM_PM);
+
+                System.out.println("incomingChange");
+                System.out.println(incomingChange);
+                if(incomingChange == true){
+                    if(AM_PM == 1){
+                        AM_PM = 0;
+                    } else if(AM_PM == 0){
+                        AM_PM = 1;
+                    }
                 }
 
-                AM_PM = cal.get(Calendar.AM_PM);
+                System.out.println("ampm2");
+                System.out.println(AM_PM);
+
+                if(AM_PM == 1)
+                {
+                    day_night = "PM";
+                }
+                else
+                {
+                    day_night = "AM";
+                }
 
                 String time = hour + ":" + min + ":" + sec + " "  + day_night;
 
-                lbl_time.setFont(new Font(40));
+                lbl_time.setFont(new Font(50));
                 lbl_time.setText(time);
             });
 
