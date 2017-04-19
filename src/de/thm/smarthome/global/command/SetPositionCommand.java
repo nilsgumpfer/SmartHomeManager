@@ -1,8 +1,10 @@
 package de.thm.smarthome.global.command;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 /**
  * Created by Nils on 15.04.2017.
@@ -10,7 +12,7 @@ import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 public class SetPositionCommand implements ICommand {
     IPositionRelevantDevice device;
     int position;
-    int oldPosition = 0;
+    int oldPosition = -1;
 
     private SetPositionCommand(){}
 
@@ -21,15 +23,32 @@ public class SetPositionCommand implements ICommand {
 
     @Override
     public ResponseCode invoke() {
-        //device.
-        device.setPosition(position);
-        //TODO: save current state of device & set position
-        return ResponseCode.MoveToPositionFailed;
+        ResponseCode responseCode;
+
+        oldPosition = device.getPosition();
+        responseCode = device.setPosition(position);
+
+        //Log detailled success- or failure-statements
+        SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
+
+        if(responseCode == ResponseCode.MoveToPositionFailed)
+            return ResponseCode.CommandInvocationFailed;
+        else
+            return ResponseCode.CommandInvokedSuccessfully;
     }
 
     @Override
     public ResponseCode undo() {
-        //TODO: recover state of device & move device back
-        return ResponseCode.MoveToPositionFailed;
+        ResponseCode responseCode;
+
+        responseCode = device.setPosition(oldPosition);
+
+        //Log detailled success- or failure-statements
+        SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
+
+        if(responseCode == ResponseCode.MoveToPositionFailed)
+            return ResponseCode.CommandInvocationFailed;
+        else
+            return ResponseCode.CommandInvokedSuccessfully;
     }
 }
