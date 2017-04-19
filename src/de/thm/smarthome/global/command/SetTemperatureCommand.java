@@ -1,7 +1,9 @@
 package de.thm.smarthome.global.command;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 
 /**
@@ -9,30 +11,45 @@ import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
  */
 public class SetTemperatureCommand implements ICommand {
     private ITemperatureRelevantDevice device;
-    private double value;
-    private double oldState;
+    private double newTemperature;
+    private double oldTemperature;
 
     private SetTemperatureCommand(){}
 
     public SetTemperatureCommand(ITemperatureRelevantDevice device, double value){
         this.device = device;
-        this.value = value;
+        this.newTemperature = value;
     }
 
     @Override
     public ResponseCode invoke() {
-        oldState = device.getTemperature();
-        if(oldState != value) {
-            device.setTemperature(value);
-            return ResponseCode.TemperatureAdjustmentSuccessful;
-        }
-        //TODO: save current state of device & set temperature
-        return ResponseCode.TemperatureAdjustmentFailed;
+        ResponseCode responseCode;
+
+        oldTemperature = device.getTemperature();
+        responseCode = device.setTemperature(newTemperature);
+
+        //Log detailled success- or failure-statements
+        SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
+
+        if(responseCode == ResponseCode.TemperatureAdjustmentFailed)
+            return ResponseCode.CommandInvocationFailed;
+        else
+            return ResponseCode.CommandInvokedSuccessfully;
     }
 
     @Override
     public ResponseCode undo() {
-        device.setTemperature(oldState);
-        return ResponseCode.TemperatureAdjustmentSuccessful;
+        ResponseCode responseCode;
+
+        oldTemperature = device.getTemperature();
+        responseCode = device.setTemperature(oldTemperature);
+
+        //Log detailled success- or failure-statements
+        SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
+
+        if(responseCode == ResponseCode.TemperatureAdjustmentFailed)
+            return ResponseCode.CommandInvocationFailed;
+        else
+            return ResponseCode.CommandInvokedSuccessfully;
     }
 }

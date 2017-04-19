@@ -1,34 +1,19 @@
 package de.thm.smarthome.global.command;
 
+import de.thm.smarthome.global.enumeration.Power;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 
 /**
  * Created by Nils on 15.04.2017.
  */
-public class SwitchOnCommand implements ICommand {
-    IOnAndOffSwitchableDevice device;
-
+public class SwitchOnCommand extends ASwitchCommand {
     private SwitchOnCommand(){}
-
+    
     public SwitchOnCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
+        powerToDo = Power.On;
+        expectedStatus = ResponseCode.SwitchedOff;
+        requiredStatus = ResponseCode.SwitchedOn;
     }
-    private ResponseCode oldState = null;
-
-    @Override
-    public ResponseCode invoke() {
-        device.switchOn();
-        //TODO: save current state of device & switch power
-        return ResponseCode.SwitchOnFailed;
-    }
-
-    @Override
-    public ResponseCode undo() {
-        device.switchOff();
-        //TODO: recover state of device & switch back
-        return ResponseCode.SwitchOnFailed;
-    }
-
-
 }
