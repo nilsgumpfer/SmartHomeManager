@@ -1,3 +1,5 @@
+package UI;
+
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -18,18 +20,20 @@ public class WorkerThread extends Thread{
     int hour;
     int min;
     int sec;
-    int AM_PM;
+    int AM_PM = 2;
     String day_night = "";
 
     boolean hourSetManual;
     int hourSet;
     boolean incomingChange = false;
+    int oldAM_PM;
     boolean threadRunning = true;
 
-    public WorkerThread(Label lbl_time, boolean hourSetManual, int hourSet, boolean incomingChange) {
+    public WorkerThread(Label lbl_time, boolean hourSetManual, int hourSet, boolean incomingChange, int oldAM_PM) {
         this.hourSetManual = hourSetManual;
         this.hourSet = hourSet;
         this.incomingChange = incomingChange;
+        this.oldAM_PM = oldAM_PM;
         threadRunning = true;
 
         setDaemon(true);
@@ -45,7 +49,6 @@ public class WorkerThread extends Thread{
                 // entsprechende UI Komponente updaten
 
                 cal = new GregorianCalendar();
-                System.out.println("durchlauf");
 
                 if(hourSetManual==false)
                 {
@@ -57,28 +60,18 @@ public class WorkerThread extends Thread{
                 min = cal.get(Calendar.MINUTE);
                 sec = cal.get(Calendar.SECOND);
 
-                System.out.println("erstes am/pm");
-                System.out.println(AM_PM);
-
                 if(AM_PM!=0 && AM_PM !=1){
                     AM_PM = cal.get(Calendar.AM_PM);
                 }
 
-                System.out.println("ampm");
-                System.out.println(AM_PM);
-
-                System.out.println("incomingChange");
-                System.out.println(incomingChange);
                 if(incomingChange == true){
-                    if(AM_PM == 1){
+                    incomingChange=false;
+                    if(oldAM_PM == 1){
                         AM_PM = 0;
-                    } else if(AM_PM == 0){
+                    } else if(oldAM_PM == 0){
                         AM_PM = 1;
                     }
                 }
-
-                System.out.println("ampm2");
-                System.out.println(AM_PM);
 
                 if(AM_PM == 1)
                 {
@@ -98,7 +91,7 @@ public class WorkerThread extends Thread{
             // Thread schlafen
             try {
                 // fuer 0,5 Sekunde
-                sleep(500);
+                sleep(1000);
                 //sleep(TimeUnit.SECONDS.toMillis(1));
             } catch (InterruptedException ex) {
                 //Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,7 +101,9 @@ public class WorkerThread extends Thread{
 
     public void setThreadRunning(boolean running){
         threadRunning = running;
-        System.out.println("threadrunning");
-        System.out.println(threadRunning);
+    }
+
+    public int getAM_PM(){
+        return AM_PM;
     }
 }

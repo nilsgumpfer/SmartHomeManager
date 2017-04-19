@@ -1,3 +1,5 @@
+package UI;
+
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +14,6 @@ import java.net.UnknownHostException;
 
 
 public class Controller {
-
-
 
     @FXML
     private Label lbl_Serverip;
@@ -45,6 +45,7 @@ public class Controller {
     private int hourSet = 0;
     public boolean hourSetManual = false;
     public boolean changeAMPM = false;
+    int oldAM_PM;
 
     WorkerThread workerThread;
 
@@ -105,61 +106,62 @@ public class Controller {
     }
 
     public void pressBtnStartReset(ActionEvent event){
+        hourSetManual = false;
         if(workerThread != null){
             workerThread.setThreadRunning(false);
         }
-            workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM);
+            workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM, oldAM_PM);
             workerThread.setDaemon(true);
             workerThread.start();
     }
 
     public void pressBtnSetTime(ActionEvent event){
-        //workerThread.interrupt();
         setTime(tfHour.getText());
     }
 
     public void pressBtnChangeAmPm(ActionEvent event){
         changeAMPM = true;
+        oldAM_PM = workerThread.getAM_PM();
         if(workerThread != null){
             workerThread.setThreadRunning(false);
         }
-        workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM);
+        workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM, oldAM_PM);
         workerThread.setDaemon(true);
         workerThread.start();
         changeAMPM = false;
     }
 
     private void setTime(String hour) {
-        if(hour!=""){
-            try{
+        if(hour!="") {
+            if (checkInt(tfHour) == true) {
                 hourSet = Integer.valueOf(hour);
-                hourSetManual = true;
-            } catch (Exception e){
+                if (hourSet >= 0 && hourSet < 12) {
+                    hourSetManual = true;
+                    workerThread.setThreadRunning(false);
+                    workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM, oldAM_PM);
+                    workerThread.setDaemon(true);
+                    workerThread.start();
+                } else {
+                    System.out.println("Bitte nur Zahlen zwischen 0 und 11 eingeben!");
+                }
+                } else{
                 System.out.println("Bitte nur gerade Zahlen eingeben!");
             }
         }
-
-        workerThread.setThreadRunning(false);
-        workerThread = new WorkerThread(lblTime, hourSetManual, hourSet, changeAMPM);
-        workerThread.setDaemon(true);
-        workerThread.start();
-        //workerThread.setThreadRunning(true);
     }
 
     public int getHour(){
         return hourSet;
     }
 
-    private boolean isInt(javafx.scene.control.TextField input, String message){
+    private boolean checkInt(javafx.scene.control.TextField input){
         try
         {
             int hour = Integer.parseInt(input.getText());
-            System.out.println("Eingegebene Stunde: " + hour);
             return true;
         }
         catch (NumberFormatException e)
         {
-            System.out.println("Error: " + message + " is not a Number");
             return false;
         }
     }

@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("UI/GUI.fxml"));
         primaryStage.setTitle("SmartHomeManager for SmartHome CGR");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();
