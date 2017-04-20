@@ -4,6 +4,8 @@ import de.conrad.driver.weatherstation.ConradWeatherStationDriver;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 27.01.2017.
  */
@@ -11,28 +13,28 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
 
     ConradWeatherStationDriver driver;
 
-    public ConradWeatherStationAdapter(String serialNumber){
+    public ConradWeatherStationAdapter(String serialNumber, String wetterstationIP, String wetterstationname){
 
-        driver = new ConradWeatherStationDriver(serialNumber);
+        driver = new ConradWeatherStationDriver(serialNumber, wetterstationIP, wetterstationname);
     }
 
     @Override
-    public double getTemperature() {
+    public double getTemperature() throws RemoteException{
         return driver.getTemperature();
     }
 
     @Override
-    public double getWindVelocity() {
+    public double getWindVelocity()throws RemoteException {
         return driver.getWindVelocity();
     }
 
     @Override
-    public double getAirPressure() {
+    public double getAirPressure()throws RemoteException {
         return driver.getAirPressure();
     }
 
     @Override
-    public double getRainfallAmount() {
+    public double getRainfallAmount() throws RemoteException{
         return driver.getRainfallAmount();
     }
 

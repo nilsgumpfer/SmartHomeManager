@@ -5,6 +5,7 @@ import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 
+import java.rmi.RemoteException;
 import java.util.logging.Logger;
 
 /**
@@ -34,7 +35,7 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     }
 
     @Override
-    public ResponseCode setTemperature(double temperature) {
+    public ResponseCode setTemperature(double temperature) throws RemoteException{
         if(temperature < 0){
             SmartHomeLogger.log("Die Temperatur darf nicht unter 0 Grad eingestellt werden!");
             return ResponseCode.TemperatureAdjustmentFailed;
@@ -48,17 +49,17 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     }
 
     @Override
-    public double getTemperature() {
+    public double getTemperature() throws RemoteException{
         return model.getTemperature();
     }
 
     @Override
-    public ResponseCode switchOn() {
+    public ResponseCode switchOn() throws RemoteException{
         return device.switchOn();
     }
 
     @Override
-    public ResponseCode switchOff() {
+    public ResponseCode switchOff() throws RemoteException{
         return device.switchOff();
     }
 

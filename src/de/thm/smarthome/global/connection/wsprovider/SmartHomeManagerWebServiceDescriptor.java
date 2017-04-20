@@ -8,6 +8,7 @@ import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 
 import javax.jws.*;
 import javax.jws.soap.SOAPBinding;
+import java.rmi.RemoteException;
 
 @WebService(name="SmartHomeManagerWebServices")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
@@ -55,13 +56,13 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @WebMethod
-    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) {
+    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) throws RemoteException{
         SmartHomeLogger.log("WSD " + "getHeatingTemperature(" + authentication + ")");
         return requestManager.getHeatingTemperature(authentication);
     }
 
     @WebMethod
-    public HeatingTransferObject getHeatingData(UserTransferObject authentication) {
+    public HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException{
         SmartHomeLogger.log("WSD " + "getHeatingData(" + authentication + ")");
         return requestManager.getHeatingData(authentication);
     }

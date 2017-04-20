@@ -14,14 +14,15 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class ConradWeatherStationDriver implements WeatherStationClientInterface{
+public class ConradWeatherStationDriver implements WeatherStationClientInterface {
     private String serialnumber;
     private double temperature;
     private double windVelocity;
     private double airPressure;
     private double rainfallAmount;
+    public WeatherStationServerInterface server;
 
-    public ConradWeatherStationDriver(String productSerialNumber){
+    public ConradWeatherStationDriver(String productSerialNumber, String wetterstationIP, String wetterstationname) {
 
         //TODO: Invoke command remotely at station!
         this.serialnumber = productSerialNumber;
@@ -29,55 +30,55 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         this.windVelocity = 33.5;
         this.airPressure = 1203.44;
         this.rainfallAmount = 30.1;
-    }
-
-    public double getTemperature(){
-
-        //TODO: Invoke command remotely at station!
-        return temperature;
-    };
-
-    public double getWindVelocity() {
-
-        //TODO: Invoke command remotely at station!
-        return windVelocity;
-    }
-
-    public double getAirPressure() {
-
-        //TODO: Invoke command remotely at station!
-        return airPressure;
-    }
-
-    public double getRainfallAmount() {
-
-        //TODO: Invoke command remotely at station!
-        return rainfallAmount;
-    }
-
-    public void startClient(String wetterstationIP, String wetterstationname){
-        try{
+        try {
 
             LocateRegistry.getRegistry(wetterstationIP);
 
-            UnicastRemoteObject.exportObject(this,0);
+            UnicastRemoteObject.exportObject(this, 0);
 
-            Remote ro = Naming.lookup("//"+wetterstationIP+"/"+wetterstationname);
+            Remote ro = Naming.lookup("//" + wetterstationIP + "/" + wetterstationname);
             System.out.print("Look up done.. trying to communicate \n \n");
 
-            WeatherStationServerInterface server = (WeatherStationServerInterface) ro;
+            server = (WeatherStationServerInterface) ro;
 
 
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
-
-        catch (NotBoundException e) {
+        } catch (NotBoundException e) {
             e.printStackTrace();
-        }
-
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
+
+
+    public double getTemperature() throws RemoteException {
+
+        return server.getTemperature(this);
+    }
+
+    public double getWindVelocity() throws RemoteException {
+
+
+        return server.getWindVelocity(this);
+    }
+
+    public double getAirPressure() throws RemoteException {
+
+
+        return server.getAirPressure(this);
+    }
+
+    public double getRainfallAmount() throws RemoteException {
+
+
+        return server.getRainfallAmount(this);
+    }
+
+    /*public static void main(String args[]) throws RemoteException {
+        ConradWeatherStationDriver bd = new ConradWeatherStationDriver("1234", "192.168.100.106", "Test");
+        System.out.print(bd.getAirPressure() + "\n");
+        System.out.print(bd.getRainfallAmount() +"\n" );
+        System.out.print(bd.getTemperature() +"\n");
+    }*/
 }

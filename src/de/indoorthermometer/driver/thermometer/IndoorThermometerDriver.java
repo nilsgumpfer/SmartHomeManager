@@ -18,21 +18,13 @@ public class IndoorThermometerDriver implements ThermometerClientInterface{
 
     private String serialnumber;
     private double temperature;
+    private ThermometerServerInterface server;
 
-    public IndoorThermometerDriver(String productSerialNumber){
+    public IndoorThermometerDriver(String productSerialNumber, String thermometerIP, String thermometername){
 
-        //TODO: Initialize and connect to shutter!
+
         this.serialnumber = productSerialNumber;
         this.temperature = 21.53;
-    }
-
-    public double getTemperature(){
-
-        //TODO: Invoke command remotely at shutter!
-        return temperature;
-    };
-
-    public void startClient(String thermometerIP, String thermometername){
         try{
 
             LocateRegistry.getRegistry(thermometerIP);
@@ -42,7 +34,7 @@ public class IndoorThermometerDriver implements ThermometerClientInterface{
             Remote ro = Naming.lookup("//"+thermometerIP+"/"+thermometername);
             System.out.print("Look up done.. trying to communicate \n \n");
 
-            ThermometerServerInterface server = (ThermometerServerInterface) ro;
+            server = (ThermometerServerInterface) ro;
 
 
         } catch (RemoteException e) {
@@ -57,4 +49,14 @@ public class IndoorThermometerDriver implements ThermometerClientInterface{
             e.printStackTrace();
         }
     }
+
+
+    public double getTemperature()throws RemoteException{
+
+        return server.getTemperature(this);
+    }
+    /*public static void main(String args[]) throws RemoteException {
+        IndoorThermometerDriver bd = new IndoorThermometerDriver("1234", "192.168.100.106", "Test");
+        System.out.print(bd.getTemperature() + "\n");
+    }*/
 }

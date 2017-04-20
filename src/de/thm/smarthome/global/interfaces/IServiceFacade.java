@@ -3,6 +3,8 @@ package de.thm.smarthome.global.interfaces;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.transfer.*;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 04.02.2017.
  */
@@ -14,8 +16,8 @@ public interface IServiceFacade {
     CommandResponseObject switchHeatingOn(UserTransferObject authentication);
     CommandResponseObject switchHeatingOff(UserTransferObject authentication);
     CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature);
-    HeatingTransferObject getHeatingTemperature(UserTransferObject authentication);
-    HeatingTransferObject getHeatingData(UserTransferObject authentication);
+    HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) throws RemoteException;
+    HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException;
 
     CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter);
     CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter);

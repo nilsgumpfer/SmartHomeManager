@@ -27,82 +27,12 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
     private double minWaterLevel;
     private boolean standby;
     private List<String> listOfLogs = new ArrayList<>();
+    private HeizungServerInterface server;
 
-    public ViessmannHeatingDriver(String productSerialNumber){
+    public ViessmannHeatingDriver(String productSerialNumber, String heizungsIP, String heizungsname){
 
         //TODO: Initialize and connect to heating!
         this.serialnumber = productSerialNumber;
-    }
-
-    public boolean adjustTemperature(double newTemperature){
-
-        //TODO: Invoke command remotely at heating!
-        adjustedTemperature = newTemperature;
-        currentTemperature = adjustedTemperature;
-        return true;
-    }
-
-    public void standby(){
-
-        //TODO: Invoke command remotely at heating!
-        standby = true;
-    }
-
-    public void wakeUp(){
-
-        //TODO: Invoke command remotely at heating!
-        standby = false;
-    }
-
-    public List<String> getLogs(){
-
-        //TODO: Invoke command remotely at heating!
-        return listOfLogs;
-    }
-
-    public double getCurrentTemperature(){
-
-        //TODO: Invoke command remotely at heating!
-        return currentTemperature;
-    }
-
-    public boolean setMaxTemperature(double new_maxTemperature){
-        maxTemperature = new_maxTemperature;
-        return true;
-    }
-
-    public boolean setMinTemperature(double new_minTemperature){
-        minTemperature = new_minTemperature;
-        return true;
-    }
-
-    public boolean setMaxWaterLevel(double new_maxWL){
-        maxWaterLevel = new_maxWL;
-        return true;
-    }
-
-    public boolean setMinWaterLevel(double new_minWL){
-        minWaterLevel = new_minWL;
-        return true;
-    }
-
-    public double getMaxTemperature(){
-        return maxTemperature;
-    }
-
-    public double getMinTemperature(){
-        return minTemperature;
-    }
-
-    public double getMaxWaterLevel(){
-        return getMaxWaterLevel();  //TODO: Endlosschleife
-    }
-
-    public double getMinWaterLevel(){
-        return getMinWaterLevel();  //TODO: Endlosschleife
-    }
-
-    public void startClient(String heizungsIP, String heizungsname){
         try{
 
             LocateRegistry.getRegistry(heizungsIP);
@@ -112,7 +42,7 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
             Remote ro = Naming.lookup("//"+heizungsIP+"/"+heizungsname);
             System.out.print("Look up done.. trying to communicate \n \n");
 
-            HeizungServerInterface server = (HeizungServerInterface) ro;
+            server = (HeizungServerInterface) ro;
 
 
         } catch (RemoteException e) {
@@ -128,11 +58,98 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
         }
     }
 
-    public ResponseCode switchOn() {
-        return ResponseCode.SwitchOnFailed;
+    public boolean adjustTemperature(double newTemperature)throws RemoteException{
+
+        adjustedTemperature = newTemperature;
+        currentTemperature = adjustedTemperature;
+        server.setTemperature(newTemperature, this);
+        return true;
     }
 
-    public ResponseCode switchOff() {
-        return ResponseCode.SwitchOffFailed;
+    public void standby() throws RemoteException{
+
+        server.standby(this);
+        standby = true;
     }
+
+    public void wakeUp() throws RemoteException{
+
+        server.wakeUp(this);
+        standby = false;
+    }
+
+    public List<String> getLogs(){
+
+        //TODO: Invoke command remotely at heating!
+        return listOfLogs;
+    }
+
+    public double getCurrentTemperature() throws RemoteException{
+
+        currentTemperature = server.getTemperature(this);
+        return currentTemperature;
+    }
+
+    public boolean setMaxTemperature(double new_maxTemperature) throws RemoteException{
+        maxTemperature = new_maxTemperature;
+        server.setMaxTemperature(new_maxTemperature, this   );
+        return true;
+    }
+
+    public boolean setMinTemperature(double new_minTemperature) throws RemoteException{
+        minTemperature = new_minTemperature;
+        server.setMinTemperature(new_minTemperature, this);
+        return true;
+    }
+
+    public boolean setMaxWaterLevel(double new_maxWL) throws RemoteException{
+        maxWaterLevel = new_maxWL;
+        server.setMaxWaterlevel(new_maxWL, this);
+        return true;
+    }
+
+    public boolean setMinWaterLevel(double new_minWL)throws RemoteException{
+        minWaterLevel = new_minWL;
+        server.setMinWaterlevel(new_minWL, this);
+        return true;
+    }
+
+    public double getMaxTemperature() throws RemoteException{
+        return server.getMaxTemperature(this);
+    }
+
+    public double getMinTemperature() throws RemoteException{
+        return server.getMinTemperature(this);
+    }
+
+    public double getMaxWaterLevel() throws RemoteException{
+        return server.getMaxWaterlevel(this);
+    }
+
+    public double getMinWaterLevel() throws RemoteException{
+        return server.getMinWaterlevel(this);
+    }
+
+    public ResponseCode switchOn() throws RemoteException{
+        return server.switchOn(this);
+    }
+
+    public ResponseCode switchOff() throws RemoteException{
+        return server.switchOff(this);
+    }
+
+    public String getStatus() throws RemoteException{
+        return server.getStatus(this);
+    }
+
+    /*public static void main(String args[]) throws RemoteException {
+        ViessmannHeatingDriver bd = new ViessmannHeatingDriver("1234", "192.168.100.106", "Test");
+        bd.setMaxWaterLevel(10.0);
+        bd.setMinTemperature(5.0);
+        System.out.print(bd.getMaxWaterLevel());
+        System.out.print(bd.getMinTemperature());
+        bd.switchOn();
+        bd.switchOff();
+        System.out.print(bd.getStatus());
+    }*/
 }
