@@ -11,6 +11,7 @@ public class User {
     private String lastname;
     private String username;
     private String password;
+    private String role;
     private boolean loggedIn;
     private String lastTimeLoggedIn;
 
@@ -54,6 +55,14 @@ public class User {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getLastTimeLoggedIn(){
         return lastTimeLoggedIn;
     }
@@ -62,5 +71,4 @@ public class User {
         //Date currentTimestamp = new Date(Calendar.getInstance().getTime().getTime());
         this.lastTimeLoggedIn = date;
     }
-
 }
