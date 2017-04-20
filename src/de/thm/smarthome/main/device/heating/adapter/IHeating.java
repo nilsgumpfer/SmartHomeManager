@@ -2,6 +2,8 @@ package de.thm.smarthome.main.device.heating.adapter;
 
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
+
 import java.util.List;
 
 /**
@@ -21,5 +23,6 @@ public interface IHeating {
     double getMinTemperature();
     double getMaxWaterLevel();
     double getMinWaterLevel();
-
-    }
+    ResponseCode switchOn();
+    ResponseCode switchOff();
+}

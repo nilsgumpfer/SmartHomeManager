@@ -2,6 +2,7 @@ package de.buderus.driver.heating;
 
 import HeizungServer.interfaces.HeizungClientInterface;
 import HeizungServer.interfaces.HeizungServerInterface;
+import de.thm.smarthome.global.enumeration.ResponseCode;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by Nils on 27.01.2017.
  */
 public class BuderusHeatingDriver implements HeizungClientInterface{
-    private String serialnumber;
+    /*private String serialnumber;
     private double currentTemperature;
     private double adjustedTemperature;
     private double maxTemperature;
@@ -25,74 +26,54 @@ public class BuderusHeatingDriver implements HeizungClientInterface{
     private double maxWaterLevel;
     private double minWaterLevel;
     private boolean standby;
-    private List<String> listOfLogs = new ArrayList<>();
+    private List<String> listOfLogs = new ArrayList<>();*/
 
 
     public BuderusHeatingDriver(String productSerialNumber){
 
         //TODO: Initialize and connect to heating!
-        this.serialnumber = productSerialNumber;
+
     }
 
     public boolean adjustTemperature(double newTemperature){
 
         //TODO: Invoke command remotely at heating!
-        adjustedTemperature = newTemperature;
-        currentTemperature = adjustedTemperature;
+
         return true;
     }
 
     public void standby(){
 
-        //TODO: Invoke command remotely at heating!
-        standby = false;
     }
 
     public void wakeUp(){
 
-        //TODO: Invoke command remotely at heating!
-        standby = true;
     }
 
     public List<String> getLogs(){
-
-        //TODO: Invoke command remotely at heating!
-        return listOfLogs;
+        return null;
     }
 
     public double getCurrentTemperature(){
-
-        //TODO: Invoke command remotely at heating!
-        return currentTemperature;
+        return 0;
     }
 
     public boolean setMaxTemperature(double new_maxTemperature){
-        maxTemperature = new_maxTemperature;
-        return true;
-        }
+        return false;
+    }
 
     public boolean setMinTemperature(double new_minTemperature){
-        minTemperature = new_minTemperature;
-        return true;
+        return false;
     }
 
     public boolean setMaxWaterLevel(double new_maxWL){
-        maxWaterLevel = new_maxWL;
-        return true;
+        return false;
     }
 
     public boolean setMinWaterLevel(double new_minWL){
-        minWaterLevel = new_minWL;
-        return true;
+        return false;
     }
 
-    public double getMaxTemperature(){
-        return maxTemperature;
-    }
-
-    public double getMinTemperature(){
-        return minTemperature;
-    }
 
     public double getMaxWaterLevel(){
         return getMaxWaterLevel();
@@ -102,7 +83,7 @@ public class BuderusHeatingDriver implements HeizungClientInterface{
         return getMinWaterLevel();
     }
 
-public void startClient(String heizungsIP, String heizungsname){
+    public void startClient(String heizungsIP, String heizungsname){
     try{
 
         LocateRegistry.getRegistry(heizungsIP);
@@ -128,5 +109,12 @@ public void startClient(String heizungsIP, String heizungsname){
     }
 }
 
+    public ResponseCode switchOn() {
+        return ResponseCode.SwitchOnFailed;
+    }
+
+    public ResponseCode switchOff() {
+        return ResponseCode.SwitchOffFailed;
+    }
 }
 

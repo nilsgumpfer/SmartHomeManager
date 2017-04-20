@@ -28,9 +28,7 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
 
     @Override
     public ResponseCode setTemperature(double temperature) {
-        logic.setTemperature(temperature);
-        //TODO: generate Response-Code
-        return ResponseCode.TemperatureAdjustmentSuccessful;
+        return logic.setTemperature(temperature);
     }
 
     @Override
@@ -50,17 +48,18 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
 
     @Override
     public ResponseCode switchOn(){
-        //TODO: Make this realistic
+        return logic.switchOn();
+/*
         currentState = ResponseCode.SwitchedOn;
-        return ResponseCode.SwitchedOn;
-
+        return ResponseCode.SwitchedOn;*/
     }
 
     @Override
     public ResponseCode switchOff(){
-        //TODO: Make this realistic
+        return logic.switchOff();
+/*
         currentState = ResponseCode.SwitchedOff;
-        return ResponseCode.AlreadySwitchedOff;
+        return ResponseCode.AlreadySwitchedOff;*/
     }
 @Override
     public ResponseCode currentState(){

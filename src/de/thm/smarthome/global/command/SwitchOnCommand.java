@@ -9,7 +9,7 @@ import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
  */
 public class SwitchOnCommand extends ASwitchCommand {
     private SwitchOnCommand(){}
-    
+
     public SwitchOnCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
         powerToDo = Power.On;

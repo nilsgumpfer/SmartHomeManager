@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.logic;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
@@ -15,7 +16,6 @@ public class HeatingLogicDayMode implements IHeatingLogic {
 
     public HeatingLogicDayMode(IHeatingModel model, IHeating device){
         model.setHeatingModeName("DayMode");
-        //model.setTemperature(20);
     }
 
     @Override
@@ -34,19 +34,32 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     }
 
     @Override
-    public int setTemperature(double temperature) {
+    public ResponseCode setTemperature(double temperature) {
         if(temperature < 0){
-            //ToDo: //Ausgabe: "Die Temperatur darf nicht unter 0 Grad eingestellt werden!"
             SmartHomeLogger.log("Die Temperatur darf nicht unter 0 Grad eingestellt werden!");
-        } else {
-            model.setTemperature(temperature);
+            return ResponseCode.TemperatureAdjustmentFailed;
         }
-
-        return 1;
+        else {
+            if(device.setTemperature(temperature))
+                return ResponseCode.TemperatureAdjustmentSuccessful;
+            else
+                return ResponseCode.TemperatureAdjustmentFailed;
+        }
     }
 
     @Override
     public double getTemperature() {
         return model.getTemperature();
     }
+
+    @Override
+    public ResponseCode switchOn() {
+        return device.switchOn();
+    }
+
+    @Override
+    public ResponseCode switchOff() {
+        return device.switchOff();
+    }
+
 }

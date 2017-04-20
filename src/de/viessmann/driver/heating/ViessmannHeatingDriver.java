@@ -2,6 +2,7 @@ package de.viessmann.driver.heating;
 
 import HeizungServer.interfaces.HeizungClientInterface;
 import HeizungServer.interfaces.HeizungServerInterface;
+import de.thm.smarthome.global.enumeration.ResponseCode;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -125,5 +126,13 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
         catch (MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResponseCode switchOn() {
+        return ResponseCode.SwitchOnFailed;
+    }
+
+    public ResponseCode switchOff() {
+        return ResponseCode.SwitchOffFailed;
     }
 }

@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.logic;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
@@ -13,7 +14,6 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
 
     public HeatingLogicMaintenanceMode(IHeatingModel model,IHeating device){
         model.setHeatingModeName("MaintenanceMode");
-        model.setTemperature(0);
     }
 
     @Override
@@ -37,10 +37,19 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
     }
 
     @Override
-    public int setTemperature(double temperature) {
-        //ToDo: Ausgabe: "Temperatur kann im Wartungsmodus nicht verändert werden!"
+    public ResponseCode setTemperature(double temperature) {
         SmartHomeLogger.log("Temperatur kann im Wartungsmodus nicht verändert werden!");
-        return 1;
+        return ResponseCode.TemperatureAdjustmentFailed;
+    }
+
+    @Override
+    public ResponseCode switchOn() {
+        return device.switchOn();
+    }
+
+    @Override
+    public ResponseCode switchOff() {
+        return device.switchOff();
     }
 
 }

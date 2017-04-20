@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.adapter;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.viessmann.driver.heating.ViessmannHeatingDriver;
@@ -92,5 +93,15 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
     @Override
     public double getMinWaterLevel(){
         return driver.getMinWaterLevel();
+    }
+
+    @Override
+    public ResponseCode switchOn() {
+        return driver.switchOn();
+    }
+
+    @Override
+    public ResponseCode switchOff() {
+        return driver.switchOff();
     }
 }
