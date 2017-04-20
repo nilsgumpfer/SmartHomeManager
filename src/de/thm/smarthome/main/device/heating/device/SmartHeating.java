@@ -1,5 +1,8 @@
 package de.thm.smarthome.main.device.heating.device;
 
+import UI.Controller;
+import de.thm.smarthome.global.clockobserver.AClockObservable;
+import de.thm.smarthome.global.clockobserver.IClockObserver;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
@@ -12,13 +15,15 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver, IOnAndOffSwitchableDevice {
+ public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver, IOnAndOffSwitchableDevice, IClockObserver {
     private IHeatingLogic logic;
     private HeatingModel heatingModel = new HeatingModel();
     private ResponseCode currentState = null;
 
     public SmartHeating(IHeatingLogic logic) {
         this.logic = logic;
+        Controller controller = new Controller();
+        controller.attach(this);
     }
 
     @Override
@@ -60,5 +65,10 @@ public class SmartHeating extends AObservable implements ITemperatureRelevantDev
 @Override
     public ResponseCode currentState(){
         return currentState;
+    }
+
+    @Override
+    public void update(AClockObservable o, Object change) {
+
     }
 }

@@ -1,5 +1,6 @@
 package UI;
 
+import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -28,6 +29,8 @@ public class WorkerThread extends Thread{
     boolean incomingChange = false;
     int oldAM_PM;
     boolean threadRunning = true;
+
+    SmartHeating smartHeating;
 
     public WorkerThread(Label lbl_time, boolean hourSetManual, int hourSet, boolean incomingChange, int oldAM_PM) {
         this.hourSetManual = hourSetManual;
@@ -82,6 +85,9 @@ public class WorkerThread extends Thread{
                     day_night = "AM";
                 }
 
+                //"Observer"
+                setHeatingLogic();
+
                 String time = hour + ":" + min + ":" + sec + " "  + day_night;
 
                 lbl_time.setFont(new Font(50));
@@ -96,6 +102,16 @@ public class WorkerThread extends Thread{
             } catch (InterruptedException ex) {
                 //Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    public void setHeatingLogic(){
+        if((AM_PM == 1 && hour > 10 && hour < 12) || (AM_PM == 0 && hour >= 0 && hour < 11)){
+            //smartHeating.setTemperature(18);
+        } else
+        //Daymode
+        {
+            //smartHeating.setTemperature(21);
         }
     }
 

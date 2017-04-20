@@ -1,5 +1,7 @@
 package UI;
 
+import de.thm.smarthome.global.clockobserver.AClockObservable;
+import de.thm.smarthome.global.clockobserver.IClockObserver;
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +14,12 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+public class Controller extends AClockObservable {
 
-public class Controller {
+    @Override
+    public void attach(IClockObserver observer) {
+        super.attach(observer);
+    }
 
     @FXML
     private Label lbl_Serverip;
@@ -164,5 +170,9 @@ public class Controller {
         {
             return false;
         }
+    }
+
+    public void update(AClockObservable o, Object change) {
+
     }
 }
