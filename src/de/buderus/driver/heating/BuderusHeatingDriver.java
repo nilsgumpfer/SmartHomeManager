@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Nils on 27.01.2017.
  */
 public class BuderusHeatingDriver implements HeizungClientInterface{
-    /*private String serialnumber;
+    private String serialnumber;
     private double currentTemperature;
     private double adjustedTemperature;
     private double maxTemperature;
@@ -26,88 +26,107 @@ public class BuderusHeatingDriver implements HeizungClientInterface{
     private double maxWaterLevel;
     private double minWaterLevel;
     private boolean standby;
-    private List<String> listOfLogs = new ArrayList<>();*/
-
+    private List<String> listOfLogs = new ArrayList<>();
 
     public BuderusHeatingDriver(String productSerialNumber){
 
         //TODO: Initialize and connect to heating!
-
+        this.serialnumber = productSerialNumber;
     }
 
     public boolean adjustTemperature(double newTemperature){
 
         //TODO: Invoke command remotely at heating!
-
+        adjustedTemperature = newTemperature;
+        currentTemperature = adjustedTemperature;
         return true;
     }
 
     public void standby(){
 
+        //TODO: Invoke command remotely at heating!
+        standby = true;
     }
 
     public void wakeUp(){
 
+        //TODO: Invoke command remotely at heating!
+        standby = false;
     }
 
     public List<String> getLogs(){
-        return null;
+
+        //TODO: Invoke command remotely at heating!
+        return listOfLogs;
     }
 
     public double getCurrentTemperature(){
-        return 0;
+
+        //TODO: Invoke command remotely at heating!
+        return currentTemperature;
     }
 
     public boolean setMaxTemperature(double new_maxTemperature){
-        return false;
+        maxTemperature = new_maxTemperature;
+        return true;
     }
 
     public boolean setMinTemperature(double new_minTemperature){
-        return false;
+        minTemperature = new_minTemperature;
+        return true;
     }
 
     public boolean setMaxWaterLevel(double new_maxWL){
-        return false;
+        maxWaterLevel = new_maxWL;
+        return true;
     }
 
     public boolean setMinWaterLevel(double new_minWL){
-        return false;
+        minWaterLevel = new_minWL;
+        return true;
     }
 
+    public double getMaxTemperature(){
+        return maxTemperature;
+    }
+
+    public double getMinTemperature(){
+        return minTemperature;
+    }
 
     public double getMaxWaterLevel(){
-        return getMaxWaterLevel();
+        return getMaxWaterLevel();  //TODO: Endlosschleife
     }
 
     public double getMinWaterLevel(){
-        return getMinWaterLevel();
+        return getMinWaterLevel();  //TODO: Endlosschleife
     }
 
     public void startClient(String heizungsIP, String heizungsname){
-    try{
+        try{
 
-        LocateRegistry.getRegistry(heizungsIP);
+            LocateRegistry.getRegistry(heizungsIP);
 
-        UnicastRemoteObject.exportObject(this,0);
+            UnicastRemoteObject.exportObject(this,0);
 
-        Remote ro = Naming.lookup("//"+heizungsIP+"/"+heizungsname);
-        System.out.print("Look up done.. trying to communicate \n \n");
+            Remote ro = Naming.lookup("//"+heizungsIP+"/"+heizungsname);
+            System.out.print("Look up done.. trying to communicate \n \n");
 
-        HeizungServerInterface server = (HeizungServerInterface) ro;
+            HeizungServerInterface server = (HeizungServerInterface) ro;
 
 
-    } catch (RemoteException e) {
-        e.printStackTrace();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        catch (NotBoundException e) {
+            e.printStackTrace();
+        }
+
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
-
-    catch (NotBoundException e) {
-        e.printStackTrace();
-    }
-
-    catch (MalformedURLException e) {
-        e.printStackTrace();
-    }
-}
 
     public ResponseCode switchOn() {
         return ResponseCode.SwitchOnFailed;
