@@ -13,13 +13,9 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 public class Controller extends AClockObservable {
-
-    @Override
-    public void attach(IClockObserver observer) {
-        super.attach(observer);
-    }
 
     @FXML
     private Label lbl_Serverip;
@@ -58,6 +54,8 @@ public class Controller extends AClockObservable {
     public static PrintStream ps;
 
     private SmartHomeManagerWebServiceProvider wsProvider = null;
+
+    private List<IClockObserver> attachedClockObservers;
 
     public void BTNServerStarten(ActionEvent event) throws IOException {
         if(wsProvider == null){
@@ -174,5 +172,17 @@ public class Controller extends AClockObservable {
 
     public void update(AClockObservable o, Object change) {
 
+    }
+
+    @Override
+    public void attach(IClockObserver observer) {
+        super.attach(observer);
+    }
+
+    @Override
+    public void notifyObservers(Object change){
+        for (IClockObserver element:attachedClockObservers) {
+            element.update(this,change);
+        }
     }
 }

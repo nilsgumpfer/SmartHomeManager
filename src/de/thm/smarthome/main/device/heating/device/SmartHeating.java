@@ -63,13 +63,18 @@ import java.rmi.RemoteException;
         currentState = ResponseCode.SwitchedOff;
         return ResponseCode.AlreadySwitchedOff;*/
     }
-@Override
+    @Override
     public ResponseCode currentState(){
         return currentState;
     }
 
     @Override
     public void update(AClockObservable o, Object change) {
-
+        if(change=="nightmode"){
+            heatingModel.setTemperature(18);
+        }else{
+            //Daymode
+            heatingModel.setTemperature(21);
+        }
     }
 }
