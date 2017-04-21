@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.thermometer.logic;
 
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.transfer.ThermometerTransferObject;
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 
@@ -34,5 +35,10 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
             //TODO: //Fehlermeldung: "Thermometer misst bereits in Celsius!"
             SmartHomeLogger.log("Thermometer misst bereits in Celsius!");
         }
+    }
+    public ThermometerTransferObject getThermometerData() {
+        
+        ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°C");
+        return tto;
     }
 }

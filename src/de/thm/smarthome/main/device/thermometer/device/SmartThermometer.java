@@ -38,9 +38,5 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
 
     }
 
-    public ThermometerTransferObject getThermometerData() {
-        //ThermometerTransferObject tto = new ThermometerTransferObject(ResponseCode.CommandInvokedSuccessfully, currentTemperature, "Celcius");
-        ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°C");
-        return tto;
-    }
+
 }
