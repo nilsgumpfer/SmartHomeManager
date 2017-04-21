@@ -36,8 +36,9 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
             SmartHomeLogger.log("Thermometer misst bereits in Celsius!");
         }
     }
+    @Override
     public ThermometerTransferObject getThermometerData() {
-        
+
         ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°C");
         return tto;
     }

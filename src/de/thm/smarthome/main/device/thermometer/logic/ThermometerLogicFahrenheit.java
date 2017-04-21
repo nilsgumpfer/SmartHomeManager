@@ -36,6 +36,7 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
             SmartHomeLogger.log("Thermometer misst bereits in Fahrenheit!");
         }
     }
+    @Override
     public ThermometerTransferObject getThermometerData() {
         ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°F");
         return tto;
