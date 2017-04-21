@@ -5,6 +5,8 @@ import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 30.01.2017.
  */
@@ -43,12 +45,12 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
     }
 
     @Override
-    public ResponseCode switchOn() {
+    public ResponseCode switchOn() throws RemoteException{
         return device.switchOn();
     }
 
     @Override
-    public ResponseCode switchOff() {
+    public ResponseCode switchOff() throws RemoteException{
         return device.switchOff();
     }
 

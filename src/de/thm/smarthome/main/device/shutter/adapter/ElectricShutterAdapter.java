@@ -4,6 +4,8 @@ import de.electricshutter.driver.shutter.ElectricShutterDriver;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 27.01.2017.
  */
@@ -11,30 +13,30 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
 
     ElectricShutterDriver driver;
 
-    public ElectricShutterAdapter(String serialNumber){
+    public ElectricShutterAdapter(String serialNumber, String shutterIP, String shuttername){
 
-        driver = new ElectricShutterDriver(serialNumber);
+        driver = new ElectricShutterDriver(serialNumber, shutterIP, shuttername);
     }
 
     @Override
-    public void moveUp() {
+    public void moveUp() throws RemoteException{
 
         driver.moveUp();
     }
 
     @Override
-    public void moveDown() {
+    public void moveDown() throws RemoteException{
 
         driver.moveDown();
     }
 
     @Override
-    public boolean isUp() {
+    public boolean isUp() throws RemoteException {
         return driver.isUp();
     }
 
     @Override
-    public boolean isDown() {
+    public boolean isDown() throws RemoteException{
         return driver.isDown();
     }
 

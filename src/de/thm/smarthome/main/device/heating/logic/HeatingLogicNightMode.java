@@ -5,6 +5,8 @@ import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 27.01.2017.
  */
@@ -32,7 +34,7 @@ public class HeatingLogicNightMode implements IHeatingLogic {
     }
 
     @Override
-    public ResponseCode setTemperature(double temperature) {
+    public ResponseCode setTemperature(double temperature) throws RemoteException{
         if(temperature > 18){
             SmartHomeLogger.log("Die Temperatur darf 18 Grad im Nachtmodus nicht überschreiten!");
             return ResponseCode.TemperatureAdjustmentFailed;
@@ -50,17 +52,17 @@ public class HeatingLogicNightMode implements IHeatingLogic {
     }
 
     @Override
-    public double getTemperature() {
+    public double getTemperature() throws RemoteException{
         return model.getTemperature();
     }
 
     @Override
-    public ResponseCode switchOn() {
+    public ResponseCode switchOn() throws RemoteException{
         return device.switchOn();
     }
 
     @Override
-    public ResponseCode switchOff() {
+    public ResponseCode switchOff() throws RemoteException{
         return device.switchOff();
     }
 

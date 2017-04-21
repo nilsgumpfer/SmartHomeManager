@@ -7,6 +7,8 @@ import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import sun.security.provider.certpath.OCSPResponse;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 19.04.2017.
  */
@@ -18,7 +20,7 @@ public class ASwitchCommand implements ICommand {
     protected Power        powerToDo            = null;
 
     @Override
-    public ResponseCode invoke() {
+    public ResponseCode invoke() throws RemoteException{
         ResponseCode responseCode = null;
 
         //before new state is set, save old one for possible undo-operation
@@ -50,7 +52,7 @@ public class ASwitchCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode undo() {
+    public ResponseCode undo() throws RemoteException{
         ResponseCode responseCode = null;
 
         //check if current status is as expected, do operation

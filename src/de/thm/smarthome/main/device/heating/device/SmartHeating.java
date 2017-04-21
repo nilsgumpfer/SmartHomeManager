@@ -12,6 +12,8 @@ import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.heating.model.HeatingModel;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 27.01.2017.
  */
@@ -27,12 +29,12 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
     }
 
     @Override
-    public ResponseCode setTemperature(double temperature) {
+    public ResponseCode setTemperature(double temperature) throws RemoteException{
         return logic.setTemperature(temperature);
     }
 
     @Override
-    public double getTemperature() {
+    public double getTemperature() throws RemoteException{
         return logic.getTemperature();
     }
 
@@ -47,7 +49,7 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
     }
 
     @Override
-    public ResponseCode switchOn(){
+    public ResponseCode switchOn() throws RemoteException{
         return logic.switchOn();
 /*
         currentState = ResponseCode.SwitchedOn;
@@ -55,19 +57,24 @@ import de.thm.smarthome.main.device.heating.model.HeatingModel;
     }
 
     @Override
-    public ResponseCode switchOff(){
+    public ResponseCode switchOff() throws RemoteException{
         return logic.switchOff();
 /*
         currentState = ResponseCode.SwitchedOff;
         return ResponseCode.AlreadySwitchedOff;*/
     }
-@Override
+    @Override
     public ResponseCode currentState(){
         return currentState;
     }
 
     @Override
     public void update(AClockObservable o, Object change) {
-
+        if(change=="nightmode"){
+            heatingModel.setTemperature(18);
+        }else{
+            //Daymode
+            heatingModel.setTemperature(21);
+        }
     }
 }

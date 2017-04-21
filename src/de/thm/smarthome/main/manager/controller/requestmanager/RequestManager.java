@@ -17,6 +17,7 @@ import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManagerMock;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,7 +124,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) {
+    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) throws RemoteException{
         ResponseCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
@@ -135,7 +136,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public HeatingTransferObject getHeatingData(UserTransferObject authentication) {
+    public HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException{
         ResponseCode responseCode = checkLogin(authentication);
 
         switch(responseCode){

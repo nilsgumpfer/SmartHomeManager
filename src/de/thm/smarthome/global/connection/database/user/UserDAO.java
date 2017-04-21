@@ -22,7 +22,7 @@ public class UserDAO {
         return res;
     }
 
-    public User getUserByUserName(String username)throws SQLException{
+    public void getUserByUserName(String username)throws SQLException{
         MySQLConnection mysqlconn = new MySQLConnection();
         mysqlconn.CreateConnection();
 
@@ -32,6 +32,7 @@ public class UserDAO {
         String password;
         String lastTimeLoggedIn;
         boolean loggedIn;
+        String role;
 
         User currentUser = new User();
         currentUser.setUsername("0");
@@ -40,33 +41,41 @@ public class UserDAO {
         currentUser.setPassword("0");
         currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
+        currentUser.setRole("User");
 
         try{
             ResultSet rs = UserEinlesen(username+"%", "%", "%");
-                    while (rs.next()){
-                        usrname = rs.getString(2);
-                        firstname = rs.getString(3);
-                        lastname = rs.getString(4);
-                        password = rs.getString(5);
-                        lastTimeLoggedIn = rs.getString(6);
-                        loggedIn = rs.getBoolean(7);
+            if(rs.wasNull()){
+                System.out.print("No User found!");
+            }
+            while (rs.next()){
 
-                    currentUser.setUsername(usrname);
-                    currentUser.setFirstname(firstname);
-                    currentUser.setLastname(lastname);
-                    currentUser.setPassword(password);
-                    currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
-                    currentUser.setLoggedIn(loggedIn);
 
-                    return currentUser;
-                    }
-            } catch (SQLException e) {
+                usrname = rs.getString(2);
+                firstname = rs.getString(3);
+                lastname = rs.getString(4);
+                password = rs.getString(5);
+                lastTimeLoggedIn = rs.getString(6);
+                loggedIn = rs.getBoolean(7);
+                role = rs.getString(8);
+
+                currentUser.setUsername(usrname);
+                currentUser.setFirstname(firstname);
+                currentUser.setLastname(lastname);
+                currentUser.setPassword(password);
+                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
+                currentUser.setLoggedIn(loggedIn);
+                currentUser.setRole(role);
+
+                System.out.print(currentUser.getFirstname() + currentUser.getLastname() + currentUser.getLastTimeLoggedIn() + currentUser.getRole());
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-    return currentUser;
+
     }
 
-    public User getUserByFirstNameAndLastName(String firstname, String lastname)throws SQLException{
+    public String getUserByFirstNameAndLastName(String firstname, String lastname)throws SQLException{
         MySQLConnection mysqlconn = new MySQLConnection();
         mysqlconn.CreateConnection();
 
@@ -76,6 +85,7 @@ public class UserDAO {
         String password;
         String lastTimeLoggedIn;
         boolean loggedIn;
+        String role;
 
         User currentUser = new User();
         currentUser.setUsername("0");
@@ -84,6 +94,7 @@ public class UserDAO {
         currentUser.setPassword("0");
         currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
+        currentUser.setRole("User");
 
         try{
             ResultSet rs = UserEinlesen("%", firstname+"%", lastname+"%");
@@ -94,6 +105,7 @@ public class UserDAO {
                 password = rs.getString(5);
                 lastTimeLoggedIn = rs.getString(6);
                 loggedIn = rs.getBoolean(7);
+                role = rs.getString(8);
 
                 currentUser.setUsername(usrname);
                 currentUser.setFirstname(first_name);
@@ -101,35 +113,42 @@ public class UserDAO {
                 currentUser.setPassword(password);
                 currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
+                currentUser.setRole(role);
 
-                return currentUser;
+                return currentUser.getUsername();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return currentUser;
+        return "User not found";
     }
 
-    public ResponseCode logUserIn(User user){
+    /*public ResponseCode logUserIn(User user){
         return logUserIn(user.getUsername());
-    }
+    }*/
 
     public ResponseCode logUserIn(String username) {
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
 
-            ResultSet res;
+            /*ResultSet res;
             Statement stm = mysqlconn.getConn().createStatement();
-            res = stm.executeQuery("Update users SET loggedIn = true WHERE username =" + username);
+            String sql = "SELECT * from users WHERE username ='" + username + "' AND WHERE password='" + password + "';";
+            res = stm.executeQuery(sql);
+        if(!res.wasNull()){*/
+
+            ResultSet res2;
+            Statement stm2 = mysqlconn.getConn().createStatement();
+            stm2.executeUpdate("Update users SET loggedIn = true WHERE username ='" + username + "';");
 
             //TODO: check affected rows, etc. --> then return corresponding ResponseObject
             return ResponseCode.LoginSuccessful;
         }
         catch(Exception e) {
+            e.printStackTrace();
             return ResponseCode.LoginFailed;
-        }
-    }
+        }}
 
     public ResponseCode logUserOut(User user){
         return logUserOut(user.getUsername());
@@ -140,20 +159,19 @@ public class UserDAO {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
 
-            ResultSet res;
             Statement stm = mysqlconn.getConn().createStatement();
-            res = stm.executeQuery("Update users SET loggedIn = false WHERE username =" + username);
+            stm.executeUpdate("Update users SET loggedIn = 0 WHERE username ='" + username + "';");
 
             //TODO: check affected rows, etc. --> then return corresponding ResponseObject
             return ResponseCode.LogoutSuccessful;
         }
         catch(Exception e) {
-            return ResponseCode.LoginFailed;
+            return ResponseCode.LogoutFailed;
         }
     }
 
-    public List<User> getAllUsers() throws SQLException {
-        List<User> userlist = new ArrayList<User>();
+    public List<String> getAllUsers() throws SQLException {
+        List<String> userlist = new ArrayList<String>();
 
         MySQLConnection mysqlconn = new MySQLConnection();
         mysqlconn.CreateConnection();
@@ -164,6 +182,7 @@ public class UserDAO {
         String password;
         String lastTimeLoggedIn;
         boolean loggedIn;
+        String role;
 
         User currentUser = new User();
         currentUser.setUsername("0");
@@ -172,6 +191,7 @@ public class UserDAO {
         currentUser.setPassword("0");
         currentUser.setLastTimeLoggedIn("1970-01-01");
         currentUser.setLoggedIn(false);
+        currentUser.setRole("User");
 
         try{
             ResultSet rs = UserEinlesen("%", "%", "%");
@@ -182,6 +202,7 @@ public class UserDAO {
                 password = rs.getString(5);
                 lastTimeLoggedIn = rs.getString(6);
                 loggedIn = rs.getBoolean(7);
+                role = rs.getString(8);
 
                 currentUser.setUsername(usrname);
                 currentUser.setFirstname(firstname);
@@ -189,8 +210,9 @@ public class UserDAO {
                 currentUser.setPassword(password);
                 currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
+                currentUser.setRole(role);
 
-                userlist.add(currentUser);
+                userlist.add(currentUser.getUsername());
 
             }
         } catch (SQLException e) {
@@ -200,8 +222,8 @@ public class UserDAO {
         return userlist;
     }
 
-    public List<User> getAllLoggedInUsers() throws SQLException {
-        List<User> userlist = new ArrayList<User>();
+    public List<String> getAllLoggedInUsers() throws SQLException {
+        List<String> userlist = new ArrayList<String>();
 
         MySQLConnection mysqlconn = new MySQLConnection();
         mysqlconn.CreateConnection();
@@ -223,7 +245,7 @@ public class UserDAO {
 
         ResultSet res;
         Statement stm = mysqlconn.getConn().createStatement();
-        res= stm.executeQuery("Select * from users where loggedIn = true");
+        res= stm.executeQuery("Select * from users where loggedIn = true;");
 
         try{
             while (res.next()){
@@ -241,7 +263,7 @@ public class UserDAO {
                 currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
 
-                userlist.add(currentUser);
+                userlist.add(currentUser.getUsername());
 
             }
         } catch (SQLException e) {
@@ -251,8 +273,8 @@ public class UserDAO {
         return userlist;
     }
 
-    public List<User> getAllLoggedOutUsers() throws SQLException {
-        List<User> userlist = new ArrayList<User>();
+    public List<String> getAllLoggedOutUsers() throws SQLException {
+        List<String> userlist = new ArrayList<String>();
 
         MySQLConnection mysqlconn = new MySQLConnection();
         mysqlconn.CreateConnection();
@@ -274,7 +296,7 @@ public class UserDAO {
 
         ResultSet res;
         Statement stm = mysqlconn.getConn().createStatement();
-        res= stm.executeQuery("Select * from users where loggedIn = false");
+        res= stm.executeQuery("Select * from users where loggedIn = false;");
 
         try{
             while (res.next()){
@@ -292,7 +314,7 @@ public class UserDAO {
                 currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
                 currentUser.setLoggedIn(loggedIn);
 
-                userlist.add(currentUser);
+                userlist.add(currentUser.getUsername());
 
             }
         } catch (SQLException e) {
@@ -315,7 +337,7 @@ public class UserDAO {
 
             ResultSet res;
             Statement stm = mysqlconn.getConn().createStatement();
-            res = stm.executeQuery("SELECT loggedIn from users WHERE username =" + username);
+            res = stm.executeQuery("SELECT loggedIn from users WHERE username ='" + username + "';");
 
             while (res.next())
                 currentUserStatus = res.getBoolean(1);
@@ -326,8 +348,16 @@ public class UserDAO {
                 return ResponseCode.NotLoggedIn;
         }
         catch(Exception e){
+            e.printStackTrace();
             return ResponseCode.DBError;
         }
 
     }
+
+    public static void main(String args[]) throws SQLException {
+        UserDAO benutzerverwaltung = new UserDAO();
+        System.out.print(benutzerverwaltung.logUserIn("admin"));
+    }
 }
+
+

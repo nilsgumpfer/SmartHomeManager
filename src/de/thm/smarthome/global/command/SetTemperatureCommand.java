@@ -6,6 +6,8 @@ import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 28.01.2017.
  */
@@ -22,7 +24,7 @@ public class SetTemperatureCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode invoke() {
+    public ResponseCode invoke() throws RemoteException{
         ResponseCode responseCode;
 
         oldTemperature = device.getTemperature();
@@ -38,7 +40,7 @@ public class SetTemperatureCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode undo() {
+    public ResponseCode undo() throws RemoteException{
         ResponseCode responseCode;
 
         oldTemperature = device.getTemperature();
