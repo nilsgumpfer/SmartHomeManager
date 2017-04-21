@@ -18,6 +18,8 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     private IHeating device;
 
     public HeatingLogicDayMode(IHeatingModel model, IHeating device){
+        this.device = device;
+        this.model = model;
         model.setHeatingModeName("DayMode");
     }
 

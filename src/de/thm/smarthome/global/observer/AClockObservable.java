@@ -9,7 +9,8 @@ public abstract class AClockObservable {
     private List<IClockObserver> attachedClockObservers;
 
     public void attach(IClockObserver observer){
-        attachedClockObservers.add(observer);
+        //TODO:Karle
+//        attachedClockObservers.add(observer);
     }
 
     public void detach(IClockObserver observer){
