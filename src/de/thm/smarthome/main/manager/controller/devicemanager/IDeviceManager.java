@@ -24,24 +24,22 @@ public interface IDeviceManager {
 
     SmartShutter getSmartShutter(String id);
     ResponseCode addSmartShutter(SmartShutter smartShutter);
-    ResponseCode deleteSmartShuttter(SmartShutter smartShutter);
+    ResponseCode deleteSmartShutter(SmartShutter smartShutter);
     SmartShutter getSmartShutter(ShutterTransferObject shutterTransferObject);
     ResponseCode addSmartShutter(ShutterTransferObject shutterTransferObject);
-    ResponseCode deleteSmartShuttter(ShutterTransferObject shutterTransferObject);
+    ResponseCode deleteSmartShutter(ShutterTransferObject shutterTransferObject);
     ResponseCode createSmartShutter(ShutterTransferObject shutterTransferObject);
 
     SmartThermometer getSmartThermometer();
     ResponseCode setSmartThermometer(SmartThermometer smartThermometer);
     ResponseCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject);
     ResponseCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject);
+    ResponseCode deleteSmartThermometer();
 
     SmartWeatherStation getSmartWeatherStation();
     ResponseCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
     ResponseCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject);
-
-    List<SmartShutter> getSmartShutters();
-
     ResponseCode deleteSmartWeatherStation();
 
-    ResponseCode deleteSmartThermometer();
+    List<SmartShutter> getSmartShutters();
 }

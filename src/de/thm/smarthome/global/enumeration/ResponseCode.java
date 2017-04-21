@@ -44,5 +44,5 @@ public enum ResponseCode {
     UserDeletionFailed,
     UserAlteredSuccessfully,
     UserAlterationFailed,
-    WeatherStationCouldNotBeCreated
+    Success, Fail, WeatherStationCouldNotBeCreated
 }

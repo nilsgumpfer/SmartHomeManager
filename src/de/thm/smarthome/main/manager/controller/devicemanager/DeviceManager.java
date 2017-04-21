@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.manager.controller.devicemanager;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.factory.HeatingFactory;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -37,53 +38,82 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     @Override
     public void update(AObservable o, Object change) {
-
         eventManager.update(o,change);
     }
 
     @Override
     public SmartHeating getSmartHeating() {
-        return null;
+        return smartHeating;
     }
 
     @Override
     public ResponseCode setSmartHeating(SmartHeating smartHeating) {
-        return null;
+        if(smartHeating!=null){
+            this.smartHeating = smartHeating;
+            return ResponseCode.Success;
+        } else {
+            return ResponseCode.Fail;
+        }
     }
 
     @Override
     public ResponseCode setSmartHeating(HeatingTransferObject heatingTransferObject) {
-        return null;
+        if(heatingTransferObject!=null){
+            //TODO: implement this
+            return ResponseCode.Fail;
+        } else {
+            return ResponseCode.Fail;
+        }
     }
 
     @Override
     public ResponseCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
-        return null;
+        if(heatingTransferObject!=null){
+            //TODO: implement this
+            return ResponseCode.Fail;
+        } else {
+            return ResponseCode.Fail;
+        }
     }
 
     @Override
     public ResponseCode deleteSmartHeating() {
-        return null;
+        if(smartHeating==null){
+            //TODO: implement this
+            return ResponseCode.Fail;
+        } else {
+            return ResponseCode.Fail;
+        }
     }
 
     @Override
-    public SmartShutter getSmartShutter(String id) {
+    public SmartShutter getSmartShutter(String name) {
+        for(int i = 0; i < smartShutters.size(); i++) {
+            if (name.equals(smartShutters.get(i).getName())) {
+                return smartShutters.get(i);
+            }
+        }
         return null;
     }
 
     @Override
     public ResponseCode addSmartShutter(SmartShutter smartShutter) {
-        return null;
+        if(smartShutter!=null){
+            smartShutters.add(smartShutters.size(), smartShutter);
+            return ResponseCode.Success;
+        } else {
+            return ResponseCode.Fail;
+        }
     }
 
     @Override
-    public ResponseCode deleteSmartShuttter(SmartShutter smartShutter) {
+    public ResponseCode deleteSmartShutter(SmartShutter smartShutter) {
         return null;
     }
 
     @Override
     public SmartShutter getSmartShutter(ShutterTransferObject shutterTransferObject) {
-        return null;
+return null;
     }
 
     @Override
@@ -92,7 +122,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode deleteSmartShuttter(ShutterTransferObject shutterTransferObject) {
+    public ResponseCode deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
@@ -103,8 +133,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     @Override
     public SmartThermometer getSmartThermometer() {
-
-        return null;
+        return smartThermometer;
     }
 
     @Override
@@ -124,7 +153,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     @Override
     public SmartWeatherStation getSmartWeatherStation() {
-        return null;
+        return smartWeatherStation;
     }
 
     @Override
@@ -139,7 +168,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     @Override
     public List<SmartShutter> getSmartShutters() {
-        return new ArrayList<>();
+        return smartShutters;
     }
 
     @Override

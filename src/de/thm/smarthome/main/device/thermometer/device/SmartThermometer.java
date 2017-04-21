@@ -18,10 +18,8 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
     private IThermometerLogic logic;
     private ThermometerModel model = new ThermometerModel();
 
-
     public SmartThermometer(IThermometerLogic logic) {
         this.logic = logic;
-        this.logic.setTemperature();
     }
 
     @Override
@@ -37,6 +35,7 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
     public void update(AObservable o, Object change) {
 
     }
-
-
+    public ThermometerTransferObject getThermometerData(){
+        return logic.
+    }
 }

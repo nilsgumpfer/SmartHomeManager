@@ -171,7 +171,7 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.deleteSmartShuttter(shutter));
+                return new CommandResponseObject(deviceManager.deleteSmartShutter(shutter));
             default:
                 return new CommandResponseObject(responseCode);
         }
