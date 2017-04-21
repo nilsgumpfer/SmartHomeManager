@@ -9,4 +9,5 @@ public interface IThermometerLogic {
     String getLogicName();
     double getTemperature();
     //void setTemperature();
+    ThermometerTransferObject getThermometerData();
 }

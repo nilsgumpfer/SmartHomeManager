@@ -26,16 +26,17 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
         return model.getTemperature();
     }
 
-    @Override
-    public void setTemperature() {
-        if(model.isCelsius()==false){
-            model.setTemperature((model.getTemperature()-32)/1.8);
-            model.toggleTemperatureUnit();
-        } else {
-            //TODO: //Fehlermeldung: "Thermometer misst bereits in Fahrenheit!"
-            SmartHomeLogger.log("Thermometer misst bereits in Fahrenheit!");
-        }
-    }
+//    @Override
+//    public void setTemperature() {
+//        if(model.isCelsius()==false){
+//            model.setTemperature((model.getTemperature()-32)/1.8);
+//            model.toggleTemperatureUnit();
+//        } else {
+//            //TODO: //Fehlermeldung: "Thermometer misst bereits in Fahrenheit!"
+//            SmartHomeLogger.log("Thermometer misst bereits in Fahrenheit!");
+//        }
+//    }
+
     @Override
     public ThermometerTransferObject getThermometerData() {
         ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°F");

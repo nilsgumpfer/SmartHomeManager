@@ -36,6 +36,6 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
 
     }
     public ThermometerTransferObject getThermometerData(){
-        return logic.
+        return logic.getThermometerData();
     }
 }

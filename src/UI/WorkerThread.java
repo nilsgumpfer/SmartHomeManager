@@ -85,7 +85,7 @@ public class WorkerThread extends Thread{
                 }
 
                 //"Observer"
-                setHeatingLogic();
+                //setHeatingLogic();
 
                 String time = hour + ":" + min + ":" + sec + " "  + day_night;
 
