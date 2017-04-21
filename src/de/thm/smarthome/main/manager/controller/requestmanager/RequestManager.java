@@ -2,6 +2,7 @@ package de.thm.smarthome.main.manager.controller.requestmanager;
 
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
 import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
@@ -127,7 +128,7 @@ public class RequestManager implements IServiceFacade {
 
         switch(responseCode){
             case LoggedIn:
-                return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature());
+                return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature(), UnitOfMeasurement.temperature_DegreesCelsius);
             default:
                 return new HeatingTransferObject(responseCode);
         }
@@ -141,6 +142,7 @@ public class RequestManager implements IServiceFacade {
             case LoggedIn:
                 SmartHeating smartHeating = deviceManager.getSmartHeating();
 
+                /**-->soll von der Heizung als Methode zurückgegeben werden (wie bei shutter, etc.)**/
                 return new HeatingTransferObject(
                         smartHeating.getName(),
                         smartHeating.getTemperature()

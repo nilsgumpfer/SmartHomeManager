@@ -1,4 +1,4 @@
-package de.thm.smarthome.global.clockobserver;
+package de.thm.smarthome.global.observer;
 
 import java.util.List;
 

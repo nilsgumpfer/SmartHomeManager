@@ -1,8 +1,8 @@
 package de.thm.smarthome.main.device.heating.device;
 
 import UI.Controller;
-import de.thm.smarthome.global.clockobserver.AClockObservable;
-import de.thm.smarthome.global.clockobserver.IClockObserver;
+import de.thm.smarthome.global.observer.AClockObservable;
+import de.thm.smarthome.global.observer.IClockObserver;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.ISmartDevice;

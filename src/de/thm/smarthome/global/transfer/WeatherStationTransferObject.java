@@ -1,7 +1,9 @@
 package de.thm.smarthome.global.transfer;
 
+import de.thm.smarthome.global.enumeration.DeviceManufacturer;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
+import de.thm.smarthome.global.helper.ManufacturerRepository;
 import de.thm.smarthome.global.helper.MessageRepository;
 
 /**
@@ -12,14 +14,24 @@ public class WeatherStationTransferObject {
     private String message;
     private double windVelocity;
     private UnitOfMeasurement windVelocityUnit;
+    private String windVelocityUnit_t;
     private double airPressure;
     private UnitOfMeasurement airPressureUnit;
+    private String airPressureUnit_t;
     private double outdoorTemperature;
     private UnitOfMeasurement outdoorTemperatureUnit;
+    private String outdoorTemperatureUnit_t;
     private double rainfallAmount;
     private UnitOfMeasurement rainfallAmountUnit;
+    private String rainfallAmountUnit_t;
     private double airHumidity;
     private UnitOfMeasurement airHumidityUnit;
+    private String airHumidityUnit_t;
+    private DeviceManufacturer manufacturer;
+    private String manufacturer_t;
+    private String serialnumber;
+    private String model;
+    private String name;
 
     private WeatherStationTransferObject(){}
 
@@ -106,6 +118,126 @@ public class WeatherStationTransferObject {
 
     public void setAirHumidity(double airHumidity) {
         this.airHumidity = airHumidity;
+    }
+
+    public DeviceManufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(DeviceManufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public UnitOfMeasurement getWindVelocityUnit() {
+        return windVelocityUnit;
+    }
+
+    public void setWindVelocityUnit(UnitOfMeasurement windVelocityUnit) {
+        this.windVelocityUnit = windVelocityUnit;
+    }
+
+    public String getWindVelocityUnit_t() {
+        return windVelocityUnit_t;
+    }
+
+    public void setWindVelocityUnit_t(String windVelocityUnit_t) {
+        this.windVelocityUnit_t = windVelocityUnit_t;
+    }
+
+    public UnitOfMeasurement getAirPressureUnit() {
+        return airPressureUnit;
+    }
+
+    public void setAirPressureUnit(UnitOfMeasurement airPressureUnit) {
+        this.airPressureUnit = airPressureUnit;
+    }
+
+    public String getAirPressureUnit_t() {
+        return airPressureUnit_t;
+    }
+
+    public void setAirPressureUnit_t(String airPressureUnit_t) {
+        this.airPressureUnit_t = airPressureUnit_t;
+    }
+
+    public UnitOfMeasurement getOutdoorTemperatureUnit() {
+        return outdoorTemperatureUnit;
+    }
+
+    public void setOutdoorTemperatureUnit(UnitOfMeasurement outdoorTemperatureUnit) {
+        this.outdoorTemperatureUnit = outdoorTemperatureUnit;
+    }
+
+    public String getOutdoorTemperatureUnit_t() {
+        return outdoorTemperatureUnit_t;
+    }
+
+    public void setOutdoorTemperatureUnit_t(String outdoorTemperatureUnit_t) {
+        this.outdoorTemperatureUnit_t = outdoorTemperatureUnit_t;
+    }
+
+    public UnitOfMeasurement getRainfallAmountUnit() {
+        return rainfallAmountUnit;
+    }
+
+    public void setRainfallAmountUnit(UnitOfMeasurement rainfallAmountUnit) {
+        this.rainfallAmountUnit = rainfallAmountUnit;
+    }
+
+    public String getRainfallAmountUnit_t() {
+        return rainfallAmountUnit_t;
+    }
+
+    public void setRainfallAmountUnit_t(String rainfallAmountUnit_t) {
+        this.rainfallAmountUnit_t = rainfallAmountUnit_t;
+    }
+
+    public UnitOfMeasurement getAirHumidityUnit() {
+        return airHumidityUnit;
+    }
+
+    public void setAirHumidityUnit(UnitOfMeasurement airHumidityUnit) {
+        this.airHumidityUnit = airHumidityUnit;
+    }
+
+    public String getAirHumidityUnit_t() {
+        return airHumidityUnit_t;
+    }
+
+    public void setAirHumidityUnit_t(String airHumidityUnit_t) {
+        this.airHumidityUnit_t = airHumidityUnit_t;
+    }
+
+    public String getManufacturer_t() {
+        return manufacturer_t;
+    }
+
+    public void setManufacturer_t(String manufacturer_t) {
+        this.manufacturer_t = manufacturer_t;
+    }
+
+    public String getSerialnumber() {
+        return serialnumber;
+    }
+
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

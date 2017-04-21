@@ -1,7 +1,7 @@
 package UI;
 
-import de.thm.smarthome.global.clockobserver.AClockObservable;
-import de.thm.smarthome.global.clockobserver.IClockObserver;
+import de.thm.smarthome.global.observer.AClockObservable;
+import de.thm.smarthome.global.observer.IClockObserver;
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

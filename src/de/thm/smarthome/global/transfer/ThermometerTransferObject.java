@@ -1,8 +1,11 @@
 package de.thm.smarthome.global.transfer;
 
+import de.thm.smarthome.global.enumeration.DeviceManufacturer;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
+import de.thm.smarthome.global.helper.ManufacturerRepository;
 import de.thm.smarthome.global.helper.MessageRepository;
+import de.thm.smarthome.global.helper.UnitRepository;
 
 /**
  * Created by Nils on 05.02.2017.
@@ -12,6 +15,12 @@ public class ThermometerTransferObject {
     private String message;
     private double temperature;
     private UnitOfMeasurement temperatureUnit;
+    private String temperatureUnit_t;
+    private DeviceManufacturer manufacturer;
+    private String manufacturer_t;
+    private String model;
+    private String serialnumber;
+    private String name;
 
     private ThermometerTransferObject(){}
 
@@ -27,6 +36,90 @@ public class ThermometerTransferObject {
 
     public ThermometerTransferObject(UnitOfMeasurement temperatureUnit) {
         this.temperatureUnit = temperatureUnit;
+    }
+
+    public ResponseCode getResponseCode() {
+        return responseCode;
+    }
+
+    public void setResponseCode(ResponseCode responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public UnitOfMeasurement getTemperatureUnit() {
+        return temperatureUnit;
+    }
+
+    public void setTemperatureUnit(UnitOfMeasurement temperatureUnit) {
+        this.temperatureUnit = temperatureUnit;
+    }
+
+    public String getTemperatureUnitAsText() {
+        return UnitRepository.getUnitAsText(temperatureUnit);
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSerialnumber() {
+        return serialnumber;
+    }
+
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public DeviceManufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(DeviceManufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getManufacturer_t() {
+        return manufacturer_t;
+    }
+
+    public void setManufacturer_t(String manufacturer_t) {
+        this.manufacturer_t = manufacturer_t;
+    }
+
+    public String getTemperatureUnit_t() {
+        return temperatureUnit_t;
+    }
+
+    public void setTemperatureUnit_t(String temperatureUnit_t) {
+        this.temperatureUnit_t = temperatureUnit_t;
     }
 
     @Override

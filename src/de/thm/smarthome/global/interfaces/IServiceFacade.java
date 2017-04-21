@@ -1,6 +1,10 @@
 package de.thm.smarthome.global.interfaces;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.observer.IHeatingObserver;
+import de.thm.smarthome.global.observer.IShutterObserver;
+import de.thm.smarthome.global.observer.IThermometerObserver;
+import de.thm.smarthome.global.observer.IWeatherstationObserver;
 import de.thm.smarthome.global.transfer.*;
 
 /**
@@ -16,6 +20,7 @@ public interface IServiceFacade {
     CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature);
     HeatingTransferObject getHeatingTemperature(UserTransferObject authentication);
     HeatingTransferObject getHeatingData(UserTransferObject authentication);
+    //void attachHeatingObserver(UserTransferObject authentication, IHeatingObserver heatingObserver);
 
     CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter);
     CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter);
@@ -24,11 +29,10 @@ public interface IServiceFacade {
     CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
     CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
     ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
-
     ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
-
     ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter);
     ShutterTransferObject[] getAllShutterData(UserTransferObject authentication);
+    //void attachShutterObserver(UserTransferObject authentication, IShutterObserver shutterObserver);
 
     CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user);
     CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user);
@@ -46,11 +50,13 @@ public interface IServiceFacade {
     WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication);
     WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication);
     WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication);
+    //void attachWeatherstationObserver(UserTransferObject authentication, IWeatherstationObserver weatherstationObserver);
 
     CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometer);
     CommandResponseObject deleteThermometer(UserTransferObject authentication);
     ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication);
     ThermometerTransferObject getThermometerData(UserTransferObject authentication);
+    //void attachThermometerObserver(UserTransferObject authentication, IThermometerObserver thermometerObserver);
 
     String[] readLogs(UserTransferObject authentication, int limit);
 

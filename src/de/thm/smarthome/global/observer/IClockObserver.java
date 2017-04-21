@@ -1,6 +1,4 @@
-package de.thm.smarthome.global.clockobserver;
-
-import java.util.List;
+package de.thm.smarthome.global.observer;
 
 /**
  * Created by Nils on 28.01.2017.

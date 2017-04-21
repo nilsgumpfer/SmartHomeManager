@@ -3,6 +3,10 @@ package de.thm.smarthome.global.connection.wsprovider;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.observer.IHeatingObserver;
+import de.thm.smarthome.global.observer.IShutterObserver;
+import de.thm.smarthome.global.observer.IThermometerObserver;
+import de.thm.smarthome.global.observer.IWeatherstationObserver;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 
@@ -90,13 +94,13 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.moveAllShuttersDown(authentication);
     }
 
-    @Override
+    @WebMethod
     public CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
         SmartHomeLogger.log("WSD " + "moveShutterUp(" + authentication + "," + shutterTransferObject + ")");
         return requestManager.moveShutterUp(authentication, shutterTransferObject);
     }
 
-    @Override
+    @WebMethod
     public CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
         SmartHomeLogger.log("WSD " + "moveShutterDown(" + authentication + "," + shutterTransferObject + ")");
         return requestManager.moveShutterDown(authentication, shutterTransferObject);
@@ -252,7 +256,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.undoLastCommand(authentication);
     }
 
-    @Override
+    @WebMethod
     public String getMessage(ResponseCode responseCode) {
         return requestManager.getMessage(responseCode);
     }
