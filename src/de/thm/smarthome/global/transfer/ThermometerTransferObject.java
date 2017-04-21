@@ -34,6 +34,11 @@ public class ThermometerTransferObject {
         this.temperatureUnit    = temperatureUnit;
     }
 
+    public ThermometerTransferObject(double temperature, String temperatureUnit_t) {
+        this.temperature        = temperature;
+        this.temperatureUnit_t   = temperatureUnit_t;
+    }
+
     public ThermometerTransferObject(UnitOfMeasurement temperatureUnit) {
         this.temperatureUnit = temperatureUnit;
     }

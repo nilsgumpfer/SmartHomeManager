@@ -13,6 +13,7 @@ import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
 import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 import de.thm.smarthome.main.manager.controller.eventmanager.EventManager;
 import de.thm.smarthome.main.manager.controller.eventmanager.IEventManager;
+import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +103,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     @Override
     public SmartThermometer getSmartThermometer() {
+
         return null;
     }
 

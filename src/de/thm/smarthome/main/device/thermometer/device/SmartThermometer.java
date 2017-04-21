@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.thermometer.device;
 
+import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
@@ -17,6 +18,7 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
     private IThermometerLogic logic;
     private ThermometerModel model = new ThermometerModel();
 
+
     public SmartThermometer(IThermometerLogic logic) {
         this.logic = logic;
         this.logic.setTemperature();
@@ -24,7 +26,7 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
 
     @Override
     public String getName() {
-        return null;
+        return logic.getLogicName();
     }
 
     public double getTemperature(){
@@ -37,6 +39,8 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
     }
 
     public ThermometerTransferObject getThermometerData() {
-        return null;
+        //ThermometerTransferObject tto = new ThermometerTransferObject(ResponseCode.CommandInvokedSuccessfully, currentTemperature, "Celcius");
+        ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°C");
+        return tto;
     }
 }
