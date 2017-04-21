@@ -49,16 +49,28 @@ import java.rmi.RemoteException;
     }
 
     @Override
-    public ResponseCode switchOn() throws RemoteException{
-        return logic.switchOn();
+    public ResponseCode switchOn(){
+        try {
+            return logic.switchOn();
+        }
+        catch (Exception e)
+        {
+            return ResponseCode.SwitchOnFailed;
+        }
 /*
         currentState = ResponseCode.SwitchedOn;
         return ResponseCode.SwitchedOn;*/
     }
 
     @Override
-    public ResponseCode switchOff() throws RemoteException{
-        return logic.switchOff();
+    public ResponseCode switchOff(){
+        try {
+            return logic.switchOn();
+        }
+        catch (Exception e)
+        {
+            return ResponseCode.SwitchOnFailed;
+        }
 /*
         currentState = ResponseCode.SwitchedOff;
         return ResponseCode.AlreadySwitchedOff;*/
