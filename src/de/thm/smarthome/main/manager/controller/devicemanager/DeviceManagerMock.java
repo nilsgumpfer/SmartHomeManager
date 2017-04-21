@@ -1,6 +1,8 @@
 package de.thm.smarthome.main.manager.controller.devicemanager;
 
+import de.thm.smarthome.global.enumeration.DeviceManufacturer;
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.factory.HeatingFactory;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -28,7 +30,11 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     private SmartThermometer smartThermometer;
     private List<SmartShutter> smartShutters;
 
-    private DeviceManagerMock(){}
+    private DeviceManagerMock(){
+        HeatingFactory heatingFactory = new HeatingFactory();
+        //TODO: IP-Adresse & Heizungs-Name
+        smartHeating = heatingFactory.createHeating(DeviceManufacturer.VIESSMANN,"V374354343543","192.168.2.2","Edelmann");
+    }
 
     public static DeviceManagerMock getInstance() {
         return ourInstance;
@@ -75,7 +81,7 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode deleteSmartShuttter(SmartShutter smartShutter) {
+    public ResponseCode deleteSmartShutter(SmartShutter smartShutter) {
         return null;
     }
 
@@ -90,7 +96,7 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode deleteSmartShuttter(ShutterTransferObject shutterTransferObject) {
+    public ResponseCode deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 

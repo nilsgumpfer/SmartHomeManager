@@ -45,6 +45,18 @@ public class HeatingTransferObject {
         this.temperature    = temperature;
     }
 
+    public HeatingTransferObject(double temperature, String unit, String serialnumber, String mode ,String name, String model, String manufacturer_t, Power power, String powerState_t){
+        this.temperature = temperature;
+        this.unit_t = unit;
+        this.serialnumber = serialnumber;
+        this.heatingName = name;
+        this.mode = mode;
+        this.model = model;
+        this.manufacturer_t = manufacturer_t;
+        this.powerState = power;
+        this.powerState_t = powerState_t;
+    }
+
     public HeatingTransferObject(DeviceManufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }

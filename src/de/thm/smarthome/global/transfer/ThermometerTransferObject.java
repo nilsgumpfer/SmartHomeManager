@@ -39,6 +39,15 @@ public class ThermometerTransferObject {
         this.temperatureUnit_t   = temperatureUnit_t;
     }
 
+    public ThermometerTransferObject(double temperature, String temperatureUnit_t, String manufacturer_t, String model, String serialnumber, String name) {
+        this.temperature = temperature;
+        this.temperatureUnit_t = temperatureUnit_t;
+        this.manufacturer_t = manufacturer_t;
+        this.model = model;
+        this.serialnumber = serialnumber;
+        this.name = name;
+    }
+
     public ThermometerTransferObject(UnitOfMeasurement temperatureUnit) {
         this.temperatureUnit = temperatureUnit;
     }

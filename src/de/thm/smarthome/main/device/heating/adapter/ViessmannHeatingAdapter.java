@@ -28,7 +28,7 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
     }
 
     @Override
-    public double getTemperature() throws RemoteException{
+    public double getTemperature(){
 
         return driver.getCurrentTemperature();
     }

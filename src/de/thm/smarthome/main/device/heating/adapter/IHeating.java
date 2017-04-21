@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface IHeating {
     boolean setTemperature(double temperature) throws RemoteException;
-    double getTemperature() throws RemoteException;
+    double getTemperature();
     void standby() throws RemoteException;
     void wakeup() throws RemoteException;
     List<String> getLogs();

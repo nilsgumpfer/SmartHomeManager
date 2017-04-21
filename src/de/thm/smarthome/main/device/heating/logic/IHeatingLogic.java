@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.heating.logic;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
 
 import java.rmi.RemoteException;
 
@@ -15,4 +16,5 @@ public interface IHeatingLogic {
     double getTemperature() throws RemoteException;
     ResponseCode switchOn() throws RemoteException;
     ResponseCode switchOff() throws RemoteException;
+    HeatingTransferObject getHeatingData();
 }

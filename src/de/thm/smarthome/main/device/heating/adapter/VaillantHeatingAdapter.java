@@ -30,9 +30,9 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
     }
 
     @Override
-    public double getTemperature() throws RemoteException{
-
-        return driver.getCurrentTemperature();
+    public double getTemperature(){
+        return 0;
+        //return driver.getCurrentTemperature();
     }
 
     @Override

@@ -84,10 +84,15 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
         return listOfLogs;
     }
 
-    public double getCurrentTemperature() throws RemoteException{
-
-        currentTemperature = server.getTemperature(this);
-        return currentTemperature;
+    public double getCurrentTemperature(){
+        try {
+            currentTemperature = server.getTemperature(this);
+            return currentTemperature;
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
     }
 
     public boolean setMaxTemperature(double new_maxTemperature) throws RemoteException{

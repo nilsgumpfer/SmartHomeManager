@@ -37,6 +37,15 @@ public class ShutterTransferObject {
         this.shutterID  = shutterID;
     }
 
+    public ShutterTransferObject(int position, String shutterID, String manufacturer_t, String model, String mode, String serialnumber) {
+        this.position = position;
+        this.shutterID = shutterID;
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.mode = mode;
+        this.serialnumber = serialnumber;
+    }
+
     public ResponseCode getResponseCode() {
         return responseCode;
     }

@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.heating.device;
 
 import UI.Controller;
+import de.thm.smarthome.global.enumeration.Power;
 import de.thm.smarthome.global.observer.AClockObservable;
 import de.thm.smarthome.global.observer.IClockObserver;
 import de.thm.smarthome.global.enumeration.ResponseCode;
@@ -9,6 +10,7 @@ import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.heating.model.HeatingModel;
 
@@ -88,5 +90,10 @@ import java.rmi.RemoteException;
             //Daymode
             heatingModel.setTemperature(21);
         }
+    }
+
+    public HeatingTransferObject getHeatingData() {
+        //TODO: just for testing!
+        return logic.getHeatingData();
     }
 }

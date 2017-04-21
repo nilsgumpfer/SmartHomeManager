@@ -9,6 +9,7 @@ import de.thm.smarthome.global.observer.IThermometerObserver;
 import de.thm.smarthome.global.observer.IWeatherstationObserver;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
+import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
 
 import javax.jws.*;
 import javax.jws.soap.SOAPBinding;
@@ -18,7 +19,7 @@ import java.rmi.RemoteException;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 {
-    private IServiceFacade requestManager = RequestManager.getInstance();
+    private IServiceFacade requestManager = RequestManagerMock.getInstance(); //TODO: Change back to real RequestManager
 
     public SmartHomeManagerWebServiceDescriptor(){
     }

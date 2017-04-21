@@ -64,6 +64,23 @@ public class WeatherStationTransferObject {
         this.airHumidityUnit = airHumidityUnit;
     }
 
+    public WeatherStationTransferObject(double windVelocity, String windVelocityUnit_t, double airPressure, String airPressureUnit_t, double outdoorTemperature, String outdoorTemperatureUnit_t, double rainfallAmount, String rainfallAmountUnit_t, double airHumidity, String airHumidityUnit_t, String manufacturer_t, String serialnumber, String model, String name) {
+        this.windVelocity = windVelocity;
+        this.windVelocityUnit_t = windVelocityUnit_t;
+        this.airPressure = airPressure;
+        this.airPressureUnit_t = airPressureUnit_t;
+        this.outdoorTemperature = outdoorTemperature;
+        this.outdoorTemperatureUnit_t = outdoorTemperatureUnit_t;
+        this.rainfallAmount = rainfallAmount;
+        this.rainfallAmountUnit_t = rainfallAmountUnit_t;
+        this.airHumidity = airHumidity;
+        this.airHumidityUnit_t = airHumidityUnit_t;
+        this.manufacturer_t = manufacturer_t;
+        this.serialnumber = serialnumber;
+        this.model = model;
+        this.name = name;
+    }
+
     public ResponseCode getResponseCode() {
         return responseCode;
     }

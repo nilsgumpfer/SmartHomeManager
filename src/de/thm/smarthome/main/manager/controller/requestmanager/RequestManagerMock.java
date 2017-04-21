@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.manager.controller.requestmanager;
 
 import de.thm.smarthome.global.enumeration.DeviceManufacturer;
+import de.thm.smarthome.global.enumeration.Power;
 import de.thm.smarthome.global.enumeration.ResponseCode;
 import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
 import de.thm.smarthome.global.factory.HeatingFactory;
@@ -105,19 +106,10 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException{
-        ResponseCode responseCode = checkLogin(authentication);
-
-        switch(responseCode){
-            case LoggedIn:
-                SmartHeating smartHeating = deviceManager.getSmartHeating();
-
-                return new HeatingTransferObject(
-                        "Vitorondens S17",
-                        18
-                        );
-            default:
-                return new HeatingTransferObject(responseCode);
-        }
+        return deviceManager.getSmartHeating().getHeatingData();
+        /*//TODO: just for testing!
+        return new HeatingTransferObject(18,"°C","V2332746B37","DayMode","Zentralheizung","Vitorodens 103", "Viessmann", Power.On, "Eingeschaltet");
+    */
     }
 
     @Override
@@ -162,7 +154,8 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        return new ShutterTransferObject(ResponseCode.CommandInvocationFailed);
+        //TODO: just for testing!
+        return new ShutterTransferObject(5,"S1","Electric Ltd.","Sh300-XT","Standard","S3874236-BXT");
     }
 
     @Override
@@ -253,14 +246,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
-
-        switch(responseCode){
-            case LoggedIn:
-                return getWeatherStationData();
-            default:
-                return new WeatherStationTransferObject(responseCode);
-        }
+        return new WeatherStationTransferObject(23.7,"km/h",2700,"kPa",11.3,"°C",12.2,"l/m²",83.1,"%","Conrad Elektronik","CRD332435","WS2376X","Wetterstation Garten");
     }
 
     @Override
@@ -294,14 +280,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public ThermometerTransferObject getThermometerData(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
-
-        switch(responseCode){
-            case LoggedIn:
-                return getThermometerData();
-            default:
-                return new ThermometerTransferObject(responseCode);
-        }
+        return new ThermometerTransferObject(22.5,"°C","XGroup Inc.","XG1738","XG34327864", "Thermometer Flur");
     }
 
     public ThermometerTransferObject getThermometerData() {

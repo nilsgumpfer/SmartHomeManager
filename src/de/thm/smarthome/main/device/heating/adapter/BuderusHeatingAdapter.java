@@ -30,9 +30,10 @@ public class BuderusHeatingAdapter  extends AObservable implements IHeating, IOb
     }
 
     @Override
-    public double getTemperature() throws RemoteException{
+    public double getTemperature(){
 
-        return driver.getCurrentTemperature();
+        return 0;
+        //return driver.getCurrentTemperature();
     }
 
     @Override
