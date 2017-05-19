@@ -22,9 +22,6 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
         return logicName;
     }
 
-    public double getTemperature() {
-        return model.getTemperature();
-    }
 
 //    @Override
 //    public void setTemperature() {
@@ -36,10 +33,9 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
 //            SmartHomeLogger.log("Thermometer misst bereits in Celsius!");
 //        }
 //    }
+
     @Override
     public ThermometerTransferObject getThermometerData() {
-
-        ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°C");
-        return tto;
+        return new ThermometerTransferObject(model.getThermometerName(), model.getThermometerManufacutrer(), model.getThermometerModel(), model.getThermometerSerialnumber(), model.getThermometerTemperature(), "°C");
     }
 }

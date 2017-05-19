@@ -12,7 +12,12 @@ import java.util.List;
  */
 public interface IHeating {
     boolean setTemperature(double temperature) throws RemoteException;
+    String getHeatingName();
+    String getHeatingManufacturer();
+    String getHeatingModel();
+    String getHeatingSerialnumber();
     double getTemperature();
+    String getHeatingMode();
     void standby() throws RemoteException;
     void wakeup() throws RemoteException;
     List<String> getLogs();

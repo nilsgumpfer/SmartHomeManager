@@ -12,6 +12,10 @@ import de.thm.smarthome.global.helper.MessageRepository;
 public class WeatherStationTransferObject {
     private ResponseCode responseCode;
     private String message;
+    private String weatherStationName;
+    private String weatherStationManufacturer;
+    private String weatherStationModel;
+    private String weatherStationSerialnumber;
     private double windVelocity;
     private UnitOfMeasurement windVelocityUnit;
     private String windVelocityUnit_t;
@@ -64,7 +68,11 @@ public class WeatherStationTransferObject {
         this.airHumidityUnit = airHumidityUnit;
     }
 
-    public WeatherStationTransferObject(double windVelocity, String windVelocityUnit_t, double airPressure, String airPressureUnit_t, double outdoorTemperature, String outdoorTemperatureUnit_t, double rainfallAmount, String rainfallAmountUnit_t, double airHumidity, String airHumidityUnit_t, String manufacturer_t, String serialnumber, String model, String name) {
+    public WeatherStationTransferObject(String name, String manufacturer_t, String model, String serialnumber, double windVelocity, String windVelocityUnit_t, double airPressure, String airPressureUnit_t, double outdoorTemperature, String outdoorTemperatureUnit_t, double rainfallAmount, String rainfallAmountUnit_t, double airHumidity, String airHumidityUnit_t) {
+        this.name = name;
+        this.manufacturer_t = manufacturer_t;
+        this.model = model;
+        this.serialnumber = serialnumber;
         this.windVelocity = windVelocity;
         this.windVelocityUnit_t = windVelocityUnit_t;
         this.airPressure = airPressure;
@@ -75,10 +83,7 @@ public class WeatherStationTransferObject {
         this.rainfallAmountUnit_t = rainfallAmountUnit_t;
         this.airHumidity = airHumidity;
         this.airHumidityUnit_t = airHumidityUnit_t;
-        this.manufacturer_t = manufacturer_t;
-        this.serialnumber = serialnumber;
-        this.model = model;
-        this.name = name;
+
     }
 
     public ResponseCode getResponseCode() {

@@ -11,6 +11,8 @@ import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
+import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
+import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
@@ -155,7 +157,7 @@ public class RequestManagerMock implements IServiceFacade {
     @Override
     public ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
         //TODO: just for testing!
-        return new ShutterTransferObject(5,"S1","Electric Ltd.","Sh300-XT","Standard","S3874236-BXT");
+        return deviceManager.getSmartShutter(shutterTransferObject).getShutterData();//new ShutterTransferObject("name", "hersteller", "dsad", "dasds", 4);//(5,"S1","Electric Ltd.","Sh300-XT","Standard","S3874236-BXT");
     }
 
     @Override
@@ -246,7 +248,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication) {
-        return new WeatherStationTransferObject(23.7,"km/h",2700,"kPa",11.3,"°C",12.2,"l/m²",83.1,"%","Conrad Elektronik","CRD332435","WS2376X","Wetterstation Garten");
+        return deviceManager.getSmartWeatherStation().getWeatherStationData(); //WeatherStationTransferObject(23.7,"km/h",2700,"kPa",11.3,"°C",12.2,"l/m²",83.1,"%","Conrad Elektronik","CRD332435","WS2376X","Wetterstation Garten");
     }
 
     @Override
@@ -280,7 +282,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public ThermometerTransferObject getThermometerData(UserTransferObject authentication) {
-        return new ThermometerTransferObject(22.5,"°C","XGroup Inc.","XG1738","XG34327864", "Thermometer Flur");
+        return  deviceManager.getSmartThermometer().getThermometerData(); // ThermometerTransferObject(22.5,"°C","XGroup Inc.","XG1738","XG34327864", "Thermometer Flur");
     }
 
     public ThermometerTransferObject getThermometerData() {

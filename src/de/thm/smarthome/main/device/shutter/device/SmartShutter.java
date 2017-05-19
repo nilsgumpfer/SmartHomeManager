@@ -14,7 +14,7 @@ import de.thm.smarthome.main.device.shutter.model.ShutterModel;
  * Created by Nils on 27.01.2017.
  */
 public class SmartShutter extends AObservable implements ISmartDevice, IObserver, IUpAndDownMovableDevice, IPositionRelevantDevice{
-    private IShutterLogic logic;
+    private static IShutterLogic logic;
     private String logicName = "";
     private ShutterModel shutterModel = new ShutterModel();
 
@@ -75,7 +75,7 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
 
 
 
-    public ShutterTransferObject getShutterData() {
-        return null;
+    public static ShutterTransferObject getShutterData() {
+        return logic.getShutterData;
     }
 }

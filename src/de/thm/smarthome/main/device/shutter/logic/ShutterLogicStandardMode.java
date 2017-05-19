@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.shutter.logic;
 
+import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 import de.thm.smarthome.main.device.shutter.model.IShutterModel;
 import de.thm.smarthome.main.device.shutter.model.ShutterModel;
@@ -29,6 +30,15 @@ public class ShutterLogicStandardMode implements IShutterLogic {
     @Override
     public void setPosition(int shutterHeight) {
         model.setShutterHeight(shutterHeight);
+    }
+
+    public ShutterTransferObject getShutterData() {
+        return new ShutterTransferObject(shutterModel.getShutterName(), shutterModel.getShutterManufacturer(),shutterModel.getShutterModel(), shutterModel.getShutterSerialnumber(), shutterModel.getShutterPosition());
+    }
+
+    @Override
+    public int getShutterPosition() {
+        return shutterModel.getShutterPosition();
     }
 
     @Override

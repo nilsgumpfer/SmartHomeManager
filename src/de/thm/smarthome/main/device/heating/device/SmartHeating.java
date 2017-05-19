@@ -42,8 +42,9 @@ import java.rmi.RemoteException;
 
     @Override
     public String getName() {
-        return logic.getHeatingName();
+        return null;
     }
+
 
     @Override
     public void update(AObservable o, Object change) {
@@ -92,8 +93,7 @@ import java.rmi.RemoteException;
         }
     }
 
-    public HeatingTransferObject getHeatingData() {
-        //TODO: just for testing!
-        return logic.getHeatingData();
+    public HeatingTransferObject getHeatingData() throws RemoteException {
+        return new HeatingTransferObject(logic.getHeatingName(),logic.getHeatingManufacturer(),logic.getHeatingModel(),logic.getHeatingSerialnumber(),logic.getTemperature(),logic.getHeatingMode());
     }
 }

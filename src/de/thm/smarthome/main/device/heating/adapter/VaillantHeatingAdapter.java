@@ -30,9 +30,39 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
     }
 
     @Override
-    public double getTemperature(){
+    public String getHeatingName() {
+
+        return driver.getHeatingName();
+    }
+
+    @Override
+    public String getHeatingManufacturer() {
+
+        return driver.getHeatingManufacturer();
+    }
+
+    @Override
+    public String getHeatingModel() {
+
+        return driver.getHeatingModel();
+    }
+
+    @Override
+    public String getHeatingSerialnumber() {
+
+        return driver.getHeatingSerialnumber();
+    }
+
+    @Override
+    public double getTemperature() {
         return 0;
-        //return driver.getCurrentTemperature();
+        // return driver.getCurrentTemperature();
+    }
+
+    @Override
+    public String getHeatingMode() {
+
+        return driver.getHeatingMode();
     }
 
     @Override

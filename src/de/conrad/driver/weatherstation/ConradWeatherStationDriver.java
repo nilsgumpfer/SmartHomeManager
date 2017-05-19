@@ -51,6 +51,21 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
     }
 
+    public String getWeatherStationName() {
+        return null;
+    }
+
+    public String getWeatherStationManufacturer() {
+        return null;
+    }
+
+    public String getWeatherStationModel() {
+        return null;
+    }
+
+    public String getWeatherStationSerialnumber() {
+        return null;
+    }
 
     public double getTemperature() throws RemoteException {
 

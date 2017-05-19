@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.weatherstation.logic;
 
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
 import de.thm.smarthome.main.device.weatherstation.adapter.IWeatherStation;
 import de.thm.smarthome.main.device.weatherstation.model.IWeatherStationModel;
 
@@ -32,5 +33,25 @@ public class WeatherStationLogicMetric implements IWeatherStationLogic {
             //TODO: //Fehlermeldung: "Die Wetterstation misst bereits in metrischen Einheiten!"
             SmartHomeLogger.log("Die Wetterstation misst bereits in metrischen Einheiten!");
         }
+    }
+
+    @Override
+    public WeatherStationTransferObject getWeatherStationData() {
+        return new WeatherStationTransferObject(
+                model.getWeatherStationName(),
+                model.getWeatherStationManufacturer(),
+                model.getWeatherStationModel(),
+                model.getWeatherStationSerialnumber(),
+                model.getWindVelocity(),
+                "km/h",
+                model.getAirPressure(),
+                "hPa",
+                model.getTemperature(),
+                "°C",
+                model.getRainfallAmount(),
+                "l/m²",
+                model.getAirHumidity(),
+                "%");
+
     }
 }

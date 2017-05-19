@@ -18,6 +18,10 @@ public class HeatingTransferObject {
 
     private String heatingName;
     private double temperature;
+    private String heatingManufacturer;
+    private String heatingModel;
+    private String heatingSerialnumber;
+    private String heatingMode;
     private UnitOfMeasurement temperatureUnit;
     private DeviceManufacturer manufacturer;
     private String manufacturer_t;
@@ -40,9 +44,14 @@ public class HeatingTransferObject {
         this.temperatureUnit = temperatureUnit;
     }
 
-    public HeatingTransferObject(String heatingName, double temperature) {
+    public HeatingTransferObject(String heatingName, String heatingmanufacturer, String heatingmodel, String heatingserialnumber, double temperature, String heatingmode) {
         this.heatingName    = heatingName;
+        this.heatingManufacturer = heatingmanufacturer;
+        this.heatingModel = heatingmodel;
+        this.heatingSerialnumber = heatingserialnumber;
         this.temperature    = temperature;
+        this.heatingMode = heatingmode;
+
     }
 
     public HeatingTransferObject(double temperature, String unit, String serialnumber, String mode ,String name, String model, String manufacturer_t, Power power, String powerState_t){

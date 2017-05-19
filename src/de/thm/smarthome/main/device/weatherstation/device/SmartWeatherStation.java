@@ -57,6 +57,6 @@ public class SmartWeatherStation extends AObservable implements ISmartDevice, IO
     }
 
     public WeatherStationTransferObject getWeatherStationData() {
-        return null;
+        return logic.getWeatherStationData();
     }
 }

@@ -28,6 +28,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
     private SmartHeating smartHeating;
     private SmartWeatherStation smartWeatherStation;
     private SmartThermometer smartThermometer;
+    private SmartShutter smartShutter;
     private List<SmartShutter> smartShutters;
 
     private DeviceManager(){}
@@ -113,7 +114,7 @@ public class DeviceManager implements IDeviceManager, IObserver{
 
     @Override
     public SmartShutter getSmartShutter(ShutterTransferObject shutterTransferObject) {
-return null;
+return smartShutter;
     }
 
     @Override

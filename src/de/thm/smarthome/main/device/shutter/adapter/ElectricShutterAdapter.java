@@ -41,7 +41,33 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
     }
 
     @Override
+    public String getShutterName() {
+        return driver.getShutterName();
+    }
+
+    @Override
+    public String getShutterManufacturer() {
+        return driver.getShutterManufacturer();
+    }
+
+    @Override
+    public String getShutterModel() {
+        return driver.getShutterModel();
+    }
+
+    @Override
+    public String getShutterSerialnumber() {
+        return driver.getShutterSerialnumber();
+    }
+
+    @Override
+    public int getShutterPosition() {
+        return driver.getShutterPosition();
+    }
+
+    @Override
     public void update(AObservable o, Object change) {
 
     }
+
 }

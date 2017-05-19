@@ -147,6 +147,26 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
         return server.getStatus(this);
     }
 
+    public String getHeatingName() {
+        return null;
+    }
+
+    public String getHeatingManufacturer() {
+        return null;
+    }
+
+    public String getHeatingModel() {
+        return null;
+    }
+
+    public String getHeatingSerialnumber() {
+        return null;
+    }
+
+    public String getHeatingMode() {
+        return null;
+    }
+
     /*public static void main(String args[]) throws RemoteException {
         ViessmannHeatingDriver bd = new ViessmannHeatingDriver("1234", "192.168.100.106", "Test");
         bd.setMaxWaterLevel(10.0);

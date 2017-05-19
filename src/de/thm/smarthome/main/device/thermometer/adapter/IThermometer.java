@@ -7,5 +7,9 @@ import java.rmi.RemoteException;
  */
 public interface IThermometer {
 
-    double getTemperature() throws RemoteException;
+    String getThermometerName();
+    String getThermometerManufacutrer();
+    String getThermometerModel();
+    String getThermometerSerialnumber();
+    double getThermometerTemperature() throws RemoteException;
 }

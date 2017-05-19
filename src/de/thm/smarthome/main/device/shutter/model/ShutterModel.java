@@ -2,6 +2,7 @@ package de.thm.smarthome.main.device.shutter.model;
 
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.main.device.shutter.adapter.ElectricShutterAdapter;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -13,9 +14,31 @@ public class ShutterModel implements IShutterModel{
     boolean isDown = false;
     int shutterHeight = 0;
 
+    ElectricShutterAdapter adapter;
+
     @Override
     public String getShutterName(){
-        return shuttername;
+        return adapter.getShutterName();
+    }
+
+    @Override
+    public String getShutterManufacturer() {
+        return adapter.getShutterManufacturer();
+    }
+
+    @Override
+    public String getShutterModel() {
+        return adapter.getShutterModel();
+    }
+
+    @Override
+    public String getShutterSerialnumber() {
+        return adapter.getShutterSerialnumber();
+    }
+
+    @Override
+    public int getShutterPosition() {
+        return adapter.getShutterPosition();
     }
 
     @Override

@@ -72,6 +72,26 @@ public class ElectricShutterDriver implements ShutterClientInterface {
             return false;
     }
 
+    public String getShutterName() {
+        return null;
+    }
+
+    public String getShutterManufacturer() {
+        return null;
+    }
+
+    public String getShutterModel() {
+        return null;
+    }
+
+    public String getShutterSerialnumber() {
+        return null;
+    }
+
+    public int getShutterPosition() {
+        return 0;
+    }
+
     /*public static void main(String args[]) throws RemoteException {
         ElectricShutterDriver bd = new ElectricShutterDriver("1234", "192.168.100.106", "Test");
         bd.moveUp();

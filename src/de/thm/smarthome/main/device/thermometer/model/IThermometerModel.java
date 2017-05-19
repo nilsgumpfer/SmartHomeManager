@@ -8,6 +8,10 @@ public interface IThermometerModel {
     String getName();
     void setTemperature(double temperature);
     void toggleTemperatureUnit();
-    double getTemperature();
+    String getThermometerName();
+    String getThermometerManufacutrer();
+    String getThermometerModel();
+    String getThermometerSerialnumber();
+    double getThermometerTemperature();
     boolean isCelsius();
 }

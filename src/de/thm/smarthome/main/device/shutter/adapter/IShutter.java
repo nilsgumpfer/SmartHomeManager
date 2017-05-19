@@ -10,4 +10,9 @@ public interface IShutter {
     void moveDown() throws RemoteException;
     boolean isUp() throws RemoteException;
     boolean isDown() throws RemoteException;
+    String getShutterName();
+    String getShutterManufacturer();
+    String getShutterModel();
+    String getShutterSerialnumber();
+    int getShutterPosition();
 }

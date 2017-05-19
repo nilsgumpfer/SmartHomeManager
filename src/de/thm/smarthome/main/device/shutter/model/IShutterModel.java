@@ -6,6 +6,10 @@ package de.thm.smarthome.main.device.shutter.model;
 public interface IShutterModel {
     void setShutterName(String shutterName);
     String getShutterName();
+    String getShutterManufacturer();
+    String getShutterModel();
+    String getShutterSerialnumber();
+    int getShutterPosition();
     String getLogicName();
     void setLogicName(String logicName);
     void incrementShutterHeight();

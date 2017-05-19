@@ -21,7 +21,32 @@ public class HeatingLogicNightMode implements IHeatingLogic {
 
     @Override
     public String getHeatingName() {
+
         return model.getHeatingName();
+    }
+
+    @Override
+    public String getHeatingManufacturer() {
+
+        return model.getHeatingManufacturer();
+    }
+
+    @Override
+    public String getHeatingModel() {
+
+        return model.getHeatingModel();
+    }
+
+    @Override
+    public String getHeatingSerialnumber() {
+
+        return model.getHeatingSerialnumber();
+    }
+
+    @Override
+    public String getHeatingMode() {
+
+        return model.getHeatingMode();
     }
 
     @Override

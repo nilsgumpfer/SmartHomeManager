@@ -17,7 +17,7 @@ public class ShutterTransferObject {
     private DeviceManufacturer manufacturer;
     private String manufacturer_t;
     private String model;
-    private String mode;
+    private String shutterName;
     private String serialnumber;
     private boolean moveComplete;
 
@@ -37,13 +37,12 @@ public class ShutterTransferObject {
         this.shutterID  = shutterID;
     }
 
-    public ShutterTransferObject(int position, String shutterID, String manufacturer_t, String model, String mode, String serialnumber) {
-        this.position = position;
-        this.shutterID = shutterID;
+    public ShutterTransferObject(String shuttername, String manufacturer_t, String model, String serialnumber, int position) {
+        this.shutterName = shuttername;
         this.manufacturer = manufacturer;
         this.model = model;
-        this.mode = mode;
         this.serialnumber = serialnumber;
+        this.position = position;
     }
 
     public ResponseCode getResponseCode() {
@@ -100,14 +99,6 @@ public class ShutterTransferObject {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
     }
 
     public String getSerialnumber() {

@@ -7,6 +7,10 @@ import java.rmi.RemoteException;
  */
 public interface IWeatherStation {
 
+    String getWeatherStationName();
+    String getWeatherStationManufacturer();
+    String getWeatherStationModel();
+    String getWeatherStationSerialnumber();
     double getTemperature() throws RemoteException;
     double getWindVelocity() throws RemoteException;
     double getAirPressure() throws RemoteException;

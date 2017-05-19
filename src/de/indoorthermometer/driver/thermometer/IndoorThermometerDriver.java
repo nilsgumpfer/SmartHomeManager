@@ -51,10 +51,30 @@ public class IndoorThermometerDriver implements ThermometerClientInterface{
     }
 
 
-    public double getTemperature()throws RemoteException{
+
+
+    public String getThermometerName() {
+        return null;
+    }
+
+    public String getThermometerManufacturer() {
+        return null;
+    }
+
+    public String getThermometerModel() {
+        return null;
+    }
+
+    public String getThermometerSerialnumber() {
+        return null;
+    }
+
+    public double getThermometerTemperature()throws RemoteException{
 
         return server.getTemperature(this);
     }
+
+
     /*public static void main(String args[]) throws RemoteException {
         IndoorThermometerDriver bd = new IndoorThermometerDriver("1234", "192.168.100.106", "Test");
         System.out.print(bd.getTemperature() + "\n");

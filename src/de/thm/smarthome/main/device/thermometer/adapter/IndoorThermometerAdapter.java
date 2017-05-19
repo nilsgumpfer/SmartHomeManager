@@ -19,12 +19,33 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
     }
 
     @Override
-    public double getTemperature() throws RemoteException{
-        return driver.getTemperature();
+    public String getThermometerName() {
+        return driver.getThermometerName();
+    }
+
+    @Override
+    public String getThermometerManufacutrer() {
+        return driver.getThermometerManufacturer();
+    }
+
+    @Override
+    public String getThermometerModel() {
+        return driver.getThermometerModel();
+    }
+
+    @Override
+    public String getThermometerSerialnumber() {
+        return driver.getThermometerSerialnumber();
+    }
+
+    @Override
+    public double getThermometerTemperature() throws RemoteException{
+        return driver.getThermometerTemperature();
     }
 
     @Override
     public void update(AObservable o, Object change) {
 
     }
+
 }

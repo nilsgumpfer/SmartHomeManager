@@ -10,6 +10,10 @@ import java.rmi.RemoteException;
  */
 public interface IHeatingLogic {
     String getHeatingName();
+    String getHeatingManufacturer();
+    String getHeatingModel();
+    String getHeatingSerialnumber();
+    String getHeatingMode();
     String getHeatingModeName();
     void setHeatingModeName(String heatingModeName);
     ResponseCode setTemperature(double temperature) throws RemoteException;

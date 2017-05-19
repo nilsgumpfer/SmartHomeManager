@@ -7,4 +7,5 @@ public interface ISmartDevice {
     //void moveUp();
 
     String getName();
+
 }

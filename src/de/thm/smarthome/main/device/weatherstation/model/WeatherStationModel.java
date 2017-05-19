@@ -1,5 +1,7 @@
 package de.thm.smarthome.main.device.weatherstation.model;
 
+import de.thm.smarthome.main.device.weatherstation.adapter.ConradWeatherStationAdapter;
+
 /**
  * Created by Nils on 27.01.2017.
  */
@@ -10,6 +12,28 @@ public class WeatherStationModel implements IWeatherStationModel{
     private double airPressure = 4;
     private double temperature = 13;
     private boolean isMetric = true;
+
+    ConradWeatherStationAdapter adapter;
+
+    @Override
+    public String getWeatherStationName() {
+        return adapter.getWeatherStationName();
+    }
+
+    @Override
+    public String getWeatherStationManufacturer() {
+        return adapter.getWeatherStationManufacturer();
+    }
+
+    @Override
+    public String getWeatherStationModel() {
+        return adapter.getWeatherStationModel();
+    }
+
+    @Override
+    public String getWeatherStationSerialnumber() {
+        return adapter.getWeatherStationSerialnumber();
+    }
 
     @Override
     public double getWindVelocity() {
@@ -33,7 +57,7 @@ public class WeatherStationModel implements IWeatherStationModel{
 
     @Override
     public double getAirHumidity() {
-        return 0;
+        return airHumidity;
     }
 
     @Override

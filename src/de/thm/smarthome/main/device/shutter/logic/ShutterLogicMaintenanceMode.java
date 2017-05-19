@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.shutter.logic;
 
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 import de.thm.smarthome.main.device.shutter.model.IShutterModel;
 import de.thm.smarthome.main.device.shutter.model.ShutterModel;
@@ -33,6 +34,15 @@ public class ShutterLogicMaintenanceMode implements IShutterLogic {
     public void setPosition(int shutterHeight) {
         //TODO: Fehlermeldung: "Rollläden können im Wartungsmodus nicht gesetzt werden"
         SmartHomeLogger.log("Rollläden können im Wartungsmodus nicht gesetzt werden");
+    }
+
+    public ShutterTransferObject getShutterData() {
+        return new ShutterTransferObject(shutterModel.getShutterName(), shutterModel.getShutterManufacturer(),shutterModel.getShutterModel(), shutterModel.getShutterSerialnumber(), shutterModel.getShutterPosition());
+    }
+
+    @Override
+    public int getShutterPosition() {
+        return shutterModel.getShutterPosition();
     }
 
     @Override

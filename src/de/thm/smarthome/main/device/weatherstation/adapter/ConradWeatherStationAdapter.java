@@ -19,6 +19,26 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
     }
 
     @Override
+    public String getWeatherStationName() {
+        return driver.getWeatherStationName();
+    }
+
+    @Override
+    public String getWeatherStationManufacturer() {
+        return driver.getWeatherStationManufacturer();
+    }
+
+    @Override
+    public String getWeatherStationModel() {
+        return driver.getWeatherStationModel();
+    }
+
+    @Override
+    public String getWeatherStationSerialnumber() {
+        return driver.getWeatherStationSerialnumber();
+    }
+
+    @Override
     public double getTemperature() throws RemoteException{
         return driver.getTemperature();
     }

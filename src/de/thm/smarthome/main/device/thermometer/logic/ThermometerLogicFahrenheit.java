@@ -22,9 +22,6 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
         return logicName;
     }
 
-    public double getTemperature() {
-        return model.getTemperature();
-    }
 
 //    @Override
 //    public void setTemperature() {
@@ -39,8 +36,7 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
 
     @Override
     public ThermometerTransferObject getThermometerData() {
-        ThermometerTransferObject tto = new ThermometerTransferObject(getTemperature(), "°F");
-        return tto;
+        return new ThermometerTransferObject(model.getThermometerName(), model.getThermometerManufacutrer(), model.getThermometerModel(), model.getThermometerSerialnumber(), model.getThermometerTemperature(), "°C");
     }
 }
 

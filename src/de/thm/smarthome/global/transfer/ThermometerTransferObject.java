@@ -39,13 +39,13 @@ public class ThermometerTransferObject {
         this.temperatureUnit_t   = temperatureUnit_t;
     }
 
-    public ThermometerTransferObject(double temperature, String temperatureUnit_t, String manufacturer_t, String model, String serialnumber, String name) {
-        this.temperature = temperature;
-        this.temperatureUnit_t = temperatureUnit_t;
+    public ThermometerTransferObject(String name, String manufacturer_t, String model, String serialnumber, double temperature, String temperatureUnit_t) {
+        this.name = name;
         this.manufacturer_t = manufacturer_t;
         this.model = model;
         this.serialnumber = serialnumber;
-        this.name = name;
+        this.temperature = temperature;
+        this.temperatureUnit_t = temperatureUnit_t;
     }
 
     public ThermometerTransferObject(UnitOfMeasurement temperatureUnit) {

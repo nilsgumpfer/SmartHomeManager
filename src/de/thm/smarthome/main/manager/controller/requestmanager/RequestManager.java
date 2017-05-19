@@ -144,10 +144,8 @@ public class RequestManager implements IServiceFacade {
                 SmartHeating smartHeating = deviceManager.getSmartHeating();
 
                 /**-->soll von der Heizung als Methode zurückgegeben werden (wie bei shutter, etc.)**/
-                return new HeatingTransferObject(
-                        smartHeating.getName(),
-                        smartHeating.getTemperature()
-                        );
+                return smartHeating.getHeatingData();
+
             default:
                 return new HeatingTransferObject(responseCode);
         }
