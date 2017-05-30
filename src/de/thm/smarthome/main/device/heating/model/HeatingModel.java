@@ -1,7 +1,9 @@
 package de.thm.smarthome.main.device.heating.model;
 
 import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.adapter.ViessmannHeatingAdapter;
+import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -12,8 +14,12 @@ public class HeatingModel implements IHeatingModel{
     double temperature = 0;
 
     //Stimmt die Verlinkung so? ----------------------------------------------------------------------------
-    ViessmannHeatingAdapter adapter;
+    IHeating adapter;
     //Stimmt die Verlinkung so? ----------------------------------------------------------------------------
+
+    public HeatingModel(IHeating adapter) {
+        this.adapter = adapter;
+    }
 
     @Override
     public String getHeatingName() {
