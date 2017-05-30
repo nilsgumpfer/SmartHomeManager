@@ -5,8 +5,7 @@ package de.thm.smarthome.main.device.heating.model;
  */
 public interface IHeatingModel {
     void setHeatingName(String heatingName);
-    String getHeatingModeName();
-    void setHeatingModeName(String name);
+    void setHeatingMode(String heatingMode);
     String getHeatingName();
     String getHeatingManufacturer();
     String getHeatingModel();

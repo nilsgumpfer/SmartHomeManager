@@ -15,7 +15,7 @@ import de.thm.smarthome.main.device.thermometer.model.ThermometerModel;
  * Created by Nils on 27.01.2017.
  */
 public class SmartThermometer extends AObservable implements ISmartDevice, IObserver {
-    private static IThermometerLogic logic;
+    private IThermometerLogic logic;
     private ThermometerModel model = new ThermometerModel();
 
     public SmartThermometer(IThermometerLogic logic) {
@@ -31,7 +31,7 @@ public class SmartThermometer extends AObservable implements ISmartDevice, IObse
     public void update(AObservable o, Object change) {
 
     }
-    public static ThermometerTransferObject getThermometerData(){
+    public ThermometerTransferObject getThermometerData(){
         return logic.getThermometerData();
     }
 }

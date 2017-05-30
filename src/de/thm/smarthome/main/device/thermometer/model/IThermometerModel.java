@@ -9,7 +9,7 @@ public interface IThermometerModel {
     void setTemperature(double temperature);
     void toggleTemperatureUnit();
     String getThermometerName();
-    String getThermometerManufacutrer();
+    String getThermometerManufacturer();
     String getThermometerModel();
     String getThermometerSerialnumber();
     double getThermometerTemperature();

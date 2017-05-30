@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.heating.logic;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
@@ -16,7 +17,7 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
     private IHeating device;
 
     public HeatingLogicMaintenanceMode(IHeatingModel model,IHeating device){
-        model.setHeatingModeName("MaintenanceMode");
+        model.setHeatingMode("MaintenanceMode");
     }
 
     @Override
@@ -49,15 +50,6 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
         return model.getHeatingMode();
     }
 
-    @Override
-    public String getHeatingModeName() {
-        return model.getHeatingModeName();
-    }
-
-    @Override
-    public void setHeatingModeName(String heatingModeName) {
-        model.setHeatingModeName(heatingModeName);
-    }
 
     @Override
     public double getTemperature() {
@@ -82,7 +74,7 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic {
 
     @Override
     public HeatingTransferObject getHeatingData() {
-        return null;
+        return new HeatingTransferObject(model.getHeatingName(),model.getHeatingManufacturer(),model.getHeatingModel(),model.getHeatingSerialnumber(),model.getTemperature(),model.getHeatingMode(), UnitOfMeasurement.temperature_DegreesCelsius);
     }
 
 }

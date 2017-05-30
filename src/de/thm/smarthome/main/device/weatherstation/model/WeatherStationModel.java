@@ -6,6 +6,10 @@ import de.thm.smarthome.main.device.weatherstation.adapter.ConradWeatherStationA
  * Created by Nils on 27.01.2017.
  */
 public class WeatherStationModel implements IWeatherStationModel{
+    private String weatherStationName = "";
+    private String weatherStationManufacturer = "";
+    private String weatherStationModel = "";
+    private String weatherStationSerialnumber = "";
     private double windVelocity = 0.5;
     private double rainfallAmount = 20;
     private double airHumidity = 2;
@@ -17,22 +21,22 @@ public class WeatherStationModel implements IWeatherStationModel{
 
     @Override
     public String getWeatherStationName() {
-        return adapter.getWeatherStationName();
+        return this.weatherStationName;
     }
 
     @Override
     public String getWeatherStationManufacturer() {
-        return adapter.getWeatherStationManufacturer();
+        return this.weatherStationManufacturer;
     }
 
     @Override
     public String getWeatherStationModel() {
-        return adapter.getWeatherStationModel();
+        return this.weatherStationModel;
     }
 
     @Override
     public String getWeatherStationSerialnumber() {
-        return adapter.getWeatherStationSerialnumber();
+        return this.weatherStationSerialnumber;
     }
 
     @Override

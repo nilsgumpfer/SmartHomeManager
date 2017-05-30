@@ -14,8 +14,6 @@ public interface IHeatingLogic {
     String getHeatingModel();
     String getHeatingSerialnumber();
     String getHeatingMode();
-    String getHeatingModeName();
-    void setHeatingModeName(String heatingModeName);
     ResponseCode setTemperature(double temperature) throws RemoteException;
     double getTemperature() throws RemoteException;
     ResponseCode switchOn() throws RemoteException;

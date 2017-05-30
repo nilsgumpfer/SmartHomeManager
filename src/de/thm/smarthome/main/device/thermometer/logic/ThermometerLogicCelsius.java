@@ -36,6 +36,6 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
 
     @Override
     public ThermometerTransferObject getThermometerData() {
-        return new ThermometerTransferObject(model.getThermometerName(), model.getThermometerManufacutrer(), model.getThermometerModel(), model.getThermometerSerialnumber(), model.getThermometerTemperature(), "°C");
+        return new ThermometerTransferObject(model.getThermometerName(), model.getThermometerManufacturer(), model.getThermometerModel(), model.getThermometerSerialnumber(), model.getThermometerTemperature(), "°C");
     }
 }

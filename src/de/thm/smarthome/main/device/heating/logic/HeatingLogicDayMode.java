@@ -20,7 +20,7 @@ public class HeatingLogicDayMode implements IHeatingLogic {
     public HeatingLogicDayMode(IHeatingModel model, IHeating device){
         this.device = device;
         this.model = model;
-        model.setHeatingModeName("DayMode");
+        model.setHeatingMode("DayMode");
     }
 
     @Override
@@ -53,15 +53,7 @@ public class HeatingLogicDayMode implements IHeatingLogic {
         return model.getHeatingMode();
     }
 
-    @Override
-    public String getHeatingModeName() {
-        return model.getHeatingModeName();
-    }
 
-    @Override
-    public void setHeatingModeName(String heatingModeName) {
-        model.setHeatingModeName(heatingModeName);
-    }
 
     @Override
     public ResponseCode setTemperature(double temperature) throws RemoteException{
@@ -94,8 +86,7 @@ public class HeatingLogicDayMode implements IHeatingLogic {
 
     @Override
     public HeatingTransferObject getHeatingData() {
-        //TODO: just testing!
-        return new HeatingTransferObject(device.getTemperature(), UnitOfMeasurement.temperature_DegreesCelsius);
+        return new HeatingTransferObject(model.getHeatingName(),model.getHeatingManufacturer(),model.getHeatingModel(),model.getHeatingSerialnumber(),model.getTemperature(),model.getHeatingMode(), UnitOfMeasurement.temperature_DegreesCelsius);
     }
 
 }

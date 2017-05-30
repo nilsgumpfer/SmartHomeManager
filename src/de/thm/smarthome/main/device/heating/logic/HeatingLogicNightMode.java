@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.heating.logic;
 
 import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
@@ -16,7 +17,7 @@ public class HeatingLogicNightMode implements IHeatingLogic {
     private IHeating device;
 
     public HeatingLogicNightMode(IHeatingModel model, IHeating device){
-        model.setHeatingModeName("NightMode");
+        model.setHeatingMode("NightMode");
     }
 
     @Override
@@ -49,15 +50,7 @@ public class HeatingLogicNightMode implements IHeatingLogic {
         return model.getHeatingMode();
     }
 
-    @Override
-    public String getHeatingModeName() {
-        return model.getHeatingModeName();
-    }
 
-    @Override
-    public void setHeatingModeName(String heatingModeName) {
-        model.setHeatingModeName(heatingModeName);
-    }
 
     @Override
     public ResponseCode setTemperature(double temperature) throws RemoteException{
@@ -94,7 +87,7 @@ public class HeatingLogicNightMode implements IHeatingLogic {
 
     @Override
     public HeatingTransferObject getHeatingData() {
-        return null;
+        return new HeatingTransferObject(model.getHeatingName(),model.getHeatingManufacturer(),model.getHeatingModel(),model.getHeatingSerialnumber(),model.getTemperature(),model.getHeatingMode(), UnitOfMeasurement.temperature_DegreesCelsius);
     }
 
 }

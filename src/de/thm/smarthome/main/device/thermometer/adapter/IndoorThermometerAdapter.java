@@ -11,11 +11,16 @@ import java.rmi.RemoteException;
  */
 public class IndoorThermometerAdapter extends AObservable implements IThermometer, IObserver{
 
-    private IndoorThermometerDriver driver;
+
+    private IThermometer driver;
+
+    public IndoorThermometerAdapter(IThermometer driver) {
+        this.driver = driver;
+    }
 
     public IndoorThermometerAdapter(String serialNumber, String thermometerIP, String thermometername){
 
-        driver = new IndoorThermometerDriver(serialNumber, thermometerIP, thermometername);
+        driver = new IndoorThermometerAdapter(serialNumber, thermometerIP, thermometername);
     }
 
     @Override
@@ -25,7 +30,7 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public String getThermometerManufacutrer() {
-        return driver.getThermometerManufacturer();
+        return driver.getThermometerManufacutrer();
     }
 
     @Override

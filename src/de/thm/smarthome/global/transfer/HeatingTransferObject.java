@@ -44,13 +44,14 @@ public class HeatingTransferObject {
         this.temperatureUnit = temperatureUnit;
     }
 
-    public HeatingTransferObject(String heatingName, String heatingmanufacturer, String heatingmodel, String heatingserialnumber, double temperature, String heatingmode) {
+    public HeatingTransferObject(String heatingName, String heatingmanufacturer, String heatingmodel, String heatingserialnumber, double temperature, String heatingmode, UnitOfMeasurement temperatureUnit) {
         this.heatingName    = heatingName;
         this.heatingManufacturer = heatingmanufacturer;
         this.heatingModel = heatingmodel;
         this.heatingSerialnumber = heatingserialnumber;
         this.temperature    = temperature;
         this.heatingMode = heatingmode;
+        this.temperatureUnit = temperatureUnit;
 
     }
 

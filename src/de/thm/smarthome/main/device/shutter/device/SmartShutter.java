@@ -76,6 +76,6 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
 
 
     public ShutterTransferObject getShutterData() {
-        return logic.getShutterData;
+        return logic.getShutterData();
     }
 }

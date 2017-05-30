@@ -9,13 +9,15 @@ import de.thm.smarthome.main.device.shutter.device.SmartShutter;
  * Created by Nils on 27.01.2017.
  */
 public class HeatingModel implements IHeatingModel{
-    private String name = "";
-    private String heatingModeName = "";
-    double temperature = 0;
+    String heatingName;
+    String heatingManufacturer;
+    String heatingModel;
+    String heatingSerialnumber;
+    double temperature = 0.0;
+    String heatingMode;
 
-    //Stimmt die Verlinkung so? ----------------------------------------------------------------------------
+
     IHeating adapter;
-    //Stimmt die Verlinkung so? ----------------------------------------------------------------------------
 
     public HeatingModel(IHeating adapter) {
         this.adapter = adapter;
@@ -23,50 +25,43 @@ public class HeatingModel implements IHeatingModel{
 
     @Override
     public String getHeatingName() {
-        return adapter.getHeatingName();
+        return this.heatingName;
     }
 
     @Override
     public String getHeatingManufacturer() {
-        return adapter.getHeatingManufacturer();
+        return this.heatingManufacturer;
     }
 
     @Override
     public String getHeatingModel() {
-        return adapter.getHeatingModel();
+        return this.heatingModel;
     }
 
     @Override
     public String getHeatingSerialnumber() {
-        return adapter.getHeatingSerialnumber();
+        return this.heatingSerialnumber;
     }
 
     @Override
     public double getTemperature() {
-        return temperature;
+        return this.temperature;
     }
 
     @Override
     public String getHeatingMode() {
-        return adapter.getHeatingMode();
+        return this.heatingMode;
     }
 
     @Override
-    public void setHeatingName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getHeatingModeName() {
-        return heatingModeName;
-    }
-
-    @Override
-    public void setHeatingModeName(String heatingModeName) {
-        this.heatingModeName = heatingModeName;
+    public void setHeatingName(String heatingName) {
+        this.heatingName = heatingName;
     }
 
 
+    public void setHeatingMode(String heatingMode){
+        this.heatingMode = heatingMode;
+    }
 
 
 

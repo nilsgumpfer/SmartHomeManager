@@ -6,6 +6,10 @@ import de.thm.smarthome.main.device.thermometer.adapter.IndoorThermometerAdapter
  * Created by Nils on 27.01.2017.
  */
 public class ThermometerModel implements IThermometerModel{
+    private String thermometerName = "";
+    private String thermometerManufacturer = "";
+    private String thermometerModel = "";
+    private String thermometerSerialnumber = "";
     private double temperature = 0;
     private boolean isCelsius = true;
     private String name;
@@ -35,27 +39,27 @@ public class ThermometerModel implements IThermometerModel{
 
     @Override
     public String getThermometerName() {
-        return adapter.getThermometerName();
+        return this.thermometerName;
     }
 
     @Override
-    public String getThermometerManufacutrer() {
-        return adapter.getThermometerManufacutrer();
+    public String getThermometerManufacturer() {
+        return this.thermometerManufacturer;
     }
 
     @Override
     public String getThermometerModel() {
-        return adapter.getThermometerModel();
+        return this.thermometerModel;
     }
 
     @Override
     public String getThermometerSerialnumber() {
-        return adapter.getThermometerSerialnumber();
+        return this.thermometerSerialnumber;
     }
 
     @Override
     public double getThermometerTemperature() {
-        return temperature;
+        return this.temperature;
     }
 
 }

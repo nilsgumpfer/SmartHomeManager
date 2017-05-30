@@ -11,7 +11,7 @@ public interface IShutterLogic {
     void setLogicName(String logicName);
     int getPosition();
     void setPosition(int shutterHeight);
-    ShutterTransferObject getShutterData = null;
+    ShutterTransferObject getShutterData();
     int getShutterPosition();
 
 }

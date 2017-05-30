@@ -2,6 +2,7 @@ package de.thm.smarthome.main.device.heating.device;
 
 import UI.Controller;
 import de.thm.smarthome.global.enumeration.Power;
+import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
 import de.thm.smarthome.global.observer.AClockObservable;
 import de.thm.smarthome.global.observer.IClockObserver;
 import de.thm.smarthome.global.enumeration.ResponseCode;
@@ -94,6 +95,6 @@ import java.rmi.RemoteException;
     }
 
     public HeatingTransferObject getHeatingData() throws RemoteException {
-        return new HeatingTransferObject(logic.getHeatingName(),logic.getHeatingManufacturer(),logic.getHeatingModel(),logic.getHeatingSerialnumber(),logic.getTemperature(),logic.getHeatingMode());
+        return logic.getHeatingData();
     }
 }

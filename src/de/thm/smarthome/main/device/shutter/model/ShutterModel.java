@@ -8,7 +8,11 @@ import de.thm.smarthome.main.device.shutter.adapter.ElectricShutterAdapter;
  * Created by Nils on 27.01.2017.
  */
 public class ShutterModel implements IShutterModel{
-    private String shuttername = "";
+    private String shutterName = "";
+    private String shutterManufacturer = "";
+    private String shutterModel = "";
+    private String shutterSerialnumber = "";
+    private int shutterPosition = 0;
     private String logicName = "";
     boolean isUp = true;
     boolean isDown = false;
@@ -18,32 +22,32 @@ public class ShutterModel implements IShutterModel{
 
     @Override
     public String getShutterName(){
-        return adapter.getShutterName();
+        return this.shutterName;
     }
 
     @Override
     public String getShutterManufacturer() {
-        return adapter.getShutterManufacturer();
+        return this.shutterManufacturer;
     }
 
     @Override
     public String getShutterModel() {
-        return adapter.getShutterModel();
+        return this.shutterModel;
     }
 
     @Override
     public String getShutterSerialnumber() {
-        return adapter.getShutterSerialnumber();
+        return this.shutterSerialnumber;
     }
 
     @Override
     public int getShutterPosition() {
-        return adapter.getShutterPosition();
+        return this.shutterPosition;
     }
 
     @Override
     public void setShutterName(String shuttername){
-       this.shuttername = shuttername;
+       this.shutterName = shuttername;
     }
 
     @Override
