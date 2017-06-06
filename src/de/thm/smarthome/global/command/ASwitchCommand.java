@@ -12,7 +12,7 @@ import java.rmi.RemoteException;
 /**
  * Created by Nils on 19.04.2017.
  */
-public class ASwitchCommand implements ICommand {
+public abstract class ASwitchCommand implements ICommand {
     protected IOnAndOffSwitchableDevice device;
     protected ResponseCode oldState             = null;
     protected ResponseCode expectedStatus       = null;

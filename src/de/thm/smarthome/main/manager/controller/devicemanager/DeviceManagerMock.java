@@ -33,7 +33,7 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     private DeviceManagerMock(){
         HeatingFactory heatingFactory = new HeatingFactory();
         //TODO: IP-Adresse & Heizungs-Name
-        smartHeating = heatingFactory.createHeating(DeviceManufacturer.VIESSMANN,"V374354343543","192.168.2.2","Edelmann");
+        smartHeating = heatingFactory.createHeating(DeviceManufacturer.VIESSMANN,"V374354343543","192.168.56.1","SAG");
     }
 
     public static DeviceManagerMock getInstance() {
