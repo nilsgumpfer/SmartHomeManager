@@ -1,11 +1,9 @@
 package de.thm.smarthome.main.device.heating.device;
 
 import UI.Controller;
-import de.thm.smarthome.global.enumeration.Power;
-import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
 import de.thm.smarthome.global.observer.AClockObservable;
 import de.thm.smarthome.global.observer.IClockObserver;
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
@@ -23,7 +21,7 @@ import java.rmi.RemoteException;
  public class SmartHeating extends AObservable implements ITemperatureRelevantDevice, ISmartDevice, IObserver, IOnAndOffSwitchableDevice, IClockObserver {
     private IHeatingLogic logic;
     private HeatingModel heatingModel = new HeatingModel();
-    private ResponseCode currentState = null;
+    private EMessageCode currentState = null;
 
     public SmartHeating(IHeatingLogic logic) {
         this.logic = logic;
@@ -32,7 +30,7 @@ import java.rmi.RemoteException;
     }
 
     @Override
-    public ResponseCode setTemperature(double temperature) throws RemoteException{
+    public EMessageCode setTemperature(double temperature) throws RemoteException{
         return logic.setTemperature(temperature);
     }
 
@@ -53,13 +51,13 @@ import java.rmi.RemoteException;
     }
 
     @Override
-    public ResponseCode switchOn(){
+    public EMessageCode switchOn(){
         try {
             return logic.switchOn();
         }
         catch (Exception e)
         {
-            return ResponseCode.SwitchOnFailed;
+            return EMessageCode.SwitchOnFailed;
         }
 /*
         currentState = ResponseCode.SwitchedOn;
@@ -67,20 +65,20 @@ import java.rmi.RemoteException;
     }
 
     @Override
-    public ResponseCode switchOff(){
+    public EMessageCode switchOff(){
         try {
             return logic.switchOn();
         }
         catch (Exception e)
         {
-            return ResponseCode.SwitchOnFailed;
+            return EMessageCode.SwitchOnFailed;
         }
 /*
         currentState = ResponseCode.SwitchedOff;
         return ResponseCode.AlreadySwitchedOff;*/
     }
     @Override
-    public ResponseCode currentState(){
+    public EMessageCode currentState(){
         return currentState;
     }
 

@@ -1,30 +1,30 @@
 package de.thm.smarthome.global.transfer;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.enumeration.UserGroup;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.enumeration.EUserGroup;
 import de.thm.smarthome.global.helper.MessageRepository;
 
 /**
  * Created by Nils on 05.02.2017.
  */
 public class UserTransferObject {
-    private ResponseCode responseCode;
+    private EMessageCode responseCode;
     private String message;
     private String username;
     private String password;
     private String firstname;
     private String lastname;
     private String eMail;
-    private UserGroup userGroup;
+    private EUserGroup userGroup;
 
     private UserTransferObject(){}
 
-    public UserTransferObject(ResponseCode responseCode) {
+    public UserTransferObject(EMessageCode responseCode) {
         this.responseCode = responseCode;
         message = MessageRepository.getMessage(responseCode);
     }
 
-    public UserTransferObject(String username, String password, String firstname, String lastname, String eMail, UserGroup userGroup) {
+    public UserTransferObject(String username, String password, String firstname, String lastname, String eMail, EUserGroup userGroup) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -38,11 +38,11 @@ public class UserTransferObject {
         this.password = password;
     }
 
-    public ResponseCode getResponseCode() {
+    public EMessageCode getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(ResponseCode responseCode) {
+    public void setResponseCode(EMessageCode responseCode) {
         this.responseCode = responseCode;
     }
 
@@ -94,11 +94,11 @@ public class UserTransferObject {
         this.eMail = eMail;
     }
 
-    public UserGroup getUserGroup() {
+    public EUserGroup getUserGroup() {
         return userGroup;
     }
 
-    public void setUserGroup(UserGroup userGroup) {
+    public void setUserGroup(EUserGroup userGroup) {
         this.userGroup = userGroup;
     }
 

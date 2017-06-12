@@ -94,6 +94,6 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         ConradWeatherStationDriver bd = new ConradWeatherStationDriver("1234", "192.168.100.106", "Test");
         System.out.print(bd.getAirPressure() + "\n");
         System.out.print(bd.getRainfallAmount() +"\n" );
-        System.out.print(bd.getTemperature() +"\n");
+        System.out.print(bd.getCurrentTemperature() +"\n");
     }*/
 }

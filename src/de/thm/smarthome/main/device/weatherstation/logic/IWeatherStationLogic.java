@@ -10,7 +10,7 @@ public interface IWeatherStationLogic {
 //    void setRainfallAmount(double rainfallAmount);
 //    void setAirHumidity(double airHumidity);
 //    void setAirPressure(double airPressure);
-//    void setTemperature(double temperature);
+//    void setCurrentTemperature(double temperature);
     void setValues();
     WeatherStationTransferObject getWeatherStationData();
 }

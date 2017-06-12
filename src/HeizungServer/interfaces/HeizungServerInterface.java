@@ -2,8 +2,7 @@ package HeizungServer.interfaces;
 
 
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -25,8 +24,8 @@ public interface HeizungServerInterface extends Remote {
     public boolean setMinTemperature (double min_temp, HeizungClientInterface c) throws RemoteException;
     public void standby(HeizungClientInterface c) throws RemoteException;
     public void wakeUp(HeizungClientInterface c) throws RemoteException;
-    public ResponseCode switchOn(HeizungClientInterface c) throws RemoteException;
-    public ResponseCode switchOff(HeizungClientInterface c) throws RemoteException;
+    public EMessageCode switchOn(HeizungClientInterface c) throws RemoteException;
+    public EMessageCode switchOff(HeizungClientInterface c) throws RemoteException;
     public String getStatus(HeizungClientInterface c) throws RemoteException;
     //public void update(AObservable o, Object change, HeizungClientInterface c) throws RemoteException;
 }

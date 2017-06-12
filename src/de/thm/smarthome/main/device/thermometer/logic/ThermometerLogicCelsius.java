@@ -24,9 +24,9 @@ public class ThermometerLogicCelsius implements IThermometerLogic {
 
 
 //    @Override
-//    public void setTemperature() {
+//    public void setCurrentTemperature() {
 //        if(model.isCelsius()==false){
-//            model.setTemperature((model.getTemperature()*1.8)+32);
+//            model.setCurrentTemperature((model.getCurrentTemperature()*1.8)+32);
 //            model.toggleTemperatureUnit();
 //        } else {
 //            //TODO: //Fehlermeldung: "Thermometer misst bereits in Celsius!"

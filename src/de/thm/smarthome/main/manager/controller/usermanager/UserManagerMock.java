@@ -1,9 +1,8 @@
 package de.thm.smarthome.main.manager.controller.usermanager;
 
 import de.thm.smarthome.global.connection.database.user.User;
-import de.thm.smarthome.global.connection.database.user.UserDAO;
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.enumeration.UserGroup;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.enumeration.EUserGroup;
 import de.thm.smarthome.global.transfer.CommandResponseObject;
 import de.thm.smarthome.global.transfer.UserTransferObject;
 
@@ -24,27 +23,27 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public ResponseCode login(String username){
-        return ResponseCode.LoginSuccessful;
+    public EMessageCode login(String username){
+        return EMessageCode.LoginSuccessful;
     }
 
     @Override
-    public ResponseCode logout(String username){
-        return ResponseCode.LogoutSuccessful;
+    public EMessageCode logout(String username){
+        return EMessageCode.LogoutSuccessful;
     }
 
     @Override
-    public ResponseCode checkLogin(String username) {
-        return ResponseCode.LoggedIn;
+    public EMessageCode checkLogin(String username) {
+        return EMessageCode.LoggedIn;
     }
 
     @Override
-    public ResponseCode login(UserTransferObject userTransferObject) {
+    public EMessageCode login(UserTransferObject userTransferObject) {
         return login(userTransferObject.getUsername());
     }
 
     @Override
-    public ResponseCode logout(UserTransferObject userTransferObject) {
+    public EMessageCode logout(UserTransferObject userTransferObject) {
         return logout(userTransferObject.getUsername());
     }
 
@@ -70,12 +69,12 @@ public class UserManagerMock implements IUserManager{
 
     @Override
     public CommandResponseObject createUser(UserTransferObject userTransferObject) {
-        return new CommandResponseObject(ResponseCode.UserCreatedSuccessfully);
+        return new CommandResponseObject(EMessageCode.UserCreatedSuccessfully);
     }
 
     @Override
     public UserTransferObject getUserData(UserTransferObject userTransferObject) {
-        return new UserTransferObject("username", "password", "firstname", "lastname", "eMail" , UserGroup.Administrator);
+        return new UserTransferObject("username", "password", "firstname", "lastname", "eMail" , EUserGroup.Administrator);
     }
 
     @Override
@@ -90,15 +89,15 @@ public class UserManagerMock implements IUserManager{
 
     @Override
     public CommandResponseObject deleteUser(UserTransferObject userTransferObject) {
-        return new CommandResponseObject(ResponseCode.UserDeletedSuccessfully);
+        return new CommandResponseObject(EMessageCode.UserDeletedSuccessfully);
     }
 
     @Override
     public CommandResponseObject alterUser(UserTransferObject userTransferObject) {
-        return new CommandResponseObject(ResponseCode.UserAlteredSuccessfully);
+        return new CommandResponseObject(EMessageCode.UserAlteredSuccessfully);
     }
 
-    public ResponseCode checkLogin(UserTransferObject userTransferObject){
+    public EMessageCode checkLogin(UserTransferObject userTransferObject){
         return checkLogin(userTransferObject.getUsername());
     }
 }

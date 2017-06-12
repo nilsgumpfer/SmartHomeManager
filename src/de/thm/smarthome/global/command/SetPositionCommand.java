@@ -1,9 +1,8 @@
 package de.thm.smarthome.global.command;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
-import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 /**
@@ -22,8 +21,8 @@ public class SetPositionCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode invoke() {
-        ResponseCode responseCode;
+    public EMessageCode invoke() {
+        EMessageCode responseCode;
 
         oldPosition = device.getPosition();
         responseCode = device.setPosition(position);
@@ -31,24 +30,24 @@ public class SetPositionCommand implements ICommand {
         //Log detailled success- or failure-statements
         SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
 
-        if(responseCode == ResponseCode.MoveToPositionFailed)
-            return ResponseCode.CommandInvocationFailed;
+        if(responseCode == EMessageCode.MoveToPositionFailed)
+            return EMessageCode.CommandInvocationFailed;
         else
-            return ResponseCode.CommandInvokedSuccessfully;
+            return EMessageCode.CommandInvokedSuccessfully;
     }
 
     @Override
-    public ResponseCode undo() {
-        ResponseCode responseCode;
+    public EMessageCode undo() {
+        EMessageCode responseCode;
 
         responseCode = device.setPosition(oldPosition);
 
         //Log detailled success- or failure-statements
         SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
 
-        if(responseCode == ResponseCode.MoveToPositionFailed)
-            return ResponseCode.CommandInvocationFailed;
+        if(responseCode == EMessageCode.MoveToPositionFailed)
+            return EMessageCode.CommandInvocationFailed;
         else
-            return ResponseCode.CommandInvokedSuccessfully;
+            return EMessageCode.CommandInvokedSuccessfully;
     }
 }

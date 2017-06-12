@@ -77,6 +77,6 @@ public class IndoorThermometerDriver implements ThermometerClientInterface{
 
     /*public static void main(String args[]) throws RemoteException {
         IndoorThermometerDriver bd = new IndoorThermometerDriver("1234", "192.168.100.106", "Test");
-        System.out.print(bd.getTemperature() + "\n");
+        System.out.print(bd.getCurrentTemperature() + "\n");
     }*/
 }

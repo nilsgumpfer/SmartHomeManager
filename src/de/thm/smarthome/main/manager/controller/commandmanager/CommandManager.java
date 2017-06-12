@@ -2,7 +2,7 @@ package de.thm.smarthome.main.manager.controller.commandmanager;
 
 import de.thm.smarthome.global.command.*;
 import de.thm.smarthome.global.helper.TypeConverter;
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
@@ -32,13 +32,13 @@ public class CommandManager implements ICommandManager{
     }
 
     @Override
-    public ResponseCode undoLastCommand(){
-        ResponseCode responseCode;
+    public EMessageCode undoLastCommand(){
+        EMessageCode responseCode;
         try {
             ICommand command = invokedCommands.get(invokedCommands.size() - 1);
             responseCode = command.undo();
 
-            if(responseCode != ResponseCode.UndoFailed)
+            if(responseCode != EMessageCode.UndoFailed)
                 invokedCommands.remove(command);
 
             return responseCode;
@@ -47,23 +47,23 @@ public class CommandManager implements ICommandManager{
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("undoLastCommand: UndoFailed");
 
-            return ResponseCode.UndoFailed;
+            return EMessageCode.UndoFailed;
         }
     }
 
     @Override
-    public ResponseCode addSetTemperatureCommand(HeatingTransferObject heatingTransferObject) {
-        return addSetTemperatureCommand(deviceManager.getSmartHeating(),heatingTransferObject.getTemperature());
+    public EMessageCode addSetTemperatureCommand(HeatingTransferObject heatingTransferObject) {
+        return addSetTemperatureCommand(deviceManager.getSmartHeating(),heatingTransferObject.getCurrentTemperature());
     }
 
     @Override
-    public ResponseCode addSetTemperatureCommand(ITemperatureRelevantDevice temperatureRelevantDevice, double temperature) {
-        ResponseCode responseCode;
+    public EMessageCode addSetTemperatureCommand(ITemperatureRelevantDevice temperatureRelevantDevice, double temperature) {
+        EMessageCode responseCode;
         try {
             ICommand command = new SetTemperatureCommand(temperatureRelevantDevice, temperature);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed)
+            if(responseCode != EMessageCode.CommandInvocationFailed)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -72,18 +72,18 @@ public class CommandManager implements ICommandManager{
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addSetTemperatureCommand: CommandInvocationFailed");
 
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 
     @Override
-    public ResponseCode addMoveUpCommand() {
-        ResponseCode responseCode;
+    public EMessageCode addMoveUpCommand() {
+        EMessageCode responseCode;
         try {
             ICommand command = new CollectiveMoveUpCommand(TypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed)
+            if(responseCode != EMessageCode.CommandInvocationFailed)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -91,18 +91,18 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addMoveUpCommand: CommandInvocationFailed");
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 
     @Override
-    public ResponseCode addMoveDownCommand() {
-        ResponseCode responseCode;
+    public EMessageCode addMoveDownCommand() {
+        EMessageCode responseCode;
         try {
             ICommand command = new CollectiveMoveDownCommand(TypeConverter.convertDeviceList(deviceManager.getSmartShutters()));
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyMovedUp)
+            if(responseCode != EMessageCode.CommandInvocationFailed && responseCode != EMessageCode.AlreadyMovedUp)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -110,28 +110,28 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addMoveUpCommand: CommandInvocationFailed");
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 
     @Override
-    public ResponseCode addMoveUpCommand(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode addMoveUpCommand(ShutterTransferObject shutterTransferObject) {
         return addMoveUpCommand(deviceManager.getSmartShutter(shutterTransferObject));
     }
 
     @Override
-    public ResponseCode addMoveDownCommand(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode addMoveDownCommand(ShutterTransferObject shutterTransferObject) {
         return addMoveDownCommand(deviceManager.getSmartShutter(shutterTransferObject));
     }
 
     @Override
-    public ResponseCode addMoveUpCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
-        ResponseCode responseCode;
+    public EMessageCode addMoveUpCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
+        EMessageCode responseCode;
         try {
             ICommand command = new MoveUpCommand(upAndDownMovableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyMovedUp)
+            if(responseCode != EMessageCode.CommandInvocationFailed && responseCode != EMessageCode.AlreadyMovedUp)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -139,18 +139,18 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addMoveUpCommand: CommandInvocationFailed");
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 
     @Override
-    public ResponseCode addMoveDownCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
-        ResponseCode responseCode;
+    public EMessageCode addMoveDownCommand(IUpAndDownMovableDevice upAndDownMovableDevice) {
+        EMessageCode responseCode;
         try {
             ICommand command = new MoveDownCommand(upAndDownMovableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyMovedDown)
+            if(responseCode != EMessageCode.CommandInvocationFailed && responseCode != EMessageCode.AlreadyMovedDown)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -158,18 +158,18 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addMoveDownCommand: CommandInvocationFailed");
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 
     @Override
-    public ResponseCode addSetPositionCommand(IPositionRelevantDevice positionRelevantDevice, int position) {
-        ResponseCode responseCode;
+    public EMessageCode addSetPositionCommand(IPositionRelevantDevice positionRelevantDevice, int position) {
+        EMessageCode responseCode;
         try {
             ICommand command = new SetPositionCommand(positionRelevantDevice, position);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadyAtThisPosition)
+            if(responseCode != EMessageCode.CommandInvocationFailed && responseCode != EMessageCode.AlreadyAtThisPosition)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -177,28 +177,28 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addSetPositionCommand: CommandInvocationFailed");
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 
     @Override
-    public ResponseCode addSwitchOnCommand(HeatingTransferObject heatingTransferObject) {
+    public EMessageCode addSwitchOnCommand(HeatingTransferObject heatingTransferObject) {
         return addSwitchOnCommand(deviceManager.getSmartHeating());
     }
 
     @Override
-    public ResponseCode addSwitchOffCommand(HeatingTransferObject heatingTransferObject) {
+    public EMessageCode addSwitchOffCommand(HeatingTransferObject heatingTransferObject) {
         return addSwitchOffCommand(deviceManager.getSmartHeating());
     }
 
     @Override
-    public ResponseCode addSwitchOnCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
-        ResponseCode responseCode;
+    public EMessageCode addSwitchOnCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
+        EMessageCode responseCode;
         try {
             ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadySwitchedOn)
+            if(responseCode != EMessageCode.CommandInvocationFailed && responseCode != EMessageCode.AlreadySwitchedOn)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -206,18 +206,18 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addSwitchOnCommand: CommandInvocationFailed");
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 
     @Override
-    public ResponseCode addSwitchOffCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
-        ResponseCode responseCode;
+    public EMessageCode addSwitchOffCommand(IOnAndOffSwitchableDevice onAndOffTurnableDevice) {
+        EMessageCode responseCode;
         try {
             ICommand command = new SwitchOnCommand(onAndOffTurnableDevice);
             responseCode = command.invoke();
 
-            if(responseCode != ResponseCode.CommandInvocationFailed && responseCode != ResponseCode.AlreadySwitchedOff)
+            if(responseCode != EMessageCode.CommandInvocationFailed && responseCode != EMessageCode.AlreadySwitchedOff)
                 invokedCommands.add(command);
 
             return responseCode;
@@ -225,7 +225,7 @@ public class CommandManager implements ICommandManager{
         catch(Exception e){
             SmartHomeLogger.log(e);
             SmartHomeLogger.log("addSwitchOffCommand: CommandInvocationFailed");
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         }
     }
 

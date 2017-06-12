@@ -1,20 +1,18 @@
 package de.thm.smarthome.global.transfer;
 
-import de.thm.smarthome.global.enumeration.DeviceManufacturer;
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.helper.ManufacturerRepository;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.helper.MessageRepository;
-import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 
 /**
  * Created by Nils on 05.02.2017.
  */
 public class ShutterTransferObject {
-    private ResponseCode responseCode;
+    private EMessageCode responseCode;
     private String message;
     private int position;
     private String shutterID;
-    private DeviceManufacturer manufacturer;
+    private EDeviceManufacturer manufacturer;
     private String manufacturer_t;
     private String model;
     private String shutterName;
@@ -23,7 +21,7 @@ public class ShutterTransferObject {
 
     private ShutterTransferObject(){}
 
-    public ShutterTransferObject(ResponseCode responseCode) {
+    public ShutterTransferObject(EMessageCode responseCode) {
         this.responseCode   = responseCode;
         message             = MessageRepository.getMessage(responseCode);
     }
@@ -45,11 +43,11 @@ public class ShutterTransferObject {
         this.position = position;
     }
 
-    public ResponseCode getResponseCode() {
+    public EMessageCode getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(ResponseCode responseCode) {
+    public void setResponseCode(EMessageCode responseCode) {
         this.responseCode = responseCode;
     }
 
@@ -77,11 +75,11 @@ public class ShutterTransferObject {
         this.shutterID = shutterID;
     }
 
-    public DeviceManufacturer getManufacturer() {
+    public EDeviceManufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(DeviceManufacturer manufacturer) {
+    public void setManufacturer(EDeviceManufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 

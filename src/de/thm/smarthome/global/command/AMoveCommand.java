@@ -1,8 +1,7 @@
 package de.thm.smarthome.global.command;
 
-import com.sun.org.apache.bcel.internal.generic.ICONST;
-import de.thm.smarthome.global.enumeration.MoveDirection;
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMoveDirection;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
@@ -12,13 +11,13 @@ import de.thm.smarthome.global.logging.SmartHomeLogger;
  */
 public abstract class AMoveCommand implements ICommand {
     protected IUpAndDownMovableDevice device          = null;
-    protected MoveDirection moveDirection             = null;
-    protected ResponseCode failureCode                = null;
+    protected EMoveDirection moveDirection             = null;
+    protected EMessageCode failureCode                = null;
     protected int oldPosition                         = -1;
 
     @Override
-    public ResponseCode invoke() {
-        ResponseCode responseCode = null;
+    public EMessageCode invoke() {
+        EMessageCode responseCode = null;
         boolean errorsOccured = false;
 
         //before new position is set, save old position for possible undo-operation
@@ -46,14 +45,14 @@ public abstract class AMoveCommand implements ICommand {
             errorsOccured = true;
 
         if(errorsOccured)
-            return ResponseCode.CommandInvocationFailed;
+            return EMessageCode.CommandInvocationFailed;
         else
-            return ResponseCode.CommandInvokedSuccessfully;
+            return EMessageCode.CommandInvokedSuccessfully;
     }
 
     @Override
-    public ResponseCode undo() {
-        ResponseCode responseCode;
+    public EMessageCode undo() {
+        EMessageCode responseCode;
         boolean errorsOccured       = false;
 
         responseCode = device.setPosition(oldPosition);
@@ -62,12 +61,12 @@ public abstract class AMoveCommand implements ICommand {
         SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
 
         //in case of error, set flag
-        if(responseCode == ResponseCode.MoveToPositionFailed)
+        if(responseCode == EMessageCode.MoveToPositionFailed)
             errorsOccured = true;
 
         if(errorsOccured)
-            return ResponseCode.UndoFailed;
+            return EMessageCode.UndoFailed;
         else
-            return ResponseCode.UndoSuccessful;
+            return EMessageCode.UndoSuccessful;
     }
 }

@@ -1,18 +1,13 @@
 package de.thm.smarthome.main.manager.controller.requestmanager;
 
-import de.thm.smarthome.global.enumeration.DeviceManufacturer;
-import de.thm.smarthome.global.enumeration.Power;
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.factory.HeatingFactory;
 import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
-import de.thm.smarthome.main.device.heating.device.SmartHeating;
-import de.thm.smarthome.main.device.shutter.device.SmartShutter;
-import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
-import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
@@ -22,8 +17,6 @@ import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManagerMock;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -49,7 +42,7 @@ public class RequestManagerMock implements IServiceFacade {
     }
 
     @Override
-    public String getMessage(ResponseCode responseCode) {
+    public String getMessage(EMessageCode responseCode) {
         return MessageRepository.getMessage(responseCode);
     }
 
@@ -67,16 +60,16 @@ public class RequestManagerMock implements IServiceFacade {
     public CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
         HeatingFactory heatingFactory = new HeatingFactory();
 
-        return new CommandResponseObject(deviceManager.setSmartHeating(heatingFactory.createHeating(DeviceManufacturer.VIESSMANN,"V348732B328","","")));
+        return new CommandResponseObject(deviceManager.setSmartHeating(heatingFactory.createHeating(EDeviceManufacturer.VIESSMANN,"V348732B328","","")));
     }
 
-    private ResponseCode checkLogin(UserTransferObject authentication) {
+    private EMessageCode checkLogin(UserTransferObject authentication) {
         return userManager.checkLogin(authentication);
     }
 
     @Override
     public CommandResponseObject deleteHeating(UserTransferObject authentication) {
-        return new CommandResponseObject(ResponseCode.Success);
+        return new CommandResponseObject(EMessageCode.Success);
     }
 
     @Override
@@ -91,7 +84,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -103,55 +96,55 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) throws RemoteException{
-        return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature(),UnitOfMeasurement.temperature_DegreesCelsius);
+        return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature(), EUnitOfMeasurement.temperature_DegreesCelsius);
     }
 
     @Override
     public HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException{
         return deviceManager.getSmartHeating().getHeatingData();
         /*//TODO: just for testing!
-        return new HeatingTransferObject(18,"°C","V2332746B37","DayMode","Zentralheizung","Vitorodens 103", "Viessmann", Power.On, "Eingeschaltet");
+        return new HeatingTransferObject(18,"°C","V2332746B37","DayMode","Zentralheizung","Vitorodens 103", "Viessmann", Power.ON, "Eingeschaltet");
     */
     }
 
     @Override
     public CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject moveAllShuttersUp(UserTransferObject authentication) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject moveAllShuttersDown(UserTransferObject authentication) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        return new ShutterTransferObject(ResponseCode.CommandInvocationFailed);
+        return new ShutterTransferObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        return new ShutterTransferObject(ResponseCode.CommandInvocationFailed);
+        return new ShutterTransferObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
@@ -167,17 +160,17 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
@@ -187,7 +180,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -199,7 +192,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        return new UserTransferObject(ResponseCode.CommandInvocationFailed);
+        return new UserTransferObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
@@ -209,12 +202,12 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStationTransferObject) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
     public CommandResponseObject deleteWeatherStation(UserTransferObject authentication) {
-        return new CommandResponseObject(ResponseCode.CommandInvocationFailed);
+        return new CommandResponseObject(EMessageCode.CommandInvocationFailed);
     }
 
     @Override
@@ -253,7 +246,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometerTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -265,7 +258,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public CommandResponseObject deleteThermometer(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:

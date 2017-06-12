@@ -8,17 +8,17 @@ import de.thm.smarthome.main.device.shutter.adapter.ElectricShutterAdapter;
  * Created by Nils on 27.01.2017.
  */
 public class ShutterModel implements IShutterModel{
-    private String shutterName = "";
-    private String shutterManufacturer = "";
-    private String shutterModel = "";
-    private String shutterSerialnumber = "";
+    private String shutterName = "N/A";
+    private String shutterManufacturer = "N/A";
+    private String shutterModel = "N/A";
+    private String shutterSerialnumber = "N/A";
     private int shutterPosition = 0;
-    private String logicName = "";
+    private String logicName = "N/A";
     boolean isUp = true;
     boolean isDown = false;
     int shutterHeight = 0;
 
-    ElectricShutterAdapter adapter;
+    ElectricShutterAdapter adapter; //TODO: das ist falsch --> interface!
 
     @Override
     public String getShutterName(){

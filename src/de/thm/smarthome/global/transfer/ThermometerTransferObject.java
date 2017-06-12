@@ -1,9 +1,8 @@
 package de.thm.smarthome.global.transfer;
 
-import de.thm.smarthome.global.enumeration.DeviceManufacturer;
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
-import de.thm.smarthome.global.helper.ManufacturerRepository;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.helper.UnitRepository;
 
@@ -11,12 +10,12 @@ import de.thm.smarthome.global.helper.UnitRepository;
  * Created by Nils on 05.02.2017.
  */
 public class ThermometerTransferObject {
-    private ResponseCode responseCode;
+    private EMessageCode responseCode;
     private String message;
     private double temperature;
-    private UnitOfMeasurement temperatureUnit;
+    private EUnitOfMeasurement temperatureUnit;
     private String temperatureUnit_t;
-    private DeviceManufacturer manufacturer;
+    private EDeviceManufacturer manufacturer;
     private String manufacturer_t;
     private String model;
     private String serialnumber;
@@ -24,12 +23,12 @@ public class ThermometerTransferObject {
 
     private ThermometerTransferObject(){}
 
-    public ThermometerTransferObject(ResponseCode responseCode) {
+    public ThermometerTransferObject(EMessageCode responseCode) {
         this.responseCode   = responseCode;
         message             = MessageRepository.getMessage(responseCode);
     }
 
-    public ThermometerTransferObject(double temperature, UnitOfMeasurement temperatureUnit) {
+    public ThermometerTransferObject(double temperature, EUnitOfMeasurement temperatureUnit) {
         this.temperature        = temperature;
         this.temperatureUnit    = temperatureUnit;
     }
@@ -48,15 +47,15 @@ public class ThermometerTransferObject {
         this.temperatureUnit_t = temperatureUnit_t;
     }
 
-    public ThermometerTransferObject(UnitOfMeasurement temperatureUnit) {
+    public ThermometerTransferObject(EUnitOfMeasurement temperatureUnit) {
         this.temperatureUnit = temperatureUnit;
     }
 
-    public ResponseCode getResponseCode() {
+    public EMessageCode getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(ResponseCode responseCode) {
+    public void setResponseCode(EMessageCode responseCode) {
         this.responseCode = responseCode;
     }
 
@@ -76,11 +75,11 @@ public class ThermometerTransferObject {
         this.temperature = temperature;
     }
 
-    public UnitOfMeasurement getTemperatureUnit() {
+    public EUnitOfMeasurement getTemperatureUnit() {
         return temperatureUnit;
     }
 
-    public void setTemperatureUnit(UnitOfMeasurement temperatureUnit) {
+    public void setTemperatureUnit(EUnitOfMeasurement temperatureUnit) {
         this.temperatureUnit = temperatureUnit;
     }
 
@@ -112,11 +111,11 @@ public class ThermometerTransferObject {
         this.name = name;
     }
 
-    public DeviceManufacturer getManufacturer() {
+    public EDeviceManufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(DeviceManufacturer manufacturer) {
+    public void setManufacturer(EDeviceManufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 

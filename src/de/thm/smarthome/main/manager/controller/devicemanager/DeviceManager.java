@@ -1,7 +1,6 @@
 package de.thm.smarthome.main.manager.controller.devicemanager;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.factory.HeatingFactory;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -14,9 +13,7 @@ import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
 import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 import de.thm.smarthome.main.manager.controller.eventmanager.EventManager;
 import de.thm.smarthome.main.manager.controller.eventmanager.IEventManager;
-import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,42 +45,42 @@ public class DeviceManager implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode setSmartHeating(SmartHeating smartHeating) {
+    public EMessageCode setSmartHeating(SmartHeating smartHeating) {
         if(smartHeating!=null){
             this.smartHeating = smartHeating;
-            return ResponseCode.Success;
+            return EMessageCode.Success;
         } else {
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         }
     }
 
     @Override
-    public ResponseCode setSmartHeating(HeatingTransferObject heatingTransferObject) {
+    public EMessageCode setSmartHeating(HeatingTransferObject heatingTransferObject) {
         if(heatingTransferObject!=null){
             //TODO: implement this
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         } else {
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         }
     }
 
     @Override
-    public ResponseCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
+    public EMessageCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
         if(heatingTransferObject!=null){
             //TODO: implement this
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         } else {
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         }
     }
 
     @Override
-    public ResponseCode deleteSmartHeating() {
+    public EMessageCode deleteSmartHeating() {
         if(smartHeating==null){
             //TODO: implement this
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         } else {
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         }
     }
 
@@ -98,17 +95,17 @@ public class DeviceManager implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode addSmartShutter(SmartShutter smartShutter) {
+    public EMessageCode addSmartShutter(SmartShutter smartShutter) {
         if(smartShutter!=null){
             smartShutters.add(smartShutters.size(), smartShutter);
-            return ResponseCode.Success;
+            return EMessageCode.Success;
         } else {
-            return ResponseCode.Fail;
+            return EMessageCode.Fail;
         }
     }
 
     @Override
-    public ResponseCode deleteSmartShutter(SmartShutter smartShutter) {
+    public EMessageCode deleteSmartShutter(SmartShutter smartShutter) {
         return null;
     }
 
@@ -118,17 +115,17 @@ return smartShutter;
     }
 
     @Override
-    public ResponseCode addSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode addSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
     @Override
-    public ResponseCode deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
     @Override
-    public ResponseCode createSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode createSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
@@ -138,17 +135,17 @@ return smartShutter;
     }
 
     @Override
-    public ResponseCode setSmartThermometer(SmartThermometer smartThermometer) {
+    public EMessageCode setSmartThermometer(SmartThermometer smartThermometer) {
         return null;
     }
 
     @Override
-    public ResponseCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+    public EMessageCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
         return null;
     }
 
     @Override
-    public ResponseCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+    public EMessageCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
         return null;
     }
 
@@ -158,12 +155,12 @@ return smartShutter;
     }
 
     @Override
-    public ResponseCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
+    public EMessageCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
         return null;
     }
 
     @Override
-    public ResponseCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
+    public EMessageCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
         return null;
     }
 
@@ -173,12 +170,12 @@ return smartShutter;
     }
 
     @Override
-    public ResponseCode deleteSmartWeatherStation() {
+    public EMessageCode deleteSmartWeatherStation() {
         return null;
     }
 
     @Override
-    public ResponseCode deleteSmartThermometer() {
+    public EMessageCode deleteSmartThermometer() {
         return null;
     }
 }

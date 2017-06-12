@@ -2,7 +2,7 @@ package de.thm.smarthome.main.manager.controller.usermanager;
 
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.connection.database.user.UserDAO;
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.transfer.CommandResponseObject;
 import de.thm.smarthome.global.transfer.UserTransferObject;
 
@@ -26,27 +26,27 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public ResponseCode login(String username){
+    public EMessageCode login(String username){
         return userdao.logUserIn(username);
     }
 
     @Override
-    public ResponseCode logout(String username){
+    public EMessageCode logout(String username){
         return userdao.logUserOut(username);
     }
 
     @Override
-    public ResponseCode checkLogin(String username) {
+    public EMessageCode checkLogin(String username) {
         return userdao.isUserloggedIn(username);
     }
 
     @Override
-    public ResponseCode login(UserTransferObject userTransferObject) {
+    public EMessageCode login(UserTransferObject userTransferObject) {
         return login(userTransferObject.getUsername());
     }
 
     @Override
-    public ResponseCode logout(UserTransferObject userTransferObject) {
+    public EMessageCode logout(UserTransferObject userTransferObject) {
         return logout(userTransferObject.getUsername());
     }
 
@@ -105,7 +105,7 @@ public class UserManager implements IUserManager{
         return null;
     }
 
-    public ResponseCode checkLogin(UserTransferObject userTransferObject){
+    public EMessageCode checkLogin(UserTransferObject userTransferObject){
         return checkLogin(userTransferObject.getUsername());
     }
 }

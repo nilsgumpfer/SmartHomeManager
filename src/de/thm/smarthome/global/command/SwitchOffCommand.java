@@ -1,7 +1,7 @@
 package de.thm.smarthome.global.command;
 
-import de.thm.smarthome.global.enumeration.Power;
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EPowerState;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 
 /**
@@ -12,8 +12,8 @@ public class SwitchOffCommand extends ASwitchCommand {
 
     public SwitchOffCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
-        powerToDo = Power.Off;
-        expectedStatus = ResponseCode.SwitchedOn;
-        requiredStatus = ResponseCode.SwitchedOff;
+        powerToDo = EPowerState.OFF;
+        expectedStatus = EMessageCode.SwitchedOn;
+        requiredStatus = EMessageCode.SwitchedOff;
     }
 }

@@ -1,6 +1,8 @@
 package de.thm.smarthome.main.device.heating.model;
 
+import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.adapter.ViessmannHeatingAdapter;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
@@ -8,66 +10,108 @@ import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class HeatingModel implements IHeatingModel{
-    String heatingName;
-    String heatingManufacturer;
-    String heatingModel;
-    String heatingSerialnumber;
-    double temperature = 0.0;
-    String heatingMode;
+public class HeatingModel extends AObservable implements IHeatingModel, IObserver
+{
+    MeasureBean currentTemperature;
+    MeasureBean desiredTemperature;
+    ModelVariantBean modelVariant;
+    ManufacturerBean manufacturer;
+    ActionModeBean actionMode;
+    String genericName;
+    String serialnumber;
+    PowerStateBean powerState;
 
-
-    IHeating adapter;
-
-    public HeatingModel(IHeating adapter) {
-        this.adapter = adapter;
+    public HeatingModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
+        this.modelVariant = modelVariant;
+        this.manufacturer = manufacturer;
+        this.actionMode = actionMode;
+        this.genericName = genericName;
+        this.serialnumber = serialnumber;
+        this.powerState = powerState;
     }
 
     @Override
-    public String getHeatingName() {
-        return this.heatingName;
+    public MeasureBean getCurrentTemperature() {
+        return currentTemperature;
     }
 
     @Override
-    public String getHeatingManufacturer() {
-        return this.heatingManufacturer;
+    public void setCurrentTemperature(MeasureBean currentTemperature) {
+        this.currentTemperature = currentTemperature;
     }
 
     @Override
-    public String getHeatingModel() {
-        return this.heatingModel;
+    public MeasureBean getDesiredTemperature() {
+        return desiredTemperature;
     }
 
     @Override
-    public String getHeatingSerialnumber() {
-        return this.heatingSerialnumber;
+    public void setDesiredTemperature(MeasureBean desiredTemperature) {
+        this.desiredTemperature = desiredTemperature;
     }
 
     @Override
-    public double getTemperature() {
-        return this.temperature;
+    public ModelVariantBean getModelVariant() {
+        return modelVariant;
     }
 
     @Override
-    public String getHeatingMode() {
-        return this.heatingMode;
+    public void setModelVariant(ModelVariantBean modelVariant) {
+        this.modelVariant = modelVariant;
     }
 
     @Override
-    public void setHeatingName(String heatingName) {
-        this.heatingName = heatingName;
+    public ManufacturerBean getManufacturer() {
+        return manufacturer;
     }
-
-
-    public void setHeatingMode(String heatingMode){
-        this.heatingMode = heatingMode;
-    }
-
-
-
 
     @Override
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
+    public void setManufacturer(ManufacturerBean manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    @Override
+    public ActionModeBean getActionMode() {
+        return actionMode;
+    }
+
+    @Override
+    public void setActionMode(ActionModeBean actionMode) {
+        this.actionMode = actionMode;
+    }
+
+    @Override
+    public String getGenericName() {
+        return genericName;
+    }
+
+    @Override
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
+    }
+
+    @Override
+    public String getSerialnumber() {
+        return serialnumber;
+    }
+
+    @Override
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
+
+    @Override
+    public PowerStateBean getPowerState() {
+        return powerState;
+    }
+
+    @Override
+    public void setPowerState(PowerStateBean powerState) {
+        this.powerState = powerState;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+        //TODO: Observer-Pattern
     }
 }

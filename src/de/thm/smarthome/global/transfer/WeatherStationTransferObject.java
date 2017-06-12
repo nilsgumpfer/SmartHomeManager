@@ -1,37 +1,36 @@
 package de.thm.smarthome.global.transfer;
 
-import de.thm.smarthome.global.enumeration.DeviceManufacturer;
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
-import de.thm.smarthome.global.helper.ManufacturerRepository;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.helper.MessageRepository;
 
 /**
  * Created by Nils on 05.02.2017.
  */
 public class WeatherStationTransferObject {
-    private ResponseCode responseCode;
+    private EMessageCode responseCode;
     private String message;
     private String weatherStationName;
     private String weatherStationManufacturer;
     private String weatherStationModel;
     private String weatherStationSerialnumber;
     private double windVelocity;
-    private UnitOfMeasurement windVelocityUnit;
+    private EUnitOfMeasurement windVelocityUnit;
     private String windVelocityUnit_t;
     private double airPressure;
-    private UnitOfMeasurement airPressureUnit;
+    private EUnitOfMeasurement airPressureUnit;
     private String airPressureUnit_t;
     private double outdoorTemperature;
-    private UnitOfMeasurement outdoorTemperatureUnit;
+    private EUnitOfMeasurement outdoorTemperatureUnit;
     private String outdoorTemperatureUnit_t;
     private double rainfallAmount;
-    private UnitOfMeasurement rainfallAmountUnit;
+    private EUnitOfMeasurement rainfallAmountUnit;
     private String rainfallAmountUnit_t;
     private double airHumidity;
-    private UnitOfMeasurement airHumidityUnit;
+    private EUnitOfMeasurement airHumidityUnit;
     private String airHumidityUnit_t;
-    private DeviceManufacturer manufacturer;
+    private EDeviceManufacturer manufacturer;
     private String manufacturer_t;
     private String serialnumber;
     private String model;
@@ -39,22 +38,22 @@ public class WeatherStationTransferObject {
 
     private WeatherStationTransferObject(){}
 
-    public WeatherStationTransferObject(ResponseCode responseCode) {
+    public WeatherStationTransferObject(EMessageCode responseCode) {
         this.responseCode = responseCode;
         message = MessageRepository.getMessage(responseCode);
     }
 
     public WeatherStationTransferObject(
         double windVelocity,
-        UnitOfMeasurement windVelocityUnit,
+        EUnitOfMeasurement windVelocityUnit,
         double airPressure,
-        UnitOfMeasurement airPressureUnit,
+        EUnitOfMeasurement airPressureUnit,
         double outdoorTemperature,
-        UnitOfMeasurement outdoorTemperatureUnit,
+        EUnitOfMeasurement outdoorTemperatureUnit,
         double rainfallAmount,
-        UnitOfMeasurement rainfallAmountUnit,
+        EUnitOfMeasurement rainfallAmountUnit,
         double airHumidity,
-        UnitOfMeasurement airHumidityUnit
+        EUnitOfMeasurement airHumidityUnit
         ){
         this.windVelocity = windVelocity;
         this.windVelocityUnit = windVelocityUnit;
@@ -86,11 +85,11 @@ public class WeatherStationTransferObject {
 
     }
 
-    public ResponseCode getResponseCode() {
+    public EMessageCode getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(ResponseCode responseCode) {
+    public void setResponseCode(EMessageCode responseCode) {
         this.responseCode = responseCode;
     }
 
@@ -142,19 +141,19 @@ public class WeatherStationTransferObject {
         this.airHumidity = airHumidity;
     }
 
-    public DeviceManufacturer getManufacturer() {
+    public EDeviceManufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(DeviceManufacturer manufacturer) {
+    public void setManufacturer(EDeviceManufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 
-    public UnitOfMeasurement getWindVelocityUnit() {
+    public EUnitOfMeasurement getWindVelocityUnit() {
         return windVelocityUnit;
     }
 
-    public void setWindVelocityUnit(UnitOfMeasurement windVelocityUnit) {
+    public void setWindVelocityUnit(EUnitOfMeasurement windVelocityUnit) {
         this.windVelocityUnit = windVelocityUnit;
     }
 
@@ -166,11 +165,11 @@ public class WeatherStationTransferObject {
         this.windVelocityUnit_t = windVelocityUnit_t;
     }
 
-    public UnitOfMeasurement getAirPressureUnit() {
+    public EUnitOfMeasurement getAirPressureUnit() {
         return airPressureUnit;
     }
 
-    public void setAirPressureUnit(UnitOfMeasurement airPressureUnit) {
+    public void setAirPressureUnit(EUnitOfMeasurement airPressureUnit) {
         this.airPressureUnit = airPressureUnit;
     }
 
@@ -182,11 +181,11 @@ public class WeatherStationTransferObject {
         this.airPressureUnit_t = airPressureUnit_t;
     }
 
-    public UnitOfMeasurement getOutdoorTemperatureUnit() {
+    public EUnitOfMeasurement getOutdoorTemperatureUnit() {
         return outdoorTemperatureUnit;
     }
 
-    public void setOutdoorTemperatureUnit(UnitOfMeasurement outdoorTemperatureUnit) {
+    public void setOutdoorTemperatureUnit(EUnitOfMeasurement outdoorTemperatureUnit) {
         this.outdoorTemperatureUnit = outdoorTemperatureUnit;
     }
 
@@ -198,11 +197,11 @@ public class WeatherStationTransferObject {
         this.outdoorTemperatureUnit_t = outdoorTemperatureUnit_t;
     }
 
-    public UnitOfMeasurement getRainfallAmountUnit() {
+    public EUnitOfMeasurement getRainfallAmountUnit() {
         return rainfallAmountUnit;
     }
 
-    public void setRainfallAmountUnit(UnitOfMeasurement rainfallAmountUnit) {
+    public void setRainfallAmountUnit(EUnitOfMeasurement rainfallAmountUnit) {
         this.rainfallAmountUnit = rainfallAmountUnit;
     }
 
@@ -214,11 +213,11 @@ public class WeatherStationTransferObject {
         this.rainfallAmountUnit_t = rainfallAmountUnit_t;
     }
 
-    public UnitOfMeasurement getAirHumidityUnit() {
+    public EUnitOfMeasurement getAirHumidityUnit() {
         return airHumidityUnit;
     }
 
-    public void setAirHumidityUnit(UnitOfMeasurement airHumidityUnit) {
+    public void setAirHumidityUnit(EUnitOfMeasurement airHumidityUnit) {
         this.airHumidityUnit = airHumidityUnit;
     }
 

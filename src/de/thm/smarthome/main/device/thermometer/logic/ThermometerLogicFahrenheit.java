@@ -24,9 +24,9 @@ public class ThermometerLogicFahrenheit implements IThermometerLogic{
 
 
 //    @Override
-//    public void setTemperature() {
+//    public void setCurrentTemperature() {
 //        if(model.isCelsius()==false){
-//            model.setTemperature((model.getTemperature()-32)/1.8);
+//            model.setCurrentTemperature((model.getCurrentTemperature()-32)/1.8);
 //            model.toggleTemperatureUnit();
 //        } else {
 //            //TODO: //Fehlermeldung: "Thermometer misst bereits in Fahrenheit!"

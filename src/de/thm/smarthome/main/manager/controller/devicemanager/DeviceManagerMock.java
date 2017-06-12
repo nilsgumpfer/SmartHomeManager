@@ -1,7 +1,7 @@
 package de.thm.smarthome.main.manager.controller.devicemanager;
 
-import de.thm.smarthome.global.enumeration.DeviceManufacturer;
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.factory.HeatingFactory;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
@@ -33,7 +33,7 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     private DeviceManagerMock(){
         HeatingFactory heatingFactory = new HeatingFactory();
         //TODO: IP-Adresse & Heizungs-Name
-        smartHeating = heatingFactory.createHeating(DeviceManufacturer.VIESSMANN,"V374354343543","192.168.56.1","SAG");
+        smartHeating = heatingFactory.createHeating(EDeviceManufacturer.VIESSMANN,"V374354343543","192.168.56.1","SAG");
     }
 
     public static DeviceManagerMock getInstance() {
@@ -51,23 +51,23 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode setSmartHeating(SmartHeating smartHeating) {
+    public EMessageCode setSmartHeating(SmartHeating smartHeating) {
         return this.setSmartHeating(smartHeating);
     }
 
     @Override
-    public ResponseCode setSmartHeating(HeatingTransferObject heatingTransferObject) {
-        return ResponseCode.Fail;
+    public EMessageCode setSmartHeating(HeatingTransferObject heatingTransferObject) {
+        return EMessageCode.Fail;
     }
 
     @Override
-    public ResponseCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
-        return ResponseCode.Fail;
+    public EMessageCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
+        return EMessageCode.Fail;
     }
 
     @Override
-    public ResponseCode deleteSmartHeating() {
-        return ResponseCode.Success;
+    public EMessageCode deleteSmartHeating() {
+        return EMessageCode.Success;
     }
 
     @Override
@@ -76,12 +76,12 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode addSmartShutter(SmartShutter smartShutter) {
+    public EMessageCode addSmartShutter(SmartShutter smartShutter) {
         return null;
     }
 
     @Override
-    public ResponseCode deleteSmartShutter(SmartShutter smartShutter) {
+    public EMessageCode deleteSmartShutter(SmartShutter smartShutter) {
         return null;
     }
 
@@ -91,17 +91,17 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode addSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode addSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
     @Override
-    public ResponseCode deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
     @Override
-    public ResponseCode createSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode createSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
@@ -111,17 +111,17 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode setSmartThermometer(SmartThermometer smartThermometer) {
+    public EMessageCode setSmartThermometer(SmartThermometer smartThermometer) {
         return null;
     }
 
     @Override
-    public ResponseCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+    public EMessageCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
         return null;
     }
 
     @Override
-    public ResponseCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+    public EMessageCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
         return null;
     }
 
@@ -131,12 +131,12 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
+    public EMessageCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
         return null;
     }
 
     @Override
-    public ResponseCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
+    public EMessageCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
         return null;
     }
 
@@ -146,12 +146,12 @@ public class DeviceManagerMock implements IDeviceManager, IObserver{
     }
 
     @Override
-    public ResponseCode deleteSmartWeatherStation() {
+    public EMessageCode deleteSmartWeatherStation() {
         return null;
     }
 
     @Override
-    public ResponseCode deleteSmartThermometer() {
+    public EMessageCode deleteSmartThermometer() {
         return null;
     }
 }

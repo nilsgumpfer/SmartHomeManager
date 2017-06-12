@@ -1,6 +1,6 @@
 package de.thm.smarthome.main.device.shutter.device;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
 import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
@@ -23,16 +23,16 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
         this.logic = logic;
     }
 
-    public ResponseCode moveUp() {
+    public EMessageCode moveUp() {
         logic.moveUp();
         //return null;
-        return ResponseCode.MoveUpFailed;
+        return EMessageCode.MoveUpFailed;
     }
     @Override
-    public ResponseCode moveDown() {
+    public EMessageCode moveDown() {
         logic.moveDown();
         //TODO: Anpassen!
-        return ResponseCode.MoveDownFailed;
+        return EMessageCode.MoveDownFailed;
     }
     @Override
     public boolean isUp(){
@@ -63,14 +63,14 @@ public class SmartShutter extends AObservable implements ISmartDevice, IObserver
     }
 
     @Override
-    public ResponseCode setPosition(int position) {
+    public EMessageCode setPosition(int position) {
         //TODO: anpassen!
-        return ResponseCode.MoveToPositionFailed;
+        return EMessageCode.MoveToPositionFailed;
     }
 
-    public ResponseCode setPosition(ShutterTransferObject shutterTransferObject) {
+    public EMessageCode setPosition(ShutterTransferObject shutterTransferObject) {
         //TODO: Anpassen!
-        return ResponseCode.MoveToPositionFailed;
+        return EMessageCode.MoveToPositionFailed;
     }
 
 

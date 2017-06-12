@@ -1,10 +1,9 @@
 package de.thm.smarthome.global.command;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
-import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 
 import java.rmi.RemoteException;
 
@@ -24,8 +23,8 @@ public class SetTemperatureCommand implements ICommand {
     }
 
     @Override
-    public ResponseCode invoke() throws RemoteException{
-        ResponseCode responseCode;
+    public EMessageCode invoke() throws RemoteException{
+        EMessageCode responseCode;
 
         oldTemperature = device.getTemperature();
         responseCode = device.setTemperature(newTemperature);
@@ -33,15 +32,15 @@ public class SetTemperatureCommand implements ICommand {
         //Log detailled success- or failure-statements
         SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
 
-        if(responseCode == ResponseCode.TemperatureAdjustmentFailed)
-            return ResponseCode.CommandInvocationFailed;
+        if(responseCode == EMessageCode.TemperatureAdjustmentFailed)
+            return EMessageCode.CommandInvocationFailed;
         else
-            return ResponseCode.CommandInvokedSuccessfully;
+            return EMessageCode.CommandInvokedSuccessfully;
     }
 
     @Override
-    public ResponseCode undo() throws RemoteException{
-        ResponseCode responseCode;
+    public EMessageCode undo() throws RemoteException{
+        EMessageCode responseCode;
 
         oldTemperature = device.getTemperature();
         responseCode = device.setTemperature(oldTemperature);
@@ -49,9 +48,9 @@ public class SetTemperatureCommand implements ICommand {
         //Log detailled success- or failure-statements
         SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
 
-        if(responseCode == ResponseCode.TemperatureAdjustmentFailed)
-            return ResponseCode.CommandInvocationFailed;
+        if(responseCode == EMessageCode.TemperatureAdjustmentFailed)
+            return EMessageCode.CommandInvocationFailed;
         else
-            return ResponseCode.CommandInvokedSuccessfully;
+            return EMessageCode.CommandInvokedSuccessfully;
     }
 }

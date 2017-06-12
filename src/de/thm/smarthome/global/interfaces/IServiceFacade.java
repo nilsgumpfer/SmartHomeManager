@@ -1,10 +1,6 @@
 package de.thm.smarthome.global.interfaces;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.observer.IHeatingObserver;
-import de.thm.smarthome.global.observer.IShutterObserver;
-import de.thm.smarthome.global.observer.IThermometerObserver;
-import de.thm.smarthome.global.observer.IWeatherstationObserver;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.transfer.*;
 
 import java.rmi.RemoteException;
@@ -63,5 +59,5 @@ public interface IServiceFacade {
 
     CommandResponseObject undoLastCommand(UserTransferObject authentication);
 
-    String getMessage(ResponseCode responseCode);
+    String getMessage(EMessageCode responseCode);
 }

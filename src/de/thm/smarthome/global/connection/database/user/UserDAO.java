@@ -1,6 +1,6 @@
 package de.thm.smarthome.global.connection.database.user;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -127,7 +127,7 @@ public class UserDAO {
         return logUserIn(user.getUsername());
     }*/
 
-    public ResponseCode logUserIn(String username) {
+    public EMessageCode logUserIn(String username) {
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
@@ -143,18 +143,18 @@ public class UserDAO {
             stm2.executeUpdate("Update users SET loggedIn = true WHERE username ='" + username + "';");
 
             //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-            return ResponseCode.LoginSuccessful;
+            return EMessageCode.LoginSuccessful;
         }
         catch(Exception e) {
             e.printStackTrace();
-            return ResponseCode.LoginFailed;
+            return EMessageCode.LoginFailed;
         }}
 
-    public ResponseCode logUserOut(User user){
+    public EMessageCode logUserOut(User user){
         return logUserOut(user.getUsername());
     }
 
-    public ResponseCode logUserOut(String username){
+    public EMessageCode logUserOut(String username){
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
@@ -163,10 +163,10 @@ public class UserDAO {
             stm.executeUpdate("Update users SET loggedIn = 0 WHERE username ='" + username + "';");
 
             //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-            return ResponseCode.LogoutSuccessful;
+            return EMessageCode.LogoutSuccessful;
         }
         catch(Exception e) {
-            return ResponseCode.LogoutFailed;
+            return EMessageCode.LogoutFailed;
         }
     }
 
@@ -324,11 +324,11 @@ public class UserDAO {
         return userlist;
     }
 
-    public ResponseCode isUserloggedIn(User user) {
+    public EMessageCode isUserloggedIn(User user) {
         return isUserloggedIn(user.getUsername());
     }
 
-    public ResponseCode isUserloggedIn(String username) {
+    public EMessageCode isUserloggedIn(String username) {
         try {
             MySQLConnection mysqlconn = new MySQLConnection();
             mysqlconn.CreateConnection();
@@ -343,13 +343,13 @@ public class UserDAO {
                 currentUserStatus = res.getBoolean(1);
 
             if(currentUserStatus)
-                return ResponseCode.LoggedIn;
+                return EMessageCode.LoggedIn;
             else
-                return ResponseCode.NotLoggedIn;
+                return EMessageCode.NotLoggedIn;
         }
         catch(Exception e){
             e.printStackTrace();
-            return ResponseCode.DBError;
+            return EMessageCode.DBError;
         }
 
     }

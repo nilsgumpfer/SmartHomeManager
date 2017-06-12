@@ -1,6 +1,6 @@
 package de.thm.smarthome.main.manager.controller.devicemanager;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.global.transfer.ThermometerTransferObject;
@@ -17,29 +17,29 @@ import java.util.List;
  */
 public interface IDeviceManager {
     SmartHeating getSmartHeating();
-    ResponseCode setSmartHeating(SmartHeating smartHeating);
-    ResponseCode setSmartHeating(HeatingTransferObject heatingTransferObject);
-    ResponseCode createSmartHeating(HeatingTransferObject heatingTransferObject);
-    ResponseCode deleteSmartHeating();
+    EMessageCode setSmartHeating(SmartHeating smartHeating);
+    EMessageCode setSmartHeating(HeatingTransferObject heatingTransferObject);
+    EMessageCode createSmartHeating(HeatingTransferObject heatingTransferObject);
+    EMessageCode deleteSmartHeating();
 
     SmartShutter getSmartShutter(String id);
-    ResponseCode addSmartShutter(SmartShutter smartShutter);
-    ResponseCode deleteSmartShutter(SmartShutter smartShutter);
+    EMessageCode addSmartShutter(SmartShutter smartShutter);
+    EMessageCode deleteSmartShutter(SmartShutter smartShutter);
     SmartShutter getSmartShutter(ShutterTransferObject shutterTransferObject);
-    ResponseCode addSmartShutter(ShutterTransferObject shutterTransferObject);
-    ResponseCode deleteSmartShutter(ShutterTransferObject shutterTransferObject);
-    ResponseCode createSmartShutter(ShutterTransferObject shutterTransferObject);
+    EMessageCode addSmartShutter(ShutterTransferObject shutterTransferObject);
+    EMessageCode deleteSmartShutter(ShutterTransferObject shutterTransferObject);
+    EMessageCode createSmartShutter(ShutterTransferObject shutterTransferObject);
 
     SmartThermometer getSmartThermometer();
-    ResponseCode setSmartThermometer(SmartThermometer smartThermometer);
-    ResponseCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject);
-    ResponseCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject);
-    ResponseCode deleteSmartThermometer();
+    EMessageCode setSmartThermometer(SmartThermometer smartThermometer);
+    EMessageCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject);
+    EMessageCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject);
+    EMessageCode deleteSmartThermometer();
 
     SmartWeatherStation getSmartWeatherStation();
-    ResponseCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
-    ResponseCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject);
-    ResponseCode deleteSmartWeatherStation();
+    EMessageCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation);
+    EMessageCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject);
+    EMessageCode deleteSmartWeatherStation();
 
     List<SmartShutter> getSmartShutters();
 }

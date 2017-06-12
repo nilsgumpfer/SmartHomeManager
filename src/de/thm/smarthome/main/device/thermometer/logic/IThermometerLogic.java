@@ -7,6 +7,6 @@ import de.thm.smarthome.global.transfer.ThermometerTransferObject;
  */
 public interface IThermometerLogic {
     String getLogicName();
-        //void setTemperature();
+        //void setCurrentTemperature();
     ThermometerTransferObject getThermometerData();
 }

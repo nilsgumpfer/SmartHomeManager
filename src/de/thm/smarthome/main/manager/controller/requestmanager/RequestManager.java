@@ -1,8 +1,7 @@
 package de.thm.smarthome.main.manager.controller.requestmanager;
 
-import de.thm.smarthome.global.connection.database.user.User;
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.helper.MessageRepository;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
@@ -14,7 +13,6 @@ import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;
-import de.thm.smarthome.main.manager.controller.usermanager.UserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManagerMock;
 
 import java.rmi.RemoteException;
@@ -45,7 +43,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public String getMessage(ResponseCode responseCode) {
+    public String getMessage(EMessageCode responseCode) {
         return MessageRepository.getMessage(responseCode);
     }
 
@@ -61,7 +59,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -71,13 +69,13 @@ public class RequestManager implements IServiceFacade {
         }
     }
 
-    private ResponseCode checkLogin(UserTransferObject authentication) {
+    private EMessageCode checkLogin(UserTransferObject authentication) {
         return userManager.checkLogin(authentication);
     }
 
     @Override
     public CommandResponseObject deleteHeating(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -89,7 +87,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject switchHeatingOn(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -101,7 +99,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject switchHeatingOff(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -113,7 +111,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -125,11 +123,11 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) throws RemoteException{
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature(), UnitOfMeasurement.temperature_DegreesCelsius);
+                return new HeatingTransferObject(deviceManager.getSmartHeating().getTemperature(), EUnitOfMeasurement.temperature_DegreesCelsius);
             default:
                 return new HeatingTransferObject(responseCode);
         }
@@ -137,7 +135,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException{
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -153,7 +151,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -165,7 +163,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -177,7 +175,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject moveAllShuttersUp(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -189,7 +187,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject moveAllShuttersDown(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -201,7 +199,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -213,7 +211,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -225,7 +223,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -237,7 +235,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -249,7 +247,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -261,11 +259,11 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public ShutterTransferObject[] getAllShutterData(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
         List<ShutterTransferObject> shutterTransferObjects = new ArrayList<>();
         ShutterTransferObject [] array = {};
 
-        if(responseCode == ResponseCode.LoggedIn)
+        if(responseCode == EMessageCode.LoggedIn)
             for (SmartShutter smartShutter : deviceManager.getSmartShutters()) {
                 shutterTransferObjects.add(smartShutter.getShutterData());
             }
@@ -275,7 +273,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -287,7 +285,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -299,7 +297,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -316,7 +314,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -328,7 +326,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject userTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -340,7 +338,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public UserTransferObject[] getAllUserData(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
         UserTransferObject[] array = {};
 
         switch(responseCode){
@@ -353,7 +351,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStationTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -365,7 +363,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject deleteWeatherStation(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -406,7 +404,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -418,7 +416,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometerTransferObject) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -430,7 +428,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public CommandResponseObject deleteThermometer(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
@@ -447,7 +445,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public ThermometerTransferObject getThermometerData(UserTransferObject authentication) {
-        ResponseCode responseCode = checkLogin(authentication);
+        EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:

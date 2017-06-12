@@ -1,11 +1,15 @@
 package de.thm.smarthome.main.device.heating.adapter;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.buderus.driver.heating.BuderusHeatingDriver;
+import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.helper.TransferObjectFactory;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.vaillant.driver.heating.VaillantHeatingDriver;
-import de.viessmann.driver.heating.ViessmannHeatingDriver;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -16,130 +20,47 @@ import java.util.List;
  */
 public class VaillantHeatingAdapter extends AObservable implements IHeating, IObserver {
 
-    VaillantHeatingDriver driver;
-
-    public VaillantHeatingAdapter(String productSerialNumber, String heizungsIP, String heizungsname) {
-
-        driver = new VaillantHeatingDriver(productSerialNumber, heizungsIP, heizungsname);
-    }
-
-    @Override
-    public boolean setTemperature(double temperature) throws RemoteException{
-
-        return driver.adjustTemperature(temperature);
-    }
-
-    @Override
-    public String getHeatingName() {
-
-        return driver.getHeatingName();
-    }
-
-    @Override
-    public String getHeatingManufacturer() {
-
-        return driver.getHeatingManufacturer();
-    }
-
-    @Override
-    public String getHeatingModel() {
-
-        return driver.getHeatingModel();
-    }
-
-    @Override
-    public String getHeatingSerialnumber() {
-
-        return driver.getHeatingSerialnumber();
-    }
-
-    @Override
-    public double getTemperature() {
-        return 0;
-        // return driver.getCurrentTemperature();
-    }
-
-    @Override
-    public String getHeatingMode() {
-
-        return driver.getHeatingMode();
-    }
-
-    @Override
-    public void standby() throws RemoteException{
-
-        driver.standby();
-    }
-
-    @Override
-    public void wakeup() throws RemoteException{
-
-        driver.wakeUp();
-    }
-
-    @Override
-    public List<String> getLogs() {
-
-        return driver.getLogs();
-    }
+    private VaillantHeatingDriver driver;
+    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.BUDERUS);
 
     @Override
     public void update(AObservable o, Object change) {
-
+        //TODO: Observer-Pattern
     }
 
     @Override
-    public boolean setMaxWaterLevel(double new_maxWL) throws RemoteException{
-        return driver.setMaxWaterLevel(new_maxWL);
+    public MeasureBean getCurrentTemperature() {
+        return driver.getCurrentTemperature();
     }
 
     @Override
-    public boolean setMinWaterLevel(double new_minWL) throws RemoteException{
-        return driver.setMinWaterLevel(new_minWL);
+    public MeasureBean getDesiredTemperature() {
+        return driver.getDesiredTemperature();
     }
 
     @Override
-    public boolean setMaxTemperature(double new_maxTemperature) throws RemoteException{
-        return driver.setMaxTemperature(new_maxTemperature);
+    public ModelVariantBean getModelVariant() {
+        return driver.getModelVariant();
     }
 
     @Override
-    public boolean setMinTemperature(double new_minTemperature) throws RemoteException{
-        return driver.setMinTemperature(new_minTemperature);
+    public ManufacturerBean getManufacturer() {
+        return manufacturer;
     }
 
     @Override
-    public double getMaxTemperature() throws RemoteException{
-        return driver.getMaxTemperature();
+    public PowerStateBean getPowerState() {
+        return driver.getPowerState();
     }
 
     @Override
-    public double getMinTemperature() throws RemoteException{
-        return driver.getMinTemperature();
+    public MessageBean setDesiredTemperature(MeasureBean temperature) {
+        return driver.setDesiredTemperature(temperature);
     }
 
     @Override
-    public double getMaxWaterLevel() throws RemoteException{
-        return driver.getMaxWaterLevel();
+    public MessageBean setPowerState(PowerStateBean powerState) {
+        return driver.setPowerState(powerState);
     }
 
-    @Override
-    public double getMinWaterLevel() throws RemoteException{
-        return driver.getMinWaterLevel();
-    }
-
-    @Override
-    public ResponseCode switchOn() throws RemoteException{
-        return driver.switchOn();
-    }
-
-    @Override
-    public ResponseCode switchOff() throws RemoteException{
-        return driver.switchOff();
-    }
-
-    @Override
-    public String getStatus() throws RemoteException {
-        return driver.getStatus();
-    }
 }

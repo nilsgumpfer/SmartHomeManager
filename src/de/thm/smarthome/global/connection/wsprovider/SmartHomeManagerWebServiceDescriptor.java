@@ -1,14 +1,9 @@
 package de.thm.smarthome.global.connection.wsprovider;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
-import de.thm.smarthome.global.observer.IHeatingObserver;
-import de.thm.smarthome.global.observer.IShutterObserver;
-import de.thm.smarthome.global.observer.IThermometerObserver;
-import de.thm.smarthome.global.observer.IWeatherstationObserver;
 import de.thm.smarthome.global.transfer.*;
-import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
 
 import javax.jws.*;
@@ -259,7 +254,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @WebMethod
-    public String getMessage(ResponseCode responseCode) {
+    public String getMessage(EMessageCode responseCode) {
         return requestManager.getMessage(responseCode);
     }
 

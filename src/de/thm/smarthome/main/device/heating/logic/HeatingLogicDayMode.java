@@ -1,92 +1,60 @@
 package de.thm.smarthome.main.device.heating.logic;
 
-import de.thm.smarthome.global.enumeration.ResponseCode;
-import de.thm.smarthome.global.enumeration.UnitOfMeasurement;
+import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.helper.TransferObjectFactory;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 
 import java.rmi.RemoteException;
-import java.util.logging.Logger;
 
 /**
  * Created by Nils on 27.01.2017.
  */
-public class HeatingLogicDayMode implements IHeatingLogic {
+public class HeatingLogicDayMode implements IHeatingLogic
+{
     private IHeatingModel model;
     private IHeating device;
 
-    public HeatingLogicDayMode(IHeatingModel model, IHeating device){
-        this.device = device;
-        this.model = model;
-        model.setHeatingMode("DayMode");
+    @Override
+    public MeasureBean getCurrentTemperature() {
+        return model.getCurrentTemperature();
     }
 
     @Override
-    public String getHeatingName() {
-
-        return model.getHeatingName();
+    public MeasureBean getDesiredTemperature() {
+        return model.getDesiredTemperature();
     }
 
     @Override
-    public String getHeatingManufacturer() {
-
-        return model.getHeatingManufacturer();
+    public ModelVariantBean getModelVariant() {
+        return model.getModelVariant();
     }
 
     @Override
-    public String getHeatingModel() {
-
-        return model.getHeatingModel();
+    public ManufacturerBean getManufacturer() {
+        return model.getManufacturer();
     }
 
     @Override
-    public String getHeatingSerialnumber() {
-
-        return model.getHeatingSerialnumber();
+    public PowerStateBean getPowerState() {
+        return model.getPowerState();
     }
 
     @Override
-    public String getHeatingMode() {
-
-        return model.getHeatingMode();
-    }
-
-
-
-    @Override
-    public ResponseCode setTemperature(double temperature) throws RemoteException{
-        if(temperature < 0){
-            SmartHomeLogger.log("Die Temperatur darf nicht unter 0 Grad eingestellt werden!");
-            return ResponseCode.TemperatureAdjustmentFailed;
-        }
-        else {
-            if(device.setTemperature(temperature))
-                return ResponseCode.TemperatureAdjustmentSuccessful;
-            else
-                return ResponseCode.TemperatureAdjustmentFailed;
-        }
+    public MessageBean setDesiredTemperature(MeasureBean temperature) {
+        return device.setDesiredTemperature(temperature);
     }
 
     @Override
-    public double getTemperature() throws RemoteException{
-        return model.getTemperature();
-    }
-
-    @Override
-    public ResponseCode switchOn() throws RemoteException{
-        return device.switchOn();
-    }
-
-    @Override
-    public ResponseCode switchOff() throws RemoteException{
-        return device.switchOff();
+    public MessageBean setPowerState(PowerStateBean powerState) {
+        return device.setPowerState(powerState);
     }
 
     @Override
     public HeatingTransferObject getHeatingData() {
-        return new HeatingTransferObject(model.getHeatingName(),model.getHeatingManufacturer(),model.getHeatingModel(),model.getHeatingSerialnumber(),model.getTemperature(),model.getHeatingMode(), UnitOfMeasurement.temperature_DegreesCelsius);
+        return TransferObjectFactory.getHeatingTransferObject(model);
     }
-
 }
