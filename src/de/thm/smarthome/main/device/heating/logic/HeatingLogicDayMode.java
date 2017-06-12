@@ -1,14 +1,10 @@
 package de.thm.smarthome.main.device.heating.logic;
 
 import de.thm.smarthome.global.beans.*;
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.helper.TransferObjectFactory;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.factory.TransferObjectFactory;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
-
-import java.rmi.RemoteException;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -17,6 +13,11 @@ public class HeatingLogicDayMode implements IHeatingLogic
 {
     private IHeatingModel model;
     private IHeating device;
+
+    public HeatingLogicDayMode(IHeatingModel model, IHeating adapter) {
+        this.model  = model;
+        device      = adapter;
+    }
 
     @Override
     public MeasureBean getCurrentTemperature() {
@@ -44,6 +45,21 @@ public class HeatingLogicDayMode implements IHeatingLogic
     }
 
     @Override
+    public ActionModeBean getActionMode() {
+        return model.getActionMode();
+    }
+
+    @Override
+    public String getGenericName() {
+        return model.getGenericName();
+    }
+
+    @Override
+    public String getSerialnumber() {
+        return model.getSerialnumber();
+    }
+
+    @Override
     public MessageBean setDesiredTemperature(MeasureBean temperature) {
         return device.setDesiredTemperature(temperature);
     }
@@ -56,5 +72,15 @@ public class HeatingLogicDayMode implements IHeatingLogic
     @Override
     public HeatingTransferObject getHeatingData() {
         return TransferObjectFactory.getHeatingTransferObject(model);
+    }
+
+    @Override
+    public IHeatingModel getModel() {
+        return model;
+    }
+
+    @Override
+    public IHeating getAdapter() {
+        return device;
     }
 }

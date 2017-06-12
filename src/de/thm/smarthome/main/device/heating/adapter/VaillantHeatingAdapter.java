@@ -1,18 +1,11 @@
 package de.thm.smarthome.main.device.heating.adapter;
 
-import de.buderus.driver.heating.BuderusHeatingDriver;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.helper.TransferObjectFactory;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
-import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.vaillant.driver.heating.VaillantHeatingDriver;
-
-import java.rmi.RemoteException;
-import java.util.List;
 
 /**
  * Created by Nils on 27.01.2017.

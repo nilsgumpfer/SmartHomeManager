@@ -21,16 +21,26 @@ public class HeatingTransferObject {
     MessageBean         messageBean;
 
     public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState, MessageBean messageBean) {
-        this.currentTemperature = currentTemperature;
-        this.desiredTemperature = desiredTemperature;
-        this.modelVariant = modelVariant;
-        this.manufacturer = manufacturer;
-        this.actionMode = actionMode;
-        this.genericName = genericName;
-        this.serialnumber = serialnumber;
-        this.powerState = powerState;
-        this.messageBean = messageBean;
-        //TODO: native Datentypen als Übergabewerte
+        this.currentTemperature     = currentTemperature;
+        this.desiredTemperature     = desiredTemperature;
+        this.modelVariant           = modelVariant;
+        this.manufacturer           = manufacturer;
+        this.actionMode             = actionMode;
+        this.genericName            = genericName;
+        this.serialnumber           = serialnumber;
+        this.powerState             = powerState;
+        this.messageBean            = messageBean;
+    }
+
+    public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
+        this.currentTemperature     = currentTemperature;
+        this.desiredTemperature     = desiredTemperature;
+        this.modelVariant           = modelVariant;
+        this.manufacturer           = manufacturer;
+        this.actionMode             = actionMode;
+        this.genericName            = genericName;
+        this.serialnumber           = serialnumber;
+        this.powerState             = powerState;
     }
 
     public MeasureBean getCurrentTemperature() {

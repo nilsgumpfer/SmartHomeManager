@@ -1,102 +1,90 @@
 package de.thm.smarthome.global.transfer;
 
-import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.helper.MessageRepository;
+import de.thm.smarthome.global.beans.*;
 
 /**
  * Created by Nils on 05.02.2017.
  */
 public class ShutterTransferObject {
-    private EMessageCode responseCode;
-    private String message;
-    private int position;
-    private String shutterID;
-    private EDeviceManufacturer manufacturer;
-    private String manufacturer_t;
-    private String model;
-    private String shutterName;
-    private String serialnumber;
-    private boolean moveComplete;
+    private PositionBean        currentPosition;
+    private PositionBean        desiredPosition;
+    private ModelVariantBean    modelVariant;
+    private ManufacturerBean    manufacturer;
+    private ActionModeBean      actionMode;
+    private String              genericName;
+    private String              serialnumber;
+    private MessageBean         message;
+    private boolean             moveComplete;
 
-    private ShutterTransferObject(){}
-
-    public ShutterTransferObject(EMessageCode responseCode) {
-        this.responseCode   = responseCode;
-        message             = MessageRepository.getMessage(responseCode);
+    public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, MessageBean message, boolean moveComplete) {
+        this.currentPosition    = currentPosition;
+        this.desiredPosition    = desiredPosition;
+        this.modelVariant       = modelVariant;
+        this.manufacturer       = manufacturer;
+        this.actionMode         = actionMode;
+        this.genericName        = genericName;
+        this.serialnumber       = serialnumber;
+        this.message            = message;
+        this.moveComplete       = moveComplete;
     }
 
-    public ShutterTransferObject(int position) {
-        this.position = position;
+    public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, boolean moveComplete) {
+        this.currentPosition    = currentPosition;
+        this.desiredPosition    = desiredPosition;
+        this.modelVariant       = modelVariant;
+        this.manufacturer       = manufacturer;
+        this.actionMode         = actionMode;
+        this.genericName        = genericName;
+        this.serialnumber       = serialnumber;
+        this.moveComplete       = moveComplete;
     }
 
-    public ShutterTransferObject(int position, String shutterID) {
-        this.position   = position;
-        this.shutterID  = shutterID;
+    public PositionBean getCurrentPosition() {
+        return currentPosition;
     }
 
-    public ShutterTransferObject(String shuttername, String manufacturer_t, String model, String serialnumber, int position) {
-        this.shutterName = shuttername;
-        this.manufacturer = manufacturer;
-        this.model = model;
-        this.serialnumber = serialnumber;
-        this.position = position;
+    public void setCurrentPosition(PositionBean currentPosition) {
+        this.currentPosition = currentPosition;
     }
 
-    public EMessageCode getResponseCode() {
-        return responseCode;
+    public PositionBean getDesiredPosition() {
+        return desiredPosition;
     }
 
-    public void setResponseCode(EMessageCode responseCode) {
-        this.responseCode = responseCode;
+    public void setDesiredPosition(PositionBean desiredPosition) {
+        this.desiredPosition = desiredPosition;
     }
 
-    public String getMessage() {
-        return message;
+    public ModelVariantBean getModelVariant() {
+        return modelVariant;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setModelVariant(ModelVariantBean modelVariant) {
+        this.modelVariant = modelVariant;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public String getShutterID() {
-        return shutterID;
-    }
-
-    public void setShutterID(String shutterID) {
-        this.shutterID = shutterID;
-    }
-
-    public EDeviceManufacturer getManufacturer() {
+    public ManufacturerBean getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(EDeviceManufacturer manufacturer) {
+    public void setManufacturer(ManufacturerBean manufacturer) {
         this.manufacturer = manufacturer;
     }
 
-    public String getManufacturer_t() {
-        return manufacturer_t;
+    public ActionModeBean getActionMode() {
+        return actionMode;
     }
 
-    public void setManufacturer_t(String manufacturer_t) {
-        this.manufacturer_t = manufacturer_t;
+    public void setActionMode(ActionModeBean actionMode) {
+        this.actionMode = actionMode;
     }
 
-    public String getModel() {
-        return model;
+    public String getGenericName() {
+        return genericName;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
     }
 
     public String getSerialnumber() {
@@ -107,16 +95,19 @@ public class ShutterTransferObject {
         this.serialnumber = serialnumber;
     }
 
+    public MessageBean getMessage() {
+        return message;
+    }
+
+    public void setMessage(MessageBean message) {
+        this.message = message;
+    }
+
     public boolean isMoveComplete() {
         return moveComplete;
     }
 
     public void setMoveComplete(boolean moveComplete) {
         this.moveComplete = moveComplete;
-    }
-
-    @Override
-    public String toString(){
-        return "shutterID: " + shutterID + " pos: " + position + " resp:" + responseCode + " : " + message;
     }
 }
