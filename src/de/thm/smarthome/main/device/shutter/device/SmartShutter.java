@@ -25,17 +25,11 @@ public class SmartShutter extends AObservable implements IObserver{
         return logic.getCurrentPosition();
     }
 
-    public void setCurrentPosition(PositionBean currentPosition) {
-        logic.setCurrentPosition(currentPosition);
-    }
-
     public PositionBean getDesiredPosition() {
         return logic.getDesiredPosition();
     }
 
-    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
-        return logic.setDesiredPosition(desiredPosition);
-    }
+    public MessageBean setDesiredPosition(PositionBean desiredPosition) { return logic.setDesiredPosition(desiredPosition); }
 
     public ModelVariantBean getModelVariant() {
         return logic.getModelVariant();
@@ -49,9 +43,7 @@ public class SmartShutter extends AObservable implements IObserver{
         return logic.getActionMode();
     }
 
-    public String getGenericName() {
-        return logic.getGenericName();
-    }
+    public String getGenericName() { return logic.getGenericName(); }
 
     public String getSerialnumber() {
         return logic.getSerialnumber();

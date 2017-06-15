@@ -1,65 +1,92 @@
 package de.thm.smarthome.main.device.thermometer.model;
 
+import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.thermometer.adapter.IndoorThermometerAdapter;
 
 /**
  * Created by Nils on 27.01.2017.
  */
-public class ThermometerModel implements IThermometerModel{
-    private String thermometerName = "";
-    private String thermometerManufacturer = "";
-    private String thermometerModel = "";
-    private String thermometerSerialnumber = "";
-    private double temperature = 0;
-    private boolean isCelsius = true;
-    private String name;
+public class ThermometerModel extends AObservable implements IThermometerModel, IObserver
+{
+    private MeasureBean         temperature;
+    private ModelVariantBean    modelVariant;
+    private ManufacturerBean    manufacturer;
+    private ActionModeBean      actionMode;
+    private String              genericName;
+    private String              serialnumber;
 
-    IndoorThermometerAdapter adapter;
+    public ThermometerModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
+        this.modelVariant = modelVariant;
+        this.manufacturer = manufacturer;
+        this.actionMode = actionMode;
+        this.genericName = genericName;
+        this.serialnumber = serialnumber;
+    }
 
-    public void setName(String name){
-        this.name = name;
+    @Override
+    public MeasureBean getTemperature() {
+        return temperature;
     }
-    public String getName(){
-        return name;
-    }
-    public void setTemperature(double temperature){
+
+    @Override
+    public void setTemperature(MeasureBean temperature) {
         this.temperature = temperature;
     }
-    public boolean isCelsius(){
-        return isCelsius();
-    };
-    public void toggleTemperatureUnit(){
-        if(isCelsius==true){
-            isCelsius=false;
-        } else {
-            isCelsius=true;
-        }
-    }
-
 
     @Override
-    public String getThermometerName() {
-        return this.thermometerName;
+    public ModelVariantBean getModelVariant() {
+        return modelVariant;
     }
 
     @Override
-    public String getThermometerManufacturer() {
-        return this.thermometerManufacturer;
+    public void setModelVariant(ModelVariantBean modelVariant) {
+        this.modelVariant = modelVariant;
     }
 
     @Override
-    public String getThermometerModel() {
-        return this.thermometerModel;
+    public ManufacturerBean getManufacturer() {
+        return manufacturer;
     }
 
     @Override
-    public String getThermometerSerialnumber() {
-        return this.thermometerSerialnumber;
+    public void setManufacturer(ManufacturerBean manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     @Override
-    public double getThermometerTemperature() {
-        return this.temperature;
+    public ActionModeBean getActionMode() {
+        return actionMode;
     }
 
+    @Override
+    public void setActionMode(ActionModeBean actionMode) {
+        this.actionMode = actionMode;
+    }
+
+    @Override
+    public String getGenericName() {
+        return genericName;
+    }
+
+    @Override
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
+    }
+
+    @Override
+    public String getSerialnumber() {
+        return serialnumber;
+    }
+
+    @Override
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+
+    }
 }

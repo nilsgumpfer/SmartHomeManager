@@ -1,6 +1,11 @@
 package de.thm.smarthome.main.device.shutter.logic;
 
+import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EActionMode;
+import de.thm.smarthome.global.factory.TransferObjectFactory;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 import de.thm.smarthome.main.device.shutter.model.IShutterModel;
@@ -11,48 +16,74 @@ import de.thm.smarthome.main.device.shutter.model.ShutterModel;
  */
 
 
-public class ShutterLogicMaintenanceMode implements IShutterLogic {
-    private IShutterModel model;
-    private IShutter device;
-    private ShutterModel shutterModel; //TODO: Von Nils: Warum gibt es ein Model-Interface, obwohl hier das konkrete Model verwendet wird??
+public class ShutterLogicMaintenanceMode extends AObservable implements IShutterLogic, IObserver
+{
+    private IShutterModel   model;
+    private IShutter        device;
+    private ActionModeBean  actionModeBean = new ActionModeBean(EActionMode.MAINTENANCEMODE);
 
-    public ShutterLogicMaintenanceMode(IShutterModel model, IShutter device){
-        setLogicName("MaintenanceMode");
+    public ShutterLogicMaintenanceMode(IShutterModel model, IShutter adapter) {
+        this.model  = model;
+        device      = adapter;
     }
 
     @Override
-    public void setLogicName(String logicName){
-        model.setLogicName(logicName);
+    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
+        return device.setDesiredPosition(desiredPosition);
     }
 
     @Override
-    public int getPosition() {
-        return model.getShutterHeight();
+    public PositionBean getCurrentPosition() {
+        return model.getCurrentPosition();
     }
 
     @Override
-    public void setPosition(int shutterHeight) {
-        //TODO: Fehlermeldung: "Rollläden können im Wartungsmodus nicht gesetzt werden"
-        SmartHomeLogger.log("Rollläden können im Wartungsmodus nicht gesetzt werden");
+    public PositionBean getDesiredPosition() {
+        return model.getDesiredPosition();
     }
 
+    @Override
+    public ModelVariantBean getModelVariant() {
+        return model.getModelVariant();
+    }
+
+    @Override
+    public ManufacturerBean getManufacturer() {
+        return model.getManufacturer();
+    }
+
+    @Override
+    public ActionModeBean getActionMode() {
+        return actionModeBean;
+    }
+
+    @Override
+    public String getGenericName() {
+        return null;
+    }
+
+    @Override
+    public String getSerialnumber() {
+        return null;
+    }
+
+    @Override
     public ShutterTransferObject getShutterData() {
-        return new ShutterTransferObject(shutterModel.getShutterName(), shutterModel.getShutterManufacturer(),shutterModel.getShutterModel(), shutterModel.getShutterSerialnumber(), shutterModel.getShutterPosition());
+        return TransferObjectFactory.getShutterTransferObject(model);
     }
 
     @Override
-    public int getShutterPosition() {
-        return shutterModel.getShutterPosition();
+    public IShutterModel getModel() {
+        return null;
     }
 
     @Override
-    public void moveUp() {
-        shutterModel.setShutterHeight(5);
+    public IShutter getAdapter() {
+        return null;
     }
 
     @Override
-    public void moveDown() {
-        shutterModel.setShutterHeight(0);
+    public void update(AObservable o, Object change) {
+        //TODO: Observer-Pattern
     }
-
 }

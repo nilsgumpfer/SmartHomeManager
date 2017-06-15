@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.device.heating.adapter;
 
+import de.buderus.driver.heating.BuderusHeatingDriver;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.observer.AObservable;
@@ -12,7 +13,8 @@ import de.viessmann.driver.heating.ViessmannHeatingDriver;
  */
 public class ViessmannHeatingAdapter extends AObservable implements IHeating, IObserver{
 
-    private ViessmannHeatingDriver driver;
+    //TODO: Change back to --> private ViessmannHeatingDriver driver;
+    private BuderusHeatingDriver driver;
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.BUDERUS);
 
     @Override

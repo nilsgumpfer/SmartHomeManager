@@ -17,7 +17,8 @@ import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class SmartThermometer extends AObservable implements IObserver {
+public class SmartThermometer extends AObservable implements IObserver
+{
     private IThermometerLogic logic;
 
     @Override
@@ -48,6 +49,8 @@ public class SmartThermometer extends AObservable implements IObserver {
     public ThermometerTransferObject getThermometerData(){
         return logic.getThermometerData();
     }
+
+    public ActionModeBean getActionMode() { return logic.getActionMode(); }
 
     public void setActionMode(ActionModeBean actionMode)
     {

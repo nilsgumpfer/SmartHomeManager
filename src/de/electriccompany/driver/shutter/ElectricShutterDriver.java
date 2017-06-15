@@ -1,10 +1,12 @@
-package de.buderus.driver.heating;
+package de.electriccompany.driver.shutter;
 
-import HeizungServer.interfaces.HeizungClientInterface;
 import HeizungServer.interfaces.HeizungServerInterface;
-import de.thm.smarthome.global.beans.*;
+import ShutterServer.interfaces.ShutterClientInterface;
+import ShutterServer.interfaces.ShutterServerInterface;
+import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.net.MalformedURLException;
@@ -14,21 +16,18 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Nils on 27.01.2017.
  */
-public class BuderusHeatingDriver implements HeizungClientInterface
-{
-    private HeizungServerInterface deviceServer;
+public class ElectricShutterDriver implements ShutterClientInterface {
+    private ShutterServerInterface deviceServer;
 
     private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
 
-    public BuderusHeatingDriver(String serialnumber, String genericName)
+    public ElectricShutterDriver(String serialnumber, String genericName)
     {
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
@@ -39,7 +38,7 @@ public class BuderusHeatingDriver implements HeizungClientInterface
     }
 
     private void readModelVariantInformation() {
-        modelVariant = new ModelVariantBean(EDeviceManufacturer.BUDERUS, serialnumber);
+        modelVariant = new ModelVariantBean(EDeviceManufacturer.ELECTRIC_COMPANY, serialnumber);
     }
 
     private void initConnection()
@@ -50,11 +49,11 @@ public class BuderusHeatingDriver implements HeizungClientInterface
 
         try {
 
-            SmartHomeLogger.log("Looking for Buderus heating: " + modelVariant.getModelVariant_String() + "..");
+            SmartHomeLogger.log("Looking for Electric Company Shutter: " + modelVariant.getModelVariant_String() + "..");
 
             LocateRegistry.getRegistry(host, port);
 
-            SmartHomeLogger.log("Found heating: " + host + ":" + port + "Establishing connection..");
+            SmartHomeLogger.log("Found shutter: " + host + ":" + port + "Establishing connection..");
 
             UnicastRemoteObject.exportObject(this, 0);
 
@@ -62,7 +61,7 @@ public class BuderusHeatingDriver implements HeizungClientInterface
 
             SmartHomeLogger.log("Successfully connected.");
 
-            deviceServer = (HeizungServerInterface) remoteObject;
+            deviceServer = (ShutterServerInterface) remoteObject;
 
             deviceServer.setGenericName(genericName);
         }
@@ -76,24 +75,16 @@ public class BuderusHeatingDriver implements HeizungClientInterface
         return modelVariant;
     }
 
-    public MeasureBean getCurrentTemperature() {
+    public PositionBean getCurrentPosition() {
         return deviceServer.getCurrentTemperature();
     }
 
-    public MeasureBean getDesiredTemperature() {
+    public PositionBean getDesiredPosition() {
         return deviceServer.getDesiredTemperature();
     }
 
-    public PowerStateBean getPowerState() {
-        return deviceServer.getPowerState();
-    }
-
-    public MessageBean setDesiredTemperature(MeasureBean desiredTemperature) {
-        return deviceServer.setDesiredTemperature(desiredTemperature);
-    }
-
-    public MessageBean setPowerState(PowerStateBean powerState) {
-        return deviceServer.setPowerState(powerState);
+    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
+        return deviceServer.setDesiredPosition(desiredPosition);
     }
 }
 

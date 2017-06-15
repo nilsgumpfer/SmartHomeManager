@@ -1,6 +1,8 @@
 package de.thm.smarthome.main.device.shutter.adapter;
 
-import de.electricshutter.driver.shutter.ElectricShutterDriver;
+import de.electriccompany.driver.shutter.ElectricShutterDriver;
+import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
@@ -9,65 +11,37 @@ import java.rmi.RemoteException;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class ElectricShutterAdapter extends AObservable implements IShutter, IObserver{
+public class ElectricShutterAdapter extends AObservable implements IShutter, IObserver
+{
+    private ElectricShutterDriver driver;
+    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.ELECTRIC_COMPANY);
 
-    ElectricShutterDriver driver;
-
-    public ElectricShutterAdapter(String serialNumber, String shutterIP, String shuttername){
-
-        driver = new ElectricShutterDriver(serialNumber, shutterIP, shuttername);
-    }
-
-    @Override
-    public void moveUp() throws RemoteException{
-
-        driver.moveUp();
-    }
-
-    @Override
-    public void moveDown() throws RemoteException{
-
-        driver.moveDown();
-    }
-
-    @Override
-    public boolean isUp() throws RemoteException {
-        return driver.isUp();
-    }
-
-    @Override
-    public boolean isDown() throws RemoteException{
-        return driver.isDown();
-    }
-
-    @Override
-    public String getShutterName() {
-        return driver.getShutterName();
-    }
-
-    @Override
-    public String getShutterManufacturer() {
-        return driver.getShutterManufacturer();
-    }
-
-    @Override
-    public String getShutterModel() {
-        return driver.getShutterModel();
-    }
-
-    @Override
-    public String getShutterSerialnumber() {
-        return driver.getShutterSerialnumber();
-    }
-
-    @Override
-    public int getShutterPosition() {
-        return driver.getShutterPosition();
+    public ElectricShutterAdapter(ElectricShutterDriver driver) {
+        this.driver = driver;
     }
 
     @Override
     public void update(AObservable o, Object change) {
-
+        //TODO: Observer-Pattern
     }
 
+    @Override
+    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
+        return driver.setDesiredPosition(desiredPosition);
+    }
+
+    @Override
+    public PositionBean getCurrentPosition() {
+        return driver.getCurrentPosition();
+    }
+
+    @Override
+    public PositionBean getDesiredPosition() {
+        return driver.getDesiredPosition();
+    }
+
+    @Override
+    public ModelVariantBean getModelVariant() {
+        return driver.getModelVariant();
+    }
 }
