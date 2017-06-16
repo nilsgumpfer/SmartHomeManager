@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.heating.adapter;
 import de.buderus.driver.heating.BuderusHeatingDriver;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
@@ -28,17 +29,17 @@ public class BuderusHeatingAdapter extends AObservable implements IHeating, IObs
 
     @Override
     public MeasureBean getCurrentTemperature() {
-        return driver.getCurrentTemperature();
+        return new MeasureBean(driver.getCurrentTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
     }
 
     @Override
     public MeasureBean getDesiredTemperature() {
-        return driver.getDesiredTemperature();
+        return new MeasureBean(driver.getDesiredTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
     }
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return driver.getModelVariant();
+        return new ModelVariantBean(EDeviceManufacturer.BUDERUS, driver.getModelVariant());
     }
 
     @Override
@@ -48,16 +49,16 @@ public class BuderusHeatingAdapter extends AObservable implements IHeating, IObs
 
     @Override
     public PowerStateBean getPowerState() {
-        return driver.getPowerState();
+        return new PowerStateBean(driver.getPowerState());
     }
 
     @Override
     public MessageBean setDesiredTemperature(MeasureBean temperature) {
-        return driver.setDesiredTemperature(temperature);
+        return new MessageBean(driver.setDesiredTemperature(temperature.getMeasure_Double()));
     }
 
     @Override
     public MessageBean setPowerState(PowerStateBean powerState) {
-        return driver.setPowerState(powerState);
+        return new MessageBean(driver.setPowerState(powerState.getPowerState_Boolean()));
     }
 }

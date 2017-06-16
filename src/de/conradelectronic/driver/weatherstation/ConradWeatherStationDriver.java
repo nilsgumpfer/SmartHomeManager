@@ -2,10 +2,6 @@ package de.conradelectronic.driver.weatherstation;
 
 import WeatherStationServer.interfaces.WeatherStationClientInterface;
 import WeatherStationServer.interfaces.WeatherStationServerInterface;
-import de.thm.smarthome.global.beans.MeasureBean;
-import de.thm.smarthome.global.beans.ModelVariantBean;
-import de.thm.smarthome.global.beans.PositionBean;
-import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.rmi.Naming;
@@ -19,7 +15,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class ConradWeatherStationDriver implements WeatherStationClientInterface {
     private WeatherStationServerInterface deviceServer;
 
-    private ModelVariantBean modelVariant;
+    private String modelVariant;
     private String genericName;
     private String serialnumber;
 
@@ -34,18 +30,19 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
     }
 
     private void readModelVariantInformation() {
-        modelVariant = new ModelVariantBean(EDeviceManufacturer.CONRAD_ELECTRONIC, serialnumber);
+        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
+        modelVariant = "Weatherstation3000";
     }
 
     private void initConnection()
     {
         //TODO: get IP Address for host-name
-        String host = modelVariant.getModelVariant_String();
+        String host = modelVariant;
         int port    = 0;
 
         try {
 
-            SmartHomeLogger.log("Looking for Conrad Electronic Weather Station: " + modelVariant.getModelVariant_String() + "..");
+            SmartHomeLogger.log("Looking for Conrad Electronic Weather Station: " + modelVariant + "..");
 
             LocateRegistry.getRegistry(host, port);
 
@@ -67,26 +64,20 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
     }
 
-    public ModelVariantBean getModelVariant() {
+    public String getModelVariant() {
         return modelVariant;
     }
-
-    public MeasureBean getTemperature() {
+    public double getTemperature() {
         return deviceServer.getTemperature();
     }
-
-    public MeasureBean getWindVelocity() {
+    public double getWindVelocity() {
         return deviceServer.getWindVelocity();
     }
-    public MeasureBean getAirHumidity() {
+    public double getAirHumidity() {
         return deviceServer.getAirHumidity();
     }
-
-    public MeasureBean getAirPressure() {
+    public double getAirPressure() {
         return deviceServer.getAirPressure();
     }
-
-    public MeasureBean getRainfallAmount() {
-        return deviceServer.getRainfallAmount();
-    }
+    public double getRainfallAmount() { return deviceServer.getRainfallAmount(); }
 }

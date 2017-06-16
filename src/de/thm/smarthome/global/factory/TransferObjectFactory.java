@@ -8,9 +8,7 @@ import de.thm.smarthome.global.transfer.ThermometerTransferObject;
 import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 import de.thm.smarthome.main.device.shutter.model.IShutterModel;
-import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
-import de.thm.smarthome.main.device.weatherstation.adapter.IWeatherStation;
 import de.thm.smarthome.main.device.weatherstation.model.IWeatherStationModel;
 
 /**
@@ -62,13 +60,43 @@ public class TransferObjectFactory {
 
     public static ThermometerTransferObject getThermometerTransferObject(IThermometerModel thermometerModel){
         return new ThermometerTransferObject(
-
+                                                thermometerModel.getTemperature(),
+                                                thermometerModel.getModelVariant(),
+                                                thermometerModel.getActionMode(),
+                                                thermometerModel.getManufacturer(),
+                                                thermometerModel.getGenericName(),
+                                                thermometerModel.getSerialnumber()
                                             );
+    }
+
+    public static ThermometerTransferObject getThermometerTransferObject(IThermometerModel thermometerModel, EMessageCode messageCode)
+    {
+        ThermometerTransferObject thermometerTransferObject = getThermometerTransferObject(thermometerModel);
+        thermometerTransferObject.setMessage(new MessageBean(messageCode));
+
+        return thermometerTransferObject;
     }
 
     public static WeatherStationTransferObject getWeatherStationTransferObject(IWeatherStationModel weatherStationModel){
         return new WeatherStationTransferObject(
-
+                                                    weatherStationModel.getTemperature(),
+                                                    weatherStationModel.getWindVelocity(),
+                                                    weatherStationModel.getRainfallAmount(),
+                                                    weatherStationModel.getAirPressure(),
+                                                    weatherStationModel.getAirHumidity(),
+                                                    weatherStationModel.getModelVariant(),
+                                                    weatherStationModel.getManufacturer(),
+                                                    weatherStationModel.getActionMode(),
+                                                    weatherStationModel.getGenericName(),
+                                                    weatherStationModel.getSerialnumber()
                                                 );
+    }
+
+    public static WeatherStationTransferObject getWeatherStationTransferObject(IWeatherStationModel weatherStationModel, EMessageCode messageCode)
+    {
+        WeatherStationTransferObject weatherStationTransferObject = getWeatherStationTransferObject(weatherStationModel);
+        weatherStationTransferObject.setMessage(new MessageBean(messageCode));
+
+        return weatherStationTransferObject;
     }
 }

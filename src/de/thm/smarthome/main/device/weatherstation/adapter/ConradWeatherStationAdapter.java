@@ -5,6 +5,7 @@ import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
@@ -27,7 +28,7 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return driver.getModelVariant();
+        return new ModelVariantBean(EDeviceManufacturer.CONRAD_ELECTRONIC, driver.getModelVariant());
     }
 
     @Override
@@ -37,26 +38,25 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
 
     @Override
     public MeasureBean getTemperature() {
-        return driver.getTemperature();
+        return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
     }
 
     @Override
     public MeasureBean getRainfallAmount() {
-        return driver.getRainfallAmount();
+        return new MeasureBean(driver.getRainfallAmount(), EUnitOfMeasurement.VOLUME_LITRESPERSQUAREMETER);
     }
 
     @Override
-    public MeasureBean getWindVelocity() {
-        return driver.getWindVelocity();
+    public MeasureBean getWindVelocity() { return new MeasureBean(driver.getWindVelocity(), EUnitOfMeasurement.VELOCITY_KILOMETERSPERHOUR);
     }
 
     @Override
     public MeasureBean getAirHumidity() {
-        return driver.getAirHumidity();
+        return new MeasureBean(driver.getAirHumidity(), EUnitOfMeasurement.RELATION_PERCENT);
     }
 
     @Override
     public MeasureBean getAirPressure() {
-        return driver.getAirPressure();
+        return new MeasureBean(driver.getAirPressure(), EUnitOfMeasurement.PRESSURE_BAR);
     }
 }

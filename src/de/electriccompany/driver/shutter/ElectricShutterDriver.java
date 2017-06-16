@@ -1,19 +1,11 @@
 package de.electriccompany.driver.shutter;
 
-import HeizungServer.interfaces.HeizungServerInterface;
 import ShutterServer.interfaces.ShutterClientInterface;
 import ShutterServer.interfaces.ShutterServerInterface;
-import de.thm.smarthome.global.beans.MessageBean;
-import de.thm.smarthome.global.beans.ModelVariantBean;
-import de.thm.smarthome.global.beans.PositionBean;
-import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -23,7 +15,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class ElectricShutterDriver implements ShutterClientInterface {
     private ShutterServerInterface deviceServer;
 
-    private ModelVariantBean modelVariant;
+    private String modelVariant;
     private String genericName;
     private String serialnumber;
 
@@ -38,18 +30,19 @@ public class ElectricShutterDriver implements ShutterClientInterface {
     }
 
     private void readModelVariantInformation() {
-        modelVariant = new ModelVariantBean(EDeviceManufacturer.ELECTRIC_COMPANY, serialnumber);
+        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
+        modelVariant = "Shutter3000";
     }
 
     private void initConnection()
     {
         //TODO: get IP Address for host-name
-        String host = modelVariant.getModelVariant_String();
+        String host = modelVariant;
         int port    = 0;
 
         try {
 
-            SmartHomeLogger.log("Looking for Electric Company Shutter: " + modelVariant.getModelVariant_String() + "..");
+            SmartHomeLogger.log("Looking for Electric Company Shutter: " + modelVariant + "..");
 
             LocateRegistry.getRegistry(host, port);
 
@@ -71,19 +64,20 @@ public class ElectricShutterDriver implements ShutterClientInterface {
         }
     }
 
-    public ModelVariantBean getModelVariant() {
+    public String getModelVariant() {
         return modelVariant;
     }
 
-    public PositionBean getCurrentPosition() {
-        return deviceServer.getCurrentTemperature();
+    public int getCurrentPosition() {
+        return deviceServer.getCurrentPosition();
     }
 
-    public PositionBean getDesiredPosition() {
-        return deviceServer.getDesiredTemperature();
+    public int getDesiredPosition() {
+        return deviceServer.getDesiredPosition();
     }
 
-    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
+    public boolean setDesiredPosition(int desiredPosition)
+    {
         return deviceServer.setDesiredPosition(desiredPosition);
     }
 }

@@ -27,6 +27,10 @@ import java.rmi.RemoteException;
  public class SmartHeating extends AObservable implements IObserver {
     private IHeatingLogic logic;
 
+    public SmartHeating(IHeatingLogic logic) {
+        this.logic = logic;
+    }
+
     @Override
     public void update(AObservable o, Object change) {
 

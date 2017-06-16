@@ -8,19 +8,12 @@ import java.rmi.RemoteException;
 /**
  * Created by Tim on 07.04.2017.
  */
-public interface WeatherStationServerInterface extends Remote {
-
-    public double getWindVelocity(WeatherStationClientInterface c) throws RemoteException;
-
-    public double getRainfallAmount(WeatherStationClientInterface c) throws RemoteException;
-
-    public double getAirHumidity(WeatherStationClientInterface c) throws RemoteException;
-
-    public double getAirPressure(WeatherStationClientInterface c) throws RemoteException;
-
-    public double getTemperature(WeatherStationClientInterface c) throws RemoteException;
-
-    public String getName(WeatherStationClientInterface c) throws RemoteException;
-
-    //public void update(AObservable o, Object change, WeatherStationClientInterface c) throws RemoteException;
+public interface WeatherStationServerInterface extends Remote
+{
+    double getWindVelocity();
+    double getRainfallAmount();
+    double getAirHumidity();
+    double getAirPressure();
+    double getTemperature();
+    void setGenericName(String genericName);
 }

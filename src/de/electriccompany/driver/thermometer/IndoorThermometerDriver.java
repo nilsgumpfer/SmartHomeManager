@@ -2,18 +2,10 @@ package de.electriccompany.driver.thermometer;
 
 import ThermometerServer.interfaces.ThermometerClientInterface;
 import ThermometerServer.interfaces.ThermometerServerInterface;
-import de.thm.smarthome.global.beans.MeasureBean;
-import de.thm.smarthome.global.beans.MessageBean;
-import de.thm.smarthome.global.beans.ModelVariantBean;
-import de.thm.smarthome.global.beans.PositionBean;
-import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -24,7 +16,7 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
 {
     private ThermometerServerInterface deviceServer;
 
-    private ModelVariantBean modelVariant;
+    private String modelVariant;
     private String genericName;
     private String serialnumber;
 
@@ -39,18 +31,19 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
     }
 
     private void readModelVariantInformation() {
-        modelVariant = new ModelVariantBean(EDeviceManufacturer.ELECTRIC_COMPANY, serialnumber);
+        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
+        modelVariant = "Thermometer3000";
     }
 
     private void initConnection()
     {
         //TODO: get IP Address for host-name
-        String host = modelVariant.getModelVariant_String();
+        String host = modelVariant;
         int port    = 0;
 
         try {
 
-            SmartHomeLogger.log("Looking for Electric Company Thermometer: " + modelVariant.getModelVariant_String() + "..");
+            SmartHomeLogger.log("Looking for Electric Company Thermometer: " + modelVariant + "..");
 
             LocateRegistry.getRegistry(host, port);
 
@@ -72,11 +65,11 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
         }
     }
 
-    public ModelVariantBean getModelVariant() {
+    public String getModelVariant() {
         return modelVariant;
     }
 
-    public MeasureBean getTemperature() {
+    public double getTemperature() {
         return deviceServer.getTemperature();
     }
 
