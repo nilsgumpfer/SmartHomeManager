@@ -1,17 +1,34 @@
 package de.thm.smarthome.global.connection.database.user;
 
-import java.sql.Date;
-import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Nils on 28.01.2017.
  */
+@Entity
+@Table
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer Id;
     private String firstname;
     private String lastname;
     private String username;
     private String password;
     private String role;
+    public User(String firstname, String lastname, String username, String password, String role)
+    {
+        super();
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password= password;
+        this.role = role;
+    }
     private boolean loggedIn;
     private String lastTimeLoggedIn;
 
@@ -21,6 +38,11 @@ public class User {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public User( )
+    {
+        super();
     }
 
     public String getFirstname() {
@@ -39,9 +61,7 @@ public class User {
         this.lastname = lastname;
     }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() { return username; }
 
     public void setUsername(String username) {
         this.username = username;
@@ -70,5 +90,9 @@ public class User {
     public void setLastTimeLoggedIn(String date){
         //Date currentTimestamp = new Date(Calendar.getInstance().getTime().getTime());
         this.lastTimeLoggedIn = date;
+    }
+
+    public Integer getId(){
+        return this.Id;
     }
 }

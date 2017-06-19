@@ -1,15 +1,18 @@
-package de.thm.smarthome.global.connection.database.user;
+// TODO; kann gelöscht werden, wenn JPA funktioniert
+ package de.thm.smarthome.global.connection.database.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 /**
  * Created by Tim on 25.03.2017.
  */
 public class MySQLConnection {
-
-
     public static Connection conn;
     private static String server = "127.0.0.1";
     private static String serverport = "3306";

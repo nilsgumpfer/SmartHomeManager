@@ -1,17 +1,24 @@
 package de.thm.smarthome.global.connection.database.user;
-
-import de.thm.smarthome.global.enumeration.EMessageCode;
-
-import java.sql.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
+import javax.persistence.*;
+import javax.persistence.Persistence;
 
-/**
+import de.thm.smarthome.global.connection.database.user.User;
+import de.thm.smarthome.global.enumeration.ResponseCode;
+//import com.mysql.jdbc.Extension;
+
+       /**
  * Created by Nils on 04.02.2017.
  */
 public class UserDAO {
 
-    public ResultSet UserEinlesen(String username, String firstname, String lastname) throws SQLException {
+    public EntityManagerFactory emf = null;
+    public EntityManager em = null;
+    public Integer affectedRows = 0;
+
+    /*public ResultSet UserEinlesen(String username, String firstname, String lastname) throws Extension {
+           }
         MySQLConnection mysqlconn = new MySQLConnection();
         ResultSet res;
         PreparedStatement ps = mysqlconn.conn.prepareStatement("Select * from users where username like ? and firstname like ? and lastname like ?");
@@ -20,343 +27,203 @@ public class UserDAO {
         ps.setString(3, lastname);
         res=ps.executeQuery();
         return res;
+    }*/
+/*public void getUserByUserName(String username)throws SQLException{
+        MySQLConnection mysqlconn = new MySQLConnection();
+        mysqlconn.CreateConnection();*/
+
+public void createEntityManager(){
+    emf = Persistence.createEntityManagerFactory( "SmartHomeManager" );
+    em = emf.createEntityManager( );
+}
+
+public EntityManager getEntityManager(){
+    return em;
+}
+
+public void BenutzerSuchennachBenutzername(String benutzername){
+    if(emf == null || em == null){
+        createEntityManager();
     }
 
-    public void getUserByUserName(String username)throws SQLException{
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
+    String statement = "select u from User u where u.Username = :username";
+    Query query = getEntityManager().createQuery(statement);
+    query.setParameter("username", benutzername);
 
-        String usrname;
-        String firstname;
-        String lastname;
-        String password;
-        String lastTimeLoggedIn;
-        boolean loggedIn;
-        String role;
+    List<User> UserListe = query.getResultList();
 
-        User currentUser = new User();
-        currentUser.setUsername("0");
-        currentUser.setFirstname("0");
-        currentUser.setLastname("0");
-        currentUser.setPassword("0");
-        currentUser.setLastTimeLoggedIn("1970-01-01");
-        currentUser.setLoggedIn(false);
-        currentUser.setRole("User");
-
-        try{
-            ResultSet rs = UserEinlesen(username+"%", "%", "%");
-            if(rs.wasNull()){
-                System.out.print("No User found!");
-            }
-            while (rs.next()){
-
-
-                usrname = rs.getString(2);
-                firstname = rs.getString(3);
-                lastname = rs.getString(4);
-                password = rs.getString(5);
-                lastTimeLoggedIn = rs.getString(6);
-                loggedIn = rs.getBoolean(7);
-                role = rs.getString(8);
-
-                currentUser.setUsername(usrname);
-                currentUser.setFirstname(firstname);
-                currentUser.setLastname(lastname);
-                currentUser.setPassword(password);
-                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
-                currentUser.setLoggedIn(loggedIn);
-                currentUser.setRole(role);
-
-                System.out.print(currentUser.getFirstname() + currentUser.getLastname() + currentUser.getLastTimeLoggedIn() + currentUser.getRole());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+    if(UserListe.isEmpty()){
+        System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen!");
     }
+    else{
+    for (User benutzer : UserListe){
+        System.out.println(benutzer.getFirstname() + " " + benutzer.getLastname() + " " + benutzer.getRole() + " " + benutzer.isLoggedIn() + " " + benutzer.getLastTimeLoggedIn() + " " + benutzer.getPassword());
+    }
+    }
+}
 
-    public String getUserByFirstNameAndLastName(String firstname, String lastname)throws SQLException{
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
 
-        String usrname;
-        String first_name;
-        String last_name;
-        String password;
-        String lastTimeLoggedIn;
-        boolean loggedIn;
-        String role;
+    public void getUserByFirstNameAndLastName(String firstname, String lastname) throws Exception{
+          // public String getUserByFirstNameAndLastName(String firstname, String lastname)throws SQLException{
+           //    MySQLConnection mysqlconn = new MySQLConnection();
+            //   mysqlconn.CreateConnection();
+       if(emf == null || em == null){
+               createEntityManager();
+           }
 
-        User currentUser = new User();
-        currentUser.setUsername("0");
-        currentUser.setFirstname("0");
-        currentUser.setLastname("0");
-        currentUser.setPassword("0");
-        currentUser.setLastTimeLoggedIn("1970-01-01");
-        currentUser.setLoggedIn(false);
-        currentUser.setRole("User");
+           String statement = "select u from User u where u.Firstame = :vorname AND where u.Lastname = :nachname";
+           Query query = getEntityManager().createQuery(statement);
+           query.setParameter("vorname", firstname);
+           query.setParameter("nachname", lastname);
 
-        try{
-            ResultSet rs = UserEinlesen("%", firstname+"%", lastname+"%");
-            while (rs.next()){
-                usrname = rs.getString(2);
-                first_name = rs.getString(3);
-                last_name = rs.getString(4);
-                password = rs.getString(5);
-                lastTimeLoggedIn = rs.getString(6);
-                loggedIn = rs.getBoolean(7);
-                role = rs.getString(8);
+           List<User> UserListe = query.getResultList();
 
-                currentUser.setUsername(usrname);
-                currentUser.setFirstname(first_name);
-                currentUser.setLastname(last_name);
-                currentUser.setPassword(password);
-                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
-                currentUser.setLoggedIn(loggedIn);
-                currentUser.setRole(role);
-
-                return currentUser.getUsername();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "User not found";
+    if(UserListe.isEmpty()){
+               System.out.println("Es existiert kein Benutzer mit diesem Namen!");
+           }
+    else{
+               for (User benutzer : UserListe){
+                   System.out.println(benutzer.getId() + " " + benutzer.getUsername()+ " " + benutzer.getFirstname() + " " + benutzer.getLastname() + " " + benutzer.getRole() + " " + benutzer.isLoggedIn() + " " + benutzer.getLastTimeLoggedIn() + " " + benutzer.getPassword());
+               }
+           }
     }
 
     /*public ResponseCode logUserIn(User user){
         return logUserIn(user.getUsername());
     }*/
 
-    public EMessageCode logUserIn(String username) {
-        try {
-            MySQLConnection mysqlconn = new MySQLConnection();
-            mysqlconn.CreateConnection();
+    public ResponseCode logUserIn(Integer userid){
 
-            /*ResultSet res;
-            Statement stm = mysqlconn.getConn().createStatement();
-            String sql = "SELECT * from users WHERE username ='" + username + "' AND WHERE password='" + password + "';";
-            res = stm.executeQuery(sql);
-        if(!res.wasNull()){*/
+        if(emf == null || em == null){
+               createEntityManager();
+           }
 
-            ResultSet res2;
-            Statement stm2 = mysqlconn.getConn().createStatement();
-            stm2.executeUpdate("Update users SET loggedIn = true WHERE username ='" + username + "';");
-
-            //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-            return EMessageCode.LoginSuccessful;
+        EntityTransaction tx = getEntityManager().getTransaction();
+        tx.begin();
+        User u = em.find(User.class, userid);
+        u.setLoggedIn(true);
+        em.merge(u);
+        tx.commit();
+        //TODO: check affected rows, etc. --> then return corresponding ResponseObject
+        return ResponseCode.LoginSuccessful;
         }
-        catch(Exception e) {
-            e.printStackTrace();
-            return EMessageCode.LoginFailed;
-        }}
 
-    public EMessageCode logUserOut(User user){
-        return logUserOut(user.getUsername());
+
+    public ResponseCode logUserOut(Integer userid){
+        if(emf == null || em == null){
+            createEntityManager();
+        }
+        EntityTransaction tx = getEntityManager().getTransaction();
+        tx.begin();
+        User u =em.find(User.class, userid);
+        u.setLoggedIn(false);
+        em.merge(u);
+        tx.commit();
+        //TODO: check affected rows, etc. --> then return corresponding ResponseObject
+        return ResponseCode.LogoutSuccessful;
     }
 
-    public EMessageCode logUserOut(String username){
-        try {
-            MySQLConnection mysqlconn = new MySQLConnection();
-            mysqlconn.CreateConnection();
-
-            Statement stm = mysqlconn.getConn().createStatement();
-            stm.executeUpdate("Update users SET loggedIn = 0 WHERE username ='" + username + "';");
-
-            //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-            return EMessageCode.LogoutSuccessful;
-        }
-        catch(Exception e) {
-            return EMessageCode.LogoutFailed;
-        }
-    }
-
-    public List<String> getAllUsers() throws SQLException {
-        List<String> userlist = new ArrayList<String>();
-
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
-
-        String usrname;
-        String firstname;
-        String lastname;
-        String password;
-        String lastTimeLoggedIn;
-        boolean loggedIn;
-        String role;
-
-        User currentUser = new User();
-        currentUser.setUsername("0");
-        currentUser.setFirstname("0");
-        currentUser.setLastname("0");
-        currentUser.setPassword("0");
-        currentUser.setLastTimeLoggedIn("1970-01-01");
-        currentUser.setLoggedIn(false);
-        currentUser.setRole("User");
-
-        try{
-            ResultSet rs = UserEinlesen("%", "%", "%");
-            while (rs.next()){
-                usrname = rs.getString(2);
-                firstname = rs.getString(3);
-                lastname = rs.getString(4);
-                password = rs.getString(5);
-                lastTimeLoggedIn = rs.getString(6);
-                loggedIn = rs.getBoolean(7);
-                role = rs.getString(8);
-
-                currentUser.setUsername(usrname);
-                currentUser.setFirstname(firstname);
-                currentUser.setLastname(lastname);
-                currentUser.setPassword(password);
-                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
-                currentUser.setLoggedIn(loggedIn);
-                currentUser.setRole(role);
-
-                userlist.add(currentUser.getUsername());
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public List<User> getAllUsers()  {
+        if(emf == null || em == null){
+            createEntityManager();
         }
 
-        return userlist;
-    }
+        String statement = "select u from User u";
+        Query query = getEntityManager().createQuery(statement);
 
-    public List<String> getAllLoggedInUsers() throws SQLException {
-        List<String> userlist = new ArrayList<String>();
+        List<User> UserListe = query.getResultList();
 
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
-
-        String usrname;
-        String firstname;
-        String lastname;
-        String password;
-        String lastTimeLoggedIn;
-        boolean loggedIn;
-
-        User currentUser = new User();
-        currentUser.setUsername("0");
-        currentUser.setFirstname("0");
-        currentUser.setLastname("0");
-        currentUser.setPassword("0");
-        currentUser.setLastTimeLoggedIn("1970-01-01");
-        currentUser.setLoggedIn(false);
-
-        ResultSet res;
-        Statement stm = mysqlconn.getConn().createStatement();
-        res= stm.executeQuery("Select * from users where loggedIn = true;");
-
-        try{
-            while (res.next()){
-                usrname = res.getString(2);
-                firstname = res.getString(3);
-                lastname = res.getString(4);
-                password = res.getString(5);
-                lastTimeLoggedIn = res.getString(6);
-                loggedIn = res.getBoolean(7);
-
-                currentUser.setUsername(usrname);
-                currentUser.setFirstname(firstname);
-                currentUser.setLastname(lastname);
-                currentUser.setPassword(password);
-                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
-                currentUser.setLoggedIn(loggedIn);
-
-                userlist.add(currentUser.getUsername());
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(UserListe.isEmpty()){
+            System.out.println("Es existiert kein Benutzer!");
+            return UserListe;
         }
-
-        return userlist;
-    }
-
-    public List<String> getAllLoggedOutUsers() throws SQLException {
-        List<String> userlist = new ArrayList<String>();
-
-        MySQLConnection mysqlconn = new MySQLConnection();
-        mysqlconn.CreateConnection();
-
-        String usrname;
-        String firstname;
-        String lastname;
-        String password;
-        String lastTimeLoggedIn;
-        boolean loggedIn;
-
-        User currentUser = new User();
-        currentUser.setUsername("0");
-        currentUser.setFirstname("0");
-        currentUser.setLastname("0");
-        currentUser.setPassword("0");
-        currentUser.setLastTimeLoggedIn("1970-01-01");
-        currentUser.setLoggedIn(false);
-
-        ResultSet res;
-        Statement stm = mysqlconn.getConn().createStatement();
-        res= stm.executeQuery("Select * from users where loggedIn = false;");
-
-        try{
-            while (res.next()){
-                usrname = res.getString(2);
-                firstname = res.getString(3);
-                lastname = res.getString(4);
-                password = res.getString(5);
-                lastTimeLoggedIn = res.getString(6);
-                loggedIn = res.getBoolean(7);
-
-                currentUser.setUsername(usrname);
-                currentUser.setFirstname(firstname);
-                currentUser.setLastname(lastname);
-                currentUser.setPassword(password);
-                currentUser.setLastTimeLoggedIn(lastTimeLoggedIn);
-                currentUser.setLoggedIn(loggedIn);
-
-                userlist.add(currentUser.getUsername());
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return userlist;
-    }
-
-    public EMessageCode isUserloggedIn(User user) {
-        return isUserloggedIn(user.getUsername());
-    }
-
-    public EMessageCode isUserloggedIn(String username) {
-        try {
-            MySQLConnection mysqlconn = new MySQLConnection();
-            mysqlconn.CreateConnection();
-
-            Boolean currentUserStatus = false;
-
-            ResultSet res;
-            Statement stm = mysqlconn.getConn().createStatement();
-            res = stm.executeQuery("SELECT loggedIn from users WHERE username ='" + username + "';");
-
-            while (res.next())
-                currentUserStatus = res.getBoolean(1);
-
-            if(currentUserStatus)
-                return EMessageCode.LoggedIn;
-            else
-                return EMessageCode.NotLoggedIn;
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return EMessageCode.DBError;
+        else{
+            return UserListe;
         }
 
     }
 
-    public static void main(String args[]) throws SQLException {
+    public List<User> getAllLoggedInUsers() {
+        if(emf == null || em == null){
+            createEntityManager();
+        }
+
+        String statement = "select u from User u where u.LoggedIn = true";
+        Query query = getEntityManager().createQuery(statement);
+
+        List<User> UserListe = query.getResultList();
+
+        if(UserListe.isEmpty()){
+            System.out.println("Es existiert kein eingeloggter Benutzer!");
+            return UserListe;
+        }
+        else{
+            return UserListe;
+        }
+    }
+
+    public List<User> getAllLoggedOutUsers() {
+        if(emf == null || em == null){
+            createEntityManager();
+        }
+
+        String statement = "select u from User u where u.LoggedIn = false";
+        Query query = getEntityManager().createQuery(statement);
+
+        List<User> UserListe = query.getResultList();
+
+        if(UserListe.isEmpty()){
+            System.out.println("Es existiert kein eingeloggter Benutzer!");
+            return UserListe;
+        }
+        else{
+            return UserListe;
+        }
+    }
+
+    public ResponseCode isUserloggedIn(String benutzername) {
+        if(emf == null || em == null){
+            createEntityManager();
+        }
+
+        String statement = "select u from User u where u.Username = :username AND where u.LoggedIn = true";
+        Query query = getEntityManager().createQuery(statement);
+        query.setParameter("username", benutzername);
+
+        List<User> UserListe = query.getResultList();
+
+        if(UserListe.isEmpty()){
+            System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist nicht eingeloggt!");
+            return ResponseCode.Fail;
+        }
+        else{
+            return ResponseCode.LoggedIn;
+    }
+    }
+
+           public ResponseCode isUserloggedout(String benutzername) {
+               if(emf == null || em == null){
+                   createEntityManager();
+               }
+
+               String statement = "select u from User u where u.Username = :username AND where u.LoggedIn = false";
+               Query query = getEntityManager().createQuery(statement);
+               query.setParameter("username", benutzername);
+
+               List<User> UserListe = query.getResultList();
+
+               if(UserListe.isEmpty()){
+                   System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist eingeloggt!");
+                   return ResponseCode.Fail;
+               }
+               else{
+                   return ResponseCode.LoggedOut;
+               }
+           }
+
+    public static void main(String args[]) {
         UserDAO benutzerverwaltung = new UserDAO();
-        System.out.print(benutzerverwaltung.logUserIn("admin"));
+        System.out.print(benutzerverwaltung.logUserIn(1));
     }
 }
 

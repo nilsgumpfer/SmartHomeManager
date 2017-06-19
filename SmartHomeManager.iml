@@ -7,6 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="javax.persistence_2.0.4.v201112161009" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.24-bin" level="project" />
+    <orderEntry type="library" name="eclipselink" level="project" />
   </component>
 </module>
