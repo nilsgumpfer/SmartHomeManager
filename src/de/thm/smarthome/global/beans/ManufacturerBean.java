@@ -36,7 +36,7 @@ public class ManufacturerBean {
             case VAILLANT:
                 deviceManufacturer_String = "Vaillant";
                 break;
-            case CONRAD:
+            case CONRAD_ELECTRONIC:
                 deviceManufacturer_String = "Conrad Electronic";
                 break;
             case ELECTRIC_COMPANY:

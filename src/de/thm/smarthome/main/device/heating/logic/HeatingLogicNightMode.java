@@ -1,7 +1,10 @@
 package de.thm.smarthome.main.device.heating.logic;
 
 import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
@@ -9,10 +12,11 @@ import de.thm.smarthome.main.device.heating.model.IHeatingModel;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class HeatingLogicNightMode implements IHeatingLogic
+public class HeatingLogicNightMode extends AObservable implements IHeatingLogic, IObserver
 {
     private IHeatingModel model;
     private IHeating device;
+    private ActionModeBean actionModeBean = new ActionModeBean(EActionMode.NIGHTMODE);
 
     public HeatingLogicNightMode(IHeatingModel model, IHeating adapter) {
         this.model  = model;
@@ -46,7 +50,7 @@ public class HeatingLogicNightMode implements IHeatingLogic
 
     @Override
     public ActionModeBean getActionMode() {
-        return model.getActionMode();
+        return actionModeBean;
     }
 
     @Override
@@ -82,5 +86,10 @@ public class HeatingLogicNightMode implements IHeatingLogic
     @Override
     public IHeating getAdapter() {
         return device;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+        //TODO: Observer-Pattern
     }
 }

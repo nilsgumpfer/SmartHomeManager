@@ -14,6 +14,15 @@ public class PowerStateBean {
         lookUpString();
     }
 
+    public PowerStateBean(boolean powerState) {
+        if(powerState)
+            powerState_Enum = EPowerState.ON;
+        else
+            powerState_Enum = EPowerState.OFF;
+
+        lookUpString();
+    }
+
     public EPowerState getPowerState_Enum() {
         return powerState_Enum;
     }
@@ -35,5 +44,12 @@ public class PowerStateBean {
                 break;
 
         }
+    }
+
+    public boolean getPowerState_Boolean() {
+        if(powerState_Enum == EPowerState.ON)
+            return true;
+        else
+            return false;
     }
 }

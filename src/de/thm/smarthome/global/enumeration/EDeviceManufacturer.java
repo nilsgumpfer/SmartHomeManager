@@ -8,6 +8,6 @@ public enum EDeviceManufacturer {
     VIESSMANN,
     BUDERUS,
     VAILLANT,
-    CONRAD,
+    CONRAD_ELECTRONIC,
     ELECTRIC_COMPANY
 }

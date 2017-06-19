@@ -1,10 +1,6 @@
 package de.thm.smarthome.global.transfer;
 
 import de.thm.smarthome.global.beans.*;
-import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
-import de.thm.smarthome.global.enumeration.EPowerState;
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 
 /**
  * Created by Nils on 05.02.2017.
@@ -18,9 +14,9 @@ public class HeatingTransferObject {
     String              genericName;
     String              serialnumber;
     PowerStateBean      powerState;
-    MessageBean         messageBean;
+    MessageBean         message;
 
-    public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState, MessageBean messageBean) {
+    public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState, MessageBean message) {
         this.currentTemperature     = currentTemperature;
         this.desiredTemperature     = desiredTemperature;
         this.modelVariant           = modelVariant;
@@ -29,7 +25,7 @@ public class HeatingTransferObject {
         this.genericName            = genericName;
         this.serialnumber           = serialnumber;
         this.powerState             = powerState;
-        this.messageBean            = messageBean;
+        this.message = message;
     }
 
     public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
@@ -107,11 +103,9 @@ public class HeatingTransferObject {
         this.powerState = powerState;
     }
 
-    public MessageBean getMessageBean() {
-        return messageBean;
+    public MessageBean getMessage() {
+        return message;
     }
 
-    public void setMessageBean(MessageBean messageBean) {
-        this.messageBean = messageBean;
-    }
+    public void setMessage(MessageBean message) { this.message = message; }
 }

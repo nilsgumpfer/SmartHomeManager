@@ -6,23 +6,23 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ThermometerTransferObject;
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
+import de.thm.smarthome.main.device.thermometer.logic.IThermometerLogic;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created by Nils on 14.06.2017.
  */
-public class ThermometerLogicFahrenheit extends AObservable implements IThermometerLogic, IObserver
+public class ThermometerLogicMaintenanceMode extends AObservable implements IThermometerLogic, IObserver
 {
     private IThermometerModel   model;
     private IThermometer        device;
-    private ActionModeBean      actionModeBean = new ActionModeBean(EActionMode.CELSIUS);
+    private ActionModeBean actionModeBean = new ActionModeBean(EActionMode.CELSIUS);
 
-    public ThermometerLogicFahrenheit(IThermometerModel model, IThermometer adapter) {
+    public ThermometerLogicMaintenanceMode(IThermometerModel model, IThermometer adapter) {
         this.model  = model;
         device      = adapter;
     }
@@ -76,8 +76,5 @@ public class ThermometerLogicFahrenheit extends AObservable implements IThermome
     public IThermometer getAdapter() {
         return device;
     }
+
 }
-
-
-
-

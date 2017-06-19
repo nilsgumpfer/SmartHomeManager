@@ -5,7 +5,8 @@ import de.thm.smarthome.global.beans.*;
 /**
  * Created by Nils on 05.02.2017.
  */
-public class WeatherStationTransferObject {
+public class WeatherStationTransferObject
+{
     private MeasureBean         temperature;
     private MeasureBean         windVelocity;
     private MeasureBean         rainfallAmount;

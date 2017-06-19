@@ -15,8 +15,8 @@ public class ModelVariantBean {
         lookUpString();
     }
 
-    public ModelVariantBean(EDeviceManufacturer buderus, String serialnumber) {
-        //TODO: Based on manufacturer and serialnumber-structure, assign ModelVariant
+    public ModelVariantBean(EDeviceManufacturer buderus, String modelVariant) {
+        //TODO: Based on manufacturer and modelVariant, assign ModelVariant
     }
 
     public EModelVariant getModelVariant_Enum() {

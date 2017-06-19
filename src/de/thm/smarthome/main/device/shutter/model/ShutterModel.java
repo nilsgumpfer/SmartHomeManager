@@ -1,5 +1,9 @@
 package de.thm.smarthome.main.device.shutter.model;
 
+import de.thm.smarthome.global.beans.ActionModeBean;
+import de.thm.smarthome.global.beans.ManufacturerBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.main.device.shutter.adapter.ElectricShutterAdapter;
@@ -7,126 +11,91 @@ import de.thm.smarthome.main.device.shutter.adapter.ElectricShutterAdapter;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class ShutterModel implements IShutterModel{
-    private String shutterName = "N/A";
-    private String shutterManufacturer = "N/A";
-    private String shutterModel = "N/A";
-    private String shutterSerialnumber = "N/A";
-    private int shutterPosition = 0;
-    private String logicName = "N/A";
-    boolean isUp = true;
-    boolean isDown = false;
-    int shutterHeight = 0;
+public class ShutterModel implements IShutterModel
+{
+    private PositionBean currentPosition;
+    private PositionBean desiredPosition;
+    private ModelVariantBean modelVariant;
+    private ManufacturerBean manufacturer;
+    private ActionModeBean actionMode;
+    private String genericName;
+    private String serialnumber;
 
-    ElectricShutterAdapter adapter; //TODO: das ist falsch --> interface!
-
-    @Override
-    public String getShutterName(){
-        return this.shutterName;
+    public ShutterModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
+        this.modelVariant = modelVariant;
+        this.manufacturer = manufacturer;
+        this.actionMode = actionMode;
+        this.genericName = genericName;
+        this.serialnumber = serialnumber;
     }
 
     @Override
-    public String getShutterManufacturer() {
-        return this.shutterManufacturer;
+    public PositionBean getCurrentPosition() {
+        return currentPosition;
     }
 
     @Override
-    public String getShutterModel() {
-        return this.shutterModel;
+    public void setCurrentPosition(PositionBean currentPosition) {
+        this.currentPosition = currentPosition;
     }
 
     @Override
-    public String getShutterSerialnumber() {
-        return this.shutterSerialnumber;
+    public PositionBean getDesiredPosition() {
+        return desiredPosition;
     }
 
     @Override
-    public int getShutterPosition() {
-        return this.shutterPosition;
+    public void setDesiredPosition(PositionBean desiredPosition) {
+        this.desiredPosition = desiredPosition;
     }
 
     @Override
-    public void setShutterName(String shuttername){
-       this.shutterName = shuttername;
+    public ModelVariantBean getModelVariant() {
+        return modelVariant;
     }
 
     @Override
-    public String getLogicName(){
-        return logicName;
+    public void setModelVariant(ModelVariantBean modelVariant) {
+        this.modelVariant = modelVariant;
     }
 
     @Override
-    public void setLogicName(String logicName){
-        this.logicName = logicName;
+    public ManufacturerBean getManufacturer() {
+        return manufacturer;
     }
 
     @Override
-    public void incrementShutterHeight(){
-        if(shutterHeight <5){
-            shutterHeight++;
-        }
-        else{
-            //TODO: Fehlermeldung: "Rollläden sind bereits komplett hochgefahren"
-            SmartHomeLogger.log("Rollläden sind bereits komplett hochgefahren");
-        }
-
-        if(shutterHeight == 5){
-            isUp = true;
-        }
+    public void setManufacturer(ManufacturerBean manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     @Override
-    public void decrementShutterHeight() {
-        if (shutterHeight > 0) {
-            shutterHeight--;
-        } else {
-            //TODO: Fehlermeldung: "Rollläden sind bereits komplett heruntergefahren"
-            SmartHomeLogger.log("Rollläden sind bereits komplett heruntergefahren");
-        }
-
-        if (shutterHeight == 0) {
-            isDown = true;
-        }
+    public ActionModeBean getActionMode() {
+        return actionMode;
     }
 
     @Override
-    public void setShutterHeight(int value){
-        if(value > -1 && value <6){
-            shutterHeight = value;
-        }
-        else{
-            //TODO: Fehlermeldung: "Bitte eine Rolllädenhöhe zwischen 0 und 5 eingeben!"
-            SmartHomeLogger.log("Bitte eine Rolllädenhöhe zwischen 0 und 5 eingeben!");
-        }
-        if(shutterHeight == 5){
-            isUp = true;
-        }
-        if(shutterHeight == 0){
-            isDown = true;
-        }
+    public void setActionMode(ActionModeBean actionMode) {
+        this.actionMode = actionMode;
     }
 
     @Override
-    public int getShutterHeight(){
-        return shutterHeight;
+    public String getGenericName() {
+        return genericName;
     }
 
     @Override
-    public boolean isUp() {
-        if(shutterHeight == 5){
-            return true;
-        } else{
-            return false;
-        }
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
     }
 
     @Override
-    public boolean isDown() {
-        if(shutterHeight == 0){
-            return true;
-        } else{
-            return false;
-        }
+    public String getSerialnumber() {
+        return serialnumber;
     }
 
+    @Override
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
 }

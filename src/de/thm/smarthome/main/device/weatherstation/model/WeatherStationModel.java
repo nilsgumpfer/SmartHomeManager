@@ -1,109 +1,139 @@
 package de.thm.smarthome.main.device.weatherstation.model;
 
+import de.thm.smarthome.global.beans.ActionModeBean;
+import de.thm.smarthome.global.beans.ManufacturerBean;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.weatherstation.adapter.ConradWeatherStationAdapter;
 
 /**
  * Created by Nils on 27.01.2017.
  */
-public class WeatherStationModel implements IWeatherStationModel{
-    private String weatherStationName = "";
-    private String weatherStationManufacturer = "";
-    private String weatherStationModel = "";
-    private String weatherStationSerialnumber = "";
-    private double windVelocity = 0.5;
-    private double rainfallAmount = 20;
-    private double airHumidity = 2;
-    private double airPressure = 4;
-    private double temperature = 13;
-    private boolean isMetric = true;
+public class WeatherStationModel extends AObservable implements IWeatherStationModel, IObserver
+{
+    private MeasureBean         temperature;
+    private MeasureBean         windVelocity;
+    private MeasureBean         rainfallAmount;
+    private MeasureBean         airPressure;
+    private MeasureBean         airHumidity;
+    private ModelVariantBean    modelVariant;
+    private ManufacturerBean    manufacturer;
+    private ActionModeBean      actionMode;
+    private String              genericName;
+    private String              serialnumber;
 
-    ConradWeatherStationAdapter adapter;
-
-    @Override
-    public String getWeatherStationName() {
-        return this.weatherStationName;
+    public WeatherStationModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
+        this.modelVariant = modelVariant;
+        this.manufacturer = manufacturer;
+        this.actionMode = actionMode;
+        this.genericName = genericName;
+        this.serialnumber = serialnumber;
     }
 
     @Override
-    public String getWeatherStationManufacturer() {
-        return this.weatherStationManufacturer;
-    }
-
-    @Override
-    public String getWeatherStationModel() {
-        return this.weatherStationModel;
-    }
-
-    @Override
-    public String getWeatherStationSerialnumber() {
-        return this.weatherStationSerialnumber;
-    }
-
-    @Override
-    public double getWindVelocity() {
-        return windVelocity;
-    }
-
-    @Override
-    public void setWindVelocity(double windVelocity) {
-        this.windVelocity = windVelocity;
-    }
-
-    @Override
-    public double getRainfallAmount() {
-        return rainfallAmount;
-    }
-
-    @Override
-    public void setRainfallAmount(double rainfallAmount) {
-        this.rainfallAmount = rainfallAmount;
-    }
-
-    @Override
-    public double getAirHumidity() {
-        return airHumidity;
-    }
-
-    @Override
-    public void setAirHumidity(double airHumidity) {
-        this.airHumidity = airHumidity;
-    }
-
-    @Override
-    public double getAirPressure() {
-        return airPressure;
-    }
-
-    @Override
-    public void setAirPressure(double airPressure) {
-        this.airPressure = airPressure;
-    }
-
-    @Override
-    public double getTemperature() {
+    public MeasureBean getTemperature() {
         return temperature;
     }
 
     @Override
-    public void setTemperature(double temperature) {
+    public void setTemperature(MeasureBean temperature) {
         this.temperature = temperature;
     }
 
     @Override
-    public boolean isMetric() {
-        if(isMetric){
-            return true;
-        }
-        return false;
+    public MeasureBean getWindVelocity() {
+        return windVelocity;
     }
 
     @Override
-    public void toggleMeasuringUnit() {
-        if(isMetric){
-            isMetric = false;
-        } else{
-            isMetric = true;
-        }
+    public void setWindVelocity(MeasureBean windVelocity) {
+        this.windVelocity = windVelocity;
+    }
 
+    @Override
+    public MeasureBean getRainfallAmount() {
+        return rainfallAmount;
+    }
+
+    @Override
+    public void setRainfallAmount(MeasureBean rainfallAmount) {
+        this.rainfallAmount = rainfallAmount;
+    }
+
+    @Override
+    public MeasureBean getAirPressure() {
+        return airPressure;
+    }
+
+    @Override
+    public void setAirPressure(MeasureBean airPressure) {
+        this.airPressure = airPressure;
+    }
+
+    @Override
+    public MeasureBean getAirHumidity() {
+        return airHumidity;
+    }
+
+    @Override
+    public void setAirHumidity(MeasureBean airHumidity) {
+        this.airHumidity = airHumidity;
+    }
+
+    @Override
+    public ModelVariantBean getModelVariant() {
+        return modelVariant;
+    }
+
+    @Override
+    public void setModelVariant(ModelVariantBean modelVariant) {
+        this.modelVariant = modelVariant;
+    }
+
+    @Override
+    public ManufacturerBean getManufacturer() {
+        return manufacturer;
+    }
+
+    @Override
+    public void setManufacturer(ManufacturerBean manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    @Override
+    public ActionModeBean getActionMode() {
+        return actionMode;
+    }
+
+    @Override
+    public void setActionMode(ActionModeBean actionMode) {
+        this.actionMode = actionMode;
+    }
+
+    @Override
+    public String getGenericName() {
+        return genericName;
+    }
+
+    @Override
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
+    }
+
+    @Override
+    public String getSerialnumber() {
+        return serialnumber;
+    }
+
+    @Override
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+        //TODO: Observer-Pattern
     }
 }

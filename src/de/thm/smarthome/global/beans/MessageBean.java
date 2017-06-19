@@ -14,6 +14,15 @@ public class MessageBean {
         lookUpString();
     }
 
+    public MessageBean(boolean returnValue) {
+        if(returnValue)
+            messageCode_Enum = EMessageCode.SUCCESS;
+        else
+            messageCode_Enum = EMessageCode.FAIL;
+
+        lookUpString();
+    }
+
     public EMessageCode getMessageCode_Enum() {
         return messageCode_Enum;
     }

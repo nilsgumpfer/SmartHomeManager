@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.heating.logic;
 
 import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
@@ -13,6 +14,7 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic
 {
     private IHeatingModel model;
     private IHeating device;
+    private ActionModeBean actionModeBean = new ActionModeBean(EActionMode.MAINTENANCEMODE);
 
     public HeatingLogicMaintenanceMode(IHeatingModel model, IHeating adapter) {
         this.model  = model;
@@ -46,7 +48,7 @@ public class HeatingLogicMaintenanceMode implements IHeatingLogic
 
     @Override
     public ActionModeBean getActionMode() {
-        return model.getActionMode();
+        return actionModeBean;
     }
 
     @Override

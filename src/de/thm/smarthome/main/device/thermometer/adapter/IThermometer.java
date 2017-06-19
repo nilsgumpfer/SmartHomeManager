@@ -1,15 +1,15 @@
 package de.thm.smarthome.main.device.thermometer.adapter;
 
-import java.rmi.RemoteException;
+import de.thm.smarthome.global.beans.ManufacturerBean;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
 
 /**
  * Created by Nils on 27.01.2017.
  */
-public interface IThermometer {
-
-    String getThermometerName();
-    String getThermometerManufacutrer();
-    String getThermometerModel();
-    String getThermometerSerialnumber();
-    double getThermometerTemperature() throws RemoteException;
+public interface IThermometer
+{
+    ModelVariantBean getModelVariant();
+    ManufacturerBean getManufacturer();
+    MeasureBean getTemperature();
 }

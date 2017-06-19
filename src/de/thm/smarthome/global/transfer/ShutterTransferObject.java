@@ -39,6 +39,16 @@ public class ShutterTransferObject {
         this.moveComplete       = moveComplete;
     }
 
+    public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
+        this.currentPosition    = currentPosition;
+        this.desiredPosition    = desiredPosition;
+        this.modelVariant       = modelVariant;
+        this.manufacturer       = manufacturer;
+        this.actionMode         = actionMode;
+        this.genericName        = genericName;
+        this.serialnumber       = serialnumber;
+    }
+
     public PositionBean getCurrentPosition() {
         return currentPosition;
     }

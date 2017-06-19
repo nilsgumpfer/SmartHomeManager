@@ -1,23 +1,33 @@
 package de.thm.smarthome.main.device.weatherstation.model;
 
+import de.thm.smarthome.global.beans.ActionModeBean;
+import de.thm.smarthome.global.beans.ManufacturerBean;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+
 /**
  * Created by Nils on 01.02.2017.
  */
-public interface IWeatherStationModel {
-    String getWeatherStationName();
-    String getWeatherStationManufacturer();
-    String getWeatherStationModel();
-    String getWeatherStationSerialnumber();
-    double getWindVelocity();
-    void setWindVelocity(double windVelocity);
-    double getRainfallAmount();
-    void setRainfallAmount(double rainfallAmount);
-    double getAirHumidity();
-    void setAirHumidity(double airHumidity);
-    double getAirPressure();
-    void setAirPressure(double airPressure);
-    double getTemperature();
-    void setTemperature(double temperature);
-    boolean isMetric();
-    void toggleMeasuringUnit();
+public interface IWeatherStationModel
+{
+    MeasureBean getTemperature();
+    void setTemperature(MeasureBean temperature);
+    MeasureBean getWindVelocity();
+    void setWindVelocity(MeasureBean windVelocity);
+    MeasureBean getRainfallAmount();
+    void setRainfallAmount(MeasureBean rainfallAmount);
+    MeasureBean getAirPressure();
+    void setAirPressure(MeasureBean airPressure);
+    MeasureBean getAirHumidity();
+    void setAirHumidity(MeasureBean airHumidity);
+    ModelVariantBean getModelVariant();
+    void setModelVariant(ModelVariantBean modelVariant);
+    ManufacturerBean getManufacturer();
+    void setManufacturer(ManufacturerBean manufacturer);
+    ActionModeBean getActionMode();
+    void setActionMode(ActionModeBean actionMode);
+    String getGenericName();
+    void setGenericName(String genericName);
+    String getSerialnumber();
+    void setSerialnumber(String serialnumber);
 }

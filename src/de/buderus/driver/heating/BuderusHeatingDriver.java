@@ -20,11 +20,11 @@ import java.util.List;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class BuderusHeatingDriver implements HeizungClientInterface{
-
+public class BuderusHeatingDriver implements HeizungClientInterface
+{
     private HeizungServerInterface deviceServer;
 
-    private ModelVariantBean modelVariant;
+    private String modelVariant;
     private String genericName;
     private String serialnumber;
 
@@ -39,18 +39,19 @@ public class BuderusHeatingDriver implements HeizungClientInterface{
     }
 
     private void readModelVariantInformation() {
-        modelVariant = new ModelVariantBean(EDeviceManufacturer.BUDERUS, serialnumber);
+        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
+        modelVariant = "Heating3000";
     }
 
     private void initConnection()
     {
         //TODO: get IP Address for host-name
-        String host = modelVariant.getModelVariant_String();
+        String host = modelVariant;
         int port    = 0;
 
         try {
 
-            SmartHomeLogger.log("Looking for Buderus heating: " + modelVariant.getModelVariant_String() + "..");
+            SmartHomeLogger.log("Looking for Buderus heating: " + modelVariant + "..");
 
             LocateRegistry.getRegistry(host, port);
 
@@ -72,27 +73,27 @@ public class BuderusHeatingDriver implements HeizungClientInterface{
         }
     }
 
-    public ModelVariantBean getModelVariant() {
+    public String getModelVariant() {
         return modelVariant;
     }
 
-    public MeasureBean getCurrentTemperature() {
+    public double getCurrentTemperature() {
         return deviceServer.getCurrentTemperature();
     }
 
-    public MeasureBean getDesiredTemperature() {
+    public double getDesiredTemperature() {
         return deviceServer.getDesiredTemperature();
     }
 
-    public PowerStateBean getPowerState() {
+    public boolean getPowerState() {
         return deviceServer.getPowerState();
     }
 
-    public MessageBean setDesiredTemperature(MeasureBean desiredTemperature) {
+    public boolean setDesiredTemperature(double desiredTemperature) {
         return deviceServer.setDesiredTemperature(desiredTemperature);
     }
 
-    public MessageBean setPowerState(PowerStateBean powerState) {
+    public boolean setPowerState(boolean powerState) {
         return deviceServer.setPowerState(powerState);
     }
 }

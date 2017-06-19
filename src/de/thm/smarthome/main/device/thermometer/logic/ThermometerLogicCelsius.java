@@ -1,41 +1,80 @@
 package de.thm.smarthome.main.device.thermometer.logic;
 
+import de.thm.smarthome.global.beans.ActionModeBean;
+import de.thm.smarthome.global.beans.ManufacturerBean;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.enumeration.EActionMode;
+import de.thm.smarthome.global.factory.TransferObjectFactory;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ThermometerTransferObject;
+import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 
 /**
  * Created by Nils on 27.01.2017.
  */
-public class ThermometerLogicCelsius implements IThermometerLogic {
-    private IThermometerModel model;
-    private IThermometer device;
-    private String logicName = "Celsius";
+public class ThermometerLogicCelsius extends AObservable implements IThermometerLogic, IObserver
+{
+    private IThermometerModel   model;
+    private IThermometer        device;
+    private ActionModeBean      actionModeBean = new ActionModeBean(EActionMode.CELSIUS);
 
-    public ThermometerLogicCelsius(IThermometerModel model, IThermometer device) {
-        this.model = model;
+    public ThermometerLogicCelsius(IThermometerModel model, IThermometer adapter) {
+        this.model  = model;
+        device      = adapter;
     }
 
     @Override
-    public String getLogicName() {
-        return logicName;
+    public void update(AObservable o, Object change) {
+        //TODO: Observer-Pattern
     }
 
+    @Override
+    public MeasureBean getTemperature() {
+        return model.getTemperature();
+    }
 
-//    @Override
-//    public void setCurrentTemperature() {
-//        if(model.isCelsius()==false){
-//            model.setCurrentTemperature((model.getCurrentTemperature()*1.8)+32);
-//            model.toggleTemperatureUnit();
-//        } else {
-//            //TODO: //Fehlermeldung: "Thermometer misst bereits in Celsius!"
-//            SmartHomeLogger.log("Thermometer misst bereits in Celsius!");
-//        }
-//    }
+    @Override
+    public ModelVariantBean getModelVariant() {
+        return model.getModelVariant();
+    }
+
+    @Override
+    public ManufacturerBean getManufacturer() {
+        return model.getManufacturer();
+    }
+
+    @Override
+    public ActionModeBean getActionMode() {
+        return actionModeBean;
+    }
+
+    @Override
+    public String getGenericName() {
+        return model.getGenericName();
+    }
+
+    @Override
+    public String getSerialnumber() {
+        return model.getSerialnumber();
+    }
 
     @Override
     public ThermometerTransferObject getThermometerData() {
-        return new ThermometerTransferObject(model.getThermometerName(), model.getThermometerManufacturer(), model.getThermometerModel(), model.getThermometerSerialnumber(), model.getThermometerTemperature(), "°C");
+        return TransferObjectFactory.getThermometerTransferObject(model);
+    }
+
+    @Override
+    public IThermometerModel getModel() {
+        return model;
+    }
+
+    @Override
+    public IThermometer getAdapter() {
+        return device;
     }
 }
