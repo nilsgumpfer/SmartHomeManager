@@ -55,7 +55,7 @@ public class MessageBean {
                 message_String = "N/A";
                 break;
             case NOTLOGGEDIN:
-                message_String = "N/A";
+                message_String = "Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist nicht eingeloggt!";
                 break;
             case HEATINGCOULDNOTBECREATED:
                 message_String = "N/A";
@@ -67,7 +67,7 @@ public class MessageBean {
                 message_String = "N/A";
                 break;
             case LOGGEDIN:
-                message_String = "N/A";
+                message_String = "User ist eingeloggt.";
                 break;
             case DBERROR:
                 message_String = "N/A";
@@ -155,6 +155,15 @@ public class MessageBean {
                 break;
             case USERALTERATIONFAILED:
                 message_String = "N/A";
+                break;
+            case NOLOGGEDINUSER:
+                message_String = "Es existiert kein eingeloggter Benutzer!";
+                break;
+            case USERNAMENOTEXIST:
+            message_String = "Es existiert kein User mit diesem Benutzernamen!";
+                break;
+            case USERNOTEXISTNOTLOGGEDIN:
+                message_String = "Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist nicht eingeloggt!";
                 break;
             case SUCCESS:
                 message_String = "N/A";

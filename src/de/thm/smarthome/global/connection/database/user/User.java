@@ -1,5 +1,7 @@
 package de.thm.smarthome.global.connection.database.user;
 
+import de.thm.smarthome.main.device.heating.adapter.BuderusHeatingAdapter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

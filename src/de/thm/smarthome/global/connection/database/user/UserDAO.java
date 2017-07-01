@@ -1,11 +1,10 @@
 package de.thm.smarthome.global.connection.database.user;
-import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Persistence;
+import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 
-import de.thm.smarthome.global.connection.database.user.User;
-import de.thm.smarthome.global.enumeration.ResponseCode;
+import javax.persistence.*;
+import java.util.List;
+
 //import com.mysql.jdbc.Extension;
 
        /**
@@ -52,8 +51,11 @@ public void BenutzerSuchennachBenutzername(String benutzername){
 
     List<User> UserListe = query.getResultList();
 
+    //TODO: Prüfung, ob Nutzerliste hier sinnvoll /notwendig ist
+
     if(UserListe.isEmpty()){
-        System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen!");
+        new MessageBean(EMessageCode.USERNAMENOTEXIST);
+        /*System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen!");*/
     }
     else{
     for (User benutzer : UserListe){
@@ -79,7 +81,8 @@ public void BenutzerSuchennachBenutzername(String benutzername){
            List<User> UserListe = query.getResultList();
 
     if(UserListe.isEmpty()){
-               System.out.println("Es existiert kein Benutzer mit diesem Namen!");
+        new MessageBean(EMessageCode.USERNAMENOTEXIST);
+        /*System.out.println("Es existiert kein Benutzer mit diesem Namen!");*/
            }
     else{
                for (User benutzer : UserListe){
@@ -88,11 +91,11 @@ public void BenutzerSuchennachBenutzername(String benutzername){
            }
     }
 
-    /*public ResponseCode logUserIn(User user){
+    /*public EMessageCode logUserIn(User user){
         return logUserIn(user.getUsername());
     }*/
 
-    public ResponseCode logUserIn(Integer userid){
+    public MessageBean logUserIn(Integer userid){
 
         if(emf == null || em == null){
                createEntityManager();
@@ -105,11 +108,12 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         em.merge(u);
         tx.commit();
         //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-        return ResponseCode.LoginSuccessful;
+        return new MessageBean(EMessageCode.LOGINSUCCESSFUL);
         }
 
 
-    public ResponseCode logUserOut(Integer userid){
+
+           public MessageBean logUserOut(Integer userid){
         if(emf == null || em == null){
             createEntityManager();
         }
@@ -120,7 +124,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         em.merge(u);
         tx.commit();
         //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-        return ResponseCode.LogoutSuccessful;
+        return new MessageBean(EMessageCode.LOGOUTSUCCESSFUL);
     }
 
     public List<User> getAllUsers()  {
@@ -134,7 +138,8 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         List<User> UserListe = query.getResultList();
 
         if(UserListe.isEmpty()){
-            System.out.println("Es existiert kein Benutzer!");
+            new MessageBean(EMessageCode.USERNAMENOTEXIST);
+            // System.out.println("Es existiert kein Benutzer!");
             return UserListe;
         }
         else{
@@ -154,7 +159,9 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         List<User> UserListe = query.getResultList();
 
         if(UserListe.isEmpty()){
-            System.out.println("Es existiert kein eingeloggter Benutzer!");
+            /*System.out.println("Es existiert kein eingeloggter Benutzer!");*/
+
+            new MessageBean(EMessageCode.NOLOGGEDINUSER);
             return UserListe;
         }
         else{
@@ -173,7 +180,8 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         List<User> UserListe = query.getResultList();
 
         if(UserListe.isEmpty()){
-            System.out.println("Es existiert kein eingeloggter Benutzer!");
+            /* System.out.println("Es existiert kein eingeloggter Benutzer!"); */
+            new MessageBean(EMessageCode.NOLOGGEDINUSER);
             return UserListe;
         }
         else{
@@ -181,7 +189,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         }
     }
 
-    public ResponseCode isUserloggedIn(String benutzername) {
+    public MessageBean isUserloggedIn(String benutzername) {
         if(emf == null || em == null){
             createEntityManager();
         }
@@ -193,15 +201,15 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         List<User> UserListe = query.getResultList();
 
         if(UserListe.isEmpty()){
-            System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist nicht eingeloggt!");
-            return ResponseCode.Fail;
+            //System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist nicht eingeloggt!");
+            return new MessageBean(EMessageCode.USERNOTEXISTNOTLOGGEDIN);
         }
         else{
-            return ResponseCode.LoggedIn;
+            return new MessageBean(EMessageCode.LOGGEDIN);
     }
     }
 
-           public ResponseCode isUserloggedout(String benutzername) {
+           public MessageBean isUserloggedout(String benutzername) {
                if(emf == null || em == null){
                    createEntityManager();
                }
@@ -213,11 +221,11 @@ public void BenutzerSuchennachBenutzername(String benutzername){
                List<User> UserListe = query.getResultList();
 
                if(UserListe.isEmpty()){
-                   System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist eingeloggt!");
-                   return ResponseCode.Fail;
+                   /*System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist eingeloggt!");*/
+                   return new MessageBean(EMessageCode.USERNOTEXISTNOTLOGGEDIN);
                }
                else{
-                   return ResponseCode.LoggedOut;
+                   return new MessageBean(EMessageCode.LOGGEDOUT);
                }
            }
 
