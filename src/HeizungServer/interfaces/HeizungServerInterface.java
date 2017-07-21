@@ -2,6 +2,10 @@ package HeizungServer.interfaces;
 
 
 
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.beans.PowerStateBean;
+
 import java.rmi.Remote;
 
 /**
@@ -10,9 +14,10 @@ import java.rmi.Remote;
 public interface HeizungServerInterface extends Remote
 {
     void setGenericName(String genericName);
-    boolean setDesiredTemperature(double desiredTemperature);
-    boolean setPowerState(boolean powerState);
-    double getCurrentTemperature();
-    double getDesiredTemperature();
-    boolean getPowerState();
+    MeasureBean setDesiredTemperature(double desiredTemperature);
+    PowerStateBean setPowerState(boolean powerState);
+    MeasureBean getCurrentTemperature();
+    MeasureBean getDesiredTemperature();
+    PowerStateBean getPowerState();
+    ModelVariantBean getModelVariant();
 }
