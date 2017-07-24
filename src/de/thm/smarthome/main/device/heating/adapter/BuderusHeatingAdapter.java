@@ -56,14 +56,12 @@ public class BuderusHeatingAdapter extends AObservable implements IHeating, IObs
 
     //TODO: IF-Else falls Änderung fehlschlägt!
     @Override
-    public MessageBean setDesiredTemperature(MeasureBean temperature) {
-        driver.setDesiredTemperature(temperature.getMeasure_Double());
-        return new MessageBean(EMessageCode.TEMPERATUREADJUSTMENTSUCCESSFUL);
+    public void setDesiredTemperature(MeasureBean temperature) {
+        driver.setDesiredTemperature(temperature);
     }
 
     @Override
-    public MessageBean setPowerState(PowerStateBean powerState) {
-        driver.setPowerState(powerState.getPowerState_Boolean());
-        return new MessageBean(EMessageCode.SUCCESS);
+    public void setPowerState(PowerStateBean powerState) {
+        driver.setPowerState(powerState);
     }
 }

@@ -20,6 +20,6 @@ public interface IHeating
     ManufacturerBean getManufacturer();
     PowerStateBean getPowerState();
 
-    MessageBean setDesiredTemperature(MeasureBean temperature);
-    MessageBean setPowerState(PowerStateBean powerState);
+    void setDesiredTemperature(MeasureBean temperature);
+    void setPowerState(PowerStateBean powerState);
 }

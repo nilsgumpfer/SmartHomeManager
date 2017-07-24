@@ -15,7 +15,7 @@ import de.viessmann.driver.heating.ViessmannHeatingDriver;
 public class ViessmannHeatingAdapter extends AObservable implements IHeating, IObserver{
 
     private ViessmannHeatingDriver driver;
-    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.BUDERUS);
+    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VIESSMANN);
 
     public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
         this.driver = driver;
@@ -28,19 +28,20 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
 
     @Override
     public MeasureBean getCurrentTemperature() {
-        return new MeasureBean(driver.getCurrentTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+        return driver.getCurrentTemperature();
     }
 
     @Override
     public MeasureBean getDesiredTemperature() {
-        return new MeasureBean(driver.getDesiredTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+        return driver.getDesiredTemperature();
     }
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return new ModelVariantBean(EDeviceManufacturer.BUDERUS, driver.getModelVariant());
+        return driver.getModelVariant();
     }
 
+    //TODO: Eingebaut da ich das IHeating Interface nicht anpassen wollte*/
     @Override
     public ManufacturerBean getManufacturer() {
         return manufacturer;
@@ -48,16 +49,17 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
 
     @Override
     public PowerStateBean getPowerState() {
-        return new PowerStateBean(driver.getPowerState());
+        return driver.getPowerState();
+    }
+
+    //TODO: IF-Else falls Änderung fehlschlägt!
+    @Override
+    public void setDesiredTemperature(MeasureBean temperature) {
+        driver.setDesiredTemperature(temperature);
     }
 
     @Override
-    public MessageBean setDesiredTemperature(MeasureBean temperature) {
-        return new MessageBean(driver.setDesiredTemperature(temperature.getMeasure_Double()));
-    }
-
-    @Override
-    public MessageBean setPowerState(PowerStateBean powerState) {
-        return new MessageBean(driver.setPowerState(powerState.getPowerState_Boolean()));
+    public void setPowerState(PowerStateBean powerState) {
+        driver.setPowerState(powerState);
     }
 }

@@ -32,6 +32,15 @@ public class ModelVariantBean {
             case NA:
                 modelVariant_String = "N/A";
                 break;
+            case Heizung3000:
+                modelVariant_String = "Heizung3000X2";
+                break;
+            case Heizung2000:
+                modelVariant_String = "Heizung2000X2";
+                break;
+            case Heizung1000:
+                modelVariant_String = "Heizung1000X2";
+                break;
         }
     }
 }
