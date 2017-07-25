@@ -15,7 +15,7 @@ public class JaxRsApplication extends Application {
 
     public JaxRsApplication() {
         HashSet<Class<?>> c = new HashSet<Class<?>>();
-        c.add(HelloWorldResource.class);
+        c.add(SmartHomeManagerWebServiceDescriptor.class);
         classes = Collections.unmodifiableSet(c);
     }
 

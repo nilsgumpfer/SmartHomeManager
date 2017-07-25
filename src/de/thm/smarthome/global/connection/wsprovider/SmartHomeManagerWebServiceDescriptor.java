@@ -17,7 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("SmartHomeWS")
+@Path("ws")
 public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 {
     private IServiceFacade requestManager = RequestManager.getInstance(); //TODO: Change back to real RequestManager
@@ -25,7 +25,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     public SmartHomeManagerWebServiceDescriptor(){
     }
 
-    @GET @Path( "getServerInfo" ) @Produces( MediaType.TEXT_PLAIN )
+    @GET @Path( "info" ) @Produces( MediaType.TEXT_PLAIN )
     public String getServerInfo() {
         return requestManager.getServerInfo();
     }

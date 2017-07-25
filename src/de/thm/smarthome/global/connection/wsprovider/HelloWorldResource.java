@@ -9,14 +9,12 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Jakub Podlesak (jakub.podlesak at oracle.com)
  */
-@Path("helloworld")
+@Path("ws")
 public class HelloWorldResource {
-    public static final String CLICHED_MESSAGE = "Hello World!";
-
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    
+    @GET @Path( "info" ) @Produces( MediaType.TEXT_PLAIN )
     public String getHello() {
-        return CLICHED_MESSAGE;
+        return "Hello World!";
     }
 
 }

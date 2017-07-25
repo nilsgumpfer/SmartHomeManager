@@ -1,13 +1,4 @@
-package de.thm.smarthome.global.connection.wsprovider;
-
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.ext.RuntimeDelegate;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.URI;
+/*package de.thm.smarthome.global.connection.wsprovider;
 
 public class SmartHomeManagerWebServiceProvider
 {
@@ -61,5 +52,37 @@ public class SmartHomeManagerWebServiceProvider
 
     public static URI getBaseURI() {
         return UriBuilder.fromUri("http://localhost/").port(getPort(8080)).build();
+    }*/
+
+package de.thm.smarthome.global.connection.wsprovider;
+
+import com.sun.net.httpserver.HttpServer;
+import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import javax.ws.rs.core.UriBuilder;
+import java.net.URI;
+
+public class SmartHomeManagerWebServiceProvider
+{
+    private HttpServer httpServer = null;
+
+
+    public void initServer(){
+        if(httpServer == null) {
+            URI baseUri = UriBuilder.fromUri("http://localhost/").port(8080).build();
+            ResourceConfig config = new ResourceConfig(HelloWorldResource.class);
+            httpServer = JdkHttpServerFactory.createHttpServer(baseUri, config);
+        }
+    }
+
+
+    public void startProviding(){
+        initServer();
+        //httpServer.start();
+    }
+
+    public void stopProviding(){
+        httpServer.stop(0);
     }
 }
