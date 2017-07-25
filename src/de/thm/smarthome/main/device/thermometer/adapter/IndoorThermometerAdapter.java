@@ -1,11 +1,11 @@
 package de.thm.smarthome.main.device.thermometer.adapter;
 
-import de.conradelectronic.driver.weatherstation.ConradWeatherStationDriver;
 import de.electriccompany.driver.thermometer.IndoorThermometerDriver;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
@@ -28,7 +28,7 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return driver.getModelVariant();
+        return null;//driver.getModelVariant();
     }
 
     @Override
@@ -38,6 +38,6 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public MeasureBean getTemperature() {
-        return driver.getTemperature();
+        return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS); //TODO: Unit should come from device directly!
     }
 }

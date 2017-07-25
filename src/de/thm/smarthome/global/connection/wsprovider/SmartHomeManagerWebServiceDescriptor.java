@@ -5,18 +5,22 @@ import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
-import de.thm.smarthome.global.transfer.*;
-import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
+import de.thm.smarthome.global.transfer.ShutterTransferObject;
+import de.thm.smarthome.global.transfer.ThermometerTransferObject;
+import de.thm.smarthome.global.transfer.UserTransferObject;
+import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
-public class SmartHomeManagerWebServiceDescriptor extends Application implements IServiceFacade
+@Path("SmartHomeWS")
+public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 {
-    private IServiceFacade requestManager = RequestManagerMock.getInstance(); //TODO: Change back to real RequestManager
+    private IServiceFacade requestManager = RequestManager.getInstance(); //TODO: Change back to real RequestManager
 
     public SmartHomeManagerWebServiceDescriptor(){
     }
