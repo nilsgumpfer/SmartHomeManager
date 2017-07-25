@@ -5,11 +5,8 @@ import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
-import de.thm.smarthome.global.transfer.HeatingTransferObject;
-import de.thm.smarthome.global.transfer.ShutterTransferObject;
-import de.thm.smarthome.global.transfer.ThermometerTransferObject;
-import de.thm.smarthome.global.transfer.UserTransferObject;
-import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
+import de.thm.smarthome.global.transfer.*;
+import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 @Path("ws")
 public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 {
-    private IServiceFacade requestManager = RequestManager.getInstance(); //TODO: Change back to real RequestManager
+    private IServiceFacade requestManager = RequestManagerMock.getInstance(); //TODO: Change back to real RequestManager
 
     public SmartHomeManagerWebServiceDescriptor(){
     }
@@ -60,7 +57,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @GET @Path( "getHeatingTemperature/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
-    public HeatingTransferObject getHeatingTemperature(@PathParam( "requesting_user" ) String requesting_user) {
+    public MeasureBean getHeatingTemperature(@PathParam( "requesting_user" ) String requesting_user) {
         return requestManager.getHeatingTemperature(requesting_user);
     }
 
@@ -208,7 +205,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     }
 
     @GET @Path( "getWeatherStationData/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
-    public MeasureBean getWeatherStationData(@PathParam( "requesting_user" ) String requesting_user) {
+    public WeatherStationTransferObject getWeatherStationData(@PathParam( "requesting_user" ) String requesting_user) {
         return requestManager.getWeatherStationData(requesting_user);
     }
 

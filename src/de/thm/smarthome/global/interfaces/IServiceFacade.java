@@ -3,10 +3,7 @@ package de.thm.smarthome.global.interfaces;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.PositionBean;
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.transfer.*;
-
-import java.rmi.RemoteException;
 
 /**
  * Created by Nils on 04.02.2017.
@@ -19,7 +16,7 @@ public interface IServiceFacade {
     MessageBean switchHeatingOn(String requesting_user);
     MessageBean switchHeatingOff(String requesting_user);
     MessageBean setHeatingTemperature(String requesting_user, double temperature);
-    HeatingTransferObject getHeatingTemperature(String requesting_user);
+    MeasureBean getHeatingTemperature(String requesting_user);
     HeatingTransferObject getHeatingData(String requesting_user);
 
     MessageBean createShutter(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber);
@@ -48,7 +45,7 @@ public interface IServiceFacade {
     MeasureBean getWindVelocity(String requesting_user);
     MeasureBean getOutdoorTemperature(String requesting_user);
     MeasureBean getRainfallAmount(String requesting_user);
-    MeasureBean getWeatherStationData(String requesting_user);
+    WeatherStationTransferObject getWeatherStationData(String requesting_user);
 
     MessageBean createThermometer(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber);
     MessageBean deleteThermometer(String requesting_user);

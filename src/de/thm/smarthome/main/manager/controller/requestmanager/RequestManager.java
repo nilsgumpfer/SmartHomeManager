@@ -4,10 +4,7 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
-import de.thm.smarthome.global.transfer.HeatingTransferObject;
-import de.thm.smarthome.global.transfer.ShutterTransferObject;
-import de.thm.smarthome.global.transfer.ThermometerTransferObject;
-import de.thm.smarthome.global.transfer.UserTransferObject;
+import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
@@ -64,7 +61,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public HeatingTransferObject getHeatingTemperature(String requesting_user) {
+    public MeasureBean getHeatingTemperature(String requesting_user) {
         return null;
     }
 
@@ -194,7 +191,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public MeasureBean getWeatherStationData(String requesting_user) {
+    public WeatherStationTransferObject getWeatherStationData(String requesting_user) {
         return null;
     }
 
