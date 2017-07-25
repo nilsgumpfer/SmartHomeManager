@@ -2,7 +2,6 @@ package de.thm.smarthome.global.transfer;
 
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.enumeration.EUserGroup;
-import de.thm.smarthome.global.helper.MessageRepository;
 
 /**
  * Created by Nils on 05.02.2017.
@@ -16,13 +15,6 @@ public class UserTransferObject {
     private String lastname;
     private String eMail;
     private EUserGroup userGroup;
-
-    private UserTransferObject(){}
-
-    public UserTransferObject(EMessageCode responseCode) {
-        this.responseCode = responseCode;
-        message = MessageRepository.getMessage(responseCode);
-    }
 
     public UserTransferObject(String username, String password, String firstname, String lastname, String eMail, EUserGroup userGroup) {
         this.username = username;

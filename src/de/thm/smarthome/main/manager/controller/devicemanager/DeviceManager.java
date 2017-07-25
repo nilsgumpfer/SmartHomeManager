@@ -1,6 +1,6 @@
 package de.thm.smarthome.main.manager.controller.devicemanager;
 
-import de.thm.smarthome.global.enumeration.EMessageCode;
+import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -45,49 +45,49 @@ public class DeviceManager implements IDeviceManager, IObserver{
     }
 
     @Override
-    public EMessageCode setSmartHeating(SmartHeating smartHeating) {
+    public MessageBean setSmartHeating(SmartHeating smartHeating) {
         if(smartHeating!=null){
             this.smartHeating = smartHeating;
-            return EMessageCode.Success;
+            return new MessageBean(true);
         } else {
-            return EMessageCode.Fail;
+            return new MessageBean(false);
         }
     }
 
     @Override
-    public EMessageCode setSmartHeating(HeatingTransferObject heatingTransferObject) {
+    public MessageBean setSmartHeating(HeatingTransferObject heatingTransferObject) {
         if(heatingTransferObject!=null){
             //TODO: implement this
-            return EMessageCode.Fail;
+            return new MessageBean(true);
         } else {
-            return EMessageCode.Fail;
+            return new MessageBean(false);
         }
     }
 
     @Override
-    public EMessageCode createSmartHeating(HeatingTransferObject heatingTransferObject) {
+    public MessageBean createSmartHeating(HeatingTransferObject heatingTransferObject) {
         if(heatingTransferObject!=null){
             //TODO: implement this
-            return EMessageCode.Fail;
+            return new MessageBean(true);
         } else {
-            return EMessageCode.Fail;
+            return new MessageBean(false);
         }
     }
 
     @Override
-    public EMessageCode deleteSmartHeating() {
+    public MessageBean deleteSmartHeating() {
         if(smartHeating==null){
             //TODO: implement this
-            return EMessageCode.Fail;
+            return new MessageBean(true);
         } else {
-            return EMessageCode.Fail;
+            return new MessageBean(false);
         }
     }
 
     @Override
-    public SmartShutter getSmartShutter(String name) {
+    public SmartShutter getSmartShutter(String serialnumber) {
         for(int i = 0; i < smartShutters.size(); i++) {
-            if (name.equals(smartShutters.get(i).getName())) {
+            if (serialnumber.equals(smartShutters.get(i).getSerialnumber())) {
                 return smartShutters.get(i);
             }
         }
@@ -95,17 +95,17 @@ public class DeviceManager implements IDeviceManager, IObserver{
     }
 
     @Override
-    public EMessageCode addSmartShutter(SmartShutter smartShutter) {
+    public MessageBean addSmartShutter(SmartShutter smartShutter) {
         if(smartShutter!=null){
             smartShutters.add(smartShutters.size(), smartShutter);
-            return EMessageCode.Success;
+            return new MessageBean(true);
         } else {
-            return EMessageCode.Fail;
+            return new MessageBean(false);
         }
     }
 
     @Override
-    public EMessageCode deleteSmartShutter(SmartShutter smartShutter) {
+    public MessageBean deleteSmartShutter(SmartShutter smartShutter) {
         return null;
     }
 
@@ -115,17 +115,17 @@ return smartShutter;
     }
 
     @Override
-    public EMessageCode addSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public MessageBean addSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
     @Override
-    public EMessageCode deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public MessageBean deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
     @Override
-    public EMessageCode createSmartShutter(ShutterTransferObject shutterTransferObject) {
+    public MessageBean createSmartShutter(ShutterTransferObject shutterTransferObject) {
         return null;
     }
 
@@ -135,17 +135,17 @@ return smartShutter;
     }
 
     @Override
-    public EMessageCode setSmartThermometer(SmartThermometer smartThermometer) {
+    public MessageBean setSmartThermometer(SmartThermometer smartThermometer) {
         return null;
     }
 
     @Override
-    public EMessageCode setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+    public MessageBean setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
         return null;
     }
 
     @Override
-    public EMessageCode createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
+    public MessageBean createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
         return null;
     }
 
@@ -155,12 +155,12 @@ return smartShutter;
     }
 
     @Override
-    public EMessageCode setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
+    public MessageBean setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
         return null;
     }
 
     @Override
-    public EMessageCode createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
+    public MessageBean createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
         return null;
     }
 
@@ -170,12 +170,12 @@ return smartShutter;
     }
 
     @Override
-    public EMessageCode deleteSmartWeatherStation() {
+    public MessageBean deleteSmartWeatherStation() {
         return null;
     }
 
     @Override
-    public EMessageCode deleteSmartThermometer() {
+    public MessageBean deleteSmartThermometer() {
         return null;
     }
 }

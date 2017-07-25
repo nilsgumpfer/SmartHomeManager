@@ -54,7 +54,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
     //TODO: Prüfung, ob Nutzerliste hier sinnvoll /notwendig ist
 
     if(UserListe.isEmpty()){
-        new MessageBean(EMessageCode.USERNAMENOTEXIST);
+        new MessageBean(EMessageCode.FAIL);
         /*System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen!");*/
     }
     else{
@@ -81,7 +81,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
            List<User> UserListe = query.getResultList();
 
     if(UserListe.isEmpty()){
-        new MessageBean(EMessageCode.USERNAMENOTEXIST);
+        new MessageBean(EMessageCode.FAIL);
         /*System.out.println("Es existiert kein Benutzer mit diesem Namen!");*/
            }
     else{
@@ -95,7 +95,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         return logUserIn(user.getUsername());
     }*/
 
-    public MessageBean logUserIn(Integer userid){
+    public MessageBean logUserIn(String username){
 
         if(emf == null || em == null){
                createEntityManager();
@@ -103,28 +103,28 @@ public void BenutzerSuchennachBenutzername(String benutzername){
 
         EntityTransaction tx = getEntityManager().getTransaction();
         tx.begin();
-        User u = em.find(User.class, userid);
+        User u = em.find(User.class, username);
         u.setLoggedIn(true);
         em.merge(u);
         tx.commit();
         //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-        return new MessageBean(EMessageCode.LOGINSUCCESSFUL);
+        return new MessageBean(EMessageCode.SUCCESS);
         }
 
 
 
-           public MessageBean logUserOut(Integer userid){
+           public MessageBean logUserOut(String username){
         if(emf == null || em == null){
             createEntityManager();
         }
         EntityTransaction tx = getEntityManager().getTransaction();
         tx.begin();
-        User u =em.find(User.class, userid);
+        User u =em.find(User.class, username);
         u.setLoggedIn(false);
         em.merge(u);
         tx.commit();
         //TODO: check affected rows, etc. --> then return corresponding ResponseObject
-        return new MessageBean(EMessageCode.LOGOUTSUCCESSFUL);
+        return new MessageBean(EMessageCode.SUCCESS);
     }
 
     public List<User> getAllUsers()  {
@@ -138,7 +138,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         List<User> UserListe = query.getResultList();
 
         if(UserListe.isEmpty()){
-            new MessageBean(EMessageCode.USERNAMENOTEXIST);
+            new MessageBean(EMessageCode.FAIL);
             // System.out.println("Es existiert kein Benutzer!");
             return UserListe;
         }
@@ -161,7 +161,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         if(UserListe.isEmpty()){
             /*System.out.println("Es existiert kein eingeloggter Benutzer!");*/
 
-            new MessageBean(EMessageCode.NOLOGGEDINUSER);
+            new MessageBean(EMessageCode.FAIL);
             return UserListe;
         }
         else{
@@ -181,7 +181,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
 
         if(UserListe.isEmpty()){
             /* System.out.println("Es existiert kein eingeloggter Benutzer!"); */
-            new MessageBean(EMessageCode.NOLOGGEDINUSER);
+            new MessageBean(EMessageCode.FAIL);
             return UserListe;
         }
         else{
@@ -202,37 +202,16 @@ public void BenutzerSuchennachBenutzername(String benutzername){
 
         if(UserListe.isEmpty()){
             //System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist nicht eingeloggt!");
-            return new MessageBean(EMessageCode.USERNOTEXISTNOTLOGGEDIN);
+            return new MessageBean(EMessageCode.NOTLOGGEDIN);
         }
         else{
             return new MessageBean(EMessageCode.LOGGEDIN);
     }
     }
 
-           public MessageBean isUserloggedout(String benutzername) {
-               if(emf == null || em == null){
-                   createEntityManager();
-               }
-
-               String statement = "select u from User u where u.Username = :username AND where u.LoggedIn = false";
-               Query query = getEntityManager().createQuery(statement);
-               query.setParameter("username", benutzername);
-
-               List<User> UserListe = query.getResultList();
-
-               if(UserListe.isEmpty()){
-                   /*System.out.println("Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist eingeloggt!");*/
-                   return new MessageBean(EMessageCode.USERNOTEXISTNOTLOGGEDIN);
-               }
-               else{
-                   return new MessageBean(EMessageCode.LOGGEDOUT);
-               }
-           }
-
-    public static void main(String args[]) {
-        UserDAO benutzerverwaltung = new UserDAO();
-        System.out.print(benutzerverwaltung.logUserIn(1));
-    }
+   public MessageBean isUserloggedout(String benutzername) {
+       return isUserloggedIn(benutzername); // does same!
+   }
 }
 
 

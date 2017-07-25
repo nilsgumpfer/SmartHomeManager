@@ -1,7 +1,7 @@
 package de.thm.smarthome.global.command;
 
+import de.thm.smarthome.global.beans.PowerStateBean;
 import de.thm.smarthome.global.enumeration.EPowerState;
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 
 /**
@@ -12,8 +12,8 @@ public class SwitchOffCommand extends ASwitchCommand {
 
     public SwitchOffCommand(IOnAndOffSwitchableDevice device) {
         this.device = device;
-        powerToDo = EPowerState.OFF;
-        expectedStatus = EMessageCode.SwitchedOn;
-        requiredStatus = EMessageCode.SwitchedOff;
+        powerToDo = new PowerStateBean(EPowerState.OFF);
+        expectedStatus = new PowerStateBean(EPowerState.OFF);
+        requiredStatus = new PowerStateBean(EPowerState.ON);
     }
 }

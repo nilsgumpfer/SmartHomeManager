@@ -25,7 +25,8 @@ public class TypeConverter {
         List<IUpAndDownMovableDevice> output = new ArrayList<>();
 
         for (SmartShutter item : input) {
-            output.add(item);
+            //TODO: anpassen:
+            // output.add(item);
         }
 
         return output;

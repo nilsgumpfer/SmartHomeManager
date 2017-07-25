@@ -1,23 +1,19 @@
 package de.thm.smarthome.main.manager.controller.requestmanager;
 
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
-import de.thm.smarthome.global.helper.MessageRepository;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
-import de.thm.smarthome.global.transfer.*;
-import de.thm.smarthome.main.device.heating.device.SmartHeating;
-import de.thm.smarthome.main.device.shutter.device.SmartShutter;
-import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
-import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
+import de.thm.smarthome.global.transfer.ShutterTransferObject;
+import de.thm.smarthome.global.transfer.ThermometerTransferObject;
+import de.thm.smarthome.global.transfer.UserTransferObject;
 import de.thm.smarthome.main.manager.controller.commandmanager.CommandManager;
 import de.thm.smarthome.main.manager.controller.commandmanager.ICommandManager;
+import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
+import de.thm.smarthome.main.manager.controller.devicemanager.IDeviceManager;
 import de.thm.smarthome.main.manager.controller.usermanager.IUserManager;
 import de.thm.smarthome.main.manager.controller.usermanager.UserManagerMock;
-
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -38,13 +34,210 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject undoLastCommand(UserTransferObject authentication) {
-        return new CommandResponseObject(commandManager.undoLastCommand());
+    public String getServerInfo() {
+        return null;
     }
 
     @Override
-    public String getMessage(EMessageCode responseCode) {
-        return MessageRepository.getMessage(responseCode);
+    public MessageBean createHeating(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean deleteHeating(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MessageBean switchHeatingOn(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MessageBean switchHeatingOff(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MessageBean setHeatingTemperature(String requesting_user, double temperature) {
+        return null;
+    }
+
+    @Override
+    public HeatingTransferObject getHeatingTemperature(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public HeatingTransferObject getHeatingData(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MessageBean createShutter(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean deleteShutter(String requesting_user, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean moveAllShuttersUp(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MessageBean moveAllShuttersDown(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MessageBean moveShutterUp(String requesting_user, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean moveShutterDown(String requesting_user, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public PositionBean getShutterPosition(String requesting_user, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean setShutterPosition(String requesting_user, String serialnumber, String position) {
+        return null;
+    }
+
+    @Override
+    public ShutterTransferObject getShutterData(String requesting_user, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public ShutterTransferObject[] getAllShutterData(String requesting_user) {
+        return new ShutterTransferObject[0];
+    }
+
+    @Override
+    public MessageBean createUser(String requesting_user, String username, String password, String firstname, String lastname, String email) {
+        return null;
+    }
+
+    @Override
+    public MessageBean deleteUser(String requesting_user, String username) {
+        return null;
+    }
+
+    @Override
+    public MessageBean alterUser(String requesting_user, String username, String password, String firstname, String lastname, String email) {
+        return null;
+    }
+
+    @Override
+    public MessageBean login(String username, String password) {
+        return null;
+    }
+
+    @Override
+    public MessageBean logout(String requesting_user, String username) {
+        return null;
+    }
+
+    @Override
+    public UserTransferObject getUserData(String requesting_user, String username) {
+        return null;
+    }
+
+    @Override
+    public UserTransferObject[] getAllUserData(String requesting_user) {
+        return new UserTransferObject[0];
+    }
+
+    @Override
+    public MessageBean createWeatherStation(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean deleteWeatherStation(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MeasureBean getAirHumidity(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MeasureBean getAirPressure(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MeasureBean getWindVelocity(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MeasureBean getOutdoorTemperature(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MeasureBean getRainfallAmount(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MeasureBean getWeatherStationData(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MessageBean createThermometer(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean deleteThermometer(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public MeasureBean getIndoorTemperature(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public ThermometerTransferObject getThermometerData(String requesting_user) {
+        return null;
+    }
+
+    @Override
+    public String[] readLogs(String requesting_user, int limit) {
+        return new String[0];
+    }
+
+    @Override
+    public MessageBean undoLastCommand(String requesting_user) {
+        return null;
+    }
+
+    /*
+    @Override
+    public MessageBean undoLastCommand(String requesting_user) {
+        MessageBean check = userManager.checkLogin(requesting_user);
+
+        if(check.getMessageCode_Enum() == EMessageCode.LOGGEDIN)
+            return commandManager.undoLastCommand();
+        else
+            return check;
+
     }
 
     @Override
@@ -58,14 +251,14 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
+    public MessageBean createHeating(UserTransferObject authentication, HeatingTransferObject heating) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.createSmartHeating(heating));
+                return new MessageBean(deviceManager.createSmartHeating(heating));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
@@ -74,50 +267,50 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject deleteHeating(UserTransferObject authentication) {
+    public MessageBean deleteHeating(UserTransferObject authentication) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.deleteSmartHeating());
+                return new MessageBean(deviceManager.deleteSmartHeating());
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject switchHeatingOn(UserTransferObject authentication) {
+    public MessageBean switchHeatingOn(UserTransferObject authentication) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addSwitchOnCommand(deviceManager.getSmartHeating()));
+                return new MessageBean(commandManager.addSwitchOnCommand(deviceManager.getSmartHeating()));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject switchHeatingOff(UserTransferObject authentication) {
+    public MessageBean switchHeatingOff(UserTransferObject authentication) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addSwitchOffCommand(deviceManager.getSmartHeating()));
+                return new MessageBean(commandManager.addSwitchOffCommand(deviceManager.getSmartHeating()));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature) {
+    public MessageBean setHeatingTemperature(UserTransferObject authentication, double temperature) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addSetTemperatureCommand(deviceManager.getSmartHeating(), temperature));
+                return new MessageBean(commandManager.addSetTemperatureCommand(deviceManager.getSmartHeating(), temperature));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
@@ -141,7 +334,7 @@ public class RequestManager implements IServiceFacade {
             case LoggedIn:
                 SmartHeating smartHeating = deviceManager.getSmartHeating();
 
-                /**-->soll von der Heizung als Methode zurückgegeben werden (wie bei shutter, etc.)**/
+                ///-->soll von der Heizung als Methode zurückgegeben werden (wie bei shutter, etc.)
                 return smartHeating.getHeatingData();
 
             default:
@@ -150,74 +343,74 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
+    public MessageBean createShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.createSmartShutter(shutter));
+                return new MessageBean(deviceManager.createSmartShutter(shutter));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
+    public MessageBean deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.deleteSmartShutter(shutter));
+                return new MessageBean(deviceManager.deleteSmartShutter(shutter));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject moveAllShuttersUp(UserTransferObject authentication) {
+    public MessageBean moveAllShuttersUp(UserTransferObject authentication) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addMoveUpCommand());
+                return new MessageBean(commandManager.addMoveUpCommand());
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject moveAllShuttersDown(UserTransferObject authentication) {
+    public MessageBean moveAllShuttersDown(UserTransferObject authentication) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addMoveDownCommand());
+                return new MessageBean(commandManager.addMoveDownCommand());
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+    public MessageBean moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addMoveUpCommand(shutterTransferObject));
+                return new MessageBean(commandManager.addMoveUpCommand(shutterTransferObject));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
+    public MessageBean moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(commandManager.addMoveDownCommand(shutterTransferObject));
+                return new MessageBean(commandManager.addMoveDownCommand(shutterTransferObject));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
@@ -272,55 +465,55 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
+    public MessageBean createUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
                 return userManager.createUser(userTransferObject);
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
+    public MessageBean deleteUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
                 return userManager.deleteUser(userTransferObject);
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
+    public MessageBean alterUser(UserTransferObject authentication, UserTransferObject userTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
                 return userManager.alterUser(userTransferObject);
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject login(UserTransferObject userTransferObject) {
-        return new CommandResponseObject(userManager.login(userTransferObject));
+    public MessageBean login(UserTransferObject userTransferObject) {
+        return new MessageBean(userManager.login(userTransferObject));
     }
 
     @Override
-    public CommandResponseObject logout(UserTransferObject authentication, UserTransferObject userTransferObject) {
+    public MessageBean logout(UserTransferObject authentication, UserTransferObject userTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(userManager.logout(userTransferObject));
+                return new MessageBean(userManager.logout(userTransferObject));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
@@ -350,26 +543,26 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStationTransferObject) {
+    public MessageBean createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStationTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.createSmartWeatherStation(weatherStationTransferObject));
+                return new MessageBean(deviceManager.createSmartWeatherStation(weatherStationTransferObject));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject deleteWeatherStation(UserTransferObject authentication) {
+    public MessageBean deleteWeatherStation(UserTransferObject authentication) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.deleteSmartWeatherStation());
+                return new MessageBean(deviceManager.deleteSmartWeatherStation());
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
@@ -415,26 +608,26 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometerTransferObject) {
+    public MessageBean createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometerTransferObject) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.createSmartThermometer(thermometerTransferObject));
+                return new MessageBean(deviceManager.createSmartThermometer(thermometerTransferObject));
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
     @Override
-    public CommandResponseObject deleteThermometer(UserTransferObject authentication) {
+    public MessageBean deleteThermometer(UserTransferObject authentication) {
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
             case LoggedIn:
-                return new CommandResponseObject(deviceManager.deleteSmartThermometer());
+                return new MessageBean(deviceManager.deleteSmartThermometer());
             default:
-                return new CommandResponseObject(responseCode);
+                return new MessageBean(responseCode);
         }
     }
 
@@ -463,4 +656,5 @@ public class RequestManager implements IServiceFacade {
     public String[] readLogs(UserTransferObject authentication, int limit) {
         return SmartHomeLogger.readLogs(limit);
     }
+    */
 }

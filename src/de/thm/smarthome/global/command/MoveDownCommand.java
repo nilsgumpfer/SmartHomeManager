@@ -1,7 +1,6 @@
 package de.thm.smarthome.global.command;
 
 import de.thm.smarthome.global.enumeration.EMoveDirection;
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 
 /**
@@ -12,7 +11,6 @@ public class MoveDownCommand extends AMoveCommand {
 
     public MoveDownCommand(IUpAndDownMovableDevice device) {
         this.device = device;
-        failureCode = EMessageCode.MoveDownFailed;
         moveDirection = EMoveDirection.Down;
     }
 }

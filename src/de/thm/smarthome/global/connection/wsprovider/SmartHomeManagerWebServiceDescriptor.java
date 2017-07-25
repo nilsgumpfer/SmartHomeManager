@@ -5,16 +5,16 @@ import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
 
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 
 
-public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
+public class SmartHomeManagerWebServiceDescriptor extends Application implements IServiceFacade
 {
     private IServiceFacade requestManager = RequestManagerMock.getInstance(); //TODO: Change back to real RequestManager
 
@@ -106,7 +106,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @GET @Path( "setShutterPosition/requesting_user/{requesting_user}/serialnumber/{serialnumber}/position/{position}" ) @Produces( MediaType.APPLICATION_JSON )
     public MessageBean setShutterPosition(@PathParam( "requesting_user" ) String requesting_user, @PathParam( "serialnumber" ) String serialnumber, @PathParam( "position" ) String position) {
-        return requestManager.setShutterPosition(requesting_user, serialnumber, position);;
+        return requestManager.setShutterPosition(requesting_user, serialnumber, position);
     }
 
     @GET @Path( "getShutterData/requesting_user/{requesting_user}/serialnumber/{serialnumber}" ) @Produces( MediaType.APPLICATION_JSON )
@@ -215,7 +215,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @GET @Path( "deleteThermometer/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
     public MessageBean deleteThermometer(@PathParam( "requesting_user" ) String requesting_user) {
-        return requestManager.deleteThermometer(requesting_user);;
+        return requestManager.deleteThermometer(requesting_user);
     }
 
     @GET @Path( "getIndoorTemperature/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
@@ -236,5 +236,10 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     @GET @Path( "undoLastCommand/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
     public MessageBean undoLastCommand(@PathParam( "requesting_user" ) String requesting_user) {
         return requestManager.undoLastCommand(requesting_user);
+    }
+
+    @GET @Path( "halloWelt/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
+    public MessageBean halloWelt(@PathParam( "requesting_user" ) String requesting_user) {
+        return new MessageBean(EMessageCode.SUCCESS);
     }
 }

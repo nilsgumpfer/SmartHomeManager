@@ -1,6 +1,5 @@
 package de.thm.smarthome.global.command;
 
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 
 import java.util.List;
@@ -13,6 +12,5 @@ public class CollectiveMoveUpCommand extends ACollectiveMoveCommand {
 
     public CollectiveMoveUpCommand(List<IUpAndDownMovableDevice> devices) {
         this.devices = devices;
-        failureCode = EMessageCode.MoveUpFailed;
     }
 }

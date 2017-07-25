@@ -5,7 +5,10 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PowerStateBean;
-import de.thm.smarthome.global.enumeration.*;
+import de.thm.smarthome.global.enumeration.EActionMode;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EModelVariant;
+import de.thm.smarthome.global.enumeration.EPowerState;
 import de.thm.smarthome.main.device.heating.adapter.BuderusHeatingAdapter;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.adapter.VaillantHeatingAdapter;
@@ -15,8 +18,6 @@ import de.thm.smarthome.main.device.heating.logic.HeatingLogicDayMode;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.heating.model.HeatingModel;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
-import de.vaillant.driver.heating.VaillantHeatingDriver;
-import de.viessmann.driver.heating.ViessmannHeatingDriver;
 
 /**
  * Created by Nils on 03.02.2017.
@@ -45,11 +46,15 @@ public class HeatingFactory {
                 heatingAdapter                                  = new BuderusHeatingAdapter(buderusHeatingDriver);
                 break;
             case VAILLANT:
-                VaillantHeatingDriver vaillantHeatingDriver     = new VaillantHeatingDriver(serialnumber, genericName);
+                //TODO: Change back
+                //VaillantHeatingDriver vaillantHeatingDriver     = new VaillantHeatingDriver(serialnumber, genericName);
+                BuderusHeatingDriver vaillantHeatingDriver       = new BuderusHeatingDriver(serialnumber, genericName);
                 heatingAdapter                                  = new VaillantHeatingAdapter(vaillantHeatingDriver);
                 break;
             case VIESSMANN:
-                ViessmannHeatingDriver viessmannHeatingDriver   = new ViessmannHeatingDriver(serialnumber, genericName);
+                //TODO: Change back
+                //ViessmannHeatingDriver viessmannHeatingDriver   = new ViessmannHeatingDriver(serialnumber, genericName);
+                BuderusHeatingDriver viessmannHeatingDriver       = new BuderusHeatingDriver(serialnumber, genericName);
                 heatingAdapter                                  = new ViessmannHeatingAdapter(viessmannHeatingDriver);
                 break;
             default:

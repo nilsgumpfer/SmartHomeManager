@@ -3,10 +3,8 @@ package de.thm.smarthome.main.device.heating.adapter;
 import de.buderus.driver.heating.BuderusHeatingDriver;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
-import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.viessmann.driver.heating.ViessmannHeatingDriver;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -14,10 +12,13 @@ import de.viessmann.driver.heating.ViessmannHeatingDriver;
  */
 public class ViessmannHeatingAdapter extends AObservable implements IHeating, IObserver{
 
-    private ViessmannHeatingDriver driver;
+    private BuderusHeatingDriver driver;
+            //TODO: Change back to:
+            // ViessmannHeatingDriver driver;
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VIESSMANN);
 
-    public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
+    //public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
+    public ViessmannHeatingAdapter(BuderusHeatingDriver driver) {
         this.driver = driver;
     }
 
@@ -41,7 +42,6 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
         return driver.getModelVariant();
     }
 
-    //TODO: Eingebaut da ich das IHeating Interface nicht anpassen wollte*/
     @Override
     public ManufacturerBean getManufacturer() {
         return manufacturer;
@@ -52,14 +52,13 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
         return driver.getPowerState();
     }
 
-    //TODO: IF-Else falls Änderung fehlschlägt!
     @Override
-    public void setDesiredTemperature(MeasureBean temperature) {
-        driver.setDesiredTemperature(temperature);
+    public MessageBean setDesiredTemperature(MeasureBean temperature) {
+        return driver.setDesiredTemperature(temperature);
     }
 
     @Override
-    public void setPowerState(PowerStateBean powerState) {
-        driver.setPowerState(powerState);
+    public MessageBean setPowerState(PowerStateBean powerState) {
+        return driver.setPowerState(powerState);
     }
 }

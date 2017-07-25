@@ -1,9 +1,8 @@
 package de.thm.smarthome.main.manager.controller.usermanager;
 
+import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.connection.database.user.UserDAO;
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.transfer.CommandResponseObject;
 import de.thm.smarthome.global.transfer.UserTransferObject;
 
 import java.util.List;
@@ -26,34 +25,34 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public EMessageCode login(String username){
+    public MessageBean login(String username){
         return userdao.logUserIn(username);
     }
 
     @Override
-    public EMessageCode logout(String username){
+    public MessageBean logout(String username){
         return userdao.logUserOut(username);
     }
 
     @Override
-    public EMessageCode checkLogin(String username) {
+    public MessageBean checkLogin(String username) {
         return userdao.isUserloggedIn(username);
     }
 
     @Override
-    public EMessageCode login(UserTransferObject userTransferObject) {
+    public MessageBean login(UserTransferObject userTransferObject) {
         return login(userTransferObject.getUsername());
     }
 
     @Override
-    public EMessageCode logout(UserTransferObject userTransferObject) {
+    public MessageBean logout(UserTransferObject userTransferObject) {
         return logout(userTransferObject.getUsername());
     }
 
     @Override
     public boolean isLoggedIn(String username){
-        switch(userdao.isUserloggedIn(username)){
-            case LoggedIn:
+        switch(userdao.isUserloggedIn(username).getMessageCode_Enum()){
+            case LOGGEDIN:
                 return true;
             default:
                 return false;
@@ -66,17 +65,7 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public boolean isLoggedIn(UserTransferObject userTransferObject) {
-        return isLoggedIn(userTransferObject.getUsername());
-    }
-
-    @Override
-    public boolean isLoggedOut(UserTransferObject userTransferObject) {
-        return isLoggedOut(userTransferObject.getUsername());
-    }
-
-    @Override
-    public CommandResponseObject createUser(UserTransferObject userTransferObject) {
+    public MessageBean createUser(UserTransferObject userTransferObject) {
         return null;
     }
 
@@ -96,16 +85,12 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public CommandResponseObject deleteUser(UserTransferObject userTransferObject) {
+    public MessageBean deleteUser(UserTransferObject userTransferObject) {
         return null;
     }
 
     @Override
-    public CommandResponseObject alterUser(UserTransferObject userTransferObject) {
+    public MessageBean alterUser(UserTransferObject userTransferObject) {
         return null;
-    }
-
-    public EMessageCode checkLogin(UserTransferObject userTransferObject){
-        return checkLogin(userTransferObject.getUsername());
     }
 }

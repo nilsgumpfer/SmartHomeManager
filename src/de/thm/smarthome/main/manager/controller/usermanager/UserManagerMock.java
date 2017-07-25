@@ -1,9 +1,8 @@
 package de.thm.smarthome.main.manager.controller.usermanager;
 
+import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.connection.database.user.User;
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.enumeration.EUserGroup;
-import de.thm.smarthome.global.transfer.CommandResponseObject;
 import de.thm.smarthome.global.transfer.UserTransferObject;
 
 import java.util.ArrayList;
@@ -23,27 +22,27 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public EMessageCode login(String username){
-        return EMessageCode.LoginSuccessful;
+    public MessageBean login(String username){
+        return new MessageBean(true);
     }
 
     @Override
-    public EMessageCode logout(String username){
-        return EMessageCode.LogoutSuccessful;
+    public MessageBean logout(String username){
+        return new MessageBean(true);
     }
 
     @Override
-    public EMessageCode checkLogin(String username) {
-        return EMessageCode.LoggedIn;
+    public MessageBean checkLogin(String username) {
+        return new MessageBean(true);
     }
 
     @Override
-    public EMessageCode login(UserTransferObject userTransferObject) {
+    public MessageBean login(UserTransferObject userTransferObject) {
         return login(userTransferObject.getUsername());
     }
 
     @Override
-    public EMessageCode logout(UserTransferObject userTransferObject) {
+    public MessageBean logout(UserTransferObject userTransferObject) {
         return logout(userTransferObject.getUsername());
     }
 
@@ -58,18 +57,8 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public boolean isLoggedIn(UserTransferObject userTransferObject) {
-        return isLoggedIn(userTransferObject.getUsername());
-    }
-
-    @Override
-    public boolean isLoggedOut(UserTransferObject userTransferObject) {
-        return isLoggedOut(userTransferObject.getUsername());
-    }
-
-    @Override
-    public CommandResponseObject createUser(UserTransferObject userTransferObject) {
-        return new CommandResponseObject(EMessageCode.UserCreatedSuccessfully);
+    public MessageBean createUser(UserTransferObject userTransferObject) {
+        return new MessageBean(true);
     }
 
     @Override
@@ -88,16 +77,12 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public CommandResponseObject deleteUser(UserTransferObject userTransferObject) {
-        return new CommandResponseObject(EMessageCode.UserDeletedSuccessfully);
+    public MessageBean deleteUser(UserTransferObject userTransferObject) {
+        return new MessageBean(true);
     }
 
     @Override
-    public CommandResponseObject alterUser(UserTransferObject userTransferObject) {
-        return new CommandResponseObject(EMessageCode.UserAlteredSuccessfully);
-    }
-
-    public EMessageCode checkLogin(UserTransferObject userTransferObject){
-        return checkLogin(userTransferObject.getUsername());
+    public MessageBean alterUser(UserTransferObject userTransferObject) {
+        return new MessageBean(true);
     }
 }

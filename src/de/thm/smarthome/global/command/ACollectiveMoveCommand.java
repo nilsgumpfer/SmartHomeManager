@@ -1,10 +1,10 @@
 package de.thm.smarthome.global.command;
 
-import de.thm.smarthome.global.enumeration.EMoveDirection;
+import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.helper.MessageRepository;
+import de.thm.smarthome.global.enumeration.EMoveDirection;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +14,12 @@ import java.util.List;
  */
 public abstract class ACollectiveMoveCommand implements ICommand{
     protected List<IUpAndDownMovableDevice> devices   = new ArrayList<>();
-    protected List<Integer> devicepositions           = new ArrayList<>();
-    protected EMoveDirection moveDirection             = null;
-    protected EMessageCode failureCode                = null;
+    protected List<PositionBean> devicepositions      = new ArrayList<>();
+    protected EMoveDirection moveDirection            = null;
 
 
-    @Override
-    public EMessageCode invoke() {
-        EMessageCode responseCode   = null;
+    public MessageBean invoke() {
+        MessageBean responseCode   = null;
         boolean errorsOccured       = false;
 
         for(IUpAndDownMovableDevice device : devices) {
@@ -33,7 +31,7 @@ public abstract class ACollectiveMoveCommand implements ICommand{
             switch (moveDirection)
             {
                 case Up:
-                    //move up to lowest position
+                    //move up to highest position
                     responseCode = device.moveUp();
                     break;
                 case Down:
@@ -46,22 +44,18 @@ public abstract class ACollectiveMoveCommand implements ICommand{
             }
 
             //Log detailled success- or failure-statements
-            SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
+            //SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
 
             //in case of error, set flag
-            if(responseCode == failureCode)
+            if(responseCode.getMessageCode_Enum() == EMessageCode.FAIL)
                 errorsOccured = true;
         }
 
-        if(errorsOccured)
-            return EMessageCode.CommandInvocationFailed;
-        else
-            return EMessageCode.CommandInvokedSuccessfully;
+        return new MessageBean(!errorsOccured);
     }
 
-    @Override
-    public EMessageCode undo() {
-        EMessageCode responseCode;
+    public MessageBean undo() {
+        MessageBean responseCode;
         boolean errorsOccured       = false;
         int i                       = 0;
 
@@ -69,20 +63,14 @@ public abstract class ACollectiveMoveCommand implements ICommand{
             //move back to last position
             responseCode = device.setPosition(devicepositions.get(i));
 
-            //Log detailled success- or failure-statements
-            SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
-
             //in case of error, set flag
-            if(responseCode == EMessageCode.MoveToPositionFailed)
+            if(responseCode.getMessageCode_Enum() == EMessageCode.FAIL)
                 errorsOccured = true;
 
             //index for position-list
             i++;
         }
 
-        if(errorsOccured)
-            return EMessageCode.UndoFailed;
-        else
-            return EMessageCode.UndoSuccessful;
+        return new MessageBean(!errorsOccured);
     }
 }

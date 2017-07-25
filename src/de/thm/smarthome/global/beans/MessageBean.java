@@ -36,7 +36,7 @@ public class MessageBean {
             case NA:
                 message_String = "N/A";
                 break;
-            case LOGINFAILED:
+            /*case LOGINFAILED:
                 message_String = "N/A";
                 break;
             case LOGINSUCCESSFUL:
@@ -164,16 +164,22 @@ public class MessageBean {
                 break;
             case USERNOTEXISTNOTLOGGEDIN:
                 message_String = "Es existiert kein Benutzer mit diesem Benutzernamen oder der Benutzer ist nicht eingeloggt!";
-                break;
+                break;*/
             case SUCCESS:
-                message_String = "N/A";
+                message_String = "erfolgreich";
                 break;
             case FAIL:
-                message_String = "N/A";
+                message_String = "fehlgeschlagen";
                 break;
+            case LOGGEDIN:
+                message_String = "eingeloggt";
+                break;
+            case NOTLOGGEDIN:
+                message_String = "nicht eingeloggt";
+                break;/*
             case WEATHERSTATIONCOULDNOTBECREATED:
                 message_String = "N/A";
-                break;
+                break;*/
 
             /*case LoginFailed:
                 return "Login fehlgeschlagen.";

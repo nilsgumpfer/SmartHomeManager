@@ -1,10 +1,8 @@
 package de.thm.smarthome.global.command;
 
-import de.thm.smarthome.global.enumeration.EPowerState;
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.helper.MessageRepository;
+import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.PowerStateBean;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.rmi.RemoteException;
 
@@ -13,21 +11,21 @@ import java.rmi.RemoteException;
  */
 public abstract class ASwitchCommand implements ICommand {
     protected IOnAndOffSwitchableDevice device;
-    protected EMessageCode oldState             = null;
-    protected EMessageCode expectedStatus       = null;
-    protected EMessageCode requiredStatus       = null;
-    protected EPowerState powerToDo            = null;
+    protected PowerStateBean oldState             = null;
+    protected PowerStateBean expectedStatus       = null;
+    protected PowerStateBean requiredStatus       = null;
+    protected PowerStateBean powerToDo            = null;
 
     @Override
-    public EMessageCode invoke() throws RemoteException{
-        EMessageCode responseCode = null;
+    public MessageBean invoke() throws RemoteException{
+        MessageBean responseCode = null;
 
         //before new state is set, save old one for possible undo-operation
         oldState = device.currentState();
 
         //check if current status is as expected, do operation
         if(oldState == expectedStatus) {
-            switch(powerToDo)
+            switch(powerToDo.getPowerState_Enum())
             {
                 case ON:
                     responseCode = device.switchOn();
@@ -38,25 +36,18 @@ public abstract class ASwitchCommand implements ICommand {
             }
         }
         else
-            responseCode = oldState;
+            responseCode = new MessageBean(false);
 
-        //Log detailled success- or failure-statements
-        SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
-
-        //if everything went fine, return success
-        if(responseCode == requiredStatus)
-            return EMessageCode.CommandInvokedSuccessfully;
-        else
-            return EMessageCode.CommandInvocationFailed;
+        return responseCode;
     }
 
     @Override
-    public EMessageCode undo() throws RemoteException{
-        EMessageCode responseCode = null;
+    public MessageBean undo() throws RemoteException{
+        MessageBean responseCode = null;
 
         //check if current status is as expected, do operation
         if(oldState == requiredStatus) {
-            switch(powerToDo)
+            switch(powerToDo.getPowerState_Enum())
             {
                 case ON:
                     responseCode = device.switchOff();
@@ -67,13 +58,6 @@ public abstract class ASwitchCommand implements ICommand {
             }
         }
 
-        //Log detailled success- or failure-statements
-        SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
-
-        //if everything went fine, return success
-        if(responseCode == oldState)
-            return EMessageCode.UndoSuccessful;
-        else
-            return EMessageCode.UndoFailed;
+        return responseCode;
     }
 }

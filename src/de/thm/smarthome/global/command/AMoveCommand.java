@@ -1,23 +1,22 @@
 package de.thm.smarthome.global.command;
 
-import de.thm.smarthome.global.enumeration.EMoveDirection;
+import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.helper.MessageRepository;
+import de.thm.smarthome.global.enumeration.EMoveDirection;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 /**
  * Created by Nils on 19.04.2017.
  */
 public abstract class AMoveCommand implements ICommand {
     protected IUpAndDownMovableDevice device          = null;
-    protected EMoveDirection moveDirection             = null;
-    protected EMessageCode failureCode                = null;
-    protected int oldPosition                         = -1;
+    protected EMoveDirection moveDirection            = null;
+    protected PositionBean oldPosition                = null;
 
     @Override
-    public EMessageCode invoke() {
-        EMessageCode responseCode = null;
+    public MessageBean invoke() {
+        MessageBean responseCode = null;
         boolean errorsOccured = false;
 
         //before new position is set, save old position for possible undo-operation
@@ -37,36 +36,24 @@ public abstract class AMoveCommand implements ICommand {
                 break;
         }
 
-        //Log detailled success- or failure-statements
-        SmartHomeLogger.log("Command Invocation: " + MessageRepository.getMessage(responseCode));
-
         //in case of error, set flag
-        if(responseCode == failureCode)
+        if(responseCode.getMessageCode_Enum() == EMessageCode.FAIL)
             errorsOccured = true;
 
-        if(errorsOccured)
-            return EMessageCode.CommandInvocationFailed;
-        else
-            return EMessageCode.CommandInvokedSuccessfully;
+        return new MessageBean(!errorsOccured);
     }
 
     @Override
-    public EMessageCode undo() {
-        EMessageCode responseCode;
+    public MessageBean undo() {
+        MessageBean responseCode;
         boolean errorsOccured       = false;
 
         responseCode = device.setPosition(oldPosition);
 
-        //Log detailled success- or failure-statements
-        SmartHomeLogger.log("Command Undo: " + MessageRepository.getMessage(responseCode));
-
         //in case of error, set flag
-        if(responseCode == EMessageCode.MoveToPositionFailed)
+        if(responseCode.getMessageCode_Enum() == EMessageCode.FAIL)
             errorsOccured = true;
 
-        if(errorsOccured)
-            return EMessageCode.UndoFailed;
-        else
-            return EMessageCode.UndoSuccessful;
+        return new MessageBean(!errorsOccured);
     }
 }

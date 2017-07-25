@@ -3,11 +3,10 @@ package de.thm.smarthome.main.device.heating.adapter;
 import de.buderus.driver.heating.BuderusHeatingDriver;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
-import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
-import de.vaillant.driver.heating.VaillantHeatingDriver;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -15,10 +14,13 @@ import de.vaillant.driver.heating.VaillantHeatingDriver;
  */
 public class VaillantHeatingAdapter extends AObservable implements IHeating, IObserver
 {
-    private VaillantHeatingDriver driver;
+    private BuderusHeatingDriver driver;
+            //TODO: Change back to:
+            // VaillantHeatingDriver driver;
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VAILLANT);
 
-    public VaillantHeatingAdapter(VaillantHeatingDriver vaillantHeatingDriver) {
+    //public VaillantHeatingAdapter(VaillantHeatingDriver vaillantHeatingDriver) {
+    public VaillantHeatingAdapter(BuderusHeatingDriver vaillantHeatingDriver) {
         this.driver = vaillantHeatingDriver;
     }
 
@@ -42,7 +44,6 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
         return driver.getModelVariant();
     }
 
-    //TODO: Eingebaut da ich das IHeating Interface nicht anpassen wollte*/
     @Override
     public ManufacturerBean getManufacturer() {
         return manufacturer;
@@ -53,15 +54,14 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
         return driver.getPowerState();
     }
 
-    //TODO: IF-Else falls Änderung fehlschlägt!
     @Override
-    public void setDesiredTemperature(MeasureBean temperature) {
-        driver.setDesiredTemperature(temperature);
+    public MessageBean setDesiredTemperature(MeasureBean temperature) {
+        return driver.setDesiredTemperature(temperature);
     }
 
     @Override
-    public void setPowerState(PowerStateBean powerState) {
-        driver.setPowerState(powerState);
+    public MessageBean setPowerState(PowerStateBean powerState) {
+        return driver.setPowerState(powerState);
     }
 
 }
