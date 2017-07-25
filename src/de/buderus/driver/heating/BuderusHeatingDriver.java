@@ -28,6 +28,7 @@ public class BuderusHeatingDriver implements HeizungClientInterface
     private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
+    //private String hostname = "192.168.100.106";
     private String hostname;
 
     public BuderusHeatingDriver(String serialnumber, String genericName)
@@ -153,5 +154,14 @@ public class BuderusHeatingDriver implements HeizungClientInterface
             return new MessageBean(false);
         }
     }
+
+    /*public static void main(String[] args) {
+        BuderusHeatingDriver bd = new BuderusHeatingDriver("12345", "HeizungTest");
+        MeasureBean ctemp = bd.getCurrentTemperature();
+        System.out.println(String.valueOf(ctemp.getMeasure_Double()) + " " + ctemp.getUnitOfMeasurement_String());
+        bd.setDesiredTemperature(new MeasureBean(5.0, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
+        System.out.println(String.valueOf(ctemp.getMeasure_Double()) + " " + ctemp.getUnitOfMeasurement_String());
+
+    }*/
 }
 
