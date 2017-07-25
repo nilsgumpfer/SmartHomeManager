@@ -71,7 +71,7 @@ public class SmartHomeManagerWebServiceProvider
     public void initServer(){
         if(httpServer == null) {
             URI baseUri = UriBuilder.fromUri("http://localhost/").port(8080).build();
-            ResourceConfig config = new ResourceConfig(HelloWorldResource.class);
+            ResourceConfig config = new ResourceConfig(SmartHomeManagerWebServiceDescriptor.class);
             httpServer = JdkHttpServerFactory.createHttpServer(baseUri, config);
         }
     }

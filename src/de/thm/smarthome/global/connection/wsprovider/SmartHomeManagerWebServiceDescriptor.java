@@ -212,8 +212,12 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
         return requestManager.getWeatherStationData(requesting_user);
     }
 
-    @GET @Path( "createThermometer/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
-    public MessageBean createThermometer(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber) {
+    @GET @Path( "createThermometer/requesting_user/{requesting_user}/modelVariant/{modelVariant}/manufacturer/{manufacturer}/genericName/{genericName}/serialnumber/{serialnumber}") @Produces( MediaType.APPLICATION_JSON )
+    public MessageBean createThermometer(     @PathParam( "requesting_user" ) String requesting_user,
+                                              @PathParam( "modelVariant" ) String modelVariant,
+                                              @PathParam( "manufacturer" ) String manufacturer,
+                                              @PathParam( "genericName" ) String genericName,
+                                              @PathParam( "serialnumber" ) String serialnumber ) {
         return requestManager.createThermometer(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
     }
 
