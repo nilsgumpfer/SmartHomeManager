@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.heating.adapter;
 import de.buderus.driver.heating.BuderusHeatingDriver;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
@@ -29,19 +30,20 @@ public class BuderusHeatingAdapter extends AObservable implements IHeating, IObs
 
     @Override
     public MeasureBean getCurrentTemperature() {
-        return new MeasureBean(driver.getCurrentTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+        return driver.getCurrentTemperature();
     }
 
     @Override
     public MeasureBean getDesiredTemperature() {
-        return new MeasureBean(driver.getDesiredTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+        return driver.getDesiredTemperature();
     }
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return new ModelVariantBean(EDeviceManufacturer.BUDERUS, driver.getModelVariant());
+        return driver.getModelVariant();
     }
 
+    //TODO: Eingebaut da ich das IHeating Interface nicht anpassen wollte*/
     @Override
     public ManufacturerBean getManufacturer() {
         return manufacturer;
@@ -49,16 +51,17 @@ public class BuderusHeatingAdapter extends AObservable implements IHeating, IObs
 
     @Override
     public PowerStateBean getPowerState() {
-        return new PowerStateBean(driver.getPowerState());
+        return driver.getPowerState();
+    }
+
+    //TODO: IF-Else falls Änderung fehlschlägt!
+    @Override
+    public void setDesiredTemperature(MeasureBean temperature) {
+        driver.setDesiredTemperature(temperature);
     }
 
     @Override
-    public MessageBean setDesiredTemperature(MeasureBean temperature) {
-        return new MessageBean(driver.setDesiredTemperature(temperature.getMeasure_Double()));
-    }
-
-    @Override
-    public MessageBean setPowerState(PowerStateBean powerState) {
-        return new MessageBean(driver.setPowerState(powerState.getPowerState_Boolean()));
+    public void setPowerState(PowerStateBean powerState) {
+        driver.setPowerState(powerState);
     }
 }

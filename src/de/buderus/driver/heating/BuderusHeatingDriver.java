@@ -24,9 +24,11 @@ public class BuderusHeatingDriver implements HeizungClientInterface
 {
     private HeizungServerInterface deviceServer;
 
-    private String modelVariant;
+    //TODO: Modelvariant besprechen
+    private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
+    private String hostname;
 
     public BuderusHeatingDriver(String serialnumber, String genericName)
     {
@@ -38,28 +40,45 @@ public class BuderusHeatingDriver implements HeizungClientInterface
         initConnection();
     }
 
+
+    //TODO: macht das Sinn? Ist das so gedacht/richtig?
     private void readModelVariantInformation() {
+        switch (modelVariant.getModelVariant_Enum()){
+            case  Heizung3000:
+                    hostname = modelVariant.getModelVariant_String();
+                    break;
+            case  Heizung2000:
+                hostname = modelVariant.getModelVariant_String();
+                break;
+            case  Heizung1000:
+                hostname = modelVariant.getModelVariant_String();
+                break;
+            }
+
         //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
-        modelVariant = "Heating3000";
+        //modelVariant = "Heating3000";
+
     }
 
     private void initConnection()
     {
+        //Viessmann Heating-3000X38743 --> Treiber "weiß": hostname für diese heizung lautet "Heating3000" --> IP wird durch RMI-Methode auf Basis des hostnamen ermittelt
+
         //TODO: get IP Address for host-name
-        String host = modelVariant;
+        //String host = modelVariant.getModelVariant_String();
         int port    = 0;
 
         try {
 
             SmartHomeLogger.log("Looking for Buderus heating: " + modelVariant + "..");
 
-            LocateRegistry.getRegistry(host, port);
+            LocateRegistry.getRegistry(hostname, port);
 
-            SmartHomeLogger.log("Found heating: " + host + ":" + port + "Establishing connection..");
+            SmartHomeLogger.log("Found heating: " + hostname + ":" + port + "Establishing connection..");
 
             UnicastRemoteObject.exportObject(this, 0);
 
-            Remote remoteObject = Naming.lookup("//" + host + "/" + "SmartHomeAPI");
+            Remote remoteObject = Naming.lookup("//" + hostname + "/" + "SmartHomeAPI");
 
             SmartHomeLogger.log("Successfully connected.");
 
@@ -73,28 +92,64 @@ public class BuderusHeatingDriver implements HeizungClientInterface
         }
     }
 
-    public String getModelVariant() {
-        return modelVariant;
+    public ModelVariantBean getModelVariant(){
+       try {
+           return modelVariant = deviceServer.getModelVariant();
+       }
+        catch (RemoteException rex){
+           System.out.println("Es ist ein Fehler aufgetreten!");
+        }
+        return null;
     }
 
-    public double getCurrentTemperature() {
-        return deviceServer.getCurrentTemperature();
+    public MeasureBean getCurrentTemperature() {
+        try {
+            return deviceServer.getCurrentTemperature();
+        }
+        catch (RemoteException rex){
+            System.out.println("Es ist ein Fehler aufgetreten!");
+        }
+        return null;
     }
 
-    public double getDesiredTemperature() {
-        return deviceServer.getDesiredTemperature();
+    public MeasureBean getDesiredTemperature() {
+        try {
+            return deviceServer.getDesiredTemperature();
+        }
+        catch (RemoteException rex){
+            System.out.println("Es ist ein Fehler aufgetreten!");
+        }
+        return null;
     }
 
-    public boolean getPowerState() {
-        return deviceServer.getPowerState();
+    public PowerStateBean getPowerState() {
+        try {
+            return deviceServer.getPowerState();
+        }
+        catch (RemoteException rex){
+            System.out.println("Es ist ein Fehler aufgetreten!");
+        }
+        return null;
     }
 
-    public boolean setDesiredTemperature(double desiredTemperature) {
-        return deviceServer.setDesiredTemperature(desiredTemperature);
-    }
+    public void setDesiredTemperature(MeasureBean new_desiredTemperature) {
+        try {
+            deviceServer.setDesiredTemperature(new_desiredTemperature);
+        }
+        catch(RemoteException ex){
+         System.out.println("Es ist ein Fehler aufgetreten!");
+        }
 
-    public boolean setPowerState(boolean powerState) {
-        return deviceServer.setPowerState(powerState);
+        }
+
+    public void setPowerState(PowerStateBean new_powerState) {
+        try {
+            deviceServer.setPowerState(new_powerState);
+        }
+        catch (RemoteException rex){
+            System.out.println("Es ist ein Fehler aufgetreten!");
+        }
+
     }
 }
 
