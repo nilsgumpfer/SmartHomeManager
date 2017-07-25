@@ -122,7 +122,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) throws RemoteException{
+    public HeatingTransferObject getHeatingTemperature(UserTransferObject authentication){
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){
@@ -134,7 +134,7 @@ public class RequestManager implements IServiceFacade {
     }
 
     @Override
-    public HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException{
+    public HeatingTransferObject getHeatingData(UserTransferObject authentication){
         EMessageCode responseCode = checkLogin(authentication);
 
         switch(responseCode){

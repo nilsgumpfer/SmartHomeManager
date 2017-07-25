@@ -1,5 +1,8 @@
 package de.thm.smarthome.global.interfaces;
 
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.transfer.*;
 
@@ -11,53 +14,48 @@ import java.rmi.RemoteException;
 public interface IServiceFacade {
     String getServerInfo();
 
-    CommandResponseObject createHeating(UserTransferObject authentication, HeatingTransferObject heating);
-    CommandResponseObject deleteHeating(UserTransferObject authentication);
-    CommandResponseObject switchHeatingOn(UserTransferObject authentication);
-    CommandResponseObject switchHeatingOff(UserTransferObject authentication);
-    CommandResponseObject setHeatingTemperature(UserTransferObject authentication, double temperature);
-    HeatingTransferObject getHeatingTemperature(UserTransferObject authentication) throws RemoteException;
-    HeatingTransferObject getHeatingData(UserTransferObject authentication) throws RemoteException;
+    MessageBean createHeating(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber);
+    MessageBean deleteHeating(String requesting_user);
+    MessageBean switchHeatingOn(String requesting_user);
+    MessageBean switchHeatingOff(String requesting_user);
+    MessageBean setHeatingTemperature(String requesting_user, double temperature);
+    HeatingTransferObject getHeatingTemperature(String requesting_user);
+    HeatingTransferObject getHeatingData(String requesting_user);
 
-    CommandResponseObject createShutter(UserTransferObject authentication, ShutterTransferObject shutter);
-    CommandResponseObject deleteShutter(UserTransferObject authentication, ShutterTransferObject shutter);
-    CommandResponseObject moveAllShuttersUp(UserTransferObject authentication);
-    CommandResponseObject moveAllShuttersDown(UserTransferObject authentication);
-    CommandResponseObject moveShutterUp(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
-    CommandResponseObject moveShutterDown(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
-    ShutterTransferObject getShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
-    ShutterTransferObject setShutterPosition(UserTransferObject authentication, ShutterTransferObject shutterTransferObject);
-    ShutterTransferObject getShutterData(UserTransferObject authentication, ShutterTransferObject shutter);
-    ShutterTransferObject[] getAllShutterData(UserTransferObject authentication);
-    //void attachShutterObserver(UserTransferObject authentication, IShutterObserver shutterObserver);
+    MessageBean createShutter(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber);
+    MessageBean deleteShutter(String requesting_user, String serialnumber);
+    MessageBean moveAllShuttersUp(String requesting_user);
+    MessageBean moveAllShuttersDown(String requesting_user);
+    MessageBean moveShutterUp(String requesting_user, String serialnumber);
+    MessageBean moveShutterDown(String requesting_user, String serialnumber);
+    PositionBean getShutterPosition(String requesting_user, String serialnumber);
+    MessageBean setShutterPosition(String requesting_user, String serialnumber, String position);
+    ShutterTransferObject getShutterData(String requesting_user, String serialnumber);
+    ShutterTransferObject[] getAllShutterData(String requesting_user);
 
-    CommandResponseObject createUser(UserTransferObject authentication, UserTransferObject user);
-    CommandResponseObject deleteUser(UserTransferObject authentication, UserTransferObject user);
-    CommandResponseObject alterUser(UserTransferObject authentication, UserTransferObject user);
-    CommandResponseObject login(UserTransferObject user);
-    CommandResponseObject logout(UserTransferObject authentication, UserTransferObject user);
-    UserTransferObject getUserData(UserTransferObject authentication, UserTransferObject user);
-    UserTransferObject[] getAllUserData(UserTransferObject authentication);
+    MessageBean createUser(String requesting_user, String username, String password, String firstname, String lastname, String email);
+    MessageBean deleteUser(String requesting_user, String username);
+    MessageBean alterUser(String requesting_user, String username, String password, String firstname, String lastname, String email);
+    MessageBean login(String username, String password);
+    MessageBean logout(String requesting_user, String username);
+    UserTransferObject getUserData(String requesting_user, String username);
+    UserTransferObject[] getAllUserData(String requesting_user);
 
-    CommandResponseObject createWeatherStation(UserTransferObject authentication, WeatherStationTransferObject weatherStation);
-    CommandResponseObject deleteWeatherStation(UserTransferObject authentication);
-    WeatherStationTransferObject getAirHumidity(UserTransferObject authentication);
-    WeatherStationTransferObject getAirPressure(UserTransferObject authentication);
-    WeatherStationTransferObject getWindVelocity(UserTransferObject authentication);
-    WeatherStationTransferObject getOutdoorTemperature(UserTransferObject authentication);
-    WeatherStationTransferObject getRainfallAmount(UserTransferObject authentication);
-    WeatherStationTransferObject getWeatherStationData(UserTransferObject authentication);
-    //void attachWeatherstationObserver(UserTransferObject authentication, IWeatherstationObserver weatherstationObserver);
+    MessageBean createWeatherStation(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber);
+    MessageBean deleteWeatherStation(String requesting_user);
+    MeasureBean getAirHumidity(String requesting_user);
+    MeasureBean getAirPressure(String requesting_user);
+    MeasureBean getWindVelocity(String requesting_user);
+    MeasureBean getOutdoorTemperature(String requesting_user);
+    MeasureBean getRainfallAmount(String requesting_user);
+    MeasureBean getWeatherStationData(String requesting_user);
 
-    CommandResponseObject createThermometer(UserTransferObject authentication, ThermometerTransferObject thermometer);
-    CommandResponseObject deleteThermometer(UserTransferObject authentication);
-    ThermometerTransferObject getIndoorTemperature(UserTransferObject authentication);
-    ThermometerTransferObject getThermometerData(UserTransferObject authentication);
-    //void attachThermometerObserver(UserTransferObject authentication, IThermometerObserver thermometerObserver);
+    MessageBean createThermometer(String requesting_user, String modelVariant, String manufacturer, String genericName, String serialnumber);
+    MessageBean deleteThermometer(String requesting_user);
+    MeasureBean getIndoorTemperature(String requesting_user);
+    ThermometerTransferObject getThermometerData(String requesting_user);
 
-    String[] readLogs(UserTransferObject authentication, int limit);
+    String[] readLogs(String requesting_user, int limit);
 
-    CommandResponseObject undoLastCommand(UserTransferObject authentication);
-
-    String getMessage(EMessageCode responseCode);
+    MessageBean undoLastCommand(String requesting_user);
 }
