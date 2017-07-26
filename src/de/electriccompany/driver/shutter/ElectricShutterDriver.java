@@ -27,7 +27,7 @@ public class ElectricShutterDriver implements ShutterClientInterface {
     private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
-    private String hostname; //TODO: hier auch hinzugefügt; richtig?
+    private String hostname;
 
     public ElectricShutterDriver(String serialnumber, String genericName)
     {
@@ -43,7 +43,7 @@ public class ElectricShutterDriver implements ShutterClientInterface {
         modelVariant = "Shutter3000";
     }*/
 
-    //TODO: macht das Sinn? Ist das so gedacht/richtig?
+
     private void readModelVariantInformation() {
         switch (modelVariant.getModelVariant_Enum()){
             case  Shutter3000:
@@ -140,6 +140,13 @@ public class ElectricShutterDriver implements ShutterClientInterface {
     /*public boolean setDesiredPosition(int desiredPosition)
     {
         return deviceServer.setDesiredPosition(desiredPosition);
+    }*/
+
+    /*public static void main(String[] args) {
+        ElectricShutterDriver ed = new ElectricShutterDriver("12345", "ShutterTest");
+        System.out.println(String.valueOf(ed.getCurrentPosition().getPosition_Int()));
+        ed.setDesiredPosition(new PositionBean(EPosition.P1));
+
     }*/
 }
 
