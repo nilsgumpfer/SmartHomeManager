@@ -10,9 +10,11 @@ import java.rmi.RemoteException;
  * Created by Nils on 27.01.2017.
  */
 public interface IShutter {
-    MessageBean setDesiredPosition(PositionBean desiredPosition);
-
-    PositionBean getCurrentPosition();
+      PositionBean getCurrentPosition();
     PositionBean getDesiredPosition();
     ModelVariantBean getModelVariant();
+
+    //TODO: PositionBean oder MessageBean?! Muss Message Bean sein, da es im Adapter so verarbeitet wird
+    MessageBean setDesiredPosition(PositionBean desiredPosition);
+
 }

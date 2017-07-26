@@ -1,5 +1,7 @@
 package ShutterServer.interfaces;
 
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.observer.AObservable;
 
 import java.rmi.Remote;
@@ -12,9 +14,13 @@ public interface ShutterServerInterface extends Remote
 {
     void setGenericName(String genericName);
 
-    int getCurrentPosition();
+    PositionBean getCurrentPosition() throws RemoteException;
 
-    int getDesiredPosition();
+    PositionBean getDesiredPosition() throws RemoteException;
 
-    boolean setDesiredPosition(int desiredPosition);
+    ModelVariantBean getModelVariant () throws RemoteException;
+
+    PositionBean setDesiredPosition(PositionBean new_desiredPosition) throws RemoteException;
+
+
 }
