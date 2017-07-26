@@ -24,7 +24,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public String getServerInfo() {
-        return "Server under construction. You can use it, but it won´t work.";
+        return "ABC";
     }
 
     @Override

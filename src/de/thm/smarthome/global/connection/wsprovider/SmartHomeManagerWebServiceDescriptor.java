@@ -5,6 +5,7 @@ import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
 
@@ -24,6 +25,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @GET @Path( "info" ) @Produces( MediaType.TEXT_PLAIN )
     public String getServerInfo() {
+        SmartHomeLogger.log("INFO");
         return requestManager.getServerInfo();
     }
 
