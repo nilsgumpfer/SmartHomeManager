@@ -71,7 +71,9 @@ public class SmartHomeManagerWebServiceProvider
     public void initServer(){
         if(httpServer == null) {
             URI baseUri = UriBuilder.fromUri("http://localhost/").port(8080).build();
-            ResourceConfig config = new ResourceConfig(SmartHomeManagerWebServiceDescriptor.class);
+            ResourceConfig config = new ResourceConfig();
+            config.register(CORSResponseFilter.class);
+            config.register(SmartHomeManagerWebServiceDescriptor.class);
             httpServer = JdkHttpServerFactory.createHttpServer(baseUri, config);
         }
     }
