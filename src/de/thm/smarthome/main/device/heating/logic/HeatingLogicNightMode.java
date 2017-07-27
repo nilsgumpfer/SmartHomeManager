@@ -16,11 +16,13 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
 {
     private IHeatingModel model;
     private IHeating device;
-    private ActionModeBean actionModeBean = new ActionModeBean(EActionMode.NIGHTMODE);
 
     public HeatingLogicNightMode(IHeatingModel model, IHeating adapter) {
         this.model  = model;
-        device      = adapter;
+        this.device = adapter;
+        this.model.attach(this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.NIGHTMODE));
     }
 
     @Override
@@ -50,7 +52,7 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
 
     @Override
     public ActionModeBean getActionMode() {
-        return actionModeBean;
+        return model.getActionMode();
     }
 
     @Override
@@ -65,6 +67,7 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
 
     @Override
     public MessageBean setDesiredTemperature(MeasureBean temperature) {
+        //TODO: Act special regarding to logic-name!
         return device.setDesiredTemperature(temperature);
     }
 
@@ -90,6 +93,6 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
 
     @Override
     public void update(AObservable o, Object change) {
-        //TODO: Observer-Pattern
+        notifyObservers(change);
     }
 }

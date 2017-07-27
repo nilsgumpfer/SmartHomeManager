@@ -1,25 +1,14 @@
 package de.thm.smarthome.main.device.heating.device;
 
-import UI.Controller;
 import de.thm.smarthome.global.beans.*;
-import de.thm.smarthome.global.observer.AClockObservable;
-import de.thm.smarthome.global.observer.IClockObserver;
-import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
-import de.thm.smarthome.global.interfaces.ISmartDevice;
-import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
+import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
-import de.thm.smarthome.main.device.heating.adapter.IHeating;
 import de.thm.smarthome.main.device.heating.logic.HeatingLogicDayMode;
 import de.thm.smarthome.main.device.heating.logic.HeatingLogicMaintenanceMode;
 import de.thm.smarthome.main.device.heating.logic.HeatingLogicNightMode;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
-import de.thm.smarthome.main.device.heating.model.HeatingModel;
-import de.thm.smarthome.main.device.heating.model.IHeatingModel;
-
-import java.rmi.RemoteException;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -29,11 +18,13 @@ import java.rmi.RemoteException;
 
     public SmartHeating(IHeatingLogic logic) {
         this.logic = logic;
+        this.logic.attach(this);
     }
 
     @Override
     public void update(AObservable o, Object change) {
-
+        notifyObservers(change);
+        //TODO: Check if Logic-Change is necessary!
     }
 
     public MeasureBean getCurrentTemperature() {
@@ -82,22 +73,44 @@ import java.rmi.RemoteException;
 
     public void setActionMode(ActionModeBean actionMode)
     {
-        IHeatingModel model = logic.getModel();
-        IHeating adapter    = logic.getAdapter();
-
         switch (actionMode.getActionMode_Enum())
         {
             case DAYMODE:
-                logic = new HeatingLogicDayMode(model, adapter);
+                switchLogicTo_DayMode();
                 break;
             case NIGHTMODE:
-                logic = new HeatingLogicNightMode(model, adapter);
+                switchLogicTo_NightMode();
                 break;
             case MAINTENANCEMODE:
-                logic = new HeatingLogicMaintenanceMode(model, adapter);
-                break;
-            case NA:
+                switchLogicTo_MaintenanceMode();
                 break;
         }
+    }
+
+    private void switchLogic_Basis(IHeatingLogic newLogic){
+        IHeatingLogic oldLogic = logic;
+        switchSubscription(oldLogic, newLogic);
+        logic = newLogic;
+    }
+
+    private void switchLogicTo_DayMode(){
+        switchLogic_Basis(new HeatingLogicDayMode(logic.getModel(), logic.getAdapter()));
+        logic.getModel().setActionMode(new ActionModeBean(EActionMode.DAYMODE));
+    }
+
+    private void switchLogicTo_NightMode(){
+        switchLogic_Basis(new HeatingLogicNightMode(logic.getModel(), logic.getAdapter()));
+        logic.getModel().setActionMode(new ActionModeBean(EActionMode.NIGHTMODE));
+    }
+
+    private void switchLogicTo_MaintenanceMode(){
+        switchLogic_Basis(new HeatingLogicMaintenanceMode(logic.getModel(), logic.getAdapter()));
+        logic.getModel().setActionMode(new ActionModeBean(EActionMode.MAINTENANCEMODE));
+    }
+
+    private void switchSubscription(IHeatingLogic oldLogic, IHeatingLogic newLogic){
+        oldLogic.detach(this);
+        newLogic.attach(this);
+        oldLogic.getModel().detach((IObserver) oldLogic);
     }
 }

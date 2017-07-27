@@ -20,13 +20,14 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VAILLANT);
 
     //public VaillantHeatingAdapter(VaillantHeatingDriver vaillantHeatingDriver) {
-    public VaillantHeatingAdapter(BuderusHeatingDriver vaillantHeatingDriver) {
-        this.driver = vaillantHeatingDriver;
+    public VaillantHeatingAdapter(BuderusHeatingDriver driver) {
+        this.driver = driver;
+        this.driver.attach(this);
     }
 
     @Override
     public void update(AObservable o, Object change) {
-        //TODO: Observer-Pattern
+        notifyObservers(change);
     }
 
     @Override

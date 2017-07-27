@@ -4,8 +4,6 @@ import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
-import de.thm.smarthome.main.device.heating.adapter.ViessmannHeatingAdapter;
-import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -20,14 +18,15 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
     String genericName;
     String serialnumber;
     PowerStateBean powerState;
+    IHeating device;
 
     public HeatingModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
-        this.modelVariant = modelVariant;
-        this.manufacturer = manufacturer;
-        this.actionMode = actionMode;
-        this.genericName = genericName;
-        this.serialnumber = serialnumber;
-        this.powerState = powerState;
+        this.modelVariant   = modelVariant;
+        this.manufacturer   = manufacturer;
+        this.actionMode     = actionMode;
+        this.genericName    = genericName;
+        this.serialnumber   = serialnumber;
+        this.powerState     = powerState;
     }
 
     @Override
@@ -110,8 +109,16 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
         this.powerState = powerState;
     }
 
+    public void setDevice(IHeating device) {
+        this.device = device;
+    }
+
     @Override
     public void update(AObservable o, Object change) {
-        //TODO: Observer-Pattern
+        notifyObservers(change);
+
+        powerState          = device.getPowerState();
+        desiredTemperature  = device.getDesiredTemperature();
+        currentTemperature  = device.getCurrentTemperature();
     }
 }

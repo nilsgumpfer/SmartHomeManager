@@ -19,11 +19,12 @@ public class BuderusHeatingAdapter extends AObservable implements IHeating, IObs
 
     public BuderusHeatingAdapter(BuderusHeatingDriver driver) {
         this.driver = driver;
+        this.driver.attach(this);
     }
 
     @Override
     public void update(AObservable o, Object change) {
-        //TODO: Observer-Pattern
+        notifyObservers(change);
     }
 
     @Override

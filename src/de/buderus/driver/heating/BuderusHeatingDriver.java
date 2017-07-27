@@ -10,6 +10,8 @@ import de.thm.smarthome.global.enumeration.EModelVariant;
 import de.thm.smarthome.global.enumeration.EPowerState;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
@@ -20,7 +22,7 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class BuderusHeatingDriver implements HeizungClientInterface
+public class BuderusHeatingDriver extends AObservable implements HeizungClientInterface, IObserver
 {
     private HeizungServerInterface deviceServer;
 
@@ -153,6 +155,11 @@ public class BuderusHeatingDriver implements HeizungClientInterface
             SmartHomeLogger.log(rex);
             return new MessageBean(false);
         }
+    }
+
+    @Override
+    public void update(AObservable o, Object change) {
+        notifyObservers(change);
     }
 
     /*public static void main(String[] args) {

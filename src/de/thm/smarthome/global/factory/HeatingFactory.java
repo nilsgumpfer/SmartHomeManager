@@ -46,15 +46,15 @@ public class HeatingFactory {
                 heatingAdapter                                  = new BuderusHeatingAdapter(buderusHeatingDriver);
                 break;
             case VAILLANT:
-                //TODO: Change back
+                //TODO: Change back:
                 //VaillantHeatingDriver vaillantHeatingDriver     = new VaillantHeatingDriver(serialnumber, genericName);
-                BuderusHeatingDriver vaillantHeatingDriver       = new BuderusHeatingDriver(serialnumber, genericName);
+                BuderusHeatingDriver vaillantHeatingDriver      = new BuderusHeatingDriver(serialnumber, genericName);
                 heatingAdapter                                  = new VaillantHeatingAdapter(vaillantHeatingDriver);
                 break;
             case VIESSMANN:
-                //TODO: Change back
+                //TODO: Change back:
                 //ViessmannHeatingDriver viessmannHeatingDriver   = new ViessmannHeatingDriver(serialnumber, genericName);
-                BuderusHeatingDriver viessmannHeatingDriver       = new BuderusHeatingDriver(serialnumber, genericName);
+                BuderusHeatingDriver viessmannHeatingDriver     = new BuderusHeatingDriver(serialnumber, genericName);
                 heatingAdapter                                  = new ViessmannHeatingAdapter(viessmannHeatingDriver);
                 break;
             default:
