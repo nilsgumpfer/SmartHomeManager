@@ -1,10 +1,7 @@
 package de.thm.smarthome.main.manager.controller.requestmanager;
 
-import de.thm.smarthome.global.beans.MeasureBean;
-import de.thm.smarthome.global.beans.MessageBean;
-import de.thm.smarthome.global.beans.PositionBean;
-import de.thm.smarthome.global.enumeration.EPosition;
-import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
+import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.*;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.transfer.*;
@@ -16,6 +13,19 @@ import de.thm.smarthome.global.transfer.*;
 public class RequestManagerMock implements IServiceFacade {
     private static RequestManagerMock ourInstance = new RequestManagerMock();
 
+    private HeatingTransferObject heatingTransferObject =
+            new HeatingTransferObject(
+                    new MeasureBean(42.4, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS),
+                    new MeasureBean(42.4, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS),
+                    new ModelVariantBean(EModelVariant.Heizung1000),
+                    new ManufacturerBean(EDeviceManufacturer.BUDERUS),
+                    new ActionModeBean(EActionMode.DAYMODE),
+                    "MyBuderusHeating1000",
+                    "BD2967498834098",
+                    new PowerStateBean(EPowerState.ON)
+
+            );
+
     private RequestManagerMock() {}
 
     public static RequestManagerMock getInstance() {
@@ -24,7 +34,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public String getServerInfo() {
-        return "ABC";
+        return "Server running.";
     }
 
     @Override
@@ -49,18 +59,20 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public MessageBean setHeatingTemperature(String requesting_user, double temperature) {
-        return new MessageBean(false);
+        heatingTransferObject.setDesiredTemperature(new MeasureBean(temperature, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
+        heatingTransferObject.setCurrentTemperature(new MeasureBean(temperature, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
+
+        return new MessageBean(true);
     }
 
     @Override
     public MeasureBean getHeatingTemperature(String requesting_user) {
-        return new MeasureBean(42.4, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+        return heatingTransferObject.getCurrentTemperature();
     }
 
     @Override
     public HeatingTransferObject getHeatingData(String requesting_user) {
-        //TODO: return new HeatingTransferObject();
-        return null;
+        return heatingTransferObject;
     }
 
     @Override

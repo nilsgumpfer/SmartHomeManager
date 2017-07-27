@@ -25,7 +25,6 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @GET @Path( "info" ) @Produces( MediaType.TEXT_PLAIN )
     public String getServerInfo() {
-        SmartHomeLogger.log("INFO");
         return requestManager.getServerInfo();
     }
 
