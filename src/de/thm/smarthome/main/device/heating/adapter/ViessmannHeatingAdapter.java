@@ -20,11 +20,12 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
     //public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
     public ViessmannHeatingAdapter(BuderusHeatingDriver driver) {
         this.driver = driver;
+        this.driver.attach(this);
     }
 
     @Override
     public void update(AObservable o, Object change) {
-        //TODO: Observer-Pattern
+        notifyObservers(change);
     }
 
     @Override
