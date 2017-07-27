@@ -28,10 +28,13 @@ public class ActionModeBean implements Serializable{
         switch (actionMode_Enum){
             case DAYMODE:
                 actionMode_String = "Daymode";
+                break;
             case NIGHTMODE:
                 actionMode_String = "Nightmode";
+                break;
             case MAINTENANCEMODE:
                 actionMode_String = "Maintenancemode";
+                break;
             case NA:
                 actionMode_String = "N/A";
                 break;
