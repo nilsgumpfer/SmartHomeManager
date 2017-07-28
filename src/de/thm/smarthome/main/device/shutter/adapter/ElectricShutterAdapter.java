@@ -24,7 +24,6 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
     }
-
     /*getter-Methoden*/
     @Override
     public PositionBean getCurrentPosition() { return driver.getCurrentPosition(); }

@@ -87,10 +87,9 @@ public class ElectricShutterDriver implements ShutterClientInterface {
         }
     }
 
-    //TODO: Stimmt das so? Ist vom BuderusHeatingDriver
     public ModelVariantBean getModelVariant(){
         try {
-            return modelVariant = deviceServer.getModelVariant();
+            return deviceServer.getModelVariant();
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);

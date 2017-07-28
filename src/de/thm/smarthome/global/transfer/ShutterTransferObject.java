@@ -4,17 +4,18 @@ import de.thm.smarthome.global.beans.*;
 
 /**
  * Created by Nils on 05.02.2017.
+ * * Changed by Jenny on 28.07.2017.
  */
 public class ShutterTransferObject {
-    private PositionBean        currentPosition;
-    private PositionBean        desiredPosition;
-    private ModelVariantBean    modelVariant;
-    private ManufacturerBean    manufacturer;
-    private ActionModeBean      actionMode;
-    private String              genericName;
-    private String              serialnumber;
-    private MessageBean         message;
-    private boolean             moveComplete;
+    PositionBean        currentPosition;
+    PositionBean        desiredPosition;
+    ModelVariantBean    modelVariant;
+    ManufacturerBean    manufacturer;
+    ActionModeBean      actionMode;
+    String              genericName;
+    String              serialnumber;
+    MessageBean         message;
+    boolean             moveComplete;
 
     public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, MessageBean message, boolean moveComplete) {
         this.currentPosition    = currentPosition;
@@ -113,9 +114,11 @@ public class ShutterTransferObject {
         this.message = message;
     }
 
-    public boolean isMoveComplete() {
+    public boolean getMoveComplete() {
         return moveComplete;
     }
+
+    //TODO: Nils fragen, wieso hier isMoveComplete() war; Absicht?
 
     public void setMoveComplete(boolean moveComplete) {
         this.moveComplete = moveComplete;

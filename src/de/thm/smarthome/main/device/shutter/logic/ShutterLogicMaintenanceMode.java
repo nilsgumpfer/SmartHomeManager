@@ -13,6 +13,7 @@ import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 
 /**
  * Created by Nils on 27.01.2017.
+ * Changed by Jenny on 28.07.2017.
  */
 
 
@@ -24,14 +25,18 @@ public class ShutterLogicMaintenanceMode extends AObservable implements IShutter
 
     public ShutterLogicMaintenanceMode(IShutterModel model, IShutter adapter) {
         this.model  = model;
-        device      = adapter;
+        this.device = adapter;
+        this.model.attach (this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.MAINTENANCEMODE));
     }
-
+    //Setter-Methoden//
     @Override
     public MessageBean setDesiredPosition(PositionBean desiredPosition) {
         return device.setDesiredPosition(desiredPosition);
     }
 
+    //Getter-Methoden//
     @Override
     public PositionBean getCurrentPosition() {
         return model.getCurrentPosition();
@@ -59,12 +64,12 @@ public class ShutterLogicMaintenanceMode extends AObservable implements IShutter
 
     @Override
     public String getGenericName() {
-        return null;
+        return model.getGenericName();
     }
 
     @Override
     public String getSerialnumber() {
-        return null;
+        return model.getSerialnumber();
     }
 
     @Override
@@ -74,12 +79,12 @@ public class ShutterLogicMaintenanceMode extends AObservable implements IShutter
 
     @Override
     public IShutterModel getModel() {
-        return null;
+        return model;
     }
 
     @Override
     public IShutter getAdapter() {
-        return null;
+        return device;
     }
 
     @Override

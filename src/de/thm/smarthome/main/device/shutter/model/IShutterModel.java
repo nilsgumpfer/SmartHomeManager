@@ -4,6 +4,7 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PositionBean;
+import de.thm.smarthome.global.observer.IObserver;
 
 /**
  * Created by Nils on 01.02.2017.
@@ -24,4 +25,6 @@ public interface IShutterModel {
     public ActionModeBean getActionMode();
     public String getGenericName();
     public String getSerialnumber();
+    void attach(IObserver observer);
+    void detach(IObserver observer);
 }

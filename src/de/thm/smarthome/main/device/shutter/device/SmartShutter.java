@@ -12,15 +12,27 @@ import de.thm.smarthome.main.device.shutter.model.IShutterModel;
 
 /**
  * Created by Nils on 27.01.2017.
+ * Changed by Jenny on 28.07.2017.
  */
 public class SmartShutter extends AObservable implements IObserver{
     private IShutterLogic logic;
 
+    public SmartShutter(IShutterLogic logic) {
+        this.logic = logic;
+        this.logic.attach(this); //TODO: Tim fragen
+    }
+
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        notifyObservers(change);
+        //TODO: Check if Logic-Change is necessary!
     }
 
+    //setter-Methoden//
+    public MessageBean setDesiredPosition(PositionBean desiredPosition) { return logic.setDesiredPosition(desiredPosition); }
+
+    //getter-Methoden//
     public PositionBean getCurrentPosition() {
         return logic.getCurrentPosition();
     }
@@ -28,8 +40,6 @@ public class SmartShutter extends AObservable implements IObserver{
     public PositionBean getDesiredPosition() {
         return logic.getDesiredPosition();
     }
-
-    public MessageBean setDesiredPosition(PositionBean desiredPosition) { return logic.setDesiredPosition(desiredPosition); }
 
     public ModelVariantBean getModelVariant() {
         return logic.getModelVariant();
