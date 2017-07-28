@@ -18,6 +18,7 @@ public class HeatingLogicMaintenanceMode extends AObservable implements IHeating
 {
     private IHeatingModel model;
     private IHeating device;
+    private ActionModeBean actionMode;
 
     public HeatingLogicMaintenanceMode(IHeatingModel model, IHeating adapter) {
         this.model  = model;

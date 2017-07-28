@@ -16,6 +16,7 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
 {
     private IHeatingModel model;
     private IHeating device;
+    private ActionModeBean actionMode;
 
     public HeatingLogicNightMode(IHeatingModel model, IHeating adapter) {
         this.model  = model;

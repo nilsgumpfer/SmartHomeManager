@@ -25,7 +25,7 @@ public class HeatingTransferObject {
         this.genericName            = genericName;
         this.serialnumber           = serialnumber;
         this.powerState             = powerState;
-        this.message = message;
+        this.message                = message;
     }
 
     public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
