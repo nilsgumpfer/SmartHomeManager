@@ -3,6 +3,7 @@ package de.vaillant.driver.heating;
 import HeizungServer.interfaces.HeizungClientInterface;
 import HeizungServer.interfaces.HeizungServerInterface;
 import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PowerStateBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
@@ -95,9 +96,9 @@ public class VaillantHeatingDriver implements HeizungClientInterface{
             return modelVariant = deviceServer.getModelVariant();
         }
         catch (RemoteException rex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            SmartHomeLogger.log(rex);
+            return null;
         }
-        return null;
     }
 
     public MeasureBean getCurrentTemperature() {
@@ -105,9 +106,9 @@ public class VaillantHeatingDriver implements HeizungClientInterface{
             return deviceServer.getCurrentTemperature();
         }
         catch (RemoteException rex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            SmartHomeLogger.log(rex);
+            return null;
         }
-        return null;
     }
 
     public MeasureBean getDesiredTemperature() {
@@ -115,9 +116,9 @@ public class VaillantHeatingDriver implements HeizungClientInterface{
             return deviceServer.getDesiredTemperature();
         }
         catch (RemoteException rex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            SmartHomeLogger.log(rex);
+            return null;
         }
-        return null;
     }
 
     public PowerStateBean getPowerState() {
@@ -125,33 +126,33 @@ public class VaillantHeatingDriver implements HeizungClientInterface{
             return deviceServer.getPowerState();
         }
         catch (RemoteException rex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            SmartHomeLogger.log(rex);
+            return null;
         }
-        return null;
     }
 
-    public void setDesiredTemperature(MeasureBean new_desiredTemperature) {
+    public MessageBean setDesiredTemperature(MeasureBean new_desiredTemperature) {
         try {
             deviceServer.setDesiredTemperature(new_desiredTemperature);
+            return new MessageBean(true);
         }
         catch(RemoteException ex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            return new MessageBean(false);
         }
 
     }
 
-    public void setPowerState(PowerStateBean new_powerState) {
+    public MessageBean setPowerState(PowerStateBean new_powerState) {
         try {
             deviceServer.setPowerState(new_powerState);
+            return new MessageBean(true);
         }
         catch (RemoteException rex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            SmartHomeLogger.log(rex);
+            return new MessageBean(false);
         }
 
     }
-
-
-
 
     //TODO: 1:1 wie Buderus-Treiber (kopieren, sobald final codiert)
 }

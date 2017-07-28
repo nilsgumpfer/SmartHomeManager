@@ -77,7 +77,7 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
             return deviceServer.getModelVariant();
         }
         catch (RemoteException rex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            SmartHomeLogger.log(rex);
             return null;
         }
     }
@@ -87,7 +87,7 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
             return deviceServer.getTemperature();
         }
         catch (RemoteException rex){
-            System.out.println("Es ist ein Fehler aufgetreten!");
+            SmartHomeLogger.log(rex);
             return 0.0;
         }
     }
