@@ -30,7 +30,7 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return null;//driver.getModelVariant();
+        return driver.getModelVariant();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public MeasureBean getTemperature() {
-        //return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS); //TODO: Unit should come from device directly!
-        return null;
+        return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS); //TODO: Unit should come from device directly! // Tim: ??
+        //return null;
     }
 }

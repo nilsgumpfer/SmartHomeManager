@@ -72,7 +72,7 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
         }
     }
 
-    public ModelVariantBean getModelVariant() throws RemoteException{
+    public ModelVariantBean getModelVariant(){
         try {
             return deviceServer.getModelVariant();
         }
@@ -82,7 +82,7 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
         }
     }
 
-    public double getTemperature() throws RemoteException{
+    public double getTemperature(){
         try {
             return deviceServer.getTemperature();
         }

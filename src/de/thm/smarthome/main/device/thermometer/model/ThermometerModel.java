@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.thermometer.model;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
 import de.thm.smarthome.main.device.thermometer.adapter.IndoorThermometerAdapter;
 
 /**
@@ -16,6 +17,7 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
     private ActionModeBean      actionMode;
     private String              genericName;
     private String              serialnumber;
+    private IThermometer        device;
 
     public ThermometerModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.modelVariant = modelVariant;
@@ -27,7 +29,8 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
 
     @Override
     public MeasureBean getTemperature() {
-        return temperature;
+        //return temperature;
+        return device.getTemperature();
     }
 
     @Override
@@ -37,7 +40,8 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return modelVariant;
+        //return modelVariant;
+        return device.getModelVariant();
     }
 
     @Override
@@ -47,7 +51,8 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
 
     @Override
     public ManufacturerBean getManufacturer() {
-        return manufacturer;
+        //return manufacturer;
+        return device.getManufacturer();
     }
 
     @Override
