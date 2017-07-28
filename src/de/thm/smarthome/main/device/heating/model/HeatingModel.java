@@ -48,8 +48,8 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
 
     @Override
     public void setDesiredTemperature(MeasureBean desiredTemperature) {
-        //this.desiredTemperature = desiredTemperature;
-        device.setDesiredTemperature(desiredTemperature);
+        this.desiredTemperature = desiredTemperature;
+        device.setDesiredTemperature(this.desiredTemperature);
     }
 
     @Override
@@ -112,8 +112,8 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
 
     @Override
     public void setPowerState(PowerStateBean powerState) {
-        //this.powerState = powerState;
-        device.setPowerState(powerState);
+        this.powerState = powerState;
+        device.setPowerState(this.powerState);
     }
 
     public void setDevice(IHeating device) {
