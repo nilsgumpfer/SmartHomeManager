@@ -10,5 +10,6 @@ public enum EModelVariant {
     Heizung1000,
     Shutter3000,
     Shutter2000,
-    Shutter1000
+    Shutter1000,
+    Thermometer3000
 }

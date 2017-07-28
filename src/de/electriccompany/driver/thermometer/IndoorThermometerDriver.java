@@ -2,10 +2,12 @@ package de.electriccompany.driver.thermometer;
 
 import ThermometerServer.interfaces.ThermometerClientInterface;
 import ThermometerServer.interfaces.ThermometerServerInterface;
+import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -16,9 +18,10 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
 {
     private ThermometerServerInterface deviceServer;
 
-    private String modelVariant;
+    private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
+    private String hostname;
 
     public IndoorThermometerDriver(String serialnumber, String genericName)
     {
@@ -31,27 +34,31 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
     }
 
     private void readModelVariantInformation() {
-        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
-        modelVariant = "Thermometer3000";
+
+        switch (modelVariant.getModelVariant_Enum()){
+            case  Thermometer3000:
+                hostname = modelVariant.getModelVariant_String();
+                break;
+        }
     }
 
     private void initConnection()
     {
         //TODO: get IP Address for host-name
-        String host = modelVariant;
+        //String host = modelVariant;
         int port    = 0;
 
         try {
 
             SmartHomeLogger.log("Looking for Electric Company Thermometer: " + modelVariant + "..");
 
-            LocateRegistry.getRegistry(host, port);
+            LocateRegistry.getRegistry(hostname, port);
 
-            SmartHomeLogger.log("Found thermometer: " + host + ":" + port + "Establishing connection..");
+            SmartHomeLogger.log("Found thermometer: " + hostname + ":" + port + "Establishing connection..");
 
             UnicastRemoteObject.exportObject(this, 0);
 
-            Remote remoteObject = Naming.lookup("//" + host + "/" + "SmartHomeAPI");
+            Remote remoteObject = Naming.lookup("//" + hostname + "/" + "SmartHomeAPI");
 
             SmartHomeLogger.log("Successfully connected.");
 
@@ -65,12 +72,24 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
         }
     }
 
-    public String getModelVariant() {
-        return modelVariant;
+    public ModelVariantBean getModelVariant() throws RemoteException{
+        try {
+            return deviceServer.getModelVariant();
+        }
+        catch (RemoteException rex){
+            System.out.println("Es ist ein Fehler aufgetreten!");
+            return null;
+        }
     }
 
-    public double getTemperature() {
-        return deviceServer.getTemperature();
+    public double getTemperature() throws RemoteException{
+        try {
+            return deviceServer.getTemperature();
+        }
+        catch (RemoteException rex){
+            System.out.println("Es ist ein Fehler aufgetreten!");
+            return 0.0;
+        }
     }
 
 }

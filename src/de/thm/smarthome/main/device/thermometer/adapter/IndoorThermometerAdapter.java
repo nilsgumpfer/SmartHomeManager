@@ -9,6 +9,8 @@ import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
+import java.rmi.RemoteException;
+
 /**
  * Created by Nils on 27.01.2017.
  */
@@ -38,6 +40,7 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public MeasureBean getTemperature() {
-        return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS); //TODO: Unit should come from device directly!
+        //return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS); //TODO: Unit should come from device directly!
+        return null;
     }
 }
