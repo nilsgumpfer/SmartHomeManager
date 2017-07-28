@@ -86,5 +86,6 @@ public class SmartHomeManagerWebServiceProvider
 
     public void stopProviding(){
         httpServer.stop(0);
+        httpServer = null;
     }
 }
