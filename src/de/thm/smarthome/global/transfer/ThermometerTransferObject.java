@@ -42,63 +42,51 @@ public class ThermometerTransferObject {
     }
 
     public MeasureBean getTemperature() {
-        return smartThermometer.getTemperature();
-        //return temperature;
+        return temperature;
     }
 
     public void setTemperature(MeasureBean temperature) {
         this.temperature = temperature;
-        thermometerModel.setTemperature(this.temperature);
     }
 
     public ModelVariantBean getModelVariant() {
-        //return modelVariant;
-        return smartThermometer.getModelVariant();
+        return modelVariant;
     }
 
     public void setModelVariant(ModelVariantBean modelVariant) {
         this.modelVariant = modelVariant;
-        thermometerModel.setModelVariant(this.modelVariant);
     }
 
     public ActionModeBean getActionMode() {
-        //return actionMode;
-        return smartThermometer.getActionMode();
+        return actionMode;
     }
 
     public void setActionMode(ActionModeBean actionMode) {
         this.actionMode = actionMode;
-        thermometerModel.setActionMode(this.actionMode);
     }
 
     public ManufacturerBean getManufacturer() {
-        //return manufacturer;
-        return smartThermometer.getManufacturer();
+        return manufacturer;
     }
 
     public void setManufacturer(ManufacturerBean manufacturer) {
         this.manufacturer = manufacturer;
-        thermometerModel.setManufacturer(this.manufacturer);
     }
 
     public String getGenericName() {
-        //return genericName;
-        return smartThermometer.getGenericName();
+        return genericName;
     }
 
     public void setGenericName(String genericName) {
         this.genericName = genericName;
-        thermometerModel.setGenericName(this.genericName);
     }
 
     public String getSerialnumber() {
-        //return serialnumber;
-        return smartThermometer.getSerialnumber();
+        return serialnumber;
     }
 
     public void setSerialnumber(String serialnumber) {
         this.serialnumber = serialnumber;
-        thermometerModel.setSerialnumber(this.serialnumber);
     }
 
     public MessageBean getMessage() {

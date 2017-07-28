@@ -97,7 +97,7 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
 
     public ModelVariantBean getModelVariant(){
        try {
-           return modelVariant = deviceServer.getModelVariant();
+           return deviceServer.getModelVariant();
        }
         catch (RemoteException rex){
            SmartHomeLogger.log(rex);

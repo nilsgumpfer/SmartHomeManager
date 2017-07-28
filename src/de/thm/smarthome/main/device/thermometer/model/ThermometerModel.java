@@ -29,8 +29,7 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
 
     @Override
     public MeasureBean getTemperature() {
-        //return temperature;
-        return device.getTemperature();
+        return temperature;
     }
 
     @Override
@@ -40,8 +39,7 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
 
     @Override
     public ModelVariantBean getModelVariant() {
-        //return modelVariant;
-        return device.getModelVariant();
+        return modelVariant;
     }
 
     @Override
@@ -51,8 +49,7 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
 
     @Override
     public ManufacturerBean getManufacturer() {
-        //return manufacturer;
-        return device.getManufacturer();
+        return manufacturer;
     }
 
     @Override

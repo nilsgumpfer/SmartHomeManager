@@ -31,8 +31,7 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
 
     @Override
     public MeasureBean getCurrentTemperature() {
-        //return currentTemperature;
-        return device.getCurrentTemperature();
+        return currentTemperature;
     }
 
     @Override
@@ -42,20 +41,18 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
 
     @Override
     public MeasureBean getDesiredTemperature() {
-        //return desiredTemperature;
-        return device.getDesiredTemperature();
+        return desiredTemperature;
+
     }
 
     @Override
     public void setDesiredTemperature(MeasureBean desiredTemperature) {
         this.desiredTemperature = desiredTemperature;
-        device.setDesiredTemperature(this.desiredTemperature);
     }
 
     @Override
     public ModelVariantBean getModelVariant() {
-        //return modelVariant;
-        return device.getModelVariant();
+        return modelVariant;
     }
 
     @Override
@@ -65,8 +62,7 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
 
     @Override
     public ManufacturerBean getManufacturer() {
-        //return manufacturer;
-        return device.getManufacturer();
+        return manufacturer;
     }
 
     @Override
@@ -106,14 +102,12 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
 
     @Override
     public PowerStateBean getPowerState() {
-        //return powerState;
-        return getPowerState();
+        return powerState;
     }
 
     @Override
     public void setPowerState(PowerStateBean powerState) {
         this.powerState = powerState;
-        device.setPowerState(this.powerState);
     }
 
     public void setDevice(IHeating device) {
