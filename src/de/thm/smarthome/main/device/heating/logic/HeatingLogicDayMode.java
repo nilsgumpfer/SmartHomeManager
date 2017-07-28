@@ -67,13 +67,11 @@ public class HeatingLogicDayMode extends AObservable implements IHeatingLogic, I
         return model.getSerialnumber();
     }
 
-    //TODO: Setter-Methoden kommen nicht vom Model, wie bei den getter-Methoden?
     @Override
     public MessageBean setDesiredTemperature(MeasureBean temperature) {
         return device.setDesiredTemperature(temperature);
     }
 
-    //TODO: Setter-Methoden kommen nicht vom Model, wie bei den getter-Methoden?
     @Override
     public MessageBean setPowerState(PowerStateBean powerState) {
         return device.setPowerState(powerState);

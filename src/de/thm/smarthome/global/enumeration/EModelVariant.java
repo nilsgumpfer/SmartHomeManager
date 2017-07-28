@@ -11,5 +11,6 @@ public enum EModelVariant {
     Shutter3000,
     Shutter2000,
     Shutter1000,
-    Thermometer3000
+    Thermometer3000,
+    WeatherStation3000
 }

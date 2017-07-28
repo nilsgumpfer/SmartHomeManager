@@ -2,10 +2,14 @@ package de.conradelectronic.driver.weatherstation;
 
 import WeatherStationServer.interfaces.WeatherStationClientInterface;
 import WeatherStationServer.interfaces.WeatherStationServerInterface;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -15,9 +19,10 @@ import java.rmi.server.UnicastRemoteObject;
 public class ConradWeatherStationDriver implements WeatherStationClientInterface {
     private WeatherStationServerInterface deviceServer;
 
-    private String modelVariant;
+    private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
+    private String hostname;
 
     public ConradWeatherStationDriver(String serialnumber, String genericName)
     {
@@ -31,26 +36,29 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
 
     private void readModelVariantInformation() {
         //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
-        modelVariant = "Weatherstation3000";
+        switch (modelVariant.getModelVariant_Enum()){
+            case  WeatherStation3000:
+                hostname = modelVariant.getModelVariant_String();
+                break;
+        }
     }
 
     private void initConnection()
     {
         //TODO: get IP Address for host-name
-        String host = modelVariant;
         int port    = 0;
 
         try {
 
             SmartHomeLogger.log("Looking for Conrad Electronic Weather Station: " + modelVariant + "..");
 
-            LocateRegistry.getRegistry(host, port);
+            LocateRegistry.getRegistry(hostname, port);
 
-            SmartHomeLogger.log("Found thermometer: " + host + ":" + port + "Establishing connection..");
+            SmartHomeLogger.log("Found thermometer: " + hostname + ":" + port + "Establishing connection..");
 
             UnicastRemoteObject.exportObject(this, 0);
 
-            Remote remoteObject = Naming.lookup("//" + host + "/" + "SmartHomeAPI");
+            Remote remoteObject = Naming.lookup("//" + hostname + "/" + "SmartHomeAPI");
 
             SmartHomeLogger.log("Successfully connected.");
 
@@ -64,20 +72,59 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
     }
 
-    public String getModelVariant() {
+    public ModelVariantBean getModelVariant() {
         return modelVariant;
     }
-    public double getTemperature() {
-        return deviceServer.getTemperature();
+    public MeasureBean getTemperature() {
+        try{
+            return deviceServer.getTemperature();
+        }
+        catch (RemoteException rex){
+            SmartHomeLogger.log(rex);
+        }
+        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
     }
-    public double getWindVelocity() {
-        return deviceServer.getWindVelocity();
+    public MeasureBean getWindVelocity() {
+        try {
+            return deviceServer.getWindvelocity();
+        }
+        catch (RemoteException rex){
+            SmartHomeLogger.log(rex);
+        }
+        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
     }
-    public double getAirHumidity() {
-        return deviceServer.getAirHumidity();
+    public MeasureBean getAirHumidity() {
+        try {
+            return deviceServer.getAirHumidity();
+        }
+        catch (RemoteException rex){
+            SmartHomeLogger.log(rex);
+        }
+        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
     }
-    public double getAirPressure() {
-        return deviceServer.getAirPressure();
+    public MeasureBean getAirPressure() {
+        try {
+            return deviceServer.getAirPressure();
+        }
+        catch (RemoteException rex){
+            SmartHomeLogger.log(rex);
+        }
+        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
     }
-    public double getRainfallAmount() { return deviceServer.getRainfallAmount(); }
+    public MeasureBean getRainfallAmount() {
+        try {
+            return deviceServer.getRainfallAmount();
+        }
+        catch (RemoteException rex){
+            SmartHomeLogger.log(rex);
+        }
+        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
+    }
+
+    public static void main(String[] args) {
+        ConradWeatherStationDriver cwsd = new ConradWeatherStationDriver("123456", "WeatherstationTest");
+        System.out.println(cwsd.getAirHumidity().getMeasure_Double() + " " + cwsd.getAirHumidity().getUnitOfMeasurement_String());
+
+    }
+
 }

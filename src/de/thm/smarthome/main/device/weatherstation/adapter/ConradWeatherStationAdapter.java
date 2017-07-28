@@ -28,7 +28,7 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return new ModelVariantBean(EDeviceManufacturer.CONRAD_ELECTRONIC, driver.getModelVariant());
+        return new ModelVariantBean(EDeviceManufacturer.CONRAD_ELECTRONIC, driver.getModelVariant().getModelVariant_String());
     }
 
     @Override
@@ -38,25 +38,25 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
 
     @Override
     public MeasureBean getTemperature() {
-        return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+        return new MeasureBean(driver.getTemperature().getMeasure_Double(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
     }
 
     @Override
     public MeasureBean getRainfallAmount() {
-        return new MeasureBean(driver.getRainfallAmount(), EUnitOfMeasurement.VOLUME_LITRESPERSQUAREMETER);
+        return new MeasureBean(driver.getRainfallAmount().getMeasure_Double(), EUnitOfMeasurement.VOLUME_LITRESPERSQUAREMETER);
     }
 
     @Override
-    public MeasureBean getWindVelocity() { return new MeasureBean(driver.getWindVelocity(), EUnitOfMeasurement.VELOCITY_KILOMETERSPERHOUR);
+    public MeasureBean getWindVelocity() { return new MeasureBean(driver.getWindVelocity().getMeasure_Double(), EUnitOfMeasurement.VELOCITY_KILOMETERSPERHOUR);
     }
 
     @Override
     public MeasureBean getAirHumidity() {
-        return new MeasureBean(driver.getAirHumidity(), EUnitOfMeasurement.RELATION_PERCENT);
+        return new MeasureBean(driver.getAirHumidity().getMeasure_Double(), EUnitOfMeasurement.RELATION_PERCENT);
     }
 
     @Override
     public MeasureBean getAirPressure() {
-        return new MeasureBean(driver.getAirPressure(), EUnitOfMeasurement.PRESSURE_BAR);
+        return new MeasureBean(driver.getAirPressure().getMeasure_Double(), EUnitOfMeasurement.PRESSURE_BAR);
     }
 }
