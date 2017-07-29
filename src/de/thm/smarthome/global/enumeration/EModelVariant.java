@@ -5,9 +5,9 @@ package de.thm.smarthome.global.enumeration;
  */
 public enum EModelVariant {
     NA,
-    Heizung3000,
-    Heizung2000,
-    Heizung1000,
+    HEATING_3000,
+    HEATING_2000,
+    HEATING_1000,
     Shutter3000,
     Shutter2000,
     Shutter1000,

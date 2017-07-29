@@ -4,6 +4,7 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
 import de.thm.smarthome.main.device.weatherstation.adapter.IWeatherStation;
 import de.thm.smarthome.main.device.weatherstation.model.IWeatherStationModel;
@@ -27,4 +28,6 @@ public interface IWeatherStationLogic
 
     IWeatherStationModel getModel();
     IWeatherStation getAdapter();
+
+    void attach(IObserver observer);
 }

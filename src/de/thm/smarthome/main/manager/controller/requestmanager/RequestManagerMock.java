@@ -18,7 +18,7 @@ public class RequestManagerMock implements IServiceFacade {
             new HeatingTransferObject(
                     new MeasureBean(42.4, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS),
                     new MeasureBean(42.4, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS),
-                    new ModelVariantBean(EModelVariant.Heizung1000),
+                    new ModelVariantBean(EModelVariant.HEATING_1000),
                     new ManufacturerBean(EDeviceManufacturer.BUDERUS),
                     new ActionModeBean(EActionMode.DAYMODE),
                     "MyBuderusHeating1000",

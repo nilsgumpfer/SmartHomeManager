@@ -1,49 +1,43 @@
 package de.thm.smarthome.main.device.shutter.adapter;
 
-import de.electriccompany.driver.shutter.ElectricShutterDriver;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EModelVariant;
+import de.thm.smarthome.global.enumeration.EPosition;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
 /**
  * Created by Nils on 27.01.2017.
  */
-public class ElectricShutterAdapter extends AObservable implements IShutter, IObserver
+public class MockedShutterAdapter extends AObservable implements IShutter, IObserver
 {
-    private ElectricShutterDriver driver;
-    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.ELECTRIC_COMPANY);
-
-    public ElectricShutterAdapter(ElectricShutterDriver driver) {
-        this.driver = driver;
-    }
+    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.NA);
 
     @Override
     public void update(AObservable o, Object change) {
-        //TODO: Observer-Pattern
     }
-    /*getter-Methoden*/
-    @Override
-    public PositionBean getCurrentPosition() { return driver.getCurrentPosition(); }
 
     @Override
-    public PositionBean getDesiredPosition() { return driver.getDesiredPosition(); }
+    public PositionBean getCurrentPosition() { return new PositionBean(EPosition.NA); }
 
     @Override
-    public ModelVariantBean getModelVariant() { return driver.getModelVariant();}
+    public PositionBean getDesiredPosition() { return new PositionBean(EPosition.NA); }
+
+    @Override
+    public ModelVariantBean getModelVariant() { return new ModelVariantBean(EModelVariant.NA);}
 
     @Override
     public ManufacturerBean getManufacturer() {
         return manufacturer;
     }
 
-    /*setter-Methoden*/
     @Override
     public MessageBean setDesiredPosition(PositionBean desiredPosition) {
-        return driver.setDesiredPosition(desiredPosition);
+        return new MessageBean(false);
     }
     }
 

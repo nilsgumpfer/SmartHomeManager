@@ -28,7 +28,7 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return new ModelVariantBean(EDeviceManufacturer.CONRAD_ELECTRONIC, driver.getModelVariant().getModelVariant_String());
+        return driver.getModelVariant();
     }
 
     @Override

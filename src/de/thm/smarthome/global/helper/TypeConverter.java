@@ -20,8 +20,7 @@ public class TypeConverter {
 
     }
 
-    public static List<IUpAndDownMovableDevice> convertDeviceList(List<SmartShutter> input)
-    {
+    public static List<IUpAndDownMovableDevice> convertDeviceList(List<SmartShutter> input) {
         List<IUpAndDownMovableDevice> output = new ArrayList<>();
 
         for (SmartShutter item : input) {
@@ -30,6 +29,4 @@ public class TypeConverter {
 
         return output;
     }
-
-
 }

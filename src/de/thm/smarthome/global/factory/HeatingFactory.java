@@ -24,7 +24,7 @@ import de.thm.smarthome.main.device.heating.model.IHeatingModel;
  */
 public class HeatingFactory {
 
-    public SmartHeating createHeating(EDeviceManufacturer manufacturer, EModelVariant modelVariant, String serialnumber, String genericName){
+    public static SmartHeating createHeating(EDeviceManufacturer manufacturer, EModelVariant modelVariant, String serialnumber, String genericName){
 
         //Prepare model
         IHeatingModel heatingModel = new HeatingModel(

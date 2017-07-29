@@ -4,24 +4,26 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
-import de.thm.smarthome.global.interfaces.ISmartDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
-import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.weatherstation.adapter.IWeatherStation;
 import de.thm.smarthome.main.device.weatherstation.logic.IWeatherStationLogic;
 import de.thm.smarthome.main.device.weatherstation.logic.WeatherStationLogicAngloAmerican;
 import de.thm.smarthome.main.device.weatherstation.logic.WeatherStationLogicMaintenanceMode;
 import de.thm.smarthome.main.device.weatherstation.logic.WeatherStationLogicMetric;
 import de.thm.smarthome.main.device.weatherstation.model.IWeatherStationModel;
-import de.thm.smarthome.main.device.weatherstation.model.WeatherStationModel;
 
 /**
  * Created by Nils on 27.01.2017.
  */
 public class SmartWeatherStation extends AObservable implements IObserver{
     private IWeatherStationLogic logic;
+
+    public SmartWeatherStation(IWeatherStationLogic logic) {
+        this.logic = logic;
+        this.logic.attach(this);
+    }
 
     @Override
     public void update(AObservable o, Object change) {

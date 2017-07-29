@@ -21,6 +21,11 @@ public class SmartThermometer extends AObservable implements IObserver
 {
     private IThermometerLogic logic;
 
+    public SmartThermometer(IThermometerLogic logic) {
+        this.logic = logic;
+        this.logic.attach(this);
+    }
+
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern

@@ -47,13 +47,13 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
     //TODO: macht das Sinn? Ist das so gedacht/richtig?
     private void readModelVariantInformation() {
         switch (modelVariant.getModelVariant_Enum()){
-            case  Heizung3000:
+            case HEATING_3000:
                     hostname = modelVariant.getModelVariant_String();
                     break;
-            case  Heizung2000:
+            case HEATING_2000:
                 hostname = modelVariant.getModelVariant_String();
                 break;
-            case  Heizung1000:
+            case HEATING_1000:
                 hostname = modelVariant.getModelVariant_String();
                 break;
             }

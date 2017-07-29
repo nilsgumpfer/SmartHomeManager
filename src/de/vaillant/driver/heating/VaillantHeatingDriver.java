@@ -6,18 +6,13 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PowerStateBean;
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -43,13 +38,13 @@ public class VaillantHeatingDriver implements HeizungClientInterface{
     //TODO: macht das Sinn? Ist das so gedacht/richtig?
     private void readModelVariantInformation() {
         switch (modelVariant.getModelVariant_Enum()){
-            case  Heizung3000:
+            case HEATING_3000:
                 hostname = modelVariant.getModelVariant_String();
                 break;
-            case  Heizung2000:
+            case HEATING_2000:
                 hostname = modelVariant.getModelVariant_String();
                 break;
-            case  Heizung1000:
+            case HEATING_1000:
                 hostname = modelVariant.getModelVariant_String();
                 break;
         }

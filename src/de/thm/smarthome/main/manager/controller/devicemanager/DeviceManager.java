@@ -1,32 +1,32 @@
 package de.thm.smarthome.main.manager.controller.devicemanager;
 
+import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.enumeration.EModelVariant;
+import de.thm.smarthome.global.factory.*;
+import de.thm.smarthome.global.helper.ParameterCollector;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.global.transfer.HeatingTransferObject;
-import de.thm.smarthome.global.transfer.ShutterTransferObject;
-import de.thm.smarthome.global.transfer.ThermometerTransferObject;
-import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
 import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
-import de.thm.smarthome.main.manager.controller.eventmanager.EventManager;
-import de.thm.smarthome.main.manager.controller.eventmanager.IEventManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Nils on 28.01.2017.
  */
 public class DeviceManager extends AObservable implements IDeviceManager, IObserver{
-    private static DeviceManager ourInstance = new DeviceManager();
-    private IEventManager eventManager = EventManager.getInstance();
-    private SmartHeating smartHeating;
-    private SmartWeatherStation smartWeatherStation;
-    private SmartThermometer smartThermometer;
-    private SmartShutter smartShutter;
-    private List<SmartShutter> smartShutters;
+    private static DeviceManager    ourInstance             = new DeviceManager();
+    private SmartHeating            smartHeating            = EmptyDeviceFactory.getEmptyHeating();
+    private SmartWeatherStation     smartWeatherStation     = EmptyDeviceFactory.getEmptyWeatherStation();
+    private SmartThermometer        smartThermometer        = EmptyDeviceFactory.getEmptyThermometer();
+    private List<SmartShutter>      smartShutters           = new ArrayList<>();
 
     private DeviceManager(){}
 
@@ -36,7 +36,62 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
 
     @Override
     public void update(AObservable o, Object change) {
-        eventManager.update(o,change);
+        notifyObservers(change);
+    }
+
+    private ParameterCollector checkParameters(String smartDevice, ParameterCollector parameterCollector) {
+        ModelVariantBean modelVariantBean = new ModelVariantBean(parameterCollector.getModelVariant());
+        ManufacturerBean manufacturerBean = new ManufacturerBean(parameterCollector.getManufacturer());
+        String serialnumber = parameterCollector.getSerialnumber();
+
+        if(modelVariantBean.getModelVariant_Enum() == EModelVariant.NA){
+            SmartHomeLogger.log(smartDevice + ": Unbekannte Modellvariante");
+            parameterCollector.setProceed(false);
+            return parameterCollector;
+        }
+
+        if(manufacturerBean.getDeviceManufacturer_Enum() == EDeviceManufacturer.NA){
+            SmartHomeLogger.log(smartDevice + "SmartHeating: Unbekannter Gerätehersteller");
+            parameterCollector.setProceed(false);
+            return parameterCollector;
+        }
+
+        if(serialnumber.length()<2){
+            SmartHomeLogger.log(smartDevice + ": Ungültige Seriennummer");
+            parameterCollector.setProceed(false);
+            return parameterCollector;
+        }
+
+        parameterCollector.setManufacturerBean(manufacturerBean);
+        parameterCollector.setModelVariantBean(modelVariantBean);
+
+        parameterCollector.setProceed(true);
+
+        return parameterCollector;
+    }
+
+    @Override
+    public MessageBean createSmartHeating(String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        ParameterCollector parameterCollector = new ParameterCollector(modelVariant, manufacturer, serialnumber);
+        parameterCollector = checkParameters("SmartHeating", parameterCollector);
+
+        if(parameterCollector.isProceed())
+        {
+            try {
+                smartHeating = HeatingFactory.createHeating(
+                        parameterCollector.getManufacturerBean().getDeviceManufacturer_Enum(),
+                        parameterCollector.getModelVariantBean().getModelVariant_Enum(),
+                        serialnumber,
+                        genericName);
+            }
+            catch (Exception e)
+            {
+                SmartHomeLogger.log(e);
+                return new MessageBean(false);
+            }
+        }
+
+        return new MessageBean(parameterCollector.isProceed());
     }
 
     @Override
@@ -45,123 +100,51 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
     }
 
     @Override
-    public MessageBean setSmartHeating(SmartHeating smartHeating) {
-        if(smartHeating!=null){
-            this.smartHeating = smartHeating;
-            return new MessageBean(true);
-        } else {
-            return new MessageBean(false);
-        }
-    }
-
-    @Override
-    public MessageBean setSmartHeating(HeatingTransferObject heatingTransferObject) {
-        if(heatingTransferObject!=null){
-            //TODO: implement this
-            return new MessageBean(true);
-        } else {
-            return new MessageBean(false);
-        }
-    }
-
-    @Override
-    public MessageBean createSmartHeating(HeatingTransferObject heatingTransferObject) {
-        if(heatingTransferObject!=null){
-            //TODO: implement this
-            return new MessageBean(true);
-        } else {
-            return new MessageBean(false);
-        }
-    }
-
-    @Override
     public MessageBean deleteSmartHeating() {
-        if(smartHeating==null){
-            //TODO: implement this
-            return new MessageBean(true);
-        } else {
-            return new MessageBean(false);
+        smartHeating.detach(this);
+        smartHeating = EmptyDeviceFactory.getEmptyHeating();
+
+        //TODO: Alle Objekte in der Observer-Kette müssen voneinander abgemeldet werden
+
+        return new MessageBean(true);
+    }
+
+    @Override
+    public MessageBean createSmartShutter(String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        ParameterCollector parameterCollector = new ParameterCollector(modelVariant, manufacturer, serialnumber);
+        parameterCollector = checkParameters("SmartShutter", parameterCollector);
+
+        if(parameterCollector.isProceed())
+        {
+            try {
+                smartShutters.add(
+                        ShutterFactory.createShutter(
+                                parameterCollector.getManufacturerBean(),
+                                parameterCollector.getModelVariantBean(),
+                                genericName,
+                                serialnumber
+                        )
+                );
+            }
+            catch (Exception e)
+            {
+                SmartHomeLogger.log(e);
+                return new MessageBean(false);
+            }
         }
+
+        return new MessageBean(parameterCollector.isProceed());
     }
 
     @Override
     public SmartShutter getSmartShutter(String serialnumber) {
-        for(int i = 0; i < smartShutters.size(); i++) {
-            if (serialnumber.equals(smartShutters.get(i).getSerialnumber())) {
-                return smartShutters.get(i);
-            }
+        for(SmartShutter smartShutter : smartShutters)
+        {
+            if(smartShutter.getSerialnumber().equals(serialnumber))
+                return smartShutter;
         }
-        return null;
-    }
 
-    @Override
-    public MessageBean addSmartShutter(SmartShutter smartShutter) {
-        if(smartShutter!=null){
-            smartShutters.add(smartShutters.size(), smartShutter);
-            return new MessageBean(true);
-        } else {
-            return new MessageBean(false);
-        }
-    }
-
-    @Override
-    public MessageBean deleteSmartShutter(SmartShutter smartShutter) {
-        return null;
-    }
-
-    @Override
-    public SmartShutter getSmartShutter(ShutterTransferObject shutterTransferObject) {
-return smartShutter;
-    }
-
-    @Override
-    public MessageBean addSmartShutter(ShutterTransferObject shutterTransferObject) {
-        return null;
-    }
-
-    @Override
-    public MessageBean deleteSmartShutter(ShutterTransferObject shutterTransferObject) {
-        return null;
-    }
-
-    @Override
-    public MessageBean createSmartShutter(ShutterTransferObject shutterTransferObject) {
-        return null;
-    }
-
-    @Override
-    public SmartThermometer getSmartThermometer() {
-        return smartThermometer;
-    }
-
-    @Override
-    public MessageBean setSmartThermometer(SmartThermometer smartThermometer) {
-        return null;
-    }
-
-    @Override
-    public MessageBean setSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
-        return null;
-    }
-
-    @Override
-    public MessageBean createSmartThermometer(ThermometerTransferObject thermometerTransferObject) {
-        return null;
-    }
-
-    @Override
-    public SmartWeatherStation getSmartWeatherStation() {
-        return smartWeatherStation;
-    }
-
-    @Override
-    public MessageBean setSmartWeatherStation(SmartWeatherStation smartWeatherStation) {
-        return null;
-    }
-
-    @Override
-    public MessageBean createSmartWeatherStation(WeatherStationTransferObject weatherStationTransferObject) {
-        return null;
+        return EmptyDeviceFactory.getEmptyShutter();
     }
 
     @Override
@@ -170,32 +153,85 @@ return smartShutter;
     }
 
     @Override
-    public MessageBean createSmartHeating(String modelVariant, String manufacturer, String genericName, String serialnumber) {
-        return null;
-    }
-
-    @Override
-    public MessageBean createSmartShutter(String modelVariant, String manufacturer, String genericName, String serialnumber) {
-        return null;
-    }
-
-    @Override
-    public MessageBean createSmartWeatherStation(String modelVariant, String manufacturer, String genericName, String serialnumber) {
-        return null;
+    public MessageBean deleteSmartShutter(SmartShutter smartShutter) {
+        return new MessageBean(smartShutters.remove(smartShutter));
     }
 
     @Override
     public MessageBean createSmartThermometer(String modelVariant, String manufacturer, String genericName, String serialnumber) {
-        return null;
+        ParameterCollector parameterCollector = new ParameterCollector(modelVariant, manufacturer, serialnumber);
+        parameterCollector = checkParameters("SmartThermometer", parameterCollector);
+
+        if(parameterCollector.isProceed())
+        {
+            try {
+                smartThermometer = ThermometerFactory.createThermometer(
+                        parameterCollector.getManufacturerBean(),
+                        parameterCollector.getModelVariantBean(),
+                        serialnumber,
+                        genericName);
+            }
+            catch (Exception e)
+            {
+                SmartHomeLogger.log(e);
+                return new MessageBean(false);
+            }
+        }
+
+        return new MessageBean(parameterCollector.isProceed());
     }
 
     @Override
-    public MessageBean deleteSmartWeatherStation() {
-        return null;
+    public SmartThermometer getSmartThermometer() {
+        return smartThermometer;
     }
 
     @Override
     public MessageBean deleteSmartThermometer() {
-        return null;
+        smartThermometer.detach(this);
+        smartThermometer = EmptyDeviceFactory.getEmptyThermometer();
+
+        //TODO: Alle Objekte in der Observer-Kette müssen voneinander abgemeldet werden
+
+        return new MessageBean(true);
+    }
+
+    @Override
+    public MessageBean createSmartWeatherStation(String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        ParameterCollector parameterCollector = new ParameterCollector(modelVariant, manufacturer, serialnumber);
+        parameterCollector = checkParameters("SmartWeatherstation", parameterCollector);
+
+        if(parameterCollector.isProceed())
+        {
+            try {
+                smartWeatherStation = WeatherStationFactory.createWeatherStation(
+                        parameterCollector.getManufacturerBean(),
+                        parameterCollector.getModelVariantBean(),
+                        serialnumber,
+                        genericName);
+            }
+            catch (Exception e)
+            {
+                SmartHomeLogger.log(e);
+                return new MessageBean(false);
+            }
+        }
+
+        return new MessageBean(parameterCollector.isProceed());
+    }
+
+    @Override
+    public SmartWeatherStation getSmartWeatherStation() {
+        return smartWeatherStation;
+    }
+
+    @Override
+    public MessageBean deleteSmartWeatherStation() {
+        smartWeatherStation.detach(this);
+        smartWeatherStation = EmptyDeviceFactory.getEmptyWeatherStation();
+
+        //TODO: Alle Objekte in der Observer-Kette müssen voneinander abgemeldet werden
+
+        return new MessageBean(true);
     }
 }
