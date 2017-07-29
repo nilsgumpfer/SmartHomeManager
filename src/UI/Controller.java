@@ -1,16 +1,20 @@
 package UI;
 
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.metadata.MetaDataManager;
 import de.thm.smarthome.global.observer.AClockObservable;
 import de.thm.smarthome.global.observer.IClockObserver;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -42,6 +46,8 @@ public class Controller extends AClockObservable {
     private TextField tfHour;
     @FXML
     private TextField tfAmPm;
+    @FXML
+    private TextArea ta_srvlog;
 
     private int hourSet = 0;
     public boolean hourSetManual = false;
@@ -57,6 +63,23 @@ public class Controller extends AClockObservable {
     private List<IClockObserver> attachedClockObservers;
 
     public void BTNServerStarten(ActionEvent event) throws IOException {
+
+        ps = new PrintStream(new OutputStream() {
+
+            @Override
+            public void write(int i) throws IOException {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        ta_srvlog.appendText(String.valueOf((char) i));
+                    }
+                });
+
+
+            }
+        });
+        System.setOut(ps);
+
         if(wsProvider == null){
             wsProvider = new SmartHomeManagerWebServiceProvider();
         }
