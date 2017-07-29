@@ -57,6 +57,7 @@ public class SmartHomeManagerWebServiceProvider
 package de.thm.smarthome.global.connection.wsprovider;
 
 import com.sun.net.httpserver.HttpServer;
+import de.thm.smarthome.global.metadata.MetaDataManager;
 import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -70,22 +71,31 @@ public class SmartHomeManagerWebServiceProvider
 
     public void initServer(){
         if(httpServer == null) {
-            URI baseUri = UriBuilder.fromUri("http://localhost/").port(8080).build();
+            String protocol = "http";
+            String uri = protocol +  "://localhost/";
+            int port = 8080;
+
+            URI baseUri = UriBuilder.fromUri(uri).port(port).build();
             ResourceConfig config = new ResourceConfig();
             config.register(CORSResponseFilter.class);
             config.register(SmartHomeManagerWebServiceDescriptor.class);
             httpServer = JdkHttpServerFactory.createHttpServer(baseUri, config);
+
+            MetaDataManager.setProtocolREST(protocol);
+            MetaDataManager.setPortREST(String.valueOf(port));
         }
     }
 
 
     public void startProviding(){
         initServer();
-        //httpServer.start();
     }
 
     public void stopProviding(){
         httpServer.stop(0);
         httpServer = null;
+
+        MetaDataManager.setProtocolREST("N/A");
+        MetaDataManager.setPortREST("N/A");
     }
 }

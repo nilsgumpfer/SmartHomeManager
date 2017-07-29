@@ -4,6 +4,7 @@ import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.*;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.metadata.MetaDataManager;
 import de.thm.smarthome.global.transfer.*;
 
 /**
@@ -34,7 +35,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public String getServerInfo() {
-        return "Server running.";
+        return MetaDataManager.getStatus() + " @ REST-Url: " + MetaDataManager.getUrlREST();
     }
 
     @Override

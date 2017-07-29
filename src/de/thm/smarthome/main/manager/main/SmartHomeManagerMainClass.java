@@ -2,6 +2,7 @@ package de.thm.smarthome.main.manager.main;
 
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.metadata.MetaDataManager;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -14,6 +15,7 @@ public class SmartHomeManagerMainClass {
         wsProvider.startProviding();
 
         SmartHomeLogger.log("WebServices are up an running..");
+        MetaDataManager.setHostStatus("Server is running");
 
         while(true){
             Thread.sleep(1000);

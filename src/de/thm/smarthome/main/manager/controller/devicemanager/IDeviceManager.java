@@ -48,4 +48,6 @@ public interface IDeviceManager {
     MessageBean createSmartShutter(String modelVariant, String manufacturer, String genericName, String serialnumber);
 
     MessageBean createSmartWeatherStation(String modelVariant, String manufacturer, String genericName, String serialnumber);
+
+    MessageBean createSmartThermometer(String modelVariant, String manufacturer, String genericName, String serialnumber);
 }

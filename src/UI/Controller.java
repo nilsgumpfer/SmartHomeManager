@@ -1,8 +1,9 @@
 package UI;
 
+import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
+import de.thm.smarthome.global.metadata.MetaDataManager;
 import de.thm.smarthome.global.observer.AClockObservable;
 import de.thm.smarthome.global.observer.IClockObserver;
-import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,8 +12,6 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.List;
 
 public class Controller extends AClockObservable {
@@ -96,17 +95,19 @@ public class Controller extends AClockObservable {
     }
 
     public String getServerIP() {
-        InetAddress ip;
-        try {
+        return MetaDataManager.getIpAddress();
+    }
 
-            ip = InetAddress.getLocalHost();
-            return ip.getHostAddress();
+    public String getServerName() {
+        return MetaDataManager.getHostName();
+    }
 
-        } catch (UnknownHostException e) {
+    public String getREST_URL() {
+        return MetaDataManager.getUrlREST();
+    }
 
-            e.printStackTrace();
-            return null;
-        }
+    public String getServerStatus() {
+        return MetaDataManager.getStatus();
     }
 
     public void pressBtnStartReset(ActionEvent event){

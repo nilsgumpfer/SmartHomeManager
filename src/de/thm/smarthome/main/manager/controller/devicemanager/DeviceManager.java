@@ -185,6 +185,11 @@ return smartShutter;
     }
 
     @Override
+    public MessageBean createSmartThermometer(String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
     public MessageBean deleteSmartWeatherStation() {
         return null;
     }
