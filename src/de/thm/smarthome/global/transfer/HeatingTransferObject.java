@@ -1,8 +1,6 @@
 package de.thm.smarthome.global.transfer;
 
 import de.thm.smarthome.global.beans.*;
-import de.thm.smarthome.main.device.heating.device.SmartHeating;
-import de.thm.smarthome.main.device.heating.model.HeatingModel;
 
 /**
  * Created by Nils on 05.02.2017.
@@ -16,22 +14,6 @@ public class HeatingTransferObject {
     String              genericName;
     String              serialnumber;
     PowerStateBean      powerState;
-    MessageBean         message;
-
-    private SmartHeating smartHeating;
-    private HeatingModel heatingModel;
-
-    public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState, MessageBean message) {
-        this.currentTemperature     = currentTemperature;
-        this.desiredTemperature     = desiredTemperature;
-        this.modelVariant           = modelVariant;
-        this.manufacturer           = manufacturer;
-        this.actionMode             = actionMode;
-        this.genericName            = genericName;
-        this.serialnumber           = serialnumber;
-        this.powerState             = powerState;
-        this.message                = message;
-    }
 
     public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
         this.currentTemperature     = currentTemperature;
@@ -107,10 +89,4 @@ public class HeatingTransferObject {
     public void setPowerState(PowerStateBean powerState) {
         this.powerState = powerState;
     }
-
-    public MessageBean getMessage() {
-        return message;
-    }
-
-    public void setMessage(MessageBean message) { this.message = message; }
 }

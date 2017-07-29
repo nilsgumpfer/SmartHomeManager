@@ -192,7 +192,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public WeatherStationTransferObject getWeatherStationData(String requesting_user) {
-        return null;
+        return deviceManager.getSmartWeatherStation().getWeatherStationData();
     }
 
     @Override

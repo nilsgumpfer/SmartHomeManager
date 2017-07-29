@@ -14,31 +14,6 @@ public class ShutterTransferObject {
     ActionModeBean      actionMode;
     String              genericName;
     String              serialnumber;
-    MessageBean         message;
-    boolean             moveComplete;
-
-    public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, MessageBean message, boolean moveComplete) {
-        this.currentPosition    = currentPosition;
-        this.desiredPosition    = desiredPosition;
-        this.modelVariant       = modelVariant;
-        this.manufacturer       = manufacturer;
-        this.actionMode         = actionMode;
-        this.genericName        = genericName;
-        this.serialnumber       = serialnumber;
-        this.message            = message;
-        this.moveComplete       = moveComplete;
-    }
-
-    public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, boolean moveComplete) {
-        this.currentPosition    = currentPosition;
-        this.desiredPosition    = desiredPosition;
-        this.modelVariant       = modelVariant;
-        this.manufacturer       = manufacturer;
-        this.actionMode         = actionMode;
-        this.genericName        = genericName;
-        this.serialnumber       = serialnumber;
-        this.moveComplete       = moveComplete;
-    }
 
     public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.currentPosition    = currentPosition;
@@ -104,23 +79,5 @@ public class ShutterTransferObject {
 
     public void setSerialnumber(String serialnumber) {
         this.serialnumber = serialnumber;
-    }
-
-    public MessageBean getMessage() {
-        return message;
-    }
-
-    public void setMessage(MessageBean message) {
-        this.message = message;
-    }
-
-    public boolean getMoveComplete() {
-        return moveComplete;
-    }
-
-    //TODO: Nils fragen, wieso hier isMoveComplete() war; Absicht?
-
-    public void setMoveComplete(boolean moveComplete) {
-        this.moveComplete = moveComplete;
     }
 }

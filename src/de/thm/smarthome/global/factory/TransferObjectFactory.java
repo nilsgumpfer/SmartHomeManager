@@ -1,7 +1,5 @@
 package de.thm.smarthome.global.factory;
 
-import de.thm.smarthome.global.beans.MessageBean;
-import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.global.transfer.ThermometerTransferObject;
@@ -29,14 +27,6 @@ public class TransferObjectFactory {
                                         );
     }
 
-    public static HeatingTransferObject getHeatingTransferObject(IHeatingModel heatingModel, EMessageCode messageCode)
-    {
-        HeatingTransferObject heatingTransferObject = getHeatingTransferObject(heatingModel);
-        heatingTransferObject.setMessage(new MessageBean(messageCode));
-
-        return heatingTransferObject;
-    }
-
     public static ShutterTransferObject getShutterTransferObject(IShutterModel shutterModel)
     {
         return new ShutterTransferObject(
@@ -50,14 +40,6 @@ public class TransferObjectFactory {
                                         );
     }
 
-    public static ShutterTransferObject getShutterTransferObject(IShutterModel shutterModel, EMessageCode messageCode)
-    {
-        ShutterTransferObject shutterTransferObject = getShutterTransferObject(shutterModel);
-        shutterTransferObject.setMessage(new MessageBean(messageCode));
-
-        return shutterTransferObject;
-    }
-
     public static ThermometerTransferObject getThermometerTransferObject(IThermometerModel thermometerModel){
         return new ThermometerTransferObject(
                                                 thermometerModel.getTemperature(),
@@ -67,14 +49,6 @@ public class TransferObjectFactory {
                                                 thermometerModel.getGenericName(),
                                                 thermometerModel.getSerialnumber()
                                             );
-    }
-
-    public static ThermometerTransferObject getThermometerTransferObject(IThermometerModel thermometerModel, EMessageCode messageCode)
-    {
-        ThermometerTransferObject thermometerTransferObject = getThermometerTransferObject(thermometerModel);
-        thermometerTransferObject.setMessage(new MessageBean(messageCode));
-
-        return thermometerTransferObject;
     }
 
     public static WeatherStationTransferObject getWeatherStationTransferObject(IWeatherStationModel weatherStationModel){
@@ -90,13 +64,5 @@ public class TransferObjectFactory {
                                                     weatherStationModel.getGenericName(),
                                                     weatherStationModel.getSerialnumber()
                                                 );
-    }
-
-    public static WeatherStationTransferObject getWeatherStationTransferObject(IWeatherStationModel weatherStationModel, EMessageCode messageCode)
-    {
-        WeatherStationTransferObject weatherStationTransferObject = getWeatherStationTransferObject(weatherStationModel);
-        weatherStationTransferObject.setMessage(new MessageBean(messageCode));
-
-        return weatherStationTransferObject;
     }
 }

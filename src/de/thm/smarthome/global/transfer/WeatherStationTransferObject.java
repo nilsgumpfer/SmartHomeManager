@@ -17,21 +17,6 @@ public class WeatherStationTransferObject
     private ActionModeBean      actionMode;
     private String              genericName;
     private String              serialnumber;
-    private MessageBean         message;
-
-    public WeatherStationTransferObject(MeasureBean temperature, MeasureBean windVelocity, MeasureBean rainfallAmount, MeasureBean airPressure, MeasureBean airHumidity, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, MessageBean message) {
-        this.temperature    = temperature;
-        this.windVelocity   = windVelocity;
-        this.rainfallAmount = rainfallAmount;
-        this.airPressure    = airPressure;
-        this.airHumidity    = airHumidity;
-        this.modelVariant   = modelVariant;
-        this.manufacturer   = manufacturer;
-        this.actionMode     = actionMode;
-        this.genericName    = genericName;
-        this.serialnumber   = serialnumber;
-        this.message        = message;
-    }
 
     public WeatherStationTransferObject(MeasureBean temperature, MeasureBean windVelocity, MeasureBean rainfallAmount, MeasureBean airPressure, MeasureBean airHumidity, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.temperature    = temperature;
@@ -124,13 +109,5 @@ public class WeatherStationTransferObject
 
     public void setSerialnumber(String serialnumber) {
         this.serialnumber = serialnumber;
-    }
-
-    public MessageBean getMessage() {
-        return message;
-    }
-
-    public void setMessage(MessageBean message) {
-        this.message = message;
     }
 }
