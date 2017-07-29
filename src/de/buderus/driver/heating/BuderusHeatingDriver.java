@@ -101,8 +101,9 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
        }
         catch (RemoteException rex){
            SmartHomeLogger.log(rex);
-        }
-        return new ModelVariantBean(EModelVariant.NA);
+            return new ModelVariantBean(EModelVariant.NA);
+       }
+
     }
 
     public MeasureBean getCurrentTemperature() {

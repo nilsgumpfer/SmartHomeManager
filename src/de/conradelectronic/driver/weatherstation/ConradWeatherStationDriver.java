@@ -81,8 +81,9 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
+            return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
-        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
+
     }
     public MeasureBean getWindVelocity() {
         try {
@@ -90,8 +91,9 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
+            return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
-        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
+
     }
     public MeasureBean getAirHumidity() {
         try {
@@ -99,8 +101,9 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
+            return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
-        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
+
     }
     public MeasureBean getAirPressure() {
         try {
@@ -108,8 +111,9 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
+            return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
-        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
+
     }
     public MeasureBean getRainfallAmount() {
         try {
@@ -117,14 +121,15 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
+            return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
-        return new MeasureBean(0.00, EUnitOfMeasurement.NA);
+
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ConradWeatherStationDriver cwsd = new ConradWeatherStationDriver("123456", "WeatherstationTest");
         System.out.println(cwsd.getAirHumidity().getMeasure_Double() + " " + cwsd.getAirHumidity().getUnitOfMeasurement_String());
 
-    }
+    }*/
 
 }

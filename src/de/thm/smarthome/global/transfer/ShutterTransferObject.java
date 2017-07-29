@@ -7,13 +7,13 @@ import de.thm.smarthome.global.beans.*;
  * * Changed by Jenny on 28.07.2017.
  */
 public class ShutterTransferObject {
-    PositionBean        currentPosition;
-    PositionBean        desiredPosition;
-    ModelVariantBean    modelVariant;
-    ManufacturerBean    manufacturer;
-    ActionModeBean      actionMode;
-    String              genericName;
-    String              serialnumber;
+   private PositionBean        currentPosition;
+   private PositionBean        desiredPosition;
+   private ModelVariantBean    modelVariant;
+   private ManufacturerBean    manufacturer;
+   private ActionModeBean      actionMode;
+   private String              genericName;
+   private String              serialnumber;
 
     public ShutterTransferObject(PositionBean currentPosition, PositionBean desiredPosition, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.currentPosition    = currentPosition;

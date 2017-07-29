@@ -3,6 +3,7 @@ package de.electriccompany.driver.thermometer;
 import ThermometerServer.interfaces.ThermometerClientInterface;
 import ThermometerServer.interfaces.ThermometerServerInterface;
 import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.enumeration.EModelVariant;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.rmi.Naming;
@@ -78,7 +79,7 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
-            return null;
+            return new ModelVariantBean(EModelVariant.NA);
         }
     }
 

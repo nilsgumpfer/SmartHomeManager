@@ -93,8 +93,9 @@ public class ElectricShutterDriver implements ShutterClientInterface {
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
+            return new ModelVariantBean(EModelVariant.NA);
         }
-        return new ModelVariantBean(EModelVariant.NA);
+
     }
 
 

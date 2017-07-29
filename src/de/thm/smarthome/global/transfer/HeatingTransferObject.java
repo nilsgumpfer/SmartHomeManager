@@ -6,14 +6,14 @@ import de.thm.smarthome.global.beans.*;
  * Created by Nils on 05.02.2017.
  */
 public class HeatingTransferObject {
-    MeasureBean         currentTemperature;
-    MeasureBean         desiredTemperature;
-    ModelVariantBean    modelVariant;
-    ManufacturerBean    manufacturer;
-    ActionModeBean      actionMode;
-    String              genericName;
-    String              serialnumber;
-    PowerStateBean      powerState;
+    private MeasureBean         currentTemperature;
+    private MeasureBean         desiredTemperature;
+    private ModelVariantBean    modelVariant;
+    private ManufacturerBean    manufacturer;
+    private ActionModeBean      actionMode;
+    private String              genericName;
+    private String              serialnumber;
+    private PowerStateBean      powerState;
 
     public HeatingTransferObject(MeasureBean currentTemperature, MeasureBean desiredTemperature, ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
         this.currentTemperature     = currentTemperature;

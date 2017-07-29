@@ -6,6 +6,9 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PowerStateBean;
+import de.thm.smarthome.global.enumeration.EModelVariant;
+import de.thm.smarthome.global.enumeration.EPowerState;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.rmi.Naming;
@@ -87,11 +90,11 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
 
     public ModelVariantBean getModelVariant(){
         try {
-            return modelVariant = deviceServer.getModelVariant();
+            return deviceServer.getModelVariant();
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
-            return null;
+            return new ModelVariantBean(EModelVariant.NA);
         }
     }
 
@@ -101,7 +104,7 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
-            return null;
+            return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
     }
 
@@ -111,7 +114,7 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
-            return null;
+            return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
     }
 
@@ -121,7 +124,7 @@ public class ViessmannHeatingDriver implements HeizungClientInterface{
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
-            return null;
+            return new PowerStateBean(EPowerState.NA);
         }
     }
 
