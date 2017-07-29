@@ -96,6 +96,10 @@ public class MetaDataManager {
         return hostStatus;
     }
 
+    public static String getHostInfo(){
+        return getStatus() + " @ REST-Url: " + getUrlREST();
+    }
+
     public static void setHostStatus(String hostStatus) {
         MetaDataManager.hostStatus = hostStatus;
     }

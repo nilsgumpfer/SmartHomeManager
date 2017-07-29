@@ -9,6 +9,6 @@ import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 public class MoveUpCommand extends AMoveCommand {
     public MoveUpCommand(IUpAndDownMovableDevice device) {
         this.device = device;
-        moveDirection = EMoveDirection.Down;
+        moveDirection = EMoveDirection.DOWN;
     }
 }

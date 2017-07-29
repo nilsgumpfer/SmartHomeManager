@@ -2,7 +2,6 @@ package de.thm.smarthome.main.manager.controller.usermanager;
 
 import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.UserGroupBean;
-import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.enumeration.EUserGroup;
 import de.thm.smarthome.global.transfer.UserTransferObject;
 
@@ -53,13 +52,12 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return new ArrayList<>();
-    }
-
-    @Override
     public UserTransferObject[] getAllUserData() {
-        return new UserTransferObject[0];
+        List<UserTransferObject> userTransferObjectList = new ArrayList<>();
+
+        userTransferObjectList.add(getUserData(""));
+
+        return (UserTransferObject[]) userTransferObjectList.toArray();
     }
 
     @Override

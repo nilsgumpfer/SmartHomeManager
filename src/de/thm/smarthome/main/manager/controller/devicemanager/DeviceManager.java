@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Nils on 28.01.2017.
  */
-public class DeviceManager implements IDeviceManager, IObserver{
+public class DeviceManager extends AObservable implements IDeviceManager, IObserver{
     private static DeviceManager ourInstance = new DeviceManager();
     private IEventManager eventManager = EventManager.getInstance();
     private SmartHeating smartHeating;

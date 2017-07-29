@@ -73,12 +73,6 @@ public class CommandManager implements ICommandManager{
     }
 
     @Override
-    public MessageBean addMoveCommand(IUpAndDownMovableDevice upAndDownMovableDevice, PositionBean positionBean) {
-        //TODO: Do it... Command Manager ohnehin nochmal komplett anschauen!
-        return null;
-    }
-
-    @Override
     public MessageBean addMoveUpCommand() {
         MessageBean responseCode;
         try {
@@ -210,5 +204,4 @@ public class CommandManager implements ICommandManager{
             return new MessageBean(false);
         }
     }
-
 }

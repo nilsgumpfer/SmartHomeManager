@@ -14,13 +14,17 @@ public class SmartHomeManagerMainClass {
         SmartHomeManagerWebServiceProvider wsProvider = new SmartHomeManagerWebServiceProvider();
         wsProvider.startProviding();
 
+        MetaDataManager.setSuffixREST("ws");
+
         SmartHomeLogger.log("WebServices are up an running..");
         MetaDataManager.setHostStatus("Server is running");
+
+        SmartHomeLogger.log(MetaDataManager.getHostInfo());
+
+        Thread.sleep(1000);
 
         while(true){
             Thread.sleep(1000);
         }
     }
-
-    public void initSmartHomeManager(){}
 }

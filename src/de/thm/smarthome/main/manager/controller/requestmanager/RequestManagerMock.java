@@ -35,7 +35,7 @@ public class RequestManagerMock implements IServiceFacade {
 
     @Override
     public String getServerInfo() {
-        return MetaDataManager.getStatus() + " @ REST-Url: " + MetaDataManager.getUrlREST();
+        return MetaDataManager.getHostInfo();
     }
 
     @Override

@@ -60,15 +60,9 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return null;
-    }
-
-    @Override
     public UserTransferObject[] getAllUserData() {
         return new UserTransferObject[0];
     }
-
 
     @Override
     public MessageBean deleteUser(String username) {

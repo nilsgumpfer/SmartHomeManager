@@ -7,10 +7,8 @@ import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
  * Created by Nils on 28.01.2017.
  */
 public class MoveDownCommand extends AMoveCommand {
-    private MoveDownCommand(){}
-
     public MoveDownCommand(IUpAndDownMovableDevice device) {
         this.device = device;
-        moveDirection = EMoveDirection.Down;
+        moveDirection = EMoveDirection.DOWN;
     }
 }

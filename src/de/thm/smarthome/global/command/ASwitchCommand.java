@@ -3,8 +3,7 @@ package de.thm.smarthome.global.command;
 import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.PowerStateBean;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
-
-import java.rmi.RemoteException;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 /**
  * Created by Nils on 19.04.2017.
@@ -17,47 +16,55 @@ public abstract class ASwitchCommand implements ICommand {
     protected PowerStateBean powerToDo            = null;
 
     @Override
-    public MessageBean invoke() throws RemoteException{
-        MessageBean responseCode = null;
-
+    public MessageBean invoke(){
         //before new state is set, save old one for possible undo-operation
         oldState = device.currentState();
 
         //check if current status is as expected, do operation
         if(oldState == expectedStatus) {
-            switch(powerToDo.getPowerState_Enum())
+            try
             {
-                case ON:
-                    responseCode = device.switchOn();
-                    break;
-                case OFF:
-                    responseCode = device.switchOff();
-                    break;
+                switch (powerToDo.getPowerState_Enum()) {
+                    case ON:
+                        return device.switchOn();
+                    case OFF:
+                        return device.switchOff();
+                    default:
+                        return new MessageBean(false);
+                }
+            }
+            catch (Exception e)
+            {
+                SmartHomeLogger.log(e);
+                return new MessageBean(false);
             }
         }
         else
-            responseCode = new MessageBean(false);
-
-        return responseCode;
+            return new MessageBean(false);
     }
 
     @Override
-    public MessageBean undo() throws RemoteException{
-        MessageBean responseCode = null;
-
+    public MessageBean undo(){
         //check if current status is as expected, do operation
         if(oldState == requiredStatus) {
-            switch(powerToDo.getPowerState_Enum())
+            try
             {
-                case ON:
-                    responseCode = device.switchOff();
-                    break;
-                case OFF:
-                    responseCode = device.switchOn();
-                    break;
+                switch (powerToDo.getPowerState_Enum()) {
+                    case ON:
+                        return device.switchOff();
+                    case OFF:
+                        return device.switchOn();
+                    default:
+                        return new MessageBean(false);
+                }
+            }
+            catch (Exception e)
+            {
+                SmartHomeLogger.log(e);
+                return new MessageBean(false);
             }
         }
-
-        return responseCode;
+        else
+            return new MessageBean(false);
     }
 }

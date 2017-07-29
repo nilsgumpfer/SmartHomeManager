@@ -1,10 +1,7 @@
 package de.thm.smarthome.main.manager.controller.usermanager;
 
 import de.thm.smarthome.global.beans.MessageBean;
-import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.transfer.UserTransferObject;
-
-import java.util.List;
 
 /**
  * Created by Nils on 01.02.2017.
@@ -23,8 +20,6 @@ public interface IUserManager {
     MessageBean createUser(String username, String password, String firstname, String lastname, String email);
 
     UserTransferObject getUserData(String username);
-
-    List<User> getAllUsers();
 
     UserTransferObject[] getAllUserData();
 }

@@ -39,7 +39,7 @@ public class RequestManager implements IServiceFacade {
 
     @Override
     public String getServerInfo() {
-        return MetaDataManager.getStatus() + " @ REST-Url: " + MetaDataManager.getUrlREST();
+        return MetaDataManager.getHostInfo();
     }
 
     @Override
@@ -160,7 +160,7 @@ public class RequestManager implements IServiceFacade {
             try
             {
                 PositionBean positionBean = new PositionBean(Integer.parseInt(position));
-                return commandManager.addMoveCommand(deviceManager.getSmartShutter(serialnumber), positionBean);
+                return commandManager.addSetPositionCommand(deviceManager.getSmartShutter(serialnumber), positionBean);
             }
             catch (Exception e)
             {
