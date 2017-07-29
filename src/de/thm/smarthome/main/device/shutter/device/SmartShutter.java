@@ -1,6 +1,8 @@
 package de.thm.smarthome.main.device.shutter.device;
 
 import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EPosition;
+import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ShutterTransferObject;
@@ -14,7 +16,7 @@ import de.thm.smarthome.main.device.shutter.model.IShutterModel;
  * Created by Nils on 27.01.2017.
  * Changed by Jenny on 28.07.2017.
  */
-public class SmartShutter extends AObservable implements IObserver{
+public class SmartShutter extends AObservable implements IObserver, IUpAndDownMovableDevice{
     private IShutterLogic logic;
 
     public SmartShutter(IShutterLogic logic) {
@@ -79,5 +81,41 @@ public class SmartShutter extends AObservable implements IObserver{
             case NA:
                 break;
         }
+    }
+
+    @Override
+    public MessageBean moveDown() {
+        return setDesiredPosition(new PositionBean(EPosition.P0_DOWN));
+    }
+
+    @Override
+    public MessageBean moveUp() {
+        return setDesiredPosition(new PositionBean(EPosition.P5_UP));
+    }
+
+    @Override
+    public PositionBean getPosition() {
+        return getCurrentPosition();
+    }
+
+    @Override
+    public MessageBean setPosition(PositionBean position) {
+        return setDesiredPosition(position);
+    }
+
+    @Override
+    public boolean isUp() {
+        if(getCurrentPosition().getPosition_Enum() == EPosition.P5_UP)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public boolean isDown() {
+        if(getCurrentPosition().getPosition_Enum() == EPosition.P0_DOWN)
+            return true;
+        else
+            return false;
     }
 }

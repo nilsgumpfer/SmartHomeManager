@@ -25,8 +25,8 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public MessageBean login(String username){
-        return userdao.logUserIn(username);
+    public MessageBean login(String username, String password){
+        return userdao.logUserIn(username, password);
     }
 
     @Override
@@ -40,16 +40,6 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public MessageBean login(UserTransferObject userTransferObject) {
-        return login(userTransferObject.getUsername());
-    }
-
-    @Override
-    public MessageBean logout(UserTransferObject userTransferObject) {
-        return logout(userTransferObject.getUsername());
-    }
-
-    @Override
     public boolean isLoggedIn(String username){
         switch(userdao.isUserloggedIn(username).getMessageCode_Enum()){
             case LOGGEDIN:
@@ -60,17 +50,12 @@ public class UserManager implements IUserManager{
     }
 
     @Override
-    public boolean isLoggedOut(String username){
-        return !isLoggedIn(username);
-    }
-
-    @Override
-    public MessageBean createUser(UserTransferObject userTransferObject) {
+    public MessageBean createUser(String username, String password, String firstname, String lastname, String email) {
         return null;
     }
 
     @Override
-    public UserTransferObject getUserData(UserTransferObject userTransferObject) {
+    public UserTransferObject getUserData(String username) {
         return null;
     }
 
@@ -84,13 +69,14 @@ public class UserManager implements IUserManager{
         return new UserTransferObject[0];
     }
 
+
     @Override
-    public MessageBean deleteUser(UserTransferObject userTransferObject) {
+    public MessageBean deleteUser(String username) {
         return null;
     }
 
     @Override
-    public MessageBean alterUser(UserTransferObject userTransferObject) {
+    public MessageBean alterUser(String username, String password, String firstname, String lastname, String email) {
         return null;
     }
 }

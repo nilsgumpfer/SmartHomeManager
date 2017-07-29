@@ -170,6 +170,21 @@ return smartShutter;
     }
 
     @Override
+    public MessageBean createSmartHeating(String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean createSmartShutter(String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
+    public MessageBean createSmartWeatherStation(String modelVariant, String manufacturer, String genericName, String serialnumber) {
+        return null;
+    }
+
+    @Override
     public MessageBean deleteSmartWeatherStation() {
         return null;
     }

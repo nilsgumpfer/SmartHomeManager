@@ -2,6 +2,9 @@ package de.thm.smarthome.main.device.heating.device;
 
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EActionMode;
+import de.thm.smarthome.global.enumeration.EPowerState;
+import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
+import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -13,7 +16,7 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 /**
  * Created by Nils on 27.01.2017.
  */
- public class SmartHeating extends AObservable implements IObserver {
+ public class SmartHeating extends AObservable implements IObserver, IOnAndOffSwitchableDevice, ITemperatureRelevantDevice {
     private IHeatingLogic logic;
 
     public SmartHeating(IHeatingLogic logic) {
@@ -59,11 +62,11 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
         return logic.getSerialnumber();
     }
 
-    public MessageBean setDesiredTemperature(MeasureBean temperature) {
+    private MessageBean setDesiredTemperature(MeasureBean temperature) {
         return logic.setDesiredTemperature(temperature);
     }
 
-    public MessageBean setPowerState(PowerStateBean powerState) {
+    private MessageBean setPowerState(PowerStateBean powerState) {
         return logic.setPowerState(powerState);
     }
 
@@ -112,5 +115,30 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
         oldLogic.detach(this);
         newLogic.attach(this);
         oldLogic.getModel().detach((IObserver) oldLogic);
+    }
+
+    @Override
+    public MessageBean switchOn() {
+        return setPowerState(new PowerStateBean(EPowerState.ON));
+    }
+
+    @Override
+    public MessageBean switchOff() {
+        return setPowerState(new PowerStateBean(EPowerState.OFF));
+    }
+
+    @Override
+    public PowerStateBean currentState() {
+        return getPowerState();
+    }
+
+    @Override
+    public MessageBean setTemperature(MeasureBean temperature) {
+        return setDesiredTemperature(temperature);
+    }
+
+    @Override
+    public MeasureBean getTemperature() {
+        return getDesiredTemperature();
     }
 }

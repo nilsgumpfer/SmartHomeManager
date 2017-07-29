@@ -42,4 +42,10 @@ public interface IDeviceManager {
     MessageBean deleteSmartWeatherStation();
 
     List<SmartShutter> getSmartShutters();
+
+    MessageBean createSmartHeating(String modelVariant, String manufacturer, String genericName, String serialnumber);
+
+    MessageBean createSmartShutter(String modelVariant, String manufacturer, String genericName, String serialnumber);
+
+    MessageBean createSmartWeatherStation(String modelVariant, String manufacturer, String genericName, String serialnumber);
 }

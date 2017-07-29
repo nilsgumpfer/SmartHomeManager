@@ -95,7 +95,7 @@ public void BenutzerSuchennachBenutzername(String benutzername){
         return logUserIn(user.getUsername());
     }*/
 
-    public MessageBean logUserIn(String username){
+    public MessageBean logUserIn(String username, String password){
 
         if(emf == null || em == null){
                createEntityManager();

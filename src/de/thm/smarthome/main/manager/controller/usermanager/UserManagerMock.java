@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.manager.controller.usermanager;
 
 import de.thm.smarthome.global.beans.MessageBean;
+import de.thm.smarthome.global.beans.UserGroupBean;
 import de.thm.smarthome.global.connection.database.user.User;
 import de.thm.smarthome.global.enumeration.EUserGroup;
 import de.thm.smarthome.global.transfer.UserTransferObject;
@@ -22,7 +23,7 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public MessageBean login(String username){
+    public MessageBean login(String username, String password){
         return new MessageBean(true);
     }
 
@@ -37,33 +38,18 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public MessageBean login(UserTransferObject userTransferObject) {
-        return login(userTransferObject.getUsername());
-    }
-
-    @Override
-    public MessageBean logout(UserTransferObject userTransferObject) {
-        return logout(userTransferObject.getUsername());
-    }
-
-    @Override
     public boolean isLoggedIn(String username){
         return true;
     }
 
     @Override
-    public boolean isLoggedOut(String username){
-        return true;
-    }
-
-    @Override
-    public MessageBean createUser(UserTransferObject userTransferObject) {
+    public MessageBean createUser(String username, String password, String firstname, String lastname, String email) {
         return new MessageBean(true);
     }
 
     @Override
-    public UserTransferObject getUserData(UserTransferObject userTransferObject) {
-        return new UserTransferObject("username", "password", "firstname", "lastname", "eMail" , EUserGroup.Administrator);
+    public UserTransferObject getUserData(String username) {
+        return new UserTransferObject("_username_", "_password_", "_firstname_", "_lastname_", "_eMail_" , new UserGroupBean(EUserGroup.ADMINISTRATOR));
     }
 
     @Override
@@ -77,12 +63,12 @@ public class UserManagerMock implements IUserManager{
     }
 
     @Override
-    public MessageBean deleteUser(UserTransferObject userTransferObject) {
+    public MessageBean deleteUser(String username) {
         return new MessageBean(true);
     }
 
     @Override
-    public MessageBean alterUser(UserTransferObject userTransferObject) {
+    public MessageBean alterUser(String username, String password, String firstname, String lastname, String email) {
         return new MessageBean(true);
     }
 }

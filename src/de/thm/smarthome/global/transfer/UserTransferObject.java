@@ -1,7 +1,7 @@
 package de.thm.smarthome.global.transfer;
 
+import de.thm.smarthome.global.beans.UserGroupBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
-import de.thm.smarthome.global.enumeration.EUserGroup;
 
 /**
  * Created by Nils on 05.02.2017.
@@ -14,9 +14,9 @@ public class UserTransferObject {
     private String firstname;
     private String lastname;
     private String eMail;
-    private EUserGroup userGroup;
+    private UserGroupBean userGroup;
 
-    public UserTransferObject(String username, String password, String firstname, String lastname, String eMail, EUserGroup userGroup) {
+    public UserTransferObject(String username, String password, String firstname, String lastname, String eMail, UserGroupBean userGroup) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -86,16 +86,11 @@ public class UserTransferObject {
         this.eMail = eMail;
     }
 
-    public EUserGroup getUserGroup() {
+    public UserGroupBean getUserGroup() {
         return userGroup;
     }
 
-    public void setUserGroup(EUserGroup userGroup) {
+    public void setUserGroup(UserGroupBean userGroup) {
         this.userGroup = userGroup;
-    }
-
-    @Override
-    public String toString(){
-        return "user: " + username + " name: " + lastname + " firstn: " + firstname + " pw: " + password + " email: " + eMail + " ugrp: " + userGroup + " resp: " + responseCode + " : " + message;
     }
 }

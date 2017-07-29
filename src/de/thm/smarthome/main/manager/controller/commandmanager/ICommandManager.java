@@ -16,6 +16,7 @@ public interface ICommandManager {
 
     MessageBean addSetTemperatureCommand(ITemperatureRelevantDevice temperatureRelevantDevice, MeasureBean temperature);
 
+    MessageBean addMoveCommand(IUpAndDownMovableDevice upAndDownMovableDevice, PositionBean positionBean);
     MessageBean addMoveUpCommand();
     MessageBean addMoveDownCommand();
     MessageBean addMoveUpCommand(IUpAndDownMovableDevice upAndDownMovableDevice);
