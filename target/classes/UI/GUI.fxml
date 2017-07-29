@@ -17,8 +17,8 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label layoutX="419.0" layoutY="38.0" text="Servername:" />
-        <Label id="lbl_Servername" fx:id="lbl_Servername" layoutX="519.0" layoutY="38.0" text="-" />
+        <Label layoutX="417.0" layoutY="27.0" text="Servername:" />
+        <Label id="lbl_Servername" fx:id="lbl_Servername" layoutX="517.0" layoutY="27.0" text="-" />
         <TabPane layoutX="5.0" layoutY="100.0" prefHeight="200.0" prefWidth="583.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Server">
@@ -64,11 +64,13 @@
                 <Label id="lbl_srvmsg" fx:id="lbl_srvmsg" layoutX="1.0" layoutY="6.0" prefHeight="17.0" prefWidth="200.0" text="-" />
             </children>
         </Pane>
-        <Label layoutX="419.0" layoutY="55.0" text="Serverport:" />
-        <Label layoutX="419.0" layoutY="23.0" text="ServerIP:" />
-        <Label id="lbl_Serverport" fx:id="lbl_Serverport" layoutX="521.0" layoutY="55.0" text="-" />
-        <Label id="lbl_Serverip" fx:id="lbl_Serverip" layoutX="519.0" layoutY="23.0" text="-" />
-        <Label layoutX="419.0" layoutY="71.0" text="Serverstatus:" />
-        <Label id="lbl_Serverstatus" fx:id="lbl_Serverstatus" layoutX="521.0" layoutY="71.0" text="-" />
+        <Label layoutX="417.0" layoutY="44.0" text="Serverport:" />
+        <Label layoutX="417.0" layoutY="12.0" text="ServerIP:" />
+        <Label id="lbl_Serverport" fx:id="lbl_Serverport" layoutX="519.0" layoutY="44.0" text="-" />
+        <Label id="lbl_Serverip" fx:id="lbl_Serverip" layoutX="517.0" layoutY="12.0" text="-" />
+        <Label layoutX="417.0" layoutY="60.0" text="Serverstatus:" />
+        <Label id="lbl_Serverstatus" fx:id="lbl_Serverstatus" layoutX="519.0" layoutY="60.0" text="-" />
+      <Label layoutX="417.0" layoutY="77.0" text="REST URL:" />
+      <Label id="lbl_Serverstatus" fx:id="lbl_RestURL" layoutX="519.0" layoutY="77.0" text="-" />
     </children>
 </Pane>

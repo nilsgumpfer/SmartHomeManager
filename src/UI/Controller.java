@@ -31,6 +31,8 @@ public class Controller extends AClockObservable {
     @FXML
     private Label lbl_srvmsg;
     @FXML
+    private Label lbl_RestURL;
+    @FXML
     private Button btn_starteServer;
     @FXML
     private Button btn_stoppeServer;
@@ -95,9 +97,12 @@ public class Controller extends AClockObservable {
         /*Server wird gestartet*/
 
         wsProvider.startProviding();
+        lbl_Servername.setText(getServerName());
+        lbl_RestURL.setText(getREST_URL());
         lbl_Serverip.setText(getServerIP());
         //lbl_Servername.setText(shutter1.shuttername);
-        lbl_Serverstatus.setText("Gestartet");
+        MetaDataManager.setHostStatus("Gestartet");
+        lbl_Serverstatus.setText(getServerStatus());
 
         lbl_Serverport.setText("8080");
 
@@ -109,7 +114,8 @@ public class Controller extends AClockObservable {
 
     public void BTNServerStoppen(ActionEvent event){
         wsProvider.stopProviding();
-        lbl_Serverstatus.setText("Gestoppt");
+        MetaDataManager.setHostStatus("Gestoppt");
+        lbl_Serverstatus.setText(getServerStatus());
 
         if (lbl_Serverstatus.getText() == "Gestoppt"){
             btn_stoppeServer.setDisable(true);
