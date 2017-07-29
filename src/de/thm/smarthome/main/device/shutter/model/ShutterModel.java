@@ -7,7 +7,6 @@ import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -24,8 +23,6 @@ public class ShutterModel extends AObservable implements IShutterModel, IObserve
     /*private*/ String genericName;
     /*private*/ String serialnumber;
 
-    IShutter device;
-
     public ShutterModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.modelVariant = modelVariant;
         this.manufacturer = manufacturer;
@@ -33,8 +30,6 @@ public class ShutterModel extends AObservable implements IShutterModel, IObserve
         this.genericName = genericName;
         this.serialnumber = serialnumber;
     }
-
-    //Setter-Methoden//
 
     @Override
     public void setCurrentPosition(PositionBean currentPosition) {
@@ -71,8 +66,6 @@ public class ShutterModel extends AObservable implements IShutterModel, IObserve
         this.serialnumber = serialnumber;
     }
 
-
-    //Getter-Methoden//
     @Override
     public PositionBean getCurrentPosition() { return currentPosition; }
 
@@ -98,14 +91,10 @@ public class ShutterModel extends AObservable implements IShutterModel, IObserve
         return serialnumber;
     }
 
-    //*Observer Pattern
-    // Die Getter-/Setter-Methoden sind also lediglich zum Abgleich, ob sich Info verändert hat (aber nicht wie).
-
     @Override
     public void update (AObservable o, Object change)
     {
-
-    };
-
-
+        SmartHomeLogger.log("ShutterModel: Detected a change! [" + o.toString() + "]");
+        //TODO: Observer-Pattern
+    }
 }

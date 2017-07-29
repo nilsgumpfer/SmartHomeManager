@@ -6,6 +6,7 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
@@ -24,6 +25,7 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        SmartHomeLogger.log("ConradWeatherStationAdapter: Detected a change! [" + o.toString() + "]");
     }
 
     @Override

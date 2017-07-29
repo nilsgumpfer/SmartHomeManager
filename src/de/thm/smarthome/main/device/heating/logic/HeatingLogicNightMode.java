@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.heating.logic;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -94,6 +95,7 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("HeatingLogicNightMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 }

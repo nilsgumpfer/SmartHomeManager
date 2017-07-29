@@ -1,10 +1,12 @@
 package de.thm.smarthome.main.device.thermometer.model;
 
-import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.beans.ActionModeBean;
+import de.thm.smarthome.global.beans.ManufacturerBean;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
-import de.thm.smarthome.main.device.thermometer.adapter.IndoorThermometerAdapter;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -17,7 +19,6 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
     private ActionModeBean      actionMode;
     private String              genericName;
     private String              serialnumber;
-    private IThermometer        device;
 
     public ThermometerModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.modelVariant = modelVariant;
@@ -89,6 +90,7 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
 
     @Override
     public void update(AObservable o, Object change) {
-
+        //TODO: Observer-Pattern
+        SmartHomeLogger.log("ThermometerModel: Detected a change! [" + o.toString() + "]");
     }
 }

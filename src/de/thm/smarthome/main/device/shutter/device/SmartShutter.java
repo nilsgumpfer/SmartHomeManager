@@ -4,6 +4,7 @@ import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EPosition;
 import de.thm.smarthome.global.interfaces.IPositionRelevantDevice;
 import de.thm.smarthome.global.interfaces.IUpAndDownMovableDevice;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ShutterTransferObject;
@@ -27,7 +28,7 @@ public class SmartShutter extends AObservable implements IObserver, IUpAndDownMo
 
     @Override
     public void update(AObservable o, Object change) {
-        //TODO: Observer-Pattern
+        SmartHomeLogger.log("SmartShutter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
         //TODO: Check if Logic-Change is necessary!
     }

@@ -30,6 +30,7 @@ public class WeatherStationLogicAngloAmerican extends AObservable implements IWe
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        SmartHomeLogger.log("WeatherStationLogicAngloAmerican: Detected a change! [" + o.toString() + "]");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package de.thm.smarthome.main.manager.controller.eventmanager;
 
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 
 /**
@@ -16,6 +17,6 @@ public class EventManager implements IEventManager {
 
     @Override
     public void update(AObservable o, Object change) {
-
+        SmartHomeLogger.log("EventManager: Detected a change! [" + o.toString() + "]");
     }
 }

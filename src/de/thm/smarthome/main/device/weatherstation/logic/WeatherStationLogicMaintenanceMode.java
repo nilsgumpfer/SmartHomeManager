@@ -6,6 +6,7 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.WeatherStationTransferObject;
@@ -29,6 +30,7 @@ public class WeatherStationLogicMaintenanceMode extends AObservable implements I
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        SmartHomeLogger.log("WeatherStationLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
     }
 
     @Override

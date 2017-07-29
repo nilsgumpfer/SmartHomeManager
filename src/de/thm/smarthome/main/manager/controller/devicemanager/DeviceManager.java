@@ -36,6 +36,7 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("DeviceManager: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 
@@ -83,6 +84,8 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                         parameterCollector.getModelVariantBean().getModelVariant_Enum(),
                         serialnumber,
                         genericName);
+
+                smartHeating.attach(this);
             }
             catch (Exception e)
             {
@@ -117,14 +120,15 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
         if(parameterCollector.isProceed())
         {
             try {
-                smartShutters.add(
-                        ShutterFactory.createShutter(
-                                parameterCollector.getManufacturerBean(),
-                                parameterCollector.getModelVariantBean(),
-                                genericName,
-                                serialnumber
-                        )
-                );
+                SmartShutter smartShutter = ShutterFactory.createShutter(
+                                                    parameterCollector.getManufacturerBean(),
+                                                    parameterCollector.getModelVariantBean(),
+                                                    genericName,
+                                                    serialnumber
+                                            );
+
+                smartShutters.add(smartShutter);
+                smartShutter.attach(this);
             }
             catch (Exception e)
             {
@@ -170,6 +174,8 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                         parameterCollector.getModelVariantBean(),
                         serialnumber,
                         genericName);
+
+                smartThermometer.attach(this);
             }
             catch (Exception e)
             {
@@ -209,6 +215,8 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                         parameterCollector.getModelVariantBean(),
                         serialnumber,
                         genericName);
+
+                smartWeatherStation.attach(this);
             }
             catch (Exception e)
             {

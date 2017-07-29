@@ -5,6 +5,7 @@ import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.enumeration.EModelVariant;
 import de.thm.smarthome.global.enumeration.EPowerState;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
@@ -20,6 +21,7 @@ public class MockedHeatingAdapter extends AObservable implements IHeating, IObse
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("MockedHeatingAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 

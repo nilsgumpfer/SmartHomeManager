@@ -10,7 +10,6 @@ import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ThermometerTransferObject;
-import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 
@@ -31,6 +30,7 @@ public class ThermometerLogicCelsius extends AObservable implements IThermometer
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        SmartHomeLogger.log("ThermometerLogicCelsius: Detected a change! [" + o.toString() + "]");
     }
 
     @Override

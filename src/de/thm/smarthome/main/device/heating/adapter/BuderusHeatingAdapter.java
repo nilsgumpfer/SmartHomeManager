@@ -3,6 +3,7 @@ package de.thm.smarthome.main.device.heating.adapter;
 import de.buderus.driver.heating.BuderusHeatingDriver;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
@@ -24,6 +25,7 @@ public class BuderusHeatingAdapter extends AObservable implements IHeating, IObs
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("BuderusHeatingAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 

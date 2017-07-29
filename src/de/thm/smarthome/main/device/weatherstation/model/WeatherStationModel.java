@@ -4,9 +4,9 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.main.device.weatherstation.adapter.ConradWeatherStationAdapter;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -135,5 +135,6 @@ public class WeatherStationModel extends AObservable implements IWeatherStationM
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        SmartHomeLogger.log("WeatherStationModel: Detected a change! [" + o.toString() + "]");
     }
 }

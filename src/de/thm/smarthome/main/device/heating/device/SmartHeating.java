@@ -5,6 +5,7 @@ import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.enumeration.EPowerState;
 import de.thm.smarthome.global.interfaces.IOnAndOffSwitchableDevice;
 import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -26,6 +27,7 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("SmartHeating: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
         //TODO: Check if Logic-Change is necessary!
     }

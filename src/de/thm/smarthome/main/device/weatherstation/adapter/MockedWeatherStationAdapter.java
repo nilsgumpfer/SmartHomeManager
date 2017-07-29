@@ -6,6 +6,7 @@ import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.enumeration.EModelVariant;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
@@ -18,6 +19,8 @@ public class MockedWeatherStationAdapter extends AObservable implements IWeather
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("MockedWeatherStationAdapter: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override

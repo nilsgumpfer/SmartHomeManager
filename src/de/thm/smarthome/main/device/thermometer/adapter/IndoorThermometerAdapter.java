@@ -6,10 +6,9 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-
-import java.rmi.RemoteException;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -25,6 +24,7 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("IndoorThermometerAdapter: Detected a change! [" + o.toString() + "]");
         //TODO: Observer-Pattern
     }
 
@@ -41,6 +41,5 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
     @Override
     public MeasureBean getTemperature() {
         return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
-        //return null;
     }
 }

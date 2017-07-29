@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.heating.model;
 
 import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.main.device.heating.adapter.IHeating;
@@ -42,7 +43,6 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
     @Override
     public MeasureBean getDesiredTemperature() {
         return desiredTemperature;
-
     }
 
     @Override
@@ -116,6 +116,7 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("HeatingModel: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
 
         powerState          = device.getPowerState();

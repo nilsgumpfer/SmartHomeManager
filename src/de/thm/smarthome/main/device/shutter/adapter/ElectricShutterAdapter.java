@@ -6,6 +6,7 @@ import de.thm.smarthome.global.beans.MessageBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
@@ -23,9 +24,10 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("ElectricShutterAdapter: Detected a change! [" + o.toString() + "]");
         //TODO: Observer-Pattern
     }
-    /*getter-Methoden*/
+
     @Override
     public PositionBean getCurrentPosition() { return driver.getCurrentPosition(); }
 
@@ -40,11 +42,10 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
         return manufacturer;
     }
 
-    /*setter-Methoden*/
     @Override
     public MessageBean setDesiredPosition(PositionBean desiredPosition) {
         return driver.setDesiredPosition(desiredPosition);
     }
-    }
+}
 
 

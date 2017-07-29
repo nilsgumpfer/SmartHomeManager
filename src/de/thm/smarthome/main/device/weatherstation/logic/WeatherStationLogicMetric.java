@@ -30,6 +30,7 @@ public class WeatherStationLogicMetric extends AObservable implements IWeatherSt
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        SmartHomeLogger.log("WeatherStationLogicMetric: Detected a change! [" + o.toString() + "]");
     }
 
     @Override

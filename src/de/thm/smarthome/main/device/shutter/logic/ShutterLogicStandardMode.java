@@ -3,12 +3,12 @@ package de.thm.smarthome.main.device.shutter.logic;
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ShutterTransferObject;
 import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 import de.thm.smarthome.main.device.shutter.model.IShutterModel;
-import de.thm.smarthome.main.device.shutter.model.ShutterModel;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -27,13 +27,11 @@ public class ShutterLogicStandardMode extends AObservable implements IShutterLog
         this.model.setActionMode(new ActionModeBean(EActionMode.STANDARDMODE));
     }
 
-    //Setter-Methoden//
     @Override
     public MessageBean setDesiredPosition(PositionBean desiredPosition) {
         return device.setDesiredPosition(desiredPosition);
     }
 
-    //Getter-Methoden//
     @Override
     public PositionBean getCurrentPosition() {
         return model.getCurrentPosition();
@@ -86,6 +84,7 @@ public class ShutterLogicStandardMode extends AObservable implements IShutterLog
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("HeatingLogicStandardMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 

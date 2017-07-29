@@ -6,11 +6,11 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.ThermometerTransferObject;
 import de.thm.smarthome.main.device.thermometer.adapter.IThermometer;
-import de.thm.smarthome.main.device.thermometer.logic.IThermometerLogic;
 import de.thm.smarthome.main.device.thermometer.model.IThermometerModel;
 
 /**
@@ -20,7 +20,7 @@ public class ThermometerLogicMaintenanceMode extends AObservable implements IThe
 {
     private IThermometerModel   model;
     private IThermometer        device;
-    private ActionModeBean actionModeBean = new ActionModeBean(EActionMode.CELSIUS);
+    private ActionModeBean      actionModeBean = new ActionModeBean(EActionMode.MAINTENANCEMODE);
 
     public ThermometerLogicMaintenanceMode(IThermometerModel model, IThermometer adapter) {
         this.model  = model;
@@ -30,6 +30,7 @@ public class ThermometerLogicMaintenanceMode extends AObservable implements IThe
     @Override
     public void update(AObservable o, Object change) {
         //TODO: Observer-Pattern
+        SmartHomeLogger.log("ThermometerLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
     }
 
     @Override

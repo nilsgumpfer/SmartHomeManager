@@ -7,6 +7,7 @@ import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.enumeration.EModelVariant;
 import de.thm.smarthome.global.enumeration.EPosition;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
@@ -19,6 +20,8 @@ public class MockedShutterAdapter extends AObservable implements IShutter, IObse
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("MockedShutterAdapter: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override

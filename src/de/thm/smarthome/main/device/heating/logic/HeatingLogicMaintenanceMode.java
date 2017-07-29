@@ -5,6 +5,7 @@ import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.factory.TransferObjectFactory;
+import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
@@ -95,6 +96,7 @@ public class HeatingLogicMaintenanceMode extends AObservable implements IHeating
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("HeatingLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 }
