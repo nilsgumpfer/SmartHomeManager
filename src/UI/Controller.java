@@ -1,10 +1,10 @@
 package UI;
 
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
-import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.metadata.MetaDataManager;
 import de.thm.smarthome.global.observer.AClockObservable;
 import de.thm.smarthome.global.observer.IClockObserver;
+import de.thm.smarthome.main.manager.main.SmartHomeManagerMainClass;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -82,9 +82,10 @@ public class Controller extends AClockObservable {
         });
         System.setOut(ps);
 
+        /*
         if(wsProvider == null){
             wsProvider = new SmartHomeManagerWebServiceProvider();
-        }
+        }*/
 
         /*ps = new PrintStream(new OutputStream() {
             @Override
@@ -96,15 +97,18 @@ public class Controller extends AClockObservable {
 
         /*Server wird gestartet*/
 
-        wsProvider.startProviding();
+        //wsProvider.startProviding();
+
+        SmartHomeManagerMainClass.startSmartHomeServer();
+
         lbl_Servername.setText(getServerName());
         lbl_RestURL.setText(getREST_URL());
         lbl_Serverip.setText(getServerIP());
-        //lbl_Servername.setText(shutter1.shuttername);
+
         MetaDataManager.setHostStatus("Gestartet");
         lbl_Serverstatus.setText(getServerStatus());
 
-        lbl_Serverport.setText("8080");
+        lbl_Serverport.setText(getREST_Port());
 
         if(lbl_Serverstatus.getText() == "Gestartet"){
             btn_starteServer.setDisable(true);
@@ -113,7 +117,10 @@ public class Controller extends AClockObservable {
     }
 
     public void BTNServerStoppen(ActionEvent event){
-        wsProvider.stopProviding();
+        //wsProvider.stopProviding();
+
+        SmartHomeManagerMainClass.stopSmartHomeServer();
+
         MetaDataManager.setHostStatus("Gestoppt");
         lbl_Serverstatus.setText(getServerStatus());
 
@@ -133,6 +140,10 @@ public class Controller extends AClockObservable {
 
     public String getREST_URL() {
         return MetaDataManager.getUrlREST();
+    }
+
+    public String getREST_Port() {
+        return MetaDataManager.getPortREST();
     }
 
     public String getServerStatus() {
