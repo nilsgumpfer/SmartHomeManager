@@ -143,7 +143,7 @@ public class EventManager implements IEventManager {
     private void doFancyStuff(){
         String heatingName = "MyHeating";
 
-        SmartHomeLogger.log("Reasoner consistency check: " + reasoner.isConsistent());
+        //SmartHomeLogger.log("Reasoner consistency check: " + reasoner.isConsistent());
 
 
         OWLNamedIndividual heatingIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, heatingName));
@@ -197,18 +197,18 @@ public class EventManager implements IEventManager {
         List<OWLNamedIndividual> namedIndividualList = namedIndividualStream.collect(Collectors.toList());
         List<OWLLiteral> literalList = literalStream.collect(Collectors.toList());
 
-        SmartHomeLogger.log("ObjectProperties:");
+        //SmartHomeLogger.log("ObjectProperties:");
 
         for (OWLNamedIndividual namedIndividual : namedIndividualList)
         {
-            SmartHomeLogger.log(namedIndividual.toString());
+            //SmartHomeLogger.log(namedIndividual.toString());
         }
 
-        SmartHomeLogger.log("DataProperties:");
+        //SmartHomeLogger.log("DataProperties:");
 
         for (OWLLiteral literal : literalList)
         {
-            SmartHomeLogger.log(literal.toString());
+            //SmartHomeLogger.log(literal.toString());
         }
 
 /*

@@ -10,6 +10,7 @@ import de.thm.smarthome.global.helper.ParameterCollector;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
@@ -23,7 +24,8 @@ import java.util.List;
  */
 public class DeviceManager extends AObservable implements IDeviceManager, IObserver{
     private static DeviceManager    ourInstance             = new DeviceManager();
-    private SmartHeating            smartHeating            = EmptyDeviceFactory.getEmptyHeating();
+    //private SmartHeating            smartHeating            = EmptyDeviceFactory.getEmptyHeating();
+    private SmartHeating            smartHeating            = HeatingFactory.createHeating(EDeviceManufacturer.BUDERUS, EModelVariant.HEATING_1000, "443k4o34ko3", "Heating");
     private SmartWeatherStation     smartWeatherStation     = EmptyDeviceFactory.getEmptyWeatherStation();
     private SmartThermometer        smartThermometer        = EmptyDeviceFactory.getEmptyThermometer();
     private List<SmartShutter>      smartShutters           = new ArrayList<>();

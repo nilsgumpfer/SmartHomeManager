@@ -1,12 +1,14 @@
 package de.thm.smarthome.global.observer;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Nils on 28.01.2017.
  */
 public abstract class AObservable {
-    private List<IObserver> attachedObservers;
+    private List<IObserver> attachedObservers = new ArrayList<>();
 
     public void attach(IObserver observer){
         attachedObservers.add(observer);
@@ -18,7 +20,14 @@ public abstract class AObservable {
 
     public void notifyObservers(Object change){
         for (IObserver element:attachedObservers) {
-            element.update(this,change);
+            try
+            {
+                element.update(this,change);
+            }
+            catch (RemoteException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }

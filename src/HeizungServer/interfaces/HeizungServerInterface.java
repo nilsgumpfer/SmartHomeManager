@@ -3,6 +3,7 @@ package HeizungServer.interfaces;
 
 
 import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.observer.IObserver;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -31,4 +32,5 @@ public interface HeizungServerInterface extends Remote
     ModelVariantBean getModelVariant() throws RemoteException;
     String getGenericName() throws RemoteException;
     String getSerialNumber() throws RemoteException;
+    void attach(IObserver observer);
 }

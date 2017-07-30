@@ -6,6 +6,7 @@ import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.transfer.*;
+import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
 import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
 
 import javax.ws.rs.GET;
@@ -17,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 @Path("ws")
 public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 {
-    private IServiceFacade requestManager = RequestManagerMock.getInstance(); //TODO: Change back to real RequestManager
+    private IServiceFacade requestManager = RequestManager.getInstance();
 
     public SmartHomeManagerWebServiceDescriptor(){
     }

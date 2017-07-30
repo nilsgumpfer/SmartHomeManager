@@ -3,6 +3,7 @@ package de.thm.smarthome.main.manager.main;
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.metadata.MetaDataManager;
+import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 import de.thm.smarthome.main.manager.controller.eventmanager.EventManager;
 
 /**
@@ -24,6 +25,8 @@ public class SmartHomeManagerMainClass {
         try
         {
             initEventManager();
+
+            DeviceManager.getInstance();
 
             SmartHomeLogger.log("Hello World! I am a SmartHomeManager :)");
 

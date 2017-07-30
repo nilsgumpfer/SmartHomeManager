@@ -38,7 +38,9 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
 
-        readModelVariantInformation();
+        // readModelVariantInformation();
+
+        hostname = "192.168.56.1"; // TODO: Wieder entfernen
 
         initConnection();
     }
@@ -88,6 +90,8 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
             deviceServer = (HeizungServerInterface) remoteObject;
 
             deviceServer.setGenericName(genericName);
+
+            deviceServer.attach(this);
         }
         catch (Exception e)
         {
@@ -160,6 +164,7 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
 
     @Override
     public void update(AObservable o, Object change) {
+        SmartHomeLogger.log("BuderusHeatingAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 

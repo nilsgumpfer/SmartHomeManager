@@ -1,6 +1,7 @@
 package de.thm.smarthome.main.device.heating.model;
 
 import de.thm.smarthome.global.beans.*;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
@@ -22,6 +23,8 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
     IHeating device;
 
     public HeatingModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber, PowerStateBean powerState) {
+        currentTemperature  = new MeasureBean(0.0, EUnitOfMeasurement.NA);
+        desiredTemperature  = new MeasureBean(0.0, EUnitOfMeasurement.NA);
         this.modelVariant   = modelVariant;
         this.manufacturer   = manufacturer;
         this.actionMode     = actionMode;
