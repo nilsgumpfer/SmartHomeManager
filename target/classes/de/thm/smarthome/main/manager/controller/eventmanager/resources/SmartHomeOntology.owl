@@ -4,9 +4,30 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:smarthome="http://www.thm.de/eva/ontologies/smarthome#"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#">
     <owl:Ontology rdf:about="http://www.thm.de/eva/ontologies/smarthome"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled -->
+
+    <owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
     
 
 
@@ -21,6 +42,17 @@
     
 
 
+    <!-- http://www.thm.de/eva/ontologies/smarthome#hasActionMode -->
+
+    <owl:ObjectProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasActionMode">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
+        <rdfs:range rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ActionMode"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.thm.de/eva/ontologies/smarthome#hasPosition -->
 
     <owl:ObjectProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasPosition">
@@ -32,13 +64,13 @@
     
 
 
-    <!-- http://www.thm.de/eva/ontologies/smarthome#hasStatus -->
+    <!-- http://www.thm.de/eva/ontologies/smarthome#hasPowerState -->
 
-    <owl:ObjectProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasStatus">
+    <owl:ObjectProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasPowerState">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
-        <rdfs:range rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Status"/>
+        <rdfs:range rdf:resource="http://www.thm.de/eva/ontologies/smarthome#PowerState"/>
     </owl:ObjectProperty>
     
 
@@ -58,7 +90,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasAirPressure">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Weatherstation"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#WeatherStation"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
@@ -68,7 +100,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasRainfallAmount">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Weatherstation"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#WeatherStation"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
@@ -78,9 +110,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasTemperature">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Heating"/>
-        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Thermometer"/>
-        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Weatherstation"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
@@ -90,7 +120,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.thm.de/eva/ontologies/smarthome#hasWindVelocity">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Weatherstation"/>
+        <rdfs:domain rdf:resource="http://www.thm.de/eva/ontologies/smarthome#WeatherStation"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
@@ -107,11 +137,35 @@
     
 
 
-    <!-- http://www.thm.de/eva/ontologies/smarthome#Down -->
+    <!-- http://www.thm.de/eva/ontologies/smarthome#ActionMode -->
 
-    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Down">
-        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
-        <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Up"/>
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#ActionMode">
+        <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
+        <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#Celsius -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Celsius">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ActionMode"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#DayMode -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#DayMode">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ActionMode"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#Fahrenheit -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Fahrenheit">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ActionMode"/>
     </owl:Class>
     
 
@@ -124,11 +178,19 @@
     
 
 
-    <!-- http://www.thm.de/eva/ontologies/smarthome#Maintenance -->
+    <!-- http://www.thm.de/eva/ontologies/smarthome#MaintenanceMode -->
 
-    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Maintenance">
-        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Status"/>
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#MaintenanceMode">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ActionMode"/>
         <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Normal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#NightMode -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#NightMode">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ActionMode"/>
     </owl:Class>
     
 
@@ -136,7 +198,72 @@
     <!-- http://www.thm.de/eva/ontologies/smarthome#Normal -->
 
     <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Normal">
-        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Status"/>
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ActionMode"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#OFF -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#OFF">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#PowerState"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#ON -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#ON">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#PowerState"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#P0_DOWN -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#P0_DOWN">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
+        <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#P5_UP"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#P1 -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#P1">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#P2 -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#P2">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#P3 -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#P3">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#P4 -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#P4">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#P5_UP -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#P5_UP">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
     </owl:Class>
     
 
@@ -145,8 +272,13 @@
 
     <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Position">
         <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
-        <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Status"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#PowerState -->
+
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#PowerState"/>
     
 
 
@@ -160,15 +292,7 @@
 
     <!-- http://www.thm.de/eva/ontologies/smarthome#SmartDevice -->
 
-    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#SmartDevice">
-        <owl:disjointWith rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Status"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.thm.de/eva/ontologies/smarthome#Status -->
-
-    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Status"/>
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
     
 
 
@@ -180,19 +304,161 @@
     
 
 
-    <!-- http://www.thm.de/eva/ontologies/smarthome#Up -->
+    <!-- http://www.thm.de/eva/ontologies/smarthome#WeatherStation -->
 
-    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Up">
-        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Position"/>
+    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#WeatherStation">
+        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
     </owl:Class>
     
 
 
-    <!-- http://www.thm.de/eva/ontologies/smarthome#Weatherstation -->
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <owl:Class rdf:about="http://www.thm.de/eva/ontologies/smarthome#Weatherstation">
-        <rdfs:subClassOf rdf:resource="http://www.thm.de/eva/ontologies/smarthome#SmartDevice"/>
-    </owl:Class>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#MyHeating -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#MyHeating">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Heating"/>
+        <smarthome:hasActionMode rdf:resource="http://www.thm.de/eva/ontologies/smarthome#_DayMode"/>
+        <smarthome:hasPowerState rdf:resource="http://www.thm.de/eva/ontologies/smarthome#_ON"/>
+        <smarthome:hasTemperature rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16.0</smarthome:hasTemperature>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#MyShutter -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#MyShutter">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Shutter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#MyThermometer -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#MyThermometer">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Thermometer"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#MyWeatherStation -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#MyWeatherStation">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#WeatherStation"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_Celsius -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_Celsius">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Celsius"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_DayMode -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_DayMode">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#DayMode"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_Fahrenheit -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_Fahrenheit">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Fahrenheit"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_MaintenanceMode -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_MaintenanceMode">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#MaintenanceMode"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_NightMode -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_NightMode">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#NightMode"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_Normal -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_Normal">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Normal"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_OFF -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_OFF">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#OFF"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_ON -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_ON">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#ON"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_P1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_P1">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#P1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_P2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_P2">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#P2"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_P3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_P3">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#P3"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_P4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_P4">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#P4"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.thm.de/eva/ontologies/smarthome#_P5_UP -->
+
+    <owl:NamedIndividual rdf:about="http://www.thm.de/eva/ontologies/smarthome#_P5_UP">
+        <rdf:type rdf:resource="http://www.thm.de/eva/ontologies/smarthome#P5_UP"/>
+    </owl:NamedIndividual>
     
 
 
@@ -210,8 +476,95 @@
             <rdf:Description rdf:about="http://www.thm.de/eva/ontologies/smarthome#Heating"/>
             <rdf:Description rdf:about="http://www.thm.de/eva/ontologies/smarthome#Shutter"/>
             <rdf:Description rdf:about="http://www.thm.de/eva/ontologies/smarthome#Thermometer"/>
-            <rdf:Description rdf:about="http://www.thm.de/eva/ontologies/smarthome#Weatherstation"/>
+            <rdf:Description rdf:about="http://www.thm.de/eva/ontologies/smarthome#WeatherStation"/>
         </owl:members>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.thm.de/sag/ontologies/smarthome#heating">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.thm.de/sag/ontologies/smarthome#temperature">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Heizung wird als ausgeschaltet betrachtet, wenn ihre Temperatur unter 15°C liegt</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Test1</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.thm.de/eva/ontologies/smarthome#Heating"/>
+                        <swrl:argument1 rdf:resource="http://www.thm.de/sag/ontologies/smarthome#heating"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.thm.de/eva/ontologies/smarthome#hasTemperature"/>
+                                <swrl:argument1 rdf:resource="http://www.thm.de/sag/ontologies/smarthome#heating"/>
+                                <swrl:argument2 rdf:resource="http://www.thm.de/sag/ontologies/smarthome#temperature"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                                        <swrl:arguments>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first rdf:resource="http://www.thm.de/sag/ontologies/smarthome#temperature"/>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#double">15.0</rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </swrl:arguments>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.thm.de/eva/ontologies/smarthome#hasPowerState"/>
+                        <swrl:argument1 rdf:resource="http://www.thm.de/sag/ontologies/smarthome#heating"/>
+                        <swrl:argument2 rdf:resource="http://www.thm.de/eva/ontologies/smarthome#_OFF"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
     </rdf:Description>
 </rdf:RDF>
 
