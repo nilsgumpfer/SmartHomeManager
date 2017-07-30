@@ -3,6 +3,7 @@ package de.thm.smarthome.main.manager.main;
 import de.thm.smarthome.global.connection.wsprovider.SmartHomeManagerWebServiceProvider;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.metadata.MetaDataManager;
+import de.thm.smarthome.main.manager.controller.eventmanager.EventManager;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -10,13 +11,9 @@ import de.thm.smarthome.global.metadata.MetaDataManager;
 public class SmartHomeManagerMainClass {
     private static SmartHomeManagerWebServiceProvider webServiceProvider;
 
-    public static void main(String args[]) throws InterruptedException {
-
+    public static void main(String args[]) throws InterruptedException
+    {
         startSmartHomeServer();
-
-        Thread.sleep(1000);
-
-        stopSmartHomeServer();
 
         while(true){
             Thread.sleep(1000);
@@ -26,6 +23,8 @@ public class SmartHomeManagerMainClass {
     public static void startSmartHomeServer(){
         try
         {
+            initEventManager();
+
             SmartHomeLogger.log("Hello World! I am a SmartHomeManager :)");
 
             webServiceProvider = new SmartHomeManagerWebServiceProvider();
@@ -34,7 +33,8 @@ public class SmartHomeManagerMainClass {
             MetaDataManager.setSuffixREST("ws");
 
             SmartHomeLogger.log("WebServices are up an running..");
-            //MetaDataManager.setHostStatus("Server is running in ws_provide mode");
+
+            MetaDataManager.setHostStatus("Gestartet");
 
             SmartHomeLogger.log(MetaDataManager.getHostInfo());
         }
@@ -53,7 +53,8 @@ public class SmartHomeManagerMainClass {
                 webServiceProvider.stopProviding();
 
                 SmartHomeLogger.log("WebServices are stopped and down..");
-                //MetaDataManager.setHostStatus("Server is running in idle mode");
+
+                MetaDataManager.setHostStatus("Gestoppt");
 
                 SmartHomeLogger.log(MetaDataManager.getHostInfo());
             }
@@ -62,6 +63,9 @@ public class SmartHomeManagerMainClass {
                 SmartHomeLogger.log(e);
             }
         }
+    }
 
+    private static void initEventManager(){
+        EventManager.getInstance();
     }
 }

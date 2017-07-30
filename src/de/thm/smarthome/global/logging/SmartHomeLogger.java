@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class SmartHomeLogger {
     private static SmartHomeLogger instance = new SmartHomeLogger();
+    private static boolean supressConsoleOutput = false;
     private List<String> listOfLogs = new ArrayList<>();
 
     private SmartHomeLogger(){
@@ -19,7 +20,9 @@ public class SmartHomeLogger {
     public static void log(String message){
         String timestamp = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss:SSS] : ").format(new Date());
         SmartHomeLogger.getInstance().listOfLogs.add(timestamp + message);
-        System.out.println(timestamp + message);
+
+        if(supressConsoleOutput == false)
+            System.out.println(timestamp + message);
     }
 
     public static void log(Exception e){
@@ -49,5 +52,9 @@ public class SmartHomeLogger {
     public static SmartHomeLogger getInstance()
     {
         return instance;
+    }
+
+    public static void supressConsoleOutput(boolean flag) {
+        supressConsoleOutput = flag;
     }
 }
