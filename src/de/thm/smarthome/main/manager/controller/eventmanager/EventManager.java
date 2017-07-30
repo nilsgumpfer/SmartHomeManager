@@ -1,7 +1,11 @@
 package de.thm.smarthome.main.manager.controller.eventmanager;
 
+import de.thm.smarthome.global.enumeration.EActionMode;
+import de.thm.smarthome.global.enumeration.EPowerState;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.main.device.heating.device.SmartHeating;
+import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
@@ -13,13 +17,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by Nils on 05.02.2017.
  */
 public class EventManager implements IEventManager {
     private static EventManager ourInstance     = new EventManager();
+    private DeviceManager deviceManager         = DeviceManager.getInstance();
     private OWLOntology ontology                = null;
     private OWLReasoner reasoner                = null;
     private OWLOntologyManager ontologyManager  = null;
@@ -35,6 +39,13 @@ public class EventManager implements IEventManager {
     private IRI thermometerIRI                  = null;
     private File ontologyFile                   = null;
     private OWLReasonerFactory reasonerFactory  = null;
+    private OWLObjectProperty hasPowerState     = null;
+    private OWLObjectProperty hasActionMode     = null;
+    private OWLDataProperty hasTemperature      = null;
+    private OWLDataProperty hasWindVelocity     = null;
+    private OWLDataProperty hasRainfallAmount   = null;
+    private OWLDataProperty hasAirPressure      = null;
+    private OWLDataProperty hasAirHumidity      = null;
 
     private EventManager()
     {
@@ -58,6 +69,7 @@ public class EventManager implements IEventManager {
 
         initializeObjects();
         createIRIs();
+        initializeProperties();
         loadOntology();
         createReasoner();
     }
@@ -68,6 +80,16 @@ public class EventManager implements IEventManager {
         dataFactory         = ontologyManager.getOWLDataFactory();
         prefixManager       = new DefaultPrefixManager(null, null,ontologyNamespace);
         ontologyFile        = new File("src/de/thm/smarthome/main/manager/controller/eventmanager/resources/" + ontologyName);
+    }
+
+    private void initializeProperties(){
+        hasPowerState       = dataFactory.getOWLObjectProperty(IRI.create(ontologyNamespace,"hasPowerState"));
+        hasActionMode       = dataFactory.getOWLObjectProperty(IRI.create(ontologyNamespace,"hasActionMode"));
+        hasTemperature      = dataFactory.getOWLDataProperty(IRI.create(ontologyNamespace,"hasTemperature"));
+        hasWindVelocity     = dataFactory.getOWLDataProperty(IRI.create(ontologyNamespace,"hasWindVelocity"));
+        hasRainfallAmount   = dataFactory.getOWLDataProperty(IRI.create(ontologyNamespace,"hasRainfallAmount"));
+        hasAirHumidity      = dataFactory.getOWLDataProperty(IRI.create(ontologyNamespace,"hasAirHumidity"));
+        hasAirPressure      = dataFactory.getOWLDataProperty(IRI.create(ontologyNamespace,"hasAirPressure"));
     }
 
     private void loadOntology(){
@@ -87,10 +109,6 @@ public class EventManager implements IEventManager {
         SmartHomeLogger.log("Using reasoner " + reasonerFactory.getReasonerName() + " (" + reasonerVersion + ")");
     }
 
-    private void saveOntology(){
-
-    }
-
     private void createIRIs(){
         heatingIRI          = IRI.create(ontologyNamespace,"Heating");
         shutterIRI          = IRI.create(ontologyNamespace,"Shutter");
@@ -98,156 +116,120 @@ public class EventManager implements IEventManager {
         thermometerIRI      = IRI.create(ontologyNamespace,"Thermometer");
     }
 
-    private void logClassAxioms(OWLClass owlClass){
-        Stream<OWLClassAxiom> classAxiomStream = ontology.axioms(owlClass);
-        List<OWLClassAxiom> classAxiomList = classAxiomStream.collect(Collectors.toList());
+    private void applyTemperatureToIndividual(OWLNamedIndividual namedIndividual, double temperature)
+    {
+        applyDoubleToIndividual(namedIndividual, hasTemperature, temperature);
+    }
 
-        for(OWLClassAxiom classAxiom : classAxiomList)
+    private void applyWindVelocityToIndividual(OWLNamedIndividual namedIndividual, double temperature)
+    {
+        applyDoubleToIndividual(namedIndividual, hasWindVelocity, temperature);
+    }
+
+    private void applyRainfallAmountToIndividual(OWLNamedIndividual namedIndividual, double temperature)
+    {
+        applyDoubleToIndividual(namedIndividual, hasRainfallAmount, temperature);
+    }
+
+    private void applyAirPressureToIndividual(OWLNamedIndividual namedIndividual, double temperature)
+    {
+        applyDoubleToIndividual(namedIndividual, hasAirPressure, temperature);
+    }
+
+    private void applyAirHumidityToIndividual(OWLNamedIndividual namedIndividual, double temperature)
+    {
+        applyDoubleToIndividual(namedIndividual, hasAirHumidity, temperature);
+    }
+
+    private void applyDoubleToIndividual(OWLNamedIndividual namedIndividual, OWLDataProperty property, double value)
+    {
+        // Create data property axiom
+        OWLDataPropertyAssertionAxiom dataPropertyAssertionAxiom = dataFactory.getOWLDataPropertyAssertionAxiom(property, namedIndividual, value);
+
+        // Clean existing axioms to avoid duplicates
+        cleanPropertyAxiomsForIndividual(namedIndividual, property);
+
+        // Apply changed / new axiom to ontology
+        ontologyManager.addAxiom(ontology, dataPropertyAssertionAxiom);
+    }
+
+    private void applyPowerStateToIndividual(OWLNamedIndividual namedIndividual, EPowerState ePowerState)
+    {
+        applyStringToIndividual(namedIndividual, hasPowerState, "_" + ePowerState.toString());
+    }
+
+    private void applyActionModeToIndividual(OWLNamedIndividual namedIndividual, EActionMode eActionMode)
+    {
+        applyStringToIndividual(namedIndividual, hasActionMode, "_" + eActionMode.toString());
+    }
+
+    private void applyStringToIndividual(OWLNamedIndividual namedIndividual, OWLObjectProperty objectProperty , String string)
+    {
+        // Create property-object
+        OWLNamedIndividual propertyIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, string));
+
+        // Clean existing axioms to avoid duplicates
+        cleanPropertyAxiomsForIndividual(namedIndividual, objectProperty);
+
+        // Create object property axiom for powerState
+        OWLObjectPropertyAssertionAxiom objectPropertyAssertionAxiom = dataFactory.getOWLObjectPropertyAssertionAxiom(objectProperty, namedIndividual, propertyIndividual);
+
+        // Apply changed / new axiom to ontology
+        ontologyManager.addAxiom(ontology, objectPropertyAssertionAxiom);
+    }
+
+    private void cleanPropertyAxiomsForIndividual(OWLNamedIndividual namedIndividual, OWLProperty property){
+        List<OWLAxiom> axiomList = ontology.axioms(namedIndividual).collect(Collectors.toList());
+        List<OWLAxiom> axiomsToRemove = new ArrayList<>();
+
+        for(OWLAxiom axiom : axiomList)
         {
-            SmartHomeLogger.log(classAxiom.toString());
+            List<OWLProperty>   propertyList = axiom.dataPropertiesInSignature().collect(Collectors.toList());
+                                propertyList .addAll(axiom.objectPropertiesInSignature().collect(Collectors.toList()));
+
+            for(OWLProperty currentProperty : propertyList)
+            {
+                if(currentProperty.getIRI().equals(property.getIRI())) {
+                    axiomsToRemove.add(axiom);
+                }
+            }
         }
-    }
 
-    private void logNamedIndividuals(){
-        Stream<OWLNamedIndividual> individualStream = ontology.individualsInSignature();
-        List<OWLNamedIndividual> individualList = individualStream.collect(Collectors.toList());
-
-        for(OWLNamedIndividual namedIndividual : individualList)
-        {
-            SmartHomeLogger.log(namedIndividual.toString().replace("<","").replace(">",""));
-        }
-    }
-
-    private void logDataPropertyAssertionAxioms(OWLNamedIndividual namedIndividual){
-        Stream<OWLDataPropertyAssertionAxiom> dataPropertyAssertionAxiomStream = ontology.dataPropertyAssertionAxioms(namedIndividual);
-        List<OWLDataPropertyAssertionAxiom> dataPropertyAssertionAxiomList = dataPropertyAssertionAxiomStream.collect(Collectors.toList());
-
-        for (OWLDataPropertyAssertionAxiom ax: dataPropertyAssertionAxiomList) {
-            SmartHomeLogger.log((ax.getProperty().toString() + " : " + ax.getObject().getDatatype().toString() + " " + ax.getObject().parseDouble()).replace("<","").replace(">",""));
-        }
-    }
-
-    private void logObjectPropertyAssertionAxioms(OWLNamedIndividual namedIndividual){
-        Stream<OWLObjectPropertyAssertionAxiom> objectPropertyAssertionAxiomStream = ontology.objectPropertyAssertionAxioms(namedIndividual);
-        List<OWLObjectPropertyAssertionAxiom> objectPropertyAssertionAxiomList = objectPropertyAssertionAxiomStream.collect(Collectors.toList());
-
-        for (OWLObjectPropertyAssertionAxiom ax: objectPropertyAssertionAxiomList) {
-            SmartHomeLogger.log((ax.getProperty().toString() + " : " + ax.getObject().toString()).replace("<","").replace(">",""));
-        }
-    }
-
-    private void logObjectProprtyAssertionAxioms(OWLNamedIndividual namedIndividual){
-
+        ontologyManager.removeAxioms(ontology, axiomsToRemove.stream());
     }
 
     private void doFancyStuff(){
-        String heatingName = "MyHeating";
-
-        //SmartHomeLogger.log("Reasoner consistency check: " + reasoner.isConsistent());
-
+        SmartHeating smartHeating = deviceManager.getSmartHeating();
+        String heatingName = smartHeating.getGenericName().replace(" ", "");
 
         OWLNamedIndividual heatingIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, heatingName));
-        OWLNamedIndividual powerStateIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, "_ON"));
 
-        OWLObjectProperty hasPowerState = dataFactory.getOWLObjectProperty(IRI.create(ontologyNamespace,"hasPowerState"));
-        OWLDataProperty hasTemperature = dataFactory.getOWLDataProperty(IRI.create(ontologyNamespace,"hasTemperature"));
+        applyPowerStateToIndividual(heatingIndividual, smartHeating.getPowerState().getPowerState_Enum());
+        applyTemperatureToIndividual(heatingIndividual, smartHeating.getCurrentTemperature().getMeasure_Double());
+        applyActionModeToIndividual(heatingIndividual, smartHeating.getActionMode().getActionMode_Enum());
 
+        /*// Use reasoner to read inferred properties caused by SWRL rules etc.
+        List<OWLNamedIndividual> namedIndividualList = reasoner.objectPropertyValues(heatingIndividual, hasPowerState).collect(Collectors.toList());
 
-        // Create object property for PowerState
-        // Property:        hasPowerState
-        // Individual:      MyHeating
-        // Value:           _ON
-        OWLObjectPropertyAssertionAxiom objectPropertyAssertionAxiom = dataFactory.getOWLObjectPropertyAssertionAxiom(hasPowerState,heatingIndividual,powerStateIndividual);
-
-        // Remove existing axioms of same type and domain
-        List<OWLObjectPropertyAssertionAxiom> axiomsToRemove = new ArrayList<>();
-        axiomsToRemove.add(objectPropertyAssertionAxiom);
-        ontologyManager.removeAxioms(ontology,axiomsToRemove.stream()); //TODO: Removing axioms does not seem to work..
-
-        // Create axiom
-        AddAxiom addAxiom = new AddAxiom(ontology,objectPropertyAssertionAxiom);
-
-        // Apply this change to ontology
-        ontologyManager.applyChange(addAxiom);
-
-
-        // Create data property for Temperature
-        // Property:        hasTemperature
-        // Individual:      MyHeating
-        // Value:           20.0
-        OWLDataPropertyAssertionAxiom dataPropertyAssertionAxiom = dataFactory.getOWLDataPropertyAssertionAxiom(hasTemperature,heatingIndividual,20.0);
-
-        // Remove existing axioms of same type and domain
-        List<OWLDataPropertyAssertionAxiom> dpAxiomsToRemove = new ArrayList<>();
-        dpAxiomsToRemove.add(dataPropertyAssertionAxiom);
-        ontologyManager.removeAxioms(ontology,dpAxiomsToRemove.stream()); //TODO: Removing axioms does not seem to work..
-
-        // Create axiom
-        addAxiom = new AddAxiom(ontology,dataPropertyAssertionAxiom);
-
-        // Apply this change to ontology
-        ontologyManager.applyChange(addAxiom);
-
-
-        // Use reasoner to read inferred properties caused by SWRL rules etc.
-        Stream<OWLNamedIndividual> namedIndividualStream = reasoner.objectPropertyValues(heatingIndividual, hasPowerState);
-        Stream<OWLLiteral> literalStream = reasoner.dataPropertyValues(heatingIndividual, hasTemperature);
-
-        // Convert streams to lists
-        List<OWLNamedIndividual> namedIndividualList = namedIndividualStream.collect(Collectors.toList());
-        List<OWLLiteral> literalList = literalStream.collect(Collectors.toList());
-
-        //SmartHomeLogger.log("ObjectProperties:");
-
+        SmartHomeLogger.log("ObjectProperties:");
         for (OWLNamedIndividual namedIndividual : namedIndividualList)
         {
-            //SmartHomeLogger.log(namedIndividual.toString());
+            SmartHomeLogger.log(namedIndividual.toString());
+            //TODO: Go on here. Sort individuals by IRI, assign actions according to property (e.g. switch on/off heating)
+            //TODO: nicht pro device irgendwelche inferred individuals durchgehen, sondern für alle gemeinsam(macht ja auch sinn! :) )
+            //TODO: übertragung der derzeitigen werte der verbundenen geräte via schleife(je nachdem was vorhanden ist, gerade bzgl. shutter schleife wichtig)
+            //TODO: geräte werden auf basis ihres generic name angelegt
+            //TODO: zuerst alle attribute der geräte in ontologie übertragen, anschließend reasoner anwerfen, individuals sammeln und entsprechende aktionen durchführen (dispatcher zur zuteilung verwenden, etc.)
         }
 
-        //SmartHomeLogger.log("DataProperties:");
+        List<OWLLiteral> literalList = reasoner.dataPropertyValues(heatingIndividual, hasTemperature).collect(Collectors.toList());
 
+        SmartHomeLogger.log("DataProperties:");
         for (OWLLiteral literal : literalList)
         {
-            //SmartHomeLogger.log(literal.toString());
+            SmartHomeLogger.log(literal.toString());
         }
-
-/*
-        try
-        {
-
-
-            if(namedIndividualList.get(1).toString().replace("<","").replace(">","").replace(ontologyNamespace,"").equals("_ON"))
-                SmartHomeLogger.log("It´s ON!");
-            else
-                SmartHomeLogger.log("It´s OFF!");
-        }
-        catch (Exception e)
-        {
-            SmartHomeLogger.log(e);
-        }
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        */
 
     }
 
