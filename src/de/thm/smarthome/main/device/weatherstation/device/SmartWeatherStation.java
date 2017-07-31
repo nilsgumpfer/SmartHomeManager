@@ -76,7 +76,7 @@ public class SmartWeatherStation extends AObservable implements IObserver{
             case METRIC:
                 logic = new WeatherStationLogicMetric(model, adapter);
                 break;
-            case ANGLO_AMERICAN:
+            case ANGLOAMERICAN:
                 logic = new WeatherStationLogicAngloAmerican(model, adapter);
                 break;
             case MAINTENANCEMODE:

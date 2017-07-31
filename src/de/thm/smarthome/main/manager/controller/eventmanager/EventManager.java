@@ -1,10 +1,17 @@
 package de.thm.smarthome.main.manager.controller.eventmanager;
 
+import de.thm.smarthome.global.beans.ActionModeBean;
+import de.thm.smarthome.global.beans.MeasureBean;
+import de.thm.smarthome.global.beans.PowerStateBean;
 import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.enumeration.EPowerState;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
+import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
+import de.thm.smarthome.main.device.weatherstation.device.SmartWeatherStation;
 import de.thm.smarthome.main.manager.controller.devicemanager.DeviceManager;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -46,11 +53,21 @@ public class EventManager implements IEventManager {
     private OWLDataProperty hasRainfallAmount   = null;
     private OWLDataProperty hasAirPressure      = null;
     private OWLDataProperty hasAirHumidity      = null;
+    private SmartHeating smartHeating                       = null;
+    private SmartThermometer smartThermometer               = null;
+    private SmartWeatherStation smartWeatherStation         = null;
+    private String heatingName                              = null;
+    private String thermometerName                          = null;
+    private String weatherStationName                       = null;
+    private OWLNamedIndividual heatingIndividual            = null;
+    private OWLNamedIndividual thermometerIndividual        = null;
+    private OWLNamedIndividual weatherStationIndividual     = null;
+
 
     private EventManager()
     {
         initOWLAPI();
-        doFancyStuff(); //TODO: just for testing!
+        //doFancyStuff(); //TODO: just for testing!
     }
 
     public static EventManager getInstance() {
@@ -198,18 +215,124 @@ public class EventManager implements IEventManager {
         ontologyManager.removeAxioms(ontology, axiomsToRemove.stream());
     }
 
-    private void doFancyStuff(){
-        SmartHeating smartHeating = deviceManager.getSmartHeating();
-        String heatingName = smartHeating.getGenericName().replace(" ", "");
-
-        OWLNamedIndividual heatingIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, heatingName));
-
+    private void applyHeatingPropertiesToOntology(){
+        updateHeatingObjects();
         applyPowerStateToIndividual(heatingIndividual, smartHeating.getPowerState().getPowerState_Enum());
         applyTemperatureToIndividual(heatingIndividual, smartHeating.getCurrentTemperature().getMeasure_Double());
         applyActionModeToIndividual(heatingIndividual, smartHeating.getActionMode().getActionMode_Enum());
+    }
 
-        /*// Use reasoner to read inferred properties caused by SWRL rules etc.
-        List<OWLNamedIndividual> namedIndividualList = reasoner.objectPropertyValues(heatingIndividual, hasPowerState).collect(Collectors.toList());
+    private void applyShutterPropertiesToOntology(){
+        /*updateShutterObjects();*/
+    }
+
+    private void applyThermometerPropertiesToOntology(){
+        updateThermometerObjects();
+        applyTemperatureToIndividual(thermometerIndividual, smartThermometer.getTemperature().getMeasure_Double());
+        applyActionModeToIndividual(thermometerIndividual, smartThermometer.getActionMode().getActionMode_Enum());
+    }
+
+    private void applyWeatherStationPropertiesToOntology(){
+        updateWeatherStationObjects();
+        applyActionModeToIndividual(weatherStationIndividual, smartWeatherStation.getActionMode().getActionMode_Enum());
+        applyRainfallAmountToIndividual(weatherStationIndividual, smartWeatherStation.getRainfallAmount().getMeasure_Double());
+        applyWindVelocityToIndividual(weatherStationIndividual, smartWeatherStation.getWindVelocity().getMeasure_Double());
+        applyAirHumidityToIndividual(weatherStationIndividual, smartWeatherStation.getAirHumidity().getMeasure_Double());
+        applyAirPressureToIndividual(weatherStationIndividual, smartWeatherStation.getAirPressure().getMeasure_Double());
+    }
+
+    private void updateThermometerObjects(){
+        smartThermometer = deviceManager.getSmartThermometer();
+        thermometerName = smartThermometer.getGenericName().replace(" ", "");
+        thermometerIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, thermometerName));
+    }
+
+    private void updateWeatherStationObjects(){
+        smartWeatherStation = deviceManager.getSmartWeatherStation();
+        weatherStationName = smartWeatherStation.getGenericName().replace(" ", "");
+        weatherStationIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, weatherStationName));
+    }
+
+    private void updateHeatingObjects(){
+        smartHeating = deviceManager.getSmartHeating();
+        heatingName = smartHeating.getGenericName().replace(" ", "");
+        heatingIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, heatingName));
+    }
+
+    private HeatingTransferObject readInferredHeatingProperties(){
+        updateHeatingObjects();
+
+        HeatingTransferObject heatingTransferObject = smartHeating.getHeatingData();
+
+        // Read object properties
+        OWLNamedIndividual actionMode       = readObjectPropertyFromOntology(heatingIndividual, hasActionMode);
+        OWLNamedIndividual powerState       = readObjectPropertyFromOntology(heatingIndividual, hasPowerState);
+
+        // Read data properties
+        OWLLiteral temperature              = readDataPropertyFromOntology(heatingIndividual, hasTemperature);
+
+        // Convert object properties
+        ActionModeBean actionModeBean       = getActionModeBean(actionMode);
+        PowerStateBean powerStateBean       = getPowerStateBean(powerState);
+
+        // Convert data properties
+        double dTemperature                 = getDouble(temperature);
+
+
+        // Update values in transfer object
+        heatingTransferObject.setActionMode(actionModeBean);
+        heatingTransferObject.setPowerState(powerStateBean);
+        heatingTransferObject.setDesiredTemperature(new MeasureBean(dTemperature, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
+
+        return heatingTransferObject;
+    }
+
+    /*private ThermometerTransferObject readInferredThermometerProperties(){
+        //TODO: Merken! ..das macht natürlich keinen Sinn, weil an den eingesetzten Sensoren nichts geändert werden kann! (lediglich an Rolläden und der Heizung)
+    }*/
+
+    private double getDouble(OWLLiteral literal){
+        return literal.parseDouble();
+    }
+
+    private ActionModeBean getActionModeBean(OWLNamedIndividual individual){
+        return new ActionModeBean(individual.getIRI().getRemainder().get().replace("_",""));
+    }
+
+    private PowerStateBean getPowerStateBean(OWLNamedIndividual individual){
+        return new PowerStateBean(individual.getIRI().getRemainder().get().replace("_",""));
+    }
+
+    private OWLNamedIndividual readObjectPropertyFromOntology(OWLNamedIndividual namedIndividual, OWLObjectProperty objectProperty){
+        try {
+            return reasoner.objectPropertyValues(namedIndividual, objectProperty).collect(Collectors.toList()).get(0);
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    private OWLLiteral readDataPropertyFromOntology(OWLNamedIndividual namedIndividual, OWLDataProperty dataProperty){
+        try {
+            return reasoner.dataPropertyValues(namedIndividual, dataProperty).collect(Collectors.toList()).get(0);
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    private void doFancyStuff(){
+
+        // Apply (current) values to ontology
+        applyHeatingPropertiesToOntology();
+        applyShutterPropertiesToOntology();
+        applyThermometerPropertiesToOntology();
+        applyWeatherStationPropertiesToOntology();
+
+        // Read inferred (new) values
+        readInferredHeatingProperties();
+
+        /*
 
         SmartHomeLogger.log("ObjectProperties:");
         for (OWLNamedIndividual namedIndividual : namedIndividualList)
