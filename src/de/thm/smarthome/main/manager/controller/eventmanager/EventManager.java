@@ -67,7 +67,6 @@ public class EventManager implements IEventManager {
     private EventManager()
     {
         initOWLAPI();
-        //doFancyStuff(); //TODO: just for testing!
     }
 
     public static EventManager getInstance() {
@@ -77,7 +76,7 @@ public class EventManager implements IEventManager {
     @Override
     public void update(AObservable o, Object change) {
         SmartHomeLogger.log("EventManager: Detected a change! [" + o.toString() + "]");
-        doReasoning();
+        //doReasoning(); //TODO: Include!
     }
 
     private void initOWLAPI()
@@ -217,9 +216,24 @@ public class EventManager implements IEventManager {
 
     private void applyHeatingPropertiesToOntology(){
         updateHeatingObjects();
+        createHeatingIndividualIfNotPresent();
         applyPowerStateToIndividual(heatingIndividual, smartHeating.getPowerState().getPowerState_Enum());
         applyTemperatureToIndividual(heatingIndividual, smartHeating.getCurrentTemperature().getMeasure_Double());
         applyActionModeToIndividual(heatingIndividual, smartHeating.getActionMode().getActionMode_Enum());
+    }
+
+    private void createHeatingIndividualIfNotPresent(){ //TODO: GO ON HERE, check this
+        // Get entity class
+        OWLClass owlClass = dataFactory.getOWLClass(heatingIRI);
+
+        // Create individual
+        OWLNamedIndividual namedIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, heatingName));
+
+        // Create axiom
+        OWLClassAssertionAxiom classAssertionAxiom = dataFactory.getOWLClassAssertionAxiom(owlClass, namedIndividual);
+
+        // Apply axiom to ontology
+        ontologyManager.addAxiom(ontology, classAssertionAxiom);
     }
 
     private void applyShutterPropertiesToOntology(){
@@ -287,10 +301,6 @@ public class EventManager implements IEventManager {
         return heatingTransferObject;
     }
 
-    /*private ThermometerTransferObject readInferredThermometerProperties(){
-        //TODO: Merken! ..das macht natürlich keinen Sinn, weil an den eingesetzten Sensoren nichts geändert werden kann! (lediglich an Rolläden und der Heizung)
-    }*/
-
     private double getDouble(OWLLiteral literal){
         return literal.parseDouble();
     }
@@ -321,42 +331,40 @@ public class EventManager implements IEventManager {
         }
     }
 
-    private void doFancyStuff(){
+    private void invokeActionsAtHeating(HeatingTransferObject heatingTransferObject){
+        double currentValueTemperature = smartHeating.getDesiredTemperature().getMeasure_Double();
+        double inferredValueTemperature = heatingTransferObject.getDesiredTemperature().getMeasure_Double();
 
+        EActionMode currentValueActionMode = smartHeating.getActionMode().getActionMode_Enum();
+        EActionMode inferredValueActionMode = heatingTransferObject.getActionMode().getActionMode_Enum();
+
+        EPowerState currentValuePowerState = smartHeating.getPowerState().getPowerState_Enum();
+        EPowerState inferredValuePowerState = heatingTransferObject.getPowerState().getPowerState_Enum();
+
+        if(currentValueTemperature != inferredValueTemperature) {
+            smartHeating.setTemperature(heatingTransferObject.getDesiredTemperature());
+            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueTemperature + "Old value: " + currentValueTemperature + " (Heating temperature)");
+        }
+
+        if(currentValueActionMode != inferredValueActionMode) {
+            smartHeating.setActionMode(heatingTransferObject.getActionMode());
+            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueActionMode + "Old value: " + currentValueActionMode + " (Heating temperature)");
+        }
+
+        if(currentValuePowerState != inferredValuePowerState) {
+            smartHeating.setPowerState(heatingTransferObject.getPowerState());
+            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValuePowerState + "Old value: " + currentValuePowerState + " (Heating temperature)");
+        }
+    }
+
+    private void doReasoning(){
         // Apply (current) values to ontology
         applyHeatingPropertiesToOntology();
         applyShutterPropertiesToOntology();
         applyThermometerPropertiesToOntology();
         applyWeatherStationPropertiesToOntology();
 
-        // Read inferred (new) values
-        readInferredHeatingProperties();
-
-        /*
-
-        SmartHomeLogger.log("ObjectProperties:");
-        for (OWLNamedIndividual namedIndividual : namedIndividualList)
-        {
-            SmartHomeLogger.log(namedIndividual.toString());
-            //TODO: Go on here. Sort individuals by IRI, assign actions according to property (e.g. switch on/off heating)
-            //TODO: nicht pro device irgendwelche inferred individuals durchgehen, sondern für alle gemeinsam(macht ja auch sinn! :) )
-            //TODO: übertragung der derzeitigen werte der verbundenen geräte via schleife(je nachdem was vorhanden ist, gerade bzgl. shutter schleife wichtig)
-            //TODO: geräte werden auf basis ihres generic name angelegt
-            //TODO: zuerst alle attribute der geräte in ontologie übertragen, anschließend reasoner anwerfen, individuals sammeln und entsprechende aktionen durchführen (dispatcher zur zuteilung verwenden, etc.)
-        }
-
-        List<OWLLiteral> literalList = reasoner.dataPropertyValues(heatingIndividual, hasTemperature).collect(Collectors.toList());
-
-        SmartHomeLogger.log("DataProperties:");
-        for (OWLLiteral literal : literalList)
-        {
-            SmartHomeLogger.log(literal.toString());
-        }
-        */
-
-    }
-
-    private void doReasoning(){
-
+        // Read inferred (new) values and invoke action
+        invokeActionsAtHeating(readInferredHeatingProperties());
     }
 }

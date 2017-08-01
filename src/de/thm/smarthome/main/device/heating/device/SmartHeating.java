@@ -68,7 +68,7 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
         return logic.setDesiredTemperature(temperature);
     }
 
-    private MessageBean setPowerState(PowerStateBean powerState) {
+    public MessageBean setPowerState(PowerStateBean powerState) {
         return logic.setPowerState(powerState);
     }
 
@@ -81,13 +81,16 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
         switch (actionMode.getActionMode_Enum())
         {
             case DAYMODE:
-                switchLogicTo_DayMode();
+                if(logic.getActionMode().getActionMode_Enum() != EActionMode.DAYMODE)
+                    switchLogicTo_DayMode();
                 break;
             case NIGHTMODE:
-                switchLogicTo_NightMode();
+                if(logic.getActionMode().getActionMode_Enum() != EActionMode.NIGHTMODE)
+                    switchLogicTo_NightMode();
                 break;
             case MAINTENANCEMODE:
-                switchLogicTo_MaintenanceMode();
+                if(logic.getActionMode().getActionMode_Enum() != EActionMode.MAINTENANCEMODE)
+                    switchLogicTo_MaintenanceMode();
                 break;
         }
     }
