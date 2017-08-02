@@ -28,7 +28,7 @@ public class SmartThermometer extends AObservable implements IObserver
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         //TODO: Observer-Pattern
         SmartHomeLogger.log("SmartThermometer: Detected a change! [" + o.toString() + "]");
     }

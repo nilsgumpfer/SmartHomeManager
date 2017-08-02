@@ -29,5 +29,5 @@ public interface IWeatherStationLogic
     IWeatherStationModel getModel();
     IWeatherStation getAdapter();
 
-    void attach(IObserver observer);
+    void attach(Object observer);
 }

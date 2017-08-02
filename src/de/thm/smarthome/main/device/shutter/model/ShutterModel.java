@@ -92,7 +92,7 @@ public class ShutterModel extends AObservable implements IShutterModel, IObserve
     }
 
     @Override
-    public void update (AObservable o, Object change)
+    public void update (Object o, Object change)
     {
         SmartHomeLogger.log("ShutterModel: Detected a change! [" + o.toString() + "]");
         //TODO: Observer-Pattern

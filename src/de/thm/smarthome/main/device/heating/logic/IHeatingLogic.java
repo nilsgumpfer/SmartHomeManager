@@ -27,6 +27,6 @@ public interface IHeatingLogic {
     IHeatingModel getModel();
     IHeating getAdapter();
 
-    void attach(IObserver observer);
-    void detach(IObserver observer);
+    void attach(Object observer);
+    void detach(Object observer);
 }

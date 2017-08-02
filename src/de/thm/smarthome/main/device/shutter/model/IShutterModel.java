@@ -25,6 +25,6 @@ public interface IShutterModel {
     public ActionModeBean getActionMode();
     public String getGenericName();
     public String getSerialnumber();
-    void attach(IObserver observer);
-    void detach(IObserver observer);
+    void attach(Object observer);
+    void detach(Object observer);
 }

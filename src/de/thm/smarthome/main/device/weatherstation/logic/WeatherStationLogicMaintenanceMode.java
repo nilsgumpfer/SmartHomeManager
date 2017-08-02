@@ -28,7 +28,7 @@ public class WeatherStationLogicMaintenanceMode extends AObservable implements I
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         //TODO: Observer-Pattern
         SmartHomeLogger.log("WeatherStationLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
     }

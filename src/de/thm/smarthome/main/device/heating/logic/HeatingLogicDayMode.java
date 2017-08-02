@@ -25,6 +25,7 @@ public class HeatingLogicDayMode extends AObservable implements IHeatingLogic, I
         this.model.attach(this);
         this.device.attach((IObserver) this.model);
         this.model.setActionMode(new ActionModeBean(EActionMode.DAYMODE));
+        this.model.setDevice(device);
     }
 
     @Override
@@ -93,7 +94,7 @@ public class HeatingLogicDayMode extends AObservable implements IHeatingLogic, I
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("HeatingLogicDayMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }

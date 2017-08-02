@@ -18,6 +18,6 @@ public interface IShutter {
 
     /* PositionBean oder MessageBean?! Muss Message Bean sein, da es im Adapter so verarbeitet wird*/
     MessageBean setDesiredPosition(PositionBean desiredPosition);
-    void attach(IObserver observer);
+    void attach(Object observer);
 
 }

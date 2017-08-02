@@ -10,7 +10,6 @@ import de.thm.smarthome.global.helper.ParameterCollector;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
-import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.device.shutter.device.SmartShutter;
 import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
@@ -37,7 +36,7 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("DeviceManager: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
@@ -87,7 +86,7 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                         serialnumber,
                         genericName);
 
-                smartHeating.attach(this);
+                //smartHeating.attach(this); TODO: DeviceManager attach wieder einfügen
             }
             catch (Exception e)
             {

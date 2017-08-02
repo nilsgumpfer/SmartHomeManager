@@ -27,7 +27,7 @@ public class VaillantHeatingAdapter extends AObservable implements IHeating, IOb
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("VaillantHeatingAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }

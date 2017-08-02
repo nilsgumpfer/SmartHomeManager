@@ -19,5 +19,5 @@ public interface IHeating
     MessageBean setDesiredTemperature(MeasureBean temperature);
     MessageBean setPowerState(PowerStateBean powerState);
 
-    void attach(IObserver observer);
+    void attach(Object observer);
 }

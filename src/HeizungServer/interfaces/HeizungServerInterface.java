@@ -32,5 +32,5 @@ public interface HeizungServerInterface extends Remote
     ModelVariantBean getModelVariant() throws RemoteException;
     String getGenericName() throws RemoteException;
     String getSerialNumber() throws RemoteException;
-    void attach(IObserver observer);
+    void attach(Object observer);
 }

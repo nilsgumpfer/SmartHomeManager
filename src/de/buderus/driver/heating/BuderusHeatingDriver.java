@@ -163,8 +163,8 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
     }
 
     @Override
-    public void update(AObservable o, Object change) {
-        SmartHomeLogger.log("BuderusHeatingAdapter: Detected a change! [" + o.toString() + "]");
+    public void update(Object o, Object change) {
+        SmartHomeLogger.log("BuderusHeatingDriver: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
 

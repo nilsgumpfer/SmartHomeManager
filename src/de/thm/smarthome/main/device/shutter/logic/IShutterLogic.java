@@ -26,5 +26,5 @@ public interface IShutterLogic
     ShutterTransferObject getShutterData();
     IShutterModel getModel();
     IShutter getAdapter();
-    void attach(IObserver observer);
+    void attach(Object observer);
 }

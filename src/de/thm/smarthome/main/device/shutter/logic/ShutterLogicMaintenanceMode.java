@@ -86,7 +86,7 @@ public class ShutterLogicMaintenanceMode extends AObservable implements IShutter
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("ShutterLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
         //TODO: Observer-Pattern
     }

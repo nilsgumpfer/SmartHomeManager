@@ -25,5 +25,5 @@ public interface IThermometerLogic
     IThermometerModel getModel();
     IThermometer getAdapter();
 
-    void attach(IObserver observer);
+    void attach(Object observer);
 }

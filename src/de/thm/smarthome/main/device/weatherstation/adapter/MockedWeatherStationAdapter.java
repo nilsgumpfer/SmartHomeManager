@@ -18,7 +18,7 @@ public class MockedWeatherStationAdapter extends AObservable implements IWeather
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.NA);
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("MockedWeatherStationAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }

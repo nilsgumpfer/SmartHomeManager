@@ -83,7 +83,7 @@ public class ShutterLogicStandardMode extends AObservable implements IShutterLog
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("HeatingLogicStandardMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }

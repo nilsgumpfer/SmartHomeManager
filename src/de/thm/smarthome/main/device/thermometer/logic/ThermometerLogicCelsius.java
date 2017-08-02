@@ -28,7 +28,7 @@ public class ThermometerLogicCelsius extends AObservable implements IThermometer
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         //TODO: Observer-Pattern
         SmartHomeLogger.log("ThermometerLogicCelsius: Detected a change! [" + o.toString() + "]");
     }

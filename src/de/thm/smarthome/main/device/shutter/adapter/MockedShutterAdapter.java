@@ -19,7 +19,7 @@ public class MockedShutterAdapter extends AObservable implements IShutter, IObse
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.NA);
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("MockedShutterAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }

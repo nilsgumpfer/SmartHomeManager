@@ -26,7 +26,7 @@ import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("SmartHeating: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
         //TODO: Check if Logic-Change is necessary!

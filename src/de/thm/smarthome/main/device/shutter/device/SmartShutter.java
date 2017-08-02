@@ -27,7 +27,7 @@ public class SmartShutter extends AObservable implements IObserver, IUpAndDownMo
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("SmartShutter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
         //TODO: Check if Logic-Change is necessary!

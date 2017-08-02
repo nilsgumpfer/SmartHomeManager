@@ -2,6 +2,7 @@ package de.thm.smarthome.main.device.heating.model;
 
 import de.thm.smarthome.global.beans.*;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.main.device.heating.adapter.IHeating;
 
 /**
  * Created by Nils on 01.02.2017.
@@ -23,6 +24,7 @@ public interface IHeatingModel {
     void setSerialnumber(String serialnumber);
     PowerStateBean getPowerState();
     void setPowerState(PowerStateBean powerState);
-    void attach(IObserver observer);
-    void detach(IObserver observer);
+    void setDevice(IHeating device);
+    void attach(Object observer);
+    void detach(Object observer);
 }

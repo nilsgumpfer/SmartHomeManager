@@ -27,6 +27,7 @@ public class HeatingLogicMaintenanceMode extends AObservable implements IHeating
         this.model.attach(this);
         this.device.attach((IObserver) this.model);
         this.model.setActionMode(new ActionModeBean(EActionMode.MAINTENANCEMODE));
+        this.model.setDevice(device);
     }
 
     @Override
@@ -95,7 +96,7 @@ public class HeatingLogicMaintenanceMode extends AObservable implements IHeating
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("HeatingLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }

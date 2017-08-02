@@ -25,6 +25,7 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
         this.model.attach(this);
         this.device.attach((IObserver) this.model);
         this.model.setActionMode(new ActionModeBean(EActionMode.NIGHTMODE));
+        this.model.setDevice(device);
     }
 
     @Override
@@ -94,7 +95,7 @@ public class HeatingLogicNightMode extends AObservable implements IHeatingLogic,
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("HeatingLogicNightMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }

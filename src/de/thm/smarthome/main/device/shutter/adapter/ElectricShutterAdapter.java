@@ -23,7 +23,7 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("ElectricShutterAdapter: Detected a change! [" + o.toString() + "]");
         //TODO: Observer-Pattern
     }

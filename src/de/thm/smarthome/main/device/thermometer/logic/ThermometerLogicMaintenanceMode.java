@@ -28,7 +28,7 @@ public class ThermometerLogicMaintenanceMode extends AObservable implements IThe
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         //TODO: Observer-Pattern
         SmartHomeLogger.log("ThermometerLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
     }
