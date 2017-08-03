@@ -20,12 +20,13 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
 
     public ConradWeatherStationAdapter(ConradWeatherStationDriver driver) {
         this.driver = driver;
+        this.driver.attach(this);
     }
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("ConradWeatherStationAdapter: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override

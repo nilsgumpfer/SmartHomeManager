@@ -4,6 +4,7 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.main.device.weatherstation.adapter.IWeatherStation;
 
 /**
  * Created by Nils on 01.02.2017.
@@ -30,4 +31,6 @@ public interface IWeatherStationModel
     void setGenericName(String genericName);
     String getSerialnumber();
     void setSerialnumber(String serialnumber);
+    void attach(Object observer);
+    void setDevice(IWeatherStation device);
 }

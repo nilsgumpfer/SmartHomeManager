@@ -25,12 +25,16 @@ public class WeatherStationLogicMaintenanceMode extends AObservable implements I
     public WeatherStationLogicMaintenanceMode(IWeatherStationModel model, IWeatherStation adapter) {
         this.model  = model;
         device      = adapter;
+        this.model.attach(this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.MAINTENANCEMODE));
+        this.model.setDevice(device);
     }
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("WeatherStationLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override

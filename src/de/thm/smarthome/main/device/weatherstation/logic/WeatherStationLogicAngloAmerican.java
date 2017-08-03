@@ -25,12 +25,16 @@ public class WeatherStationLogicAngloAmerican extends AObservable implements IWe
     public WeatherStationLogicAngloAmerican(IWeatherStationModel model, IWeatherStation adapter) {
         this.model  = model;
         device      = adapter;
+        this.model.attach(this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.ANGLOAMERICAN));
+        this.model.setDevice(device);
     }
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("WeatherStationLogicAngloAmerican: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override

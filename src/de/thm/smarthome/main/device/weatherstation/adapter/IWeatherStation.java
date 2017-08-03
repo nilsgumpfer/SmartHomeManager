@@ -18,4 +18,5 @@ public interface IWeatherStation
     MeasureBean getWindVelocity();
     MeasureBean getAirHumidity();
     MeasureBean getAirPressure();
+    void attach(Object observer);
 }

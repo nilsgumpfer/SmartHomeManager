@@ -6,6 +6,8 @@ import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
@@ -16,7 +18,7 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class ConradWeatherStationDriver implements WeatherStationClientInterface {
+public class ConradWeatherStationDriver extends AObservable implements WeatherStationClientInterface, IObserver {
     private WeatherStationServerInterface deviceServer;
 
     private ModelVariantBean modelVariant;
@@ -65,6 +67,8 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
             deviceServer = (WeatherStationServerInterface) remoteObject;
 
             deviceServer.setGenericName(genericName);
+
+            deviceServer.attach(this);
         }
         catch (Exception e)
         {
@@ -124,6 +128,12 @@ public class ConradWeatherStationDriver implements WeatherStationClientInterface
             return new MeasureBean(0.00, EUnitOfMeasurement.NA);
         }
 
+    }
+
+    @Override
+    public void update(Object o, Object change) {
+        SmartHomeLogger.log("ConradWeatherStationDriver: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     /*public static void main(String[] args) {

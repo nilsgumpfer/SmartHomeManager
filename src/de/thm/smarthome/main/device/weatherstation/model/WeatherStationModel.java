@@ -7,6 +7,7 @@ import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.main.device.weatherstation.adapter.IWeatherStation;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -23,6 +24,7 @@ public class WeatherStationModel extends AObservable implements IWeatherStationM
     private ActionModeBean      actionMode;
     private String              genericName;
     private String              serialnumber;
+    IWeatherStation             device;
 
     public WeatherStationModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.modelVariant = modelVariant;
@@ -132,9 +134,18 @@ public class WeatherStationModel extends AObservable implements IWeatherStationM
         this.serialnumber = serialnumber;
     }
 
+    public void setDevice(IWeatherStation device) {
+        this.device = device;
+    }
+
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("WeatherStationModel: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
+
+        setTemperature(device.getTemperature());
+        setAirHumidity(device.getAirHumidity());
+        setAirPressure(device.getAirPressure());
+        setRainfallAmount(device.getRainfallAmount());
     }
 }

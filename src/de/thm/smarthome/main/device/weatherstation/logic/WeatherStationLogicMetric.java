@@ -25,12 +25,16 @@ public class WeatherStationLogicMetric extends AObservable implements IWeatherSt
     public WeatherStationLogicMetric(IWeatherStationModel model, IWeatherStation adapter) {
         this.model  = model;
         device      = adapter;
+        this.model.attach(this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.ANGLOAMERICAN));
+        this.model.setDevice(device);
     }
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("WeatherStationLogicMetric: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override

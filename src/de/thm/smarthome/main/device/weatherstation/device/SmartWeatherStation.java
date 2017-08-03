@@ -28,8 +28,8 @@ public class SmartWeatherStation extends AObservable implements IObserver{
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("SmartWeatherStation: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     public MeasureBean getTemperature() {
