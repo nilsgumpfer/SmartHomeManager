@@ -7,6 +7,7 @@ import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -15,13 +16,14 @@ import de.thm.smarthome.global.observer.IObserver;
 /*public class ShutterModel implements IShutterModel*/
 public class ShutterModel extends AObservable implements IShutterModel, IObserver
 {
-    /*private*/ PositionBean currentPosition;
-    /*private*/ PositionBean desiredPosition;
-    /*private*/ ModelVariantBean modelVariant;
-    /*private*/ ManufacturerBean manufacturer;
-    /*private*/ ActionModeBean actionMode;
-    /*private*/ String genericName;
-    /*private*/ String serialnumber;
+    private PositionBean currentPosition;
+    private PositionBean desiredPosition;
+    private ModelVariantBean modelVariant;
+    private ManufacturerBean manufacturer;
+    private ActionModeBean actionMode;
+    private String genericName;
+    private String serialnumber;
+    IShutter device;
 
     public ShutterModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
         this.modelVariant = modelVariant;
@@ -91,10 +93,17 @@ public class ShutterModel extends AObservable implements IShutterModel, IObserve
         return serialnumber;
     }
 
+    public void setDevice(IShutter device) {
+        this.device = device;
+    }
+
     @Override
     public void update (Object o, Object change)
     {
         SmartHomeLogger.log("ShutterModel: Detected a change! [" + o.toString() + "]");
-        //TODO: Observer-Pattern
+        notifyObservers(change);
+
+        setDesiredPosition(device.getDesiredPosition());
+        setCurrentPosition(device.getCurrentPosition());
     }
 }

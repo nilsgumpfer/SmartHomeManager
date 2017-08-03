@@ -25,6 +25,7 @@ public class ShutterLogicStandardMode extends AObservable implements IShutterLog
         this.model.attach (this);
         this.device.attach((IObserver) this.model);
         this.model.setActionMode(new ActionModeBean(EActionMode.STANDARDMODE));
+        this.model.setDevice(device);
     }
 
     @Override
@@ -87,7 +88,5 @@ public class ShutterLogicStandardMode extends AObservable implements IShutterLog
         SmartHomeLogger.log("HeatingLogicStandardMode: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
-
-    //TODO: Observer-Pattern --> Erledigt?
 
 };

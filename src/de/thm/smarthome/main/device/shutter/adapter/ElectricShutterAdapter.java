@@ -20,12 +20,13 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
 
     public ElectricShutterAdapter(ElectricShutterDriver driver) {
         this.driver = driver;
+        this.driver.attach(this);
     }
 
     @Override
     public void update(Object o, Object change) {
         SmartHomeLogger.log("ElectricShutterAdapter: Detected a change! [" + o.toString() + "]");
-        //TODO: Observer-Pattern
+        notifyObservers(change);
     }
 
     @Override

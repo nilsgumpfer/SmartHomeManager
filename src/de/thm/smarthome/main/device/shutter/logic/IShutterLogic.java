@@ -27,4 +27,5 @@ public interface IShutterLogic
     IShutterModel getModel();
     IShutter getAdapter();
     void attach(Object observer);
+
 }

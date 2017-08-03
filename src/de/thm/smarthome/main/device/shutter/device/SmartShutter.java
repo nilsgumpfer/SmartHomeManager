@@ -23,7 +23,7 @@ public class SmartShutter extends AObservable implements IObserver, IUpAndDownMo
 
     public SmartShutter(IShutterLogic logic) {
         this.logic = logic;
-        this.logic.attach(this); //TODO: Tim fragen
+        this.logic.attach(this);
     }
 
     @Override

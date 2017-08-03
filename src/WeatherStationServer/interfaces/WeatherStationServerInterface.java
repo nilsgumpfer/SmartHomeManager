@@ -25,4 +25,5 @@ public interface WeatherStationServerInterface extends Remote
     String getGenericName() throws RemoteException;
     String getSerialNumber() throws RemoteException;
     void setGenericName(String new_genericName) throws RemoteException;
+    void attach(Object observer);
 }

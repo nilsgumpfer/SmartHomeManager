@@ -28,6 +28,7 @@ public class ShutterLogicMaintenanceMode extends AObservable implements IShutter
         this.model.attach (this);
         this.device.attach((IObserver) this.model);
         this.model.setActionMode(new ActionModeBean(EActionMode.MAINTENANCEMODE));
+        this.model.setDevice(device);
     }
 
     @Override
@@ -88,6 +89,6 @@ public class ShutterLogicMaintenanceMode extends AObservable implements IShutter
     @Override
     public void update(Object o, Object change) {
         SmartHomeLogger.log("ShutterLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
-        //TODO: Observer-Pattern
+        notifyObservers(change);
     }
 }

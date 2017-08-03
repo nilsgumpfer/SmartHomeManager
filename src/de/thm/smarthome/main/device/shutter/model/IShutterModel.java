@@ -5,6 +5,7 @@ import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.observer.IObserver;
+import de.thm.smarthome.main.device.shutter.adapter.IShutter;
 
 /**
  * Created by Nils on 01.02.2017.
@@ -17,6 +18,7 @@ public interface IShutterModel {
     public void setActionMode(ActionModeBean actionMode);
     public void setGenericName(String genericName);
     public void setSerialnumber(String serialnumber);
+    void setDevice(IShutter device);
 
     public PositionBean getCurrentPosition();
     public PositionBean getDesiredPosition();
