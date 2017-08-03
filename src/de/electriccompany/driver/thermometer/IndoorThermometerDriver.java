@@ -5,6 +5,8 @@ import ThermometerServer.interfaces.ThermometerServerInterface;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EModelVariant;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
@@ -15,7 +17,7 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  * Created by Nils on 27.01.2017.
  */
-public class IndoorThermometerDriver implements ThermometerClientInterface
+public class IndoorThermometerDriver extends AObservable implements ThermometerClientInterface, IObserver
 {
     private ThermometerServerInterface deviceServer;
 
@@ -66,6 +68,8 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
             deviceServer = (ThermometerServerInterface) remoteObject;
 
             deviceServer.setGenericName(genericName);
+
+            deviceServer.attach(this);
         }
         catch (Exception e)
         {
@@ -91,6 +95,11 @@ public class IndoorThermometerDriver implements ThermometerClientInterface
             SmartHomeLogger.log(rex);
             return 0.0;
         }
-    }
 
-}
+        }
+
+    @Override
+    public void update(Object o, Object change) {
+        SmartHomeLogger.log("IndoorThermometerDriver: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
+}}

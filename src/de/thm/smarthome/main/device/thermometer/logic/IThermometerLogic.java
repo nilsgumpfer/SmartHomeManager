@@ -20,10 +20,13 @@ public interface IThermometerLogic
     ActionModeBean getActionMode();
     String getGenericName();
     String getSerialnumber();
-    ThermometerTransferObject getThermometerData();
 
+    ThermometerTransferObject getThermometerData();
     IThermometerModel getModel();
     IThermometer getAdapter();
 
+    //for Observer Pattern//
+
     void attach(Object observer);
+    void detach(Object observer);
 }

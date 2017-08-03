@@ -20,12 +20,13 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     public IndoorThermometerAdapter(IndoorThermometerDriver driver) {
         this.driver = driver;
+        this.driver.attach(this);
     }
 
     @Override
     public void update(Object o, Object change) {
         SmartHomeLogger.log("IndoorThermometerAdapter: Detected a change! [" + o.toString() + "]");
-        //TODO: Observer-Pattern
+        notifyObservers(changed);
     }
 
     @Override

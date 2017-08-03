@@ -25,12 +25,17 @@ public class ThermometerLogicCelsius extends AObservable implements IThermometer
     public ThermometerLogicCelsius(IThermometerModel model, IThermometer adapter) {
         this.model  = model;
         device      = adapter;
+        this.model.attach(this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.CELSIUS));
+        this.model.setDevice(device);
     }
 
     @Override
     public void update(Object o, Object change) {
         //TODO: Observer-Pattern
         SmartHomeLogger.log("ThermometerLogicCelsius: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override
@@ -60,21 +65,22 @@ public class ThermometerLogicCelsius extends AObservable implements IThermometer
 
     @Override
     public String getSerialnumber() {
-        return model.getSerialnumber();
-    }
+            return model.getSerialnumber();
+        }
 
-    @Override
-    public ThermometerTransferObject getThermometerData() {
-        return TransferObjectFactory.getThermometerTransferObject(model);
-    }
+        @Override
+        public ThermometerTransferObject getThermometerData() {
+            return TransferObjectFactory.getThermometerTransferObject(model);
+        }
 
-    @Override
-    public IThermometerModel getModel() {
-        return model;
-    }
+        @Override
+        public IThermometerModel getModel() {
+            return model;
+        }
 
-    @Override
-    public IThermometer getAdapter() {
-        return device;
-    }
+        @Override
+        public IThermometer getAdapter() {
+            return device;
+        }
+
 }

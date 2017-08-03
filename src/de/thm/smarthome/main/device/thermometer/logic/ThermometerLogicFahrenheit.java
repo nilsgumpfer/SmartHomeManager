@@ -25,12 +25,17 @@ public class ThermometerLogicFahrenheit extends AObservable implements IThermome
     public ThermometerLogicFahrenheit(IThermometerModel model, IThermometer adapter) {
         this.model  = model;
         device      = adapter;
+        this.model.attach(this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.FAHRENHEIT));
+        this.model.setDevice(device);
     }
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("ThermometerLogicFahrenheit: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
+
     }
 
     @Override
@@ -77,6 +82,8 @@ public class ThermometerLogicFahrenheit extends AObservable implements IThermome
     public IThermometer getAdapter() {
         return device;
     }
+
+
 }
 
 

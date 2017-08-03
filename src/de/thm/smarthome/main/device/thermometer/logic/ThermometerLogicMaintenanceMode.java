@@ -25,12 +25,16 @@ public class ThermometerLogicMaintenanceMode extends AObservable implements IThe
     public ThermometerLogicMaintenanceMode(IThermometerModel model, IThermometer adapter) {
         this.model  = model;
         device      = adapter;
+        this.model.attach(this);
+        this.device.attach((IObserver) this.model);
+        this.model.setActionMode(new ActionModeBean(EActionMode.MAINTENANCEMODE));
+        this.model.setDevice(device);
     }
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("ThermometerLogicMaintenanceMode: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     @Override
@@ -77,5 +81,7 @@ public class ThermometerLogicMaintenanceMode extends AObservable implements IThe
     public IThermometer getAdapter() {
         return device;
     }
+
+
 
 }

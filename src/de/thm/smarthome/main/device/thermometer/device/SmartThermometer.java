@@ -4,6 +4,7 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.interfaces.ITemperatureRelevantDevice;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
@@ -29,8 +30,8 @@ public class SmartThermometer extends AObservable implements IObserver
 
     @Override
     public void update(Object o, Object change) {
-        //TODO: Observer-Pattern
         SmartHomeLogger.log("SmartThermometer: Detected a change! [" + o.toString() + "]");
+        notifyObservers(change);
     }
 
     public MeasureBean getTemperature() {
@@ -79,4 +80,11 @@ public class SmartThermometer extends AObservable implements IObserver
                 break;
         }
     }
+
+    private void switchSubscription(IThermometerLogic oldLogic, IThermometerLogic newLogic){
+        oldLogic.detach(this);
+        newLogic.attach(this);
+        oldLogic.getModel().detach((IObserver) oldLogic);
+    }
+
 }
