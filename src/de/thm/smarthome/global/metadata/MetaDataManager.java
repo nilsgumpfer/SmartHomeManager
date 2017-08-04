@@ -13,6 +13,7 @@ public class MetaDataManager {
     private static String suffixREST    = "N/A";
     private static String protocolREST  = "N/A";
     private static String hostStatus    = "N/A";
+    public static boolean useOntology   = true;
 
     public static MetaDataManager getInstance() {
         return ourInstance;

@@ -14,6 +14,7 @@ public class SmartHomeManagerMainClass {
 
     public static void main(String args[]) throws InterruptedException
     {
+        MetaDataManager.useOntology = false;
         startSmartHomeServer();
 
         while(true){
@@ -24,9 +25,7 @@ public class SmartHomeManagerMainClass {
     public static void startSmartHomeServer(){
         try
         {
-            initEventManager();
-
-            DeviceManager.getInstance();
+            DeviceManager.getInstance().attach(EventManager.getInstance());
 
             SmartHomeLogger.log("Hello World! I am a SmartHomeManager :)");
 
@@ -66,9 +65,5 @@ public class SmartHomeManagerMainClass {
                 SmartHomeLogger.log(e);
             }
         }
-    }
-
-    private static void initEventManager(){
-        EventManager.getInstance();
     }
 }

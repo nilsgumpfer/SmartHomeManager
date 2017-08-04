@@ -30,7 +30,6 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
     private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
-    //private String hostname = "192.168.100.106";
     private String hostname;
 
     public BuderusHeatingDriver(String serialnumber, String genericName)
@@ -40,7 +39,7 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
 
         // readModelVariantInformation();
 
-        hostname = "192.168.100.106"; // TODO: Wieder entfernen
+        hostname = "localhost"; // TODO: Wieder entfernen
 
         initConnection();
     }

@@ -24,12 +24,17 @@ import java.util.List;
 public class DeviceManager extends AObservable implements IDeviceManager, IObserver{
     private static DeviceManager    ourInstance             = new DeviceManager();
     //private SmartHeating            smartHeating            = EmptyDeviceFactory.getEmptyHeating();
+    //TODO: just for testing!
     private SmartHeating            smartHeating            = HeatingFactory.createHeating(EDeviceManufacturer.BUDERUS, EModelVariant.HEATING_1000, "443k4o34ko3", "Heating");
     private SmartWeatherStation     smartWeatherStation     = EmptyDeviceFactory.getEmptyWeatherStation();
     private SmartThermometer        smartThermometer        = EmptyDeviceFactory.getEmptyThermometer();
     private List<SmartShutter>      smartShutters           = new ArrayList<>();
 
-    private DeviceManager(){}
+    private DeviceManager(){
+        smartHeating.attach(this); //TODO: just for testing!
+
+        //this.attach(EventManager.getInstance());
+    }
 
     public static DeviceManager getInstance() {
         return ourInstance;
@@ -86,7 +91,7 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                         serialnumber,
                         genericName);
 
-                //smartHeating.attach(this); TODO: DeviceManager attach wieder einfügen
+                smartHeating.attach(this);
             }
             catch (Exception e)
             {
