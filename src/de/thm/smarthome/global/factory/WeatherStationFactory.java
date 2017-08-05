@@ -22,7 +22,7 @@ public class WeatherStationFactory {
                                 serialnumber
                         ),
                         new ConradWeatherStationAdapter(
-                                new ConradWeatherStationDriver(serialnumber,genericName)
+                                new ConradWeatherStationDriver(serialnumber,genericName, modelVariantBean)
                         )));
     }
 }

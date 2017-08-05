@@ -26,10 +26,11 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
     private String serialnumber;
     private String hostname;
 
-    public IndoorThermometerDriver(String serialnumber, String genericName)
+    public IndoorThermometerDriver(String serialnumber, String genericName, ModelVariantBean modelVariantBean)
     {
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
+        this.modelVariant = modelVariantBean;
 
         readModelVariantInformation();
 

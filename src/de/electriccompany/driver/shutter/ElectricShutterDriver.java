@@ -31,10 +31,11 @@ public class ElectricShutterDriver extends AObservable implements ShutterClientI
     private String serialnumber;
     private String hostname;
 
-    public ElectricShutterDriver(String serialnumber, String genericName)
+    public ElectricShutterDriver(String serialnumber, String genericName, ModelVariantBean modelVariantBean)
     {
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
+        this.modelVariant = modelVariantBean;
 
         readModelVariantInformation();
 

@@ -26,10 +26,11 @@ public class ConradWeatherStationDriver extends AObservable implements WeatherSt
     private String serialnumber;
     private String hostname;
 
-    public ConradWeatherStationDriver(String serialnumber, String genericName)
+    public ConradWeatherStationDriver(String serialnumber, String genericName, ModelVariantBean modelVariantBean)
     {
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
+        this.modelVariant   = modelVariantBean;
 
         readModelVariantInformation();
 

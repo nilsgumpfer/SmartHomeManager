@@ -22,7 +22,7 @@ public class ThermometerFactory {
                                 serialnumber
                         ),
                         new IndoorThermometerAdapter(
-                                new IndoorThermometerDriver(serialnumber,genericName)
+                                new IndoorThermometerDriver(serialnumber,genericName, modelVariantBean)
                         )));
     }
 }

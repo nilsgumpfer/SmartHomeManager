@@ -22,7 +22,7 @@ public class ShutterFactory {
                                 serialnumber
                         ),
                         new ElectricShutterAdapter(
-                                new ElectricShutterDriver(serialnumber,genericName)
+                                new ElectricShutterDriver(serialnumber,genericName, modelVariantBean)
                         )));
     }
 }
