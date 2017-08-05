@@ -178,8 +178,8 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                 smartThermometer = ThermometerFactory.createThermometer(
                         parameterCollector.getManufacturerBean(),
                         parameterCollector.getModelVariantBean(),
-                        serialnumber,
-                        genericName);
+                        genericName,
+                        serialnumber);
 
                 smartThermometer.attach(this);
             }

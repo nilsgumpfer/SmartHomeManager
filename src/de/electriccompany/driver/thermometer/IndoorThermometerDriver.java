@@ -103,4 +103,7 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
     public void update(Object o, Object change) {
         SmartHomeLogger.log("IndoorThermometerDriver: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
-}}
+
+    }
+
+}
