@@ -42,19 +42,19 @@ public class HeatingFactory {
         //Create manufacturer-specific adapter
         switch (manufacturer){
             case BUDERUS:
-                BuderusHeatingDriver buderusHeatingDriver       = new BuderusHeatingDriver(serialnumber, genericName);
+                BuderusHeatingDriver buderusHeatingDriver       = new BuderusHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
                 heatingAdapter                                  = new BuderusHeatingAdapter(buderusHeatingDriver);
                 break;
             case VAILLANT:
                 //TODO: Change back:
                 //VaillantHeatingDriver vaillantHeatingDriver     = new VaillantHeatingDriver(serialnumber, genericName);
-                BuderusHeatingDriver vaillantHeatingDriver      = new BuderusHeatingDriver(serialnumber, genericName);
+                BuderusHeatingDriver vaillantHeatingDriver      = new BuderusHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
                 heatingAdapter                                  = new VaillantHeatingAdapter(vaillantHeatingDriver);
                 break;
             case VIESSMANN:
                 //TODO: Change back:
                 //ViessmannHeatingDriver viessmannHeatingDriver   = new ViessmannHeatingDriver(serialnumber, genericName);
-                BuderusHeatingDriver viessmannHeatingDriver     = new BuderusHeatingDriver(serialnumber, genericName);
+                BuderusHeatingDriver viessmannHeatingDriver     = new BuderusHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
                 heatingAdapter                                  = new ViessmannHeatingAdapter(viessmannHeatingDriver);
                 break;
             default:

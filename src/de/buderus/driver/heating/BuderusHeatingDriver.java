@@ -33,14 +33,15 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
     //private String hostname = "192.168.100.106";
     private String hostname;
 
-    public BuderusHeatingDriver(String serialnumber, String genericName)
+    public BuderusHeatingDriver(String serialnumber, String genericName, ModelVariantBean modelVariantBean)
     {
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
+        this.modelVariant   = modelVariantBean;
 
-        // readModelVariantInformation();
+        readModelVariantInformation();
 
-        hostname = "192.168.100.106"; // TODO: Wieder entfernen
+        //hostname = "192.168.178.31"; // TODO: Wieder entfernen
 
         initConnection();
     }
