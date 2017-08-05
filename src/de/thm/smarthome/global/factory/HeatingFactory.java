@@ -18,6 +18,8 @@ import de.thm.smarthome.main.device.heating.logic.HeatingLogicDayMode;
 import de.thm.smarthome.main.device.heating.logic.IHeatingLogic;
 import de.thm.smarthome.main.device.heating.model.HeatingModel;
 import de.thm.smarthome.main.device.heating.model.IHeatingModel;
+import de.vaillant.driver.heating.VaillantHeatingDriver;
+import de.viessmann.driver.heating.ViessmannHeatingDriver;
 
 /**
  * Created by Nils on 03.02.2017.
@@ -47,14 +49,14 @@ public class HeatingFactory {
                 break;
             case VAILLANT:
                 //TODO: Change back:
-                //VaillantHeatingDriver vaillantHeatingDriver     = new VaillantHeatingDriver(serialnumber, genericName);
-                BuderusHeatingDriver vaillantHeatingDriver      = new BuderusHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
+                VaillantHeatingDriver vaillantHeatingDriver     = new VaillantHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
+                //BuderusHeatingDriver vaillantHeatingDriver      = new BuderusHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
                 heatingAdapter                                  = new VaillantHeatingAdapter(vaillantHeatingDriver);
                 break;
             case VIESSMANN:
                 //TODO: Change back:
                 //ViessmannHeatingDriver viessmannHeatingDriver   = new ViessmannHeatingDriver(serialnumber, genericName);
-                BuderusHeatingDriver viessmannHeatingDriver     = new BuderusHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
+                ViessmannHeatingDriver viessmannHeatingDriver     = new ViessmannHeatingDriver(serialnumber, genericName, new ModelVariantBean(modelVariant));
                 heatingAdapter                                  = new ViessmannHeatingAdapter(viessmannHeatingDriver);
                 break;
             default:

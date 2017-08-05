@@ -6,6 +6,7 @@ import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.vaillant.driver.heating.VaillantHeatingDriver;
 
 //import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
 
@@ -15,13 +16,13 @@ import de.thm.smarthome.global.observer.IObserver;
  */
 public class VaillantHeatingAdapter extends AObservable implements IHeating, IObserver
 {
-    private BuderusHeatingDriver driver;
+    private VaillantHeatingDriver driver;//BuderusHeatingDriver driver;
             //TODO: Change back to:
-            // VaillantHeatingDriver driver;
+
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VAILLANT);
 
     //public VaillantHeatingAdapter(VaillantHeatingDriver vaillantHeatingDriver) {
-    public VaillantHeatingAdapter(BuderusHeatingDriver driver) {
+    public VaillantHeatingAdapter(VaillantHeatingDriver driver) {
         this.driver = driver;
         this.driver.attach(this);
     }

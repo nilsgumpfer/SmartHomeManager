@@ -6,6 +6,7 @@ import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
+import de.viessmann.driver.heating.ViessmannHeatingDriver;
 
 /**
  * Created by Nils on 27.01.2017.
@@ -13,13 +14,13 @@ import de.thm.smarthome.global.observer.IObserver;
  */
 public class ViessmannHeatingAdapter extends AObservable implements IHeating, IObserver{
 
-    private BuderusHeatingDriver driver;
+    private ViessmannHeatingDriver driver;
             //TODO: Change back to:
             // ViessmannHeatingDriver driver;
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VIESSMANN);
 
     //public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
-    public ViessmannHeatingAdapter(BuderusHeatingDriver driver) {
+    public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
         this.driver = driver;
         this.driver.attach(this);
     }

@@ -31,9 +31,10 @@ public class ViessmannHeatingDriver extends AObservable implements HeizungClient
     private String serialnumber;
     private String hostname;
 
-    public ViessmannHeatingDriver(String serialnumber, String genericName) {
+    public ViessmannHeatingDriver(String serialnumber, String genericName, ModelVariantBean modelVariant) {
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
+        this.modelVariant = modelVariant;
 
         readModelVariantInformation();
 
@@ -83,6 +84,7 @@ public class ViessmannHeatingDriver extends AObservable implements HeizungClient
             deviceServer = (HeizungServerInterface) remoteObject;
 
             deviceServer.setGenericName(genericName);
+            deviceServer.attach(this);
         }
         catch (Exception e)
         {

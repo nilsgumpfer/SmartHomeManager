@@ -31,11 +31,13 @@ public class VaillantHeatingDriver extends AObservable implements HeizungClientI
     private String serialnumber;
     private String hostname;
 
-    public VaillantHeatingDriver(String serialnumber, String genericName) {
+    public VaillantHeatingDriver(String serialnumber, String genericName, ModelVariantBean modelVariant) {
         this.serialnumber   = serialnumber;
         this.genericName    = genericName;
+        this.modelVariant = modelVariant;
 
         readModelVariantInformation();
+        //hostname = "192.168.100.106";
 
         initConnection();
     }
@@ -84,6 +86,7 @@ public class VaillantHeatingDriver extends AObservable implements HeizungClientI
             deviceServer = (HeizungServerInterface) remoteObject;
 
             deviceServer.setGenericName(genericName);
+            deviceServer.attach(this);
         }
         catch (Exception e)
         {
