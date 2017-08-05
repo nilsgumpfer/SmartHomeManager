@@ -1,9 +1,10 @@
 package de.thm.smarthome.global.observer;
 
+import de.thm.smarthome.global.logging.SmartHomeLogger;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 public abstract class AObservable {
     private List<Object> attachedObservers = new ArrayList<>();
@@ -27,7 +28,7 @@ public abstract class AObservable {
                     IObserver myO = (IObserver) element;
                     myO.update(this, change);
                 } catch (RemoteException e) {
-                    e.printStackTrace();
+                    SmartHomeLogger.log(e);
                 }
             }
 

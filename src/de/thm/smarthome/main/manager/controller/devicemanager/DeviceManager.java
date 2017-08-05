@@ -30,7 +30,11 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
     private SmartThermometer        smartThermometer        = EmptyDeviceFactory.getEmptyThermometer();
     private List<SmartShutter>      smartShutters           = new ArrayList<>();
 
-    private DeviceManager(){}
+    private DeviceManager(){
+        smartHeating.attach(this); //TODO: just for testing!
+
+        //this.attach(EventManager.getInstance());
+    }
 
     public static DeviceManager getInstance() {
         return ourInstance;
@@ -87,7 +91,7 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                         serialnumber,
                         genericName);
 
-                //smartHeating.attach(this); TODO: DeviceManager attach wieder einfügen
+                smartHeating.attach(this);
             }
             catch (Exception e)
             {

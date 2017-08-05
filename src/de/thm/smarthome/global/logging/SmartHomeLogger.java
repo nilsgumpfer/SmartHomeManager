@@ -27,6 +27,7 @@ public class SmartHomeLogger {
 
     public static void log(Exception e){
         log(e.getMessage() + " (" + e.toString() + ")");
+        e.printStackTrace();
     }
 
     public static String[] readLogs(int limit){

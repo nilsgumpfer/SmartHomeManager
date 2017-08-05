@@ -7,7 +7,7 @@ import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.enumeration.EPowerState;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
-import de.thm.smarthome.global.observer.AObservable;
+import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
 import de.thm.smarthome.main.device.thermometer.device.SmartThermometer;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Nils on 05.02.2017.
  */
-public class EventManager implements IEventManager {
+public class EventManager implements IEventManager, IObserver {
     private static EventManager ourInstance     = new EventManager();
     private DeviceManager deviceManager         = DeviceManager.getInstance();
     private OWLOntology ontology                = null;
@@ -74,9 +74,11 @@ public class EventManager implements IEventManager {
     }
 
     @Override
-    public void update(AObservable o, Object change) {
+    public void update(Object o, Object change) {
         SmartHomeLogger.log("EventManager: Detected a change! [" + o.toString() + "]");
-        //doReasoning(); //TODO: Include!
+
+        /*if(MetaDataManager.useOntology)
+            doReasoning();*/
     }
 
     private void initOWLAPI()
@@ -216,7 +218,7 @@ public class EventManager implements IEventManager {
 
     private void applyHeatingPropertiesToOntology(){
         updateHeatingObjects();
-        createHeatingIndividualIfNotPresent();
+        //createHeatingIndividualIfNotPresent(); //TODO: just for testing!
         applyPowerStateToIndividual(heatingIndividual, smartHeating.getPowerState().getPowerState_Enum());
         applyTemperatureToIndividual(heatingIndividual, smartHeating.getCurrentTemperature().getMeasure_Double());
         applyActionModeToIndividual(heatingIndividual, smartHeating.getActionMode().getActionMode_Enum());
@@ -269,7 +271,8 @@ public class EventManager implements IEventManager {
 
     private void updateHeatingObjects(){
         smartHeating = deviceManager.getSmartHeating();
-        heatingName = smartHeating.getGenericName().replace(" ", "");
+        //heatingName = smartHeating.getGenericName().replace(" ", "");
+        heatingName = "MyHeating"; //TODO: just for testing
         heatingIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, heatingName));
     }
 
@@ -315,7 +318,8 @@ public class EventManager implements IEventManager {
 
     private OWLNamedIndividual readObjectPropertyFromOntology(OWLNamedIndividual namedIndividual, OWLObjectProperty objectProperty){
         try {
-            return reasoner.objectPropertyValues(namedIndividual, objectProperty).collect(Collectors.toList()).get(0);
+            List<OWLNamedIndividual> namedIndividualList = reasoner.objectPropertyValues(namedIndividual, objectProperty).collect(Collectors.toList());
+            return namedIndividualList.get(namedIndividualList.size() - 1);
         }
         catch (Exception e){
             return null;
@@ -324,7 +328,8 @@ public class EventManager implements IEventManager {
 
     private OWLLiteral readDataPropertyFromOntology(OWLNamedIndividual namedIndividual, OWLDataProperty dataProperty){
         try {
-            return reasoner.dataPropertyValues(namedIndividual, dataProperty).collect(Collectors.toList()).get(0);
+            List<OWLLiteral> literalList = reasoner.dataPropertyValues(namedIndividual, dataProperty).collect(Collectors.toList());
+            return literalList.get(literalList.size() - 1);
         }
         catch (Exception e){
             return null;
@@ -343,28 +348,33 @@ public class EventManager implements IEventManager {
 
         if(currentValueTemperature != inferredValueTemperature) {
             smartHeating.setTemperature(heatingTransferObject.getDesiredTemperature());
-            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueTemperature + "Old value: " + currentValueTemperature + " (Heating temperature)");
+            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueTemperature + " Old value: " + currentValueTemperature + " (Heating temperature)");
         }
 
         if(currentValueActionMode != inferredValueActionMode) {
             smartHeating.setActionMode(heatingTransferObject.getActionMode());
-            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueActionMode + "Old value: " + currentValueActionMode + " (Heating temperature)");
+            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueActionMode + " Old value: " + currentValueActionMode + " (Heating actionMode)");
         }
 
         if(currentValuePowerState != inferredValuePowerState) {
             smartHeating.setPowerState(heatingTransferObject.getPowerState());
-            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValuePowerState + "Old value: " + currentValuePowerState + " (Heating temperature)");
+            SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValuePowerState + " Old value: " + currentValuePowerState + " (Heating powerState)");
         }
     }
 
     private void doReasoning(){
-        // Apply (current) values to ontology
-        applyHeatingPropertiesToOntology();
-        applyShutterPropertiesToOntology();
-        applyThermometerPropertiesToOntology();
-        applyWeatherStationPropertiesToOntology();
+        try {
+            // Apply (current) values to ontology
+            applyHeatingPropertiesToOntology();
+            //applyShutterPropertiesToOntology();
+            //applyThermometerPropertiesToOntology();
+            //applyWeatherStationPropertiesToOntology();
 
-        // Read inferred (new) values and invoke action
-        invokeActionsAtHeating(readInferredHeatingProperties());
+            // Read inferred (new) values and invoke action
+            invokeActionsAtHeating(readInferredHeatingProperties());
+        }
+        catch (Exception e){
+            //SmartHomeLogger.log(e);
+        }
     }
 }
