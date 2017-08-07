@@ -38,9 +38,9 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
         this.genericName    = genericName;
         this.modelVariant   = modelVariantBean;
 
-        readModelVariantInformation();
+        //eadModelVariantInformation();
 
-        //hostname = "192.168.178.31"; // TODO: Wieder entfernen
+        hostname = "192.168.178.31"; // TODO: Wieder entfernen
 
         initConnection();
     }

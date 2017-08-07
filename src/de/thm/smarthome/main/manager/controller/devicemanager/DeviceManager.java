@@ -219,8 +219,9 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
                 smartWeatherStation = WeatherStationFactory.createWeatherStation(
                         parameterCollector.getManufacturerBean(),
                         parameterCollector.getModelVariantBean(),
-                        serialnumber,
-                        genericName);
+                        genericName,
+                        serialnumber
+                        );
 
                 smartWeatherStation.attach(this);
             }

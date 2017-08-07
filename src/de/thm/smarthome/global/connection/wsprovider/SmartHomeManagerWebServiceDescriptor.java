@@ -172,6 +172,8 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
                                               @PathParam( "manufacturer" ) String manufacturer,
                                               @PathParam( "genericName" ) String genericName,
                                               @PathParam( "serialnumber" ) String serialnumber ) {
+        System.out.println("Hersteller: " + manufacturer);
+        System.out.println("Modell: " + modelVariant);
         return requestManager.createWeatherStation(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
     }
 
@@ -216,6 +218,8 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
                                               @PathParam( "manufacturer" ) String manufacturer,
                                               @PathParam( "genericName" ) String genericName,
                                               @PathParam( "serialnumber" ) String serialnumber ) {
+        System.out.println("name: " + genericName);
+        System.out.println("seriennummer: " + serialnumber);
         return requestManager.createThermometer(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
     }
 

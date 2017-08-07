@@ -32,6 +32,7 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
         this.genericName    = genericName;
         this.modelVariant = modelVariantBean;
 
+        //hostname = "192.168.178.31";
         readModelVariantInformation();
 
         initConnection();
