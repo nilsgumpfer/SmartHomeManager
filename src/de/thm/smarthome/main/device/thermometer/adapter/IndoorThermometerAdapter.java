@@ -41,6 +41,6 @@ public class IndoorThermometerAdapter extends AObservable implements IThermomete
 
     @Override
     public MeasureBean getTemperature() {
-        return new MeasureBean(driver.getTemperature(), EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+        return driver.getTemperature();
     }
 }

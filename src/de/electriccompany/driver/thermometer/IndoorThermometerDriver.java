@@ -2,8 +2,10 @@ package de.electriccompany.driver.thermometer;
 
 import ThermometerServer.interfaces.ThermometerClientInterface;
 import ThermometerServer.interfaces.ThermometerServerInterface;
+import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
 import de.thm.smarthome.global.enumeration.EModelVariant;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
@@ -32,8 +34,8 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
         this.genericName    = genericName;
         this.modelVariant = modelVariantBean;
 
-        //hostname = "192.168.178.31";
-        readModelVariantInformation();
+        hostname = "192.168.100.106";
+        //readModelVariantInformation();
 
         initConnection();
     }
@@ -89,13 +91,13 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
         }
     }
 
-    public double getTemperature(){
+    public MeasureBean getTemperature(){
         try {
             return deviceServer.getTemperature();
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
-            return 0.0;
+            return new MeasureBean(0.0, EUnitOfMeasurement.NA);
         }
 
         }

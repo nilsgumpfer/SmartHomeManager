@@ -4,6 +4,7 @@ import de.thm.smarthome.global.beans.ActionModeBean;
 import de.thm.smarthome.global.beans.ManufacturerBean;
 import de.thm.smarthome.global.beans.MeasureBean;
 import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
@@ -28,6 +29,7 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
         this.actionMode = actionMode;
         this.genericName = genericName;
         this.serialnumber = serialnumber;
+        temperature = new MeasureBean(0.0, EUnitOfMeasurement.NA);
     }
 
 

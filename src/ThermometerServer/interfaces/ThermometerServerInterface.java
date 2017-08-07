@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
  * Created by Tim on 07.04.2017.
  */
 public interface ThermometerServerInterface extends Remote {
-    double getTemperature() throws RemoteException;
+    MeasureBean getTemperature() throws RemoteException;
     ModelVariantBean getModelVariant() throws RemoteException;
     ManufacturerBean getManufacturer() throws RemoteException;
     ActionModeBean getActionMode() throws RemoteException;
