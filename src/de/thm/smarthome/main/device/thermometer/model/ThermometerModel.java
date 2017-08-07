@@ -24,12 +24,12 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
     IThermometer device;
 
     public ThermometerModel(ModelVariantBean modelVariant, ManufacturerBean manufacturer, ActionModeBean actionMode, String genericName, String serialnumber) {
-        this.modelVariant = modelVariant;
-        this.manufacturer = manufacturer;
-        this.actionMode = actionMode;
-        this.genericName = genericName;
-        this.serialnumber = serialnumber;
-        temperature = new MeasureBean(0.0, EUnitOfMeasurement.NA);
+        this.modelVariant   = modelVariant;
+        this.manufacturer   = manufacturer;
+        this.actionMode     = actionMode;
+        this.genericName    = genericName;
+        this.serialnumber   = serialnumber;
+        temperature         = new MeasureBean(0.0, EUnitOfMeasurement.NA);
     }
 
 
