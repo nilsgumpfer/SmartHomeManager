@@ -11,7 +11,7 @@ import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  */
 public class ConradWeatherStationAdapter extends AObservable implements IWeatherStation, IObserver
 {
@@ -22,6 +22,8 @@ public class ConradWeatherStationAdapter extends AObservable implements IWeather
         this.driver = driver;
         this.driver.attach(this);
     }
+
+    //Getter//
 
     @Override
     public void update(Object o, Object change) {

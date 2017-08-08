@@ -12,7 +12,7 @@ import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  */
 public class MockedShutterAdapter extends AObservable implements IShutter, IObserver
 {
@@ -23,6 +23,15 @@ public class MockedShutterAdapter extends AObservable implements IShutter, IObse
         SmartHomeLogger.log("MockedShutterAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
+
+    //SETTER//
+
+    @Override
+    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
+        return new MessageBean(false);
+    }
+
+    //GETTER//
 
     @Override
     public PositionBean getCurrentPosition() { return new PositionBean(EPosition.NA); }
@@ -38,10 +47,7 @@ public class MockedShutterAdapter extends AObservable implements IShutter, IObse
         return manufacturer;
     }
 
-    @Override
-    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
-        return new MessageBean(false);
-    }
+
     }
 
 

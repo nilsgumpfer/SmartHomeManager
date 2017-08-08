@@ -8,20 +8,18 @@ import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 import de.vaillant.driver.heating.VaillantHeatingDriver;
 
-//import de.thm.smarthome.main.device.heating.memento.HeatingMemento;
+
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  * Changed 28.01.2017
  */
 public class VaillantHeatingAdapter extends AObservable implements IHeating, IObserver
 {
-    private VaillantHeatingDriver driver;//BuderusHeatingDriver driver;
-            //TODO: Change back to:
+    private VaillantHeatingDriver driver;
 
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VAILLANT);
 
-    //public VaillantHeatingAdapter(VaillantHeatingDriver vaillantHeatingDriver) {
     public VaillantHeatingAdapter(VaillantHeatingDriver driver) {
         this.driver = driver;
         this.driver.attach(this);

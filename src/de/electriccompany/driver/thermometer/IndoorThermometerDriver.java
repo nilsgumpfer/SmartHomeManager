@@ -50,7 +50,7 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
 
     private void initConnection()
     {
-     
+
         int port    = 0;
 
         try {
