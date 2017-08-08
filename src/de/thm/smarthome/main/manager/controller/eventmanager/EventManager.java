@@ -7,6 +7,7 @@ import de.thm.smarthome.global.enumeration.EActionMode;
 import de.thm.smarthome.global.enumeration.EPowerState;
 import de.thm.smarthome.global.enumeration.EUnitOfMeasurement;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
+import de.thm.smarthome.global.metadata.MetaDataManager;
 import de.thm.smarthome.global.observer.IObserver;
 import de.thm.smarthome.global.transfer.HeatingTransferObject;
 import de.thm.smarthome.main.device.heating.device.SmartHeating;
@@ -29,30 +30,30 @@ import java.util.stream.Collectors;
  * Created by Nils on 05.02.2017.
  */
 public class EventManager implements IEventManager, IObserver {
-    private static EventManager ourInstance     = new EventManager();
-    private DeviceManager deviceManager         = DeviceManager.getInstance();
-    private OWLOntology ontology                = null;
-    private OWLReasoner reasoner                = null;
-    private OWLOntologyManager ontologyManager  = null;
-    private OWLDataFactory dataFactory          = null;
-    private PrefixManager prefixManager         = null;
-    private String ontologyName                 = "SmartHomeOntology.owl";
-    private String owlAPIVersion                = "5.1.0";
-    private String reasonerVersion              = "2.6.1";
-    private String ontologyNamespace            = "http://www.thm.de/eva/ontologies/smarthome#";
-    private IRI heatingIRI                      = null;
-    private IRI shutterIRI                      = null;
-    private IRI weatherStationIRI               = null;
-    private IRI thermometerIRI                  = null;
-    private File ontologyFile                   = null;
-    private OWLReasonerFactory reasonerFactory  = null;
-    private OWLObjectProperty hasPowerState     = null;
-    private OWLObjectProperty hasActionMode     = null;
-    private OWLDataProperty hasTemperature      = null;
-    private OWLDataProperty hasWindVelocity     = null;
-    private OWLDataProperty hasRainfallAmount   = null;
-    private OWLDataProperty hasAirPressure      = null;
-    private OWLDataProperty hasAirHumidity      = null;
+    private static EventManager ourInstance                 = new EventManager();
+    private DeviceManager deviceManager                     = DeviceManager.getInstance();
+    private OWLOntology ontology                            = null;
+    private OWLReasoner reasoner                            = null;
+    private OWLOntologyManager ontologyManager              = null;
+    private OWLDataFactory dataFactory                      = null;
+    private PrefixManager prefixManager                     = null;
+    private String ontologyName                             = "SmartHomeOntology.owl";
+    private String owlAPIVersion                            = "5.1.0";
+    private String reasonerVersion                          = "2.6.1";
+    private String ontologyNamespace                        = "http://www.thm.de/eva/ontologies/smarthome#";
+    private IRI heatingIRI                                  = null;
+    private IRI shutterIRI                                  = null;
+    private IRI weatherStationIRI                           = null;
+    private IRI thermometerIRI                              = null;
+    private File ontologyFile                               = null;
+    private OWLReasonerFactory reasonerFactory              = null;
+    private OWLObjectProperty hasPowerState                 = null;
+    private OWLObjectProperty hasActionMode                 = null;
+    private OWLDataProperty hasTemperature                  = null;
+    private OWLDataProperty hasWindVelocity                 = null;
+    private OWLDataProperty hasRainfallAmount               = null;
+    private OWLDataProperty hasAirPressure                  = null;
+    private OWLDataProperty hasAirHumidity                  = null;
     private SmartHeating smartHeating                       = null;
     private SmartThermometer smartThermometer               = null;
     private SmartWeatherStation smartWeatherStation         = null;
@@ -77,8 +78,8 @@ public class EventManager implements IEventManager, IObserver {
     public void update(Object o, Object change) {
         SmartHomeLogger.log("EventManager: Detected a change! [" + o.toString() + "]");
 
-        /*if(MetaDataManager.useOntology)
-            doReasoning();*/
+        if(MetaDataManager.useOntology)
+            doReasoning();
     }
 
     private void initOWLAPI()
@@ -218,10 +219,13 @@ public class EventManager implements IEventManager, IObserver {
 
     private void applyHeatingPropertiesToOntology(){
         updateHeatingObjects();
-        //createHeatingIndividualIfNotPresent(); //TODO: just for testing!
-        applyPowerStateToIndividual(heatingIndividual, smartHeating.getPowerState().getPowerState_Enum());
-        applyTemperatureToIndividual(heatingIndividual, smartHeating.getCurrentTemperature().getMeasure_Double());
-        applyActionModeToIndividual(heatingIndividual, smartHeating.getActionMode().getActionMode_Enum());
+
+        if(smartHeating.getActionMode().getActionMode_Enum() != EActionMode.NA) {
+            //createHeatingIndividualIfNotPresent(); //TODO: just for testing!
+            applyPowerStateToIndividual(heatingIndividual, smartHeating.getPowerState().getPowerState_Enum());
+            applyTemperatureToIndividual(heatingIndividual, smartHeating.getDesiredTemperature().getMeasure_Double());
+            applyActionModeToIndividual(heatingIndividual, smartHeating.getActionMode().getActionMode_Enum());
+        }
     }
 
     private void createHeatingIndividualIfNotPresent(){ //TODO: GO ON HERE, check this
@@ -239,33 +243,48 @@ public class EventManager implements IEventManager, IObserver {
     }
 
     private void applyShutterPropertiesToOntology(){
-        /*updateShutterObjects();*/
+        /*
+        * updateShutterObjects();
+        *
+        * if(smartShutter.getActionMode().getActionMode_Enum() != EActionMode.NA) {
+        * .....
+        * }
+        * */
     }
 
     private void applyThermometerPropertiesToOntology(){
         updateThermometerObjects();
-        applyTemperatureToIndividual(thermometerIndividual, smartThermometer.getTemperature().getMeasure_Double());
-        applyActionModeToIndividual(thermometerIndividual, smartThermometer.getActionMode().getActionMode_Enum());
+
+        if(smartThermometer.getActionMode().getActionMode_Enum() != EActionMode.NA) {
+            applyTemperatureToIndividual(thermometerIndividual, smartThermometer.getTemperature().getMeasure_Double());
+            applyActionModeToIndividual(thermometerIndividual, smartThermometer.getActionMode().getActionMode_Enum());
+        }
     }
 
     private void applyWeatherStationPropertiesToOntology(){
         updateWeatherStationObjects();
-        applyActionModeToIndividual(weatherStationIndividual, smartWeatherStation.getActionMode().getActionMode_Enum());
-        applyRainfallAmountToIndividual(weatherStationIndividual, smartWeatherStation.getRainfallAmount().getMeasure_Double());
-        applyWindVelocityToIndividual(weatherStationIndividual, smartWeatherStation.getWindVelocity().getMeasure_Double());
-        applyAirHumidityToIndividual(weatherStationIndividual, smartWeatherStation.getAirHumidity().getMeasure_Double());
-        applyAirPressureToIndividual(weatherStationIndividual, smartWeatherStation.getAirPressure().getMeasure_Double());
+
+        if(smartWeatherStation.getActionMode().getActionMode_Enum() != EActionMode.NA) {
+            applyActionModeToIndividual(weatherStationIndividual, smartWeatherStation.getActionMode().getActionMode_Enum());
+            applyRainfallAmountToIndividual(weatherStationIndividual, smartWeatherStation.getRainfallAmount().getMeasure_Double());
+            applyWindVelocityToIndividual(weatherStationIndividual, smartWeatherStation.getWindVelocity().getMeasure_Double());
+            applyAirHumidityToIndividual(weatherStationIndividual, smartWeatherStation.getAirHumidity().getMeasure_Double());
+            applyAirPressureToIndividual(weatherStationIndividual, smartWeatherStation.getAirPressure().getMeasure_Double());
+            applyTemperatureToIndividual(weatherStationIndividual, smartWeatherStation.getTemperature().getMeasure_Double());
+        }
     }
 
     private void updateThermometerObjects(){
         smartThermometer = deviceManager.getSmartThermometer();
-        thermometerName = smartThermometer.getGenericName().replace(" ", "");
+        //thermometerName = smartThermometer.getGenericName().replace(" ", "");
+        thermometerName = "MyThermometer"; //TODO: just for testing
         thermometerIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, thermometerName));
     }
 
     private void updateWeatherStationObjects(){
         smartWeatherStation = deviceManager.getSmartWeatherStation();
-        weatherStationName = smartWeatherStation.getGenericName().replace(" ", "");
+        //weatherStationName = smartWeatherStation.getGenericName().replace(" ", "");
+        weatherStationName = "MyWeatherStation"; //TODO: just for testing
         weatherStationIndividual = dataFactory.getOWLNamedIndividual(IRI.create(ontologyNamespace, weatherStationName));
     }
 
@@ -362,19 +381,20 @@ public class EventManager implements IEventManager, IObserver {
         }
     }
 
-    private void doReasoning(){
+    public void doReasoning(){
         try {
             // Apply (current) values to ontology
             applyHeatingPropertiesToOntology();
             //applyShutterPropertiesToOntology();
-            //applyThermometerPropertiesToOntology();
-            //applyWeatherStationPropertiesToOntology();
+            applyThermometerPropertiesToOntology();
+            applyWeatherStationPropertiesToOntology();
 
-            // Read inferred (new) values and invoke action
+            // Read inferred (new) values and invoke actions
             invokeActionsAtHeating(readInferredHeatingProperties());
+            //invokeActionsAtShutters(readInferredShutterProperties());
         }
         catch (Exception e){
-            //SmartHomeLogger.log(e);
+            SmartHomeLogger.log(e);
         }
     }
 }

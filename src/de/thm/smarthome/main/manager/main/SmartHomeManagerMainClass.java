@@ -14,7 +14,6 @@ public class SmartHomeManagerMainClass {
 
     public static void main(String args[]) throws InterruptedException
     {
-        MetaDataManager.useOntology = false;
         startSmartHomeServer();
 
         while(true){
@@ -39,6 +38,9 @@ public class SmartHomeManagerMainClass {
             MetaDataManager.setHostStatus("Gestartet");
 
             SmartHomeLogger.log(MetaDataManager.getHostInfo());
+
+            MetaDataManager.useOntology = false;
+            EventManager.getInstance().doReasoning();
         }
         catch (Exception e)
         {
