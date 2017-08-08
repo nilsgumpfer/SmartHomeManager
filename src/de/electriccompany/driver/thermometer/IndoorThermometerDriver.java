@@ -17,7 +17,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  */
 public class IndoorThermometerDriver extends AObservable implements ThermometerClientInterface, IObserver
 {
@@ -34,7 +34,6 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
         this.genericName    = genericName;
         this.modelVariant = modelVariantBean;
 
-        //hostname = "192.168.100.106";
         readModelVariantInformation();
 
         initConnection();
@@ -51,8 +50,7 @@ public class IndoorThermometerDriver extends AObservable implements ThermometerC
 
     private void initConnection()
     {
-        //TODO: get IP Address for host-name
-        //String host = modelVariant;
+     
         int port    = 0;
 
         try {

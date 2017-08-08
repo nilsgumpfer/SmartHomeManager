@@ -20,12 +20,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  */
 public class ElectricShutterDriver extends AObservable implements ShutterClientInterface, IObserver {
     private ShutterServerInterface deviceServer;
 
-    //TODO: Modelvariant besprechen
     private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
@@ -41,10 +40,6 @@ public class ElectricShutterDriver extends AObservable implements ShutterClientI
 
         initConnection();
     }
-    /* private void readModelVariantInformation() {
-        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
-        modelVariant = "Shutter3000";
-    }*/
 
 
     private void readModelVariantInformation() {
@@ -62,8 +57,6 @@ public class ElectricShutterDriver extends AObservable implements ShutterClientI
 
     private void initConnection()
     {
-        //TODO: get IP Address for host-name
-        /*String host = modelVariant;*/
         int port    = 0;
 
         try {
@@ -110,7 +103,7 @@ public class ElectricShutterDriver extends AObservable implements ShutterClientI
         }
         catch (RemoteException rex){
             SmartHomeLogger.log(rex);
-            return new PositionBean(EPosition.NA); //TODO: Maßeinheit fehlt
+            return new PositionBean(EPosition.NA);
         }
     }
 
@@ -123,13 +116,7 @@ public class ElectricShutterDriver extends AObservable implements ShutterClientI
             return new PositionBean(EPosition.NA);
         }
     }
-   /* public int getCurrentPosition() {
-        return deviceServer.getCurrentPosition();
-    }
 
-    public int getDesiredPosition() {
-        return deviceServer.getDesiredPosition();
-    }*/
 
     public MessageBean setDesiredPosition(PositionBean new_desiredPosition) {
         try {
@@ -142,17 +129,6 @@ public class ElectricShutterDriver extends AObservable implements ShutterClientI
         }
     }
 
-    /*public boolean setDesiredPosition(int desiredPosition)
-    {
-        return deviceServer.setDesiredPosition(desiredPosition);
-    }*/
-
-    /*public static void main(String[] args) {
-        ElectricShutterDriver ed = new ElectricShutterDriver("12345", "ShutterTest");
-        System.out.println(String.valueOf(ed.getCurrentPosition().getPosition_Int()));
-        ed.setDesiredPosition(new PositionBean(EPosition.P1));
-
-    }*/
 
     @Override
     public void update(Object o, Object change) {
