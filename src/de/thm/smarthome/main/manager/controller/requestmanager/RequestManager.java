@@ -354,4 +354,49 @@ public class RequestManager implements IServiceFacade {
         else
             return new MessageBean(false);
     }
+
+    @Override
+    public String[] getHeatingManufacturers_static() {
+        return MetaDataManager.getHeatingDeviceManufacturers_static();
+    }
+
+    @Override
+    public String[] getShutterManufacturers_static() {
+        return MetaDataManager.getShutterDeviceManufacturers_static();
+    }
+
+    @Override
+    public String[] getThermometerManufacturers_static() {
+        return MetaDataManager.getThermometerDeviceManufacturers_static();
+    }
+
+    @Override
+    public String[] getWeatherStationManufacturers_static() {
+        return MetaDataManager.getWeatherStationDeviceManufacturers_static();
+    }
+
+    @Override
+    public String[] getHeatingModelVariants_static() {
+        return MetaDataManager.getHeatingModelVariants_static();
+    }
+
+    @Override
+    public String[] getThermometerModelVariants_static() {
+        return MetaDataManager.getThermometerModelVariants_static();
+    }
+
+    @Override
+    public String[] getWeatherStationModelVariants_static() {
+        return MetaDataManager.getWeatherStationModelVariants_static();
+    }
+
+    @Override
+    public String[] getShutterModelVariants_static() {
+        return MetaDataManager.getShutterModelVariants_static();
+    }
+
+    @Override
+    public String[] getShutterPositions_static() {
+        return MetaDataManager.getShutterPositions_static();
+    }
 }

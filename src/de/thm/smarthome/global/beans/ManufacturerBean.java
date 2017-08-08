@@ -3,6 +3,8 @@ package de.thm.smarthome.global.beans;
 import de.thm.smarthome.global.enumeration.EDeviceManufacturer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nils on 11.06.2017.
@@ -20,6 +22,48 @@ public class ManufacturerBean implements Serializable{
     {
         this.deviceManufacturer_String = deviceManufacturer;
         lookUpEnum();
+    }
+
+    public static String[] getHeatingManufacturerEnumsAsStrings() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EDeviceManufacturer.BUDERUS.toString());
+        stringArrayList.add(EDeviceManufacturer.VIESSMANN.toString());
+        stringArrayList.add(EDeviceManufacturer.VAILLANT.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
+    }
+
+    public static String[] getShutterManufacturerEnumsAsStrings() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EDeviceManufacturer.ELECTRIC_COMPANY.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
+    }
+
+    public static String[] getThermometerManufacturerEnumsAsStrings() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EDeviceManufacturer.ELECTRIC_COMPANY.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
+    }
+
+    public static String[] getWeatherStationManufacturerEnumsAsStrings() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EDeviceManufacturer.CONRAD_ELECTRONIC.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
     }
 
     public EDeviceManufacturer getDeviceManufacturer_Enum() {

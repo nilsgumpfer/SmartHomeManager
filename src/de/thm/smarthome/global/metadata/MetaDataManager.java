@@ -1,5 +1,8 @@
 package de.thm.smarthome.global.metadata;
 
+import de.thm.smarthome.global.beans.ManufacturerBean;
+import de.thm.smarthome.global.beans.ModelVariantBean;
+import de.thm.smarthome.global.beans.PositionBean;
 import de.thm.smarthome.global.logging.SmartHomeLogger;
 
 import java.net.InetAddress;
@@ -103,5 +106,41 @@ public class MetaDataManager {
 
     public static void setHostStatus(String hostStatus) {
         MetaDataManager.hostStatus = hostStatus;
+    }
+
+    public static String[] getHeatingDeviceManufacturers_static() {
+        return ManufacturerBean.getHeatingManufacturerEnumsAsStrings();
+    }
+
+    public static String[] getShutterDeviceManufacturers_static() {
+        return ManufacturerBean.getShutterManufacturerEnumsAsStrings();
+    }
+
+    public static String[] getThermometerDeviceManufacturers_static() {
+        return ManufacturerBean.getThermometerManufacturerEnumsAsStrings();
+    }
+
+    public static String[] getWeatherStationDeviceManufacturers_static() {
+        return ManufacturerBean.getWeatherStationManufacturerEnumsAsStrings();
+    }
+
+    public static String[] getHeatingModelVariants_static() {
+        return ModelVariantBean.getHeatingModelEnumsAsString();
+    }
+
+    public static String[] getThermometerModelVariants_static() {
+        return ModelVariantBean.getThermometerModelEnumsAsString();
+    }
+
+    public static String[] getWeatherStationModelVariants_static() {
+        return ModelVariantBean.getWeatherStationModelEnumsAsString();
+    }
+
+    public static String[] getShutterModelVariants_static() {
+        return ModelVariantBean.getShutterModelEnumsAsString();
+    }
+
+    public static String[] getShutterPositions_static() {
+        return PositionBean.getPositionEnumsAsString();
     }
 }

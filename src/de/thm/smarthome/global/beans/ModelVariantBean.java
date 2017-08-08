@@ -3,6 +3,8 @@ package de.thm.smarthome.global.beans;
 import de.thm.smarthome.global.enumeration.EModelVariant;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nils on 11.06.2017.
@@ -19,6 +21,50 @@ public class ModelVariantBean implements Serializable{
     public ModelVariantBean(String  modelVariant) {
         this.modelVariant_String = modelVariant;
         lookUpEnum();
+    }
+
+    public static String[] getHeatingModelEnumsAsString() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EModelVariant.HEATING_1000.toString());
+        stringArrayList.add(EModelVariant.HEATING_2000.toString());
+        stringArrayList.add(EModelVariant.HEATING_3000.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
+    }
+
+    public static String[] getShutterModelEnumsAsString() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EModelVariant.Shutter1000.toString());
+        stringArrayList.add(EModelVariant.Shutter2000.toString());
+        stringArrayList.add(EModelVariant.Shutter3000.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
+    }
+
+    public static String[] getThermometerModelEnumsAsString() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EModelVariant.Thermometer3000.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
+    }
+
+    public static String[] getWeatherStationModelEnumsAsString() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EModelVariant.WeatherStation3000.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
     }
 
     public EModelVariant getModelVariant_Enum() {

@@ -55,4 +55,17 @@ public interface IServiceFacade {
     String[] readLogs(String requesting_user, int limit);
 
     MessageBean undoLastCommand(String requesting_user);
+
+    String[] getHeatingManufacturers_static();
+    String[] getShutterManufacturers_static();
+    String[] getThermometerManufacturers_static();
+    String[] getWeatherStationManufacturers_static();
+
+    String[] getHeatingModelVariants_static();
+    String[] getThermometerModelVariants_static();
+    String[] getWeatherStationModelVariants_static();
+    String[] getShutterModelVariants_static();
+    String[] getShutterPositions_static();
+
+
 }

@@ -7,7 +7,6 @@ import de.thm.smarthome.global.enumeration.EMessageCode;
 import de.thm.smarthome.global.interfaces.IServiceFacade;
 import de.thm.smarthome.global.transfer.*;
 import de.thm.smarthome.main.manager.controller.requestmanager.RequestManager;
-import de.thm.smarthome.main.manager.controller.requestmanager.RequestManagerMock;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -49,7 +48,7 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
 
     @GET @Path( "switchHeatingOff/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
     public MessageBean switchHeatingOff(@PathParam( "requesting_user" ) String requesting_user) {
-        return requestManager.switchHeatingOn(requesting_user);
+        return requestManager.switchHeatingOff(requesting_user);
     }
 
     @GET @Path( "setHeatingTemperature/requesting_user/{requesting_user}/temperature/{temperature}" ) @Produces( MediaType.APPLICATION_JSON )
@@ -246,6 +245,51 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
     @GET @Path( "undoLastCommand/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
     public MessageBean undoLastCommand(@PathParam( "requesting_user" ) String requesting_user) {
         return requestManager.undoLastCommand(requesting_user);
+    }
+
+    @GET @Path( "getHeatingManufacturers_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getHeatingManufacturers_static() {
+        return requestManager.getHeatingManufacturers_static();
+    }
+
+    @GET @Path( "getShutterManufacturers_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getShutterManufacturers_static() {
+        return requestManager.getShutterManufacturers_static();
+    }
+
+    @GET @Path( "getThermometerManufacturers_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getThermometerManufacturers_static() {
+        return requestManager.getThermometerManufacturers_static();
+    }
+
+    @GET @Path( "getWeatherStationManufacturers_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getWeatherStationManufacturers_static() {
+        return requestManager.getWeatherStationManufacturers_static();
+    }
+
+    @GET @Path( "getHeatingModelVariants_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getHeatingModelVariants_static() {
+        return requestManager.getHeatingModelVariants_static();
+    }
+
+    @GET @Path( "getThermometerModelVariants_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getThermometerModelVariants_static() {
+        return requestManager.getThermometerModelVariants_static();
+    }
+
+    @GET @Path( "getWeatherStationModelVariants_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getWeatherStationModelVariants_static() {
+        return requestManager.getWeatherStationModelVariants_static();
+    }
+
+    @GET @Path( "getShutterModelVariants_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getShutterModelVariants_static() {
+        return requestManager.getShutterModelVariants_static();
+    }
+
+    @GET @Path( "getShutterPositions_static" ) @Produces( MediaType.APPLICATION_JSON )
+    public String[] getShutterPositions_static() {
+        return requestManager.getShutterPositions_static();
     }
 
     @GET @Path( "halloWelt/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )

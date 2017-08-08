@@ -5,13 +5,10 @@ package de.thm.smarthome.global.enumeration;
  */
 public enum EPosition {
     NA,
-    P0,
+    P0_DOWN,
     P1,
     P2,
-    P3,
+    P3_MIDDLE,
     P4,
-    P5,
-    P5_UP,
-    MIDDLE,
-    P0_DOWN
+    P5_UP
 }

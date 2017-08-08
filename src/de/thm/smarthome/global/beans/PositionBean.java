@@ -3,6 +3,8 @@ package de.thm.smarthome.global.beans;
 import de.thm.smarthome.global.enumeration.EPosition;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nils on 11.06.2017.
@@ -31,7 +33,7 @@ public class PositionBean implements Serializable{
                 position_Enum = EPosition.P2;
                 break;
             case 3:
-                position_Enum = EPosition.P3;
+                position_Enum = EPosition.P3_MIDDLE;
                 break;
             case 4:
                 position_Enum = EPosition.P4;
@@ -44,6 +46,21 @@ public class PositionBean implements Serializable{
         }
 
         lookUpString();
+    }
+
+    public static String[] getPositionEnumsAsString() {
+        List<String> stringArrayList = new ArrayList<>();
+
+        stringArrayList.add(EPosition.P0_DOWN.toString());
+        stringArrayList.add(EPosition.P1.toString());
+        stringArrayList.add(EPosition.P2.toString());
+        stringArrayList.add(EPosition.P3_MIDDLE.toString());
+        stringArrayList.add(EPosition.P4.toString());
+        stringArrayList.add(EPosition.P5_UP.toString());
+
+        String [] array = {};
+        array = stringArrayList.toArray(array);
+        return array;
     }
 
     public EPosition getPosition_Enum() {
@@ -68,8 +85,7 @@ public class PositionBean implements Serializable{
             case P2:
                 position_String = "Position 2 (40% geöffnet)";
                 break;
-            case MIDDLE:
-            case P3:
+            case P3_MIDDLE:
                 position_String = "Position 3 / Mittlere Position (60% geöffnet)";
                 break;
             case P4:
@@ -91,8 +107,7 @@ public class PositionBean implements Serializable{
                 return 1;
             case P2:
                 return 2;
-            case MIDDLE:
-            case P3:
+            case P3_MIDDLE:
                 return 3;
             case P4:
                 return 4;
