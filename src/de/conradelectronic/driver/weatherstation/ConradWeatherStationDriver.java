@@ -16,7 +16,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  */
 public class ConradWeatherStationDriver extends AObservable implements WeatherStationClientInterface, IObserver {
     private WeatherStationServerInterface deviceServer;
@@ -32,14 +32,12 @@ public class ConradWeatherStationDriver extends AObservable implements WeatherSt
         this.genericName    = genericName;
         this.modelVariant   = modelVariantBean;
 
-        //hostname = "192.168.178.31";
         readModelVariantInformation();
 
         initConnection();
     }
 
     private void readModelVariantInformation() {
-        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
         switch (modelVariant.getModelVariant_Enum()){
             case  WeatherStation3000:
                 hostname = modelVariant.getModelVariant_String();
@@ -49,7 +47,6 @@ public class ConradWeatherStationDriver extends AObservable implements WeatherSt
 
     private void initConnection()
     {
-        //TODO: get IP Address for host-name
         int port    = 0;
 
         try {
@@ -137,11 +134,5 @@ public class ConradWeatherStationDriver extends AObservable implements WeatherSt
         SmartHomeLogger.log("ConradWeatherStationDriver: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
-
-    /*public static void main(String[] args) {
-        ConradWeatherStationDriver cwsd = new ConradWeatherStationDriver("123456", "WeatherstationTest");
-        System.out.println(cwsd.getAirHumidity().getMeasure_Double() + " " + cwsd.getAirHumidity().getUnitOfMeasurement_String());
-
-    }*/
 
 }

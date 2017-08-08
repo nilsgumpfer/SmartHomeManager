@@ -20,13 +20,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created  on 27.01.2017.
  */
 public class BuderusHeatingDriver extends AObservable implements HeizungClientInterface, IObserver
 {
     private HeizungServerInterface deviceServer;
 
-    //TODO: Modelvariant besprechen
     private ModelVariantBean modelVariant;
     private String genericName;
     private String serialnumber;
@@ -38,16 +37,13 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
         this.genericName    = genericName;
         this.modelVariant   = modelVariantBean;
 
-        //eadModelVariantInformation();
-
-        hostname = "192.168.178.31"; // TODO: Wieder entfernen
+        readModelVariantInformation();
 
         initConnection();
     }
 
 
-    //TODO: macht das Sinn? Ist das so gedacht/richtig?
-    private void readModelVariantInformation() {
+       private void readModelVariantInformation() {
         switch (modelVariant.getModelVariant_Enum()){
             case HEATING_3000:
                     hostname = modelVariant.getModelVariant_String();
@@ -60,17 +56,12 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
                 break;
             }
 
-        //TODO: Switch-Case o.Ä. zur Ermittlung des Modells
-        //modelVariant = "Heating3000";
-
     }
 
     private void initConnection()
     {
         //Viessmann Heating-3000X38743 --> Treiber "weiß": hostname für diese heizung lautet "Heating3000" --> IP wird durch RMI-Methode auf Basis des hostnamen ermittelt
 
-        //TODO: get IP Address for host-name
-        //String host = modelVariant.getModelVariant_String();
         int port    = 0;
 
         try {
@@ -168,13 +159,5 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
         notifyObservers(change);
     }
 
-    /*public static void main(String[] args) {
-        BuderusHeatingDriver bd = new BuderusHeatingDriver("12345", "HeizungTest");
-        MeasureBean ctemp = bd.getCurrentTemperature();
-        System.out.println(String.valueOf(ctemp.getMeasure_Double()) + " " + ctemp.getUnitOfMeasurement_String());
-        bd.setDesiredTemperature(new MeasureBean(5.0, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
-        System.out.println(String.valueOf(ctemp.getMeasure_Double()) + " " + ctemp.getUnitOfMeasurement_String());
-
-    }*/
 }
 
