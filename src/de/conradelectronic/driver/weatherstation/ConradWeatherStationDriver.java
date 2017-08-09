@@ -32,7 +32,9 @@ public class ConradWeatherStationDriver extends AObservable implements WeatherSt
         this.genericName    = genericName;
         this.modelVariant   = modelVariantBean;
 
-        readModelVariantInformation();
+
+        hostname = "192.168.178.20";
+        //readModelVariantInformation();
 
         initConnection();
     }

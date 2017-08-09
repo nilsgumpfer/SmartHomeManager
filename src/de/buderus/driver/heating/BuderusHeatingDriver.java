@@ -49,6 +49,8 @@ public class BuderusHeatingDriver extends AObservable implements HeizungClientIn
         this.genericName    = genericName;
         this.modelVariant   = modelVariantBean; //dient zur Ermittlung der Variante
 
+
+        hostname = "192.168.178.39";
         readModelVariantInformation();
 
         initConnection(); //bei Erstellung des Treiber Verbindung herstellen

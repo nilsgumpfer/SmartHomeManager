@@ -31,7 +31,7 @@ public class DeviceManager extends AObservable implements IDeviceManager, IObser
     //private SmartHeating            smartHeating            = HeatingFactory.createHeating(EDeviceManufacturer.BUDERUS, EModelVariant.HEATING_1000, "443k4o34ko3", "Heating");
     // --> DeviceManager has to be attached manually in constructor as observer for heating!
 
-    /*// Mocked stuff!
+    /* // Mocked stuff!
     private SmartWeatherStation     smartWeatherStation     = MockedDeviceFactory.getMockedWeatherStation();
     private SmartThermometer        smartThermometer        = MockedDeviceFactory.getMockedThermometer();
     private SmartHeating            smartHeating            = MockedDeviceFactory.getMockedHeating();*/

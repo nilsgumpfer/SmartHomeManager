@@ -153,5 +153,6 @@ public class WeatherStationModel extends AObservable implements IWeatherStationM
         setAirHumidity(device.getAirHumidity());
         setAirPressure(device.getAirPressure());
         setRainfallAmount(device.getRainfallAmount());
+        setWindVelocity(device.getWindVelocity());
     }
 }
