@@ -9,17 +9,15 @@ import de.thm.smarthome.global.observer.IObserver;
 import de.viessmann.driver.heating.ViessmannHeatingDriver;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created  on 27.01.2017.
  * Changed 28.01.2017
  */
 public class ViessmannHeatingAdapter extends AObservable implements IHeating, IObserver{
 
     private ViessmannHeatingDriver driver;
-            //TODO: Change back to:
-            // ViessmannHeatingDriver driver;
     private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VIESSMANN);
 
-    //public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
+
     public ViessmannHeatingAdapter(ViessmannHeatingDriver driver) {
         this.driver = driver;
         this.driver.attach(this);
@@ -31,6 +29,18 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
         notifyObservers(change);
     }
 
+    //SETTER//
+    @Override
+    public MessageBean setDesiredTemperature(MeasureBean temperature) {
+        return driver.setDesiredTemperature(temperature);
+    }
+
+    @Override
+    public MessageBean setPowerState(PowerStateBean powerState) {
+        return driver.setPowerState(powerState);
+    }
+
+    //GETTER//
     @Override
     public MeasureBean getCurrentTemperature() {
         return driver.getCurrentTemperature();
@@ -56,13 +66,5 @@ public class ViessmannHeatingAdapter extends AObservable implements IHeating, IO
         return driver.getPowerState();
     }
 
-    @Override
-    public MessageBean setDesiredTemperature(MeasureBean temperature) {
-        return driver.setDesiredTemperature(temperature);
-    }
 
-    @Override
-    public MessageBean setPowerState(PowerStateBean powerState) {
-        return driver.setPowerState(powerState);
-    }
 }

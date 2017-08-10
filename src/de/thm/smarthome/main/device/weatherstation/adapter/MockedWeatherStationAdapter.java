@@ -11,7 +11,7 @@ import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  */
 public class MockedWeatherStationAdapter extends AObservable implements IWeatherStation, IObserver
 {
@@ -22,6 +22,8 @@ public class MockedWeatherStationAdapter extends AObservable implements IWeather
         SmartHomeLogger.log("MockedWeatherStationAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
+
+    //GETTER//
 
     @Override
     public ModelVariantBean getModelVariant() {

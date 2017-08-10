@@ -11,13 +11,11 @@ import de.thm.smarthome.global.observer.IObserver;
  * Changed by Jenny on 28.07.2017.
  */
 public interface IShutter {
+    MessageBean setDesiredPosition(PositionBean desiredPosition);
     PositionBean getCurrentPosition();
     PositionBean getDesiredPosition();
     ModelVariantBean getModelVariant();
     ManufacturerBean getManufacturer();
-
-    /* PositionBean oder MessageBean?! Muss Message Bean sein, da es im Adapter so verarbeitet wird*/
-    MessageBean setDesiredPosition(PositionBean desiredPosition);
     void attach(Object observer);
 
 }

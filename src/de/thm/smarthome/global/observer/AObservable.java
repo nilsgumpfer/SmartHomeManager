@@ -18,7 +18,7 @@ public abstract class AObservable {
         attachedObservers.remove(observer);
     }
 
-    public void notifyObservers(Object change)  { //TODO: Ab hier nachverfolgen, ob Updates überhaupt beim SHManager ankommen
+    public void notifyObservers(Object change)  {
 
 
 

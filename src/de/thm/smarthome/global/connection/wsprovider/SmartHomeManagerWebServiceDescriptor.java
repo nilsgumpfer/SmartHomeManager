@@ -33,7 +33,8 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
                                       @PathParam( "manufacturer" ) String manufacturer,
                                       @PathParam( "genericName" ) String genericName,
                                       @PathParam( "serialnumber" ) String serialnumber ) {
-        return requestManager.createHeating(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
+        //return requestManager.createHeating(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
+        return requestManager.createHeating(requesting_user, "Heizung2000X2", "Viessmann", "MyHeating", "243242");
     }
 
     @GET @Path( "deleteHeating/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
@@ -173,7 +174,9 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
                                               @PathParam( "serialnumber" ) String serialnumber ) {
         System.out.println("Hersteller: " + manufacturer);
         System.out.println("Modell: " + modelVariant);
-        return requestManager.createWeatherStation(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
+        //return requestManager.createWeatherStation(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
+        return requestManager.createWeatherStation(requesting_user, "WeatherStation3000", "CONRAD_ELECTRONIC", "MyWeatherStation", "423423");
+
     }
 
     @GET @Path( "deleteWeatherStation/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )
@@ -219,7 +222,8 @@ public class SmartHomeManagerWebServiceDescriptor implements IServiceFacade
                                               @PathParam( "serialnumber" ) String serialnumber ) {
         System.out.println("name: " + genericName);
         System.out.println("seriennummer: " + serialnumber);
-        return requestManager.createThermometer(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
+        //return requestManager.createThermometer(requesting_user, modelVariant, manufacturer, genericName, serialnumber);
+        return requestManager.createThermometer(requesting_user, "Thermometer3000", "ELECTRIC_COMPANY", "MyThermometer", "42424");
     }
 
     @GET @Path( "deleteThermometer/requesting_user/{requesting_user}" ) @Produces( MediaType.APPLICATION_JSON )

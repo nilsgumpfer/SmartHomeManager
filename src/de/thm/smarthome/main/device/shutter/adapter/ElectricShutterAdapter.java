@@ -29,6 +29,15 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
         notifyObservers(change);
     }
 
+    //Setter Methoden//
+
+    @Override
+    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
+        return driver.setDesiredPosition(desiredPosition);
+    }
+
+    //Getter Methoden//
+
     @Override
     public PositionBean getCurrentPosition() { return driver.getCurrentPosition(); }
 
@@ -43,10 +52,6 @@ public class ElectricShutterAdapter extends AObservable implements IShutter, IOb
         return manufacturer;
     }
 
-    @Override
-    public MessageBean setDesiredPosition(PositionBean desiredPosition) {
-        return driver.setDesiredPosition(desiredPosition);
-    }
 }
 
 

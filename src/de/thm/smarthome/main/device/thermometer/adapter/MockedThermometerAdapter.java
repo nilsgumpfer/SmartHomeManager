@@ -11,7 +11,7 @@ import de.thm.smarthome.global.observer.AObservable;
 import de.thm.smarthome.global.observer.IObserver;
 
 /**
- * Created by Nils on 27.01.2017.
+ * Created on 27.01.2017.
  */
 public class MockedThermometerAdapter extends AObservable implements IThermometer, IObserver
 {
@@ -22,6 +22,8 @@ public class MockedThermometerAdapter extends AObservable implements IThermomete
         SmartHomeLogger.log("MockedThermometerAdapter: Detected a change! [" + o.toString() + "]");
         notifyObservers(change);
     }
+
+    //Getter//
 
     @Override
     public ModelVariantBean getModelVariant() {

@@ -39,8 +39,9 @@ public class SmartHomeManagerMainClass {
 
             SmartHomeLogger.log(MetaDataManager.getHostInfo());
 
-            MetaDataManager.useOntology = false;
-            EventManager.getInstance().doReasoning();
+            MetaDataManager.useOntology = true;
+
+            EventManager.getInstance().update(new Object(), new Object());
         }
         catch (Exception e)
         {

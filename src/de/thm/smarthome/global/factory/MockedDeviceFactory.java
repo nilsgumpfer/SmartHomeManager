@@ -50,7 +50,7 @@ public class MockedDeviceFactory {
                     "MWS12345"
             );
 
-        model.setTemperature(new MeasureBean(23.9, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
+        model.setTemperature(new MeasureBean(22.9, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
         model.setAirHumidity(new MeasureBean(55.9, EUnitOfMeasurement.RELATION_PERCENT));
         model.setRainfallAmount(new MeasureBean(8.75, EUnitOfMeasurement.VOLUME_LITRESPERSQUAREMETER));
         model.setWindVelocity(new MeasureBean(33.7, EUnitOfMeasurement.VELOCITY_KILOMETERSPERHOUR));
@@ -69,7 +69,7 @@ public class MockedDeviceFactory {
                     "MT12345"
             );
 
-        model.setTemperature(new MeasureBean(22.9, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
+        model.setTemperature(new MeasureBean(23.9, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS));
 
         return new SmartThermometer(new ThermometerLogicCelsius(model, new MockedThermometerAdapter()));
     }

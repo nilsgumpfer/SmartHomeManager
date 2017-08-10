@@ -13,6 +13,5 @@ public interface IThermometer
     ManufacturerBean getManufacturer();
     MeasureBean getTemperature();
 
-    //Observer-Pattern//
     void attach(Object observer);
 }

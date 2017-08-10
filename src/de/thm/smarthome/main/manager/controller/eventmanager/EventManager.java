@@ -78,8 +78,10 @@ public class EventManager implements IEventManager, IObserver {
     public void update(Object o, Object change) {
         SmartHomeLogger.log("EventManager: Detected a change! [" + o.toString() + "]");
 
-        if(MetaDataManager.useOntology)
-            doReasoning();
+        if(!change.getClass().equals(PowerStateBean.class)) {
+            if (MetaDataManager.useOntology)
+                doReasoning();
+        }
     }
 
     private void initOWLAPI()
@@ -296,6 +298,7 @@ public class EventManager implements IEventManager, IObserver {
     }
 
     private HeatingTransferObject readInferredHeatingProperties(){
+        ontology = ontology;
         updateHeatingObjects();
 
         HeatingTransferObject heatingTransferObject = smartHeating.getHeatingData();
