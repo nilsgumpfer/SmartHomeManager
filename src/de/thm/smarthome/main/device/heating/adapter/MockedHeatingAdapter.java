@@ -29,19 +29,6 @@ public class MockedHeatingAdapter extends AObservable implements IHeating, IObse
         notifyObservers(change);
     }
 
-    //SETTER//
-    @Override
-    public MessageBean setDesiredTemperature(MeasureBean temperature) {
-        return new MessageBean(false);
-    }
-
-    @Override
-    public MessageBean setPowerState(PowerStateBean powerState) {
-        return new MessageBean(false);
-    }
-
-    //GETTER//
-
     @Override
     public MeasureBean getCurrentTemperature() {
         return currentTemperature;
