@@ -101,9 +101,10 @@ public class ShutterModel extends AObservable implements IShutterModel, IObserve
     public void update (Object o, Object change)
     {
         SmartHomeLogger.log("ShutterModel: Detected a change! [" + o.toString() + "]");
-        notifyObservers(change);
 
         setDesiredPosition(device.getDesiredPosition());
         setCurrentPosition(device.getCurrentPosition());
+
+        notifyObservers(change);
     }
 }

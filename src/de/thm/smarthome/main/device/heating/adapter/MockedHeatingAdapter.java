@@ -17,7 +17,11 @@ import de.thm.smarthome.global.observer.IObserver;
  */
 public class MockedHeatingAdapter extends AObservable implements IHeating, IObserver
 {
-    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.NA);
+    private PowerStateBean powerStateBean = new PowerStateBean(EPowerState.ON);
+    private MeasureBean currentTemperature = new MeasureBean(0.0, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+    private MeasureBean desiredTemperature = new MeasureBean(0.0, EUnitOfMeasurement.TEMPERATURE_DEGREESCELSIUS);
+    private ManufacturerBean manufacturer = new ManufacturerBean(EDeviceManufacturer.VIESSMANN);
+    private ModelVariantBean modelVariantBean = new ModelVariantBean(EModelVariant.HEATING_2000);
 
     @Override
     public void update(Object o, Object change) {
@@ -27,17 +31,17 @@ public class MockedHeatingAdapter extends AObservable implements IHeating, IObse
 
     @Override
     public MeasureBean getCurrentTemperature() {
-        return new MeasureBean(0.0, EUnitOfMeasurement.NA);
+        return currentTemperature;
     }
 
     @Override
     public MeasureBean getDesiredTemperature() {
-        return new MeasureBean(0.0, EUnitOfMeasurement.NA);
+        return desiredTemperature;
     }
 
     @Override
     public ModelVariantBean getModelVariant() {
-        return new ModelVariantBean(EModelVariant.NA);
+        return modelVariantBean;
     }
 
     @Override
@@ -47,16 +51,19 @@ public class MockedHeatingAdapter extends AObservable implements IHeating, IObse
 
     @Override
     public PowerStateBean getPowerState() {
-        return new PowerStateBean(EPowerState.NA);
+        return powerStateBean;
     }
 
     @Override
     public MessageBean setDesiredTemperature(MeasureBean temperature) {
-        return new MessageBean(false);
+        notifyObservers(temperature);
+        return new MessageBean(true);
     }
 
     @Override
     public MessageBean setPowerState(PowerStateBean powerState) {
-        return new MessageBean(false);
+        this.powerStateBean = powerState;
+        notifyObservers(powerState);
+        return new MessageBean(true);
     }
 }

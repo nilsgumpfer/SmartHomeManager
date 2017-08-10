@@ -366,18 +366,18 @@ public class EventManager implements IEventManager, IObserver {
         EPowerState inferredValuePowerState = heatingTransferObject.getPowerState().getPowerState_Enum();
 
         if(currentValueTemperature != inferredValueTemperature) {
-            smartHeating.setTemperature(heatingTransferObject.getDesiredTemperature());
             SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueTemperature + " Old value: " + currentValueTemperature + " (Heating temperature)");
+            smartHeating.setTemperature(heatingTransferObject.getDesiredTemperature());
         }
 
         if(currentValueActionMode != inferredValueActionMode) {
-            smartHeating.setActionMode(heatingTransferObject.getActionMode());
             SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValueActionMode + " Old value: " + currentValueActionMode + " (Heating actionMode)");
+            smartHeating.setActionMode(heatingTransferObject.getActionMode());
         }
 
         if(currentValuePowerState != inferredValuePowerState) {
-            smartHeating.setPowerState(heatingTransferObject.getPowerState());
             SmartHomeLogger.log("EventManager: Inferred new value: " + inferredValuePowerState + " Old value: " + currentValuePowerState + " (Heating powerState)");
+            smartHeating.setPowerState(heatingTransferObject.getPowerState());
         }
     }
 

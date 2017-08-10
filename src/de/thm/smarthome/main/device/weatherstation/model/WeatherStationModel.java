@@ -147,11 +147,13 @@ public class WeatherStationModel extends AObservable implements IWeatherStationM
     @Override
     public void update(Object o, Object change) {
         SmartHomeLogger.log("WeatherStationModel: Detected a change! [" + o.toString() + "]");
-        notifyObservers(change);
 
         setTemperature(device.getTemperature());
         setAirHumidity(device.getAirHumidity());
         setAirPressure(device.getAirPressure());
         setRainfallAmount(device.getRainfallAmount());
+        setWindVelocity(device.getWindVelocity());
+
+        notifyObservers(change);
     }
 }

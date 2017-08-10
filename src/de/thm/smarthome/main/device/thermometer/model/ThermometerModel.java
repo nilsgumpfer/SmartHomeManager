@@ -104,8 +104,9 @@ public class ThermometerModel extends AObservable implements IThermometerModel, 
     @Override
     public void update(Object o, Object change) {
         SmartHomeLogger.log("ThermometerModel: Detected a change! [" + o.toString() + "]");
-        notifyObservers(change);
 
-        setTemperature(device.getTemperature());;
+        setTemperature(device.getTemperature());
+
+        notifyObservers(change);
     }
 }

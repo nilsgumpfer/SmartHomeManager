@@ -120,10 +120,11 @@ public class HeatingModel extends AObservable implements IHeatingModel, IObserve
     @Override
     public void update(Object o, Object change) {
         SmartHomeLogger.log("HeatingModel: Detected a change! [" + o.toString() + "]");
-        notifyObservers(change);
 
         setPowerState(device.getPowerState());
         setDesiredTemperature(device.getDesiredTemperature());
         setCurrentTemperature(device.getCurrentTemperature());
+
+        notifyObservers(change);
     }
 }

@@ -28,7 +28,7 @@ public class MockedDeviceFactory {
         IHeatingModel model =
             new HeatingModel(
                     new ModelVariantBean(EModelVariant.HEATING_2000),
-                    new ManufacturerBean(EDeviceManufacturer.BUDERUS),
+                    new ManufacturerBean(EDeviceManufacturer.VIESSMANN),
                     new ActionModeBean(EActionMode.DAYMODE),
                     "MyHeating",
                     "MH12345",
